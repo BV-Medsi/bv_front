@@ -7,6 +7,10 @@ import axios from "axios"
 
 import {computed, ref} from "vue";
 
+import Tabs from '@smartmed/ui/Tabs';
+
+const tab_names = ["Регистрация", 'Вход']
+const active = ref(tab_names[0]);
 
 const auth = ref({
   username: null,
@@ -46,7 +50,7 @@ const sign_in = () => {
     return
   }
   axios.post(
-      "http://100.71.101.22:8000/",
+      "http://100.71.101.22:8000/reg",
       {
         last_name: "1",
         name: "auth.value.name",
@@ -61,6 +65,7 @@ const sign_in = () => {
 
 <template>
   <div :class="$style.auth">
+    <tabs v-model="active" type="underline" :tabs="tab_names" size="md"/>
     <p class="smed-text_h2 smed-text_medium" :class="$style.title">Добро пожаловать в BV_Medsi!</p>
     <BaseInput v-model="auth.username" :is-error="is_filled_username" :class="$style.field" placeholder="Username"/>
     <BaseInput v-model="auth.name" :is-error="is_filled_name" :class="$style.field" placeholder="Name"/>
