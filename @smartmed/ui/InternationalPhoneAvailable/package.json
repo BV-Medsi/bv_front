@@ -1,0 +1,8 @@
+{
+  "main": "./InternationalPhoneAvailable.cjs.js",
+  "module": "./InternationalPhoneAvailable.es.js",
+  "types": "./../types/components/InternationalPhoneAvailable/InternationalPhoneAvailable.vue.d.ts",
+  "browser": {
+    "./sfc": "./InternationalPhoneAvailable.vue"
+  }
+}

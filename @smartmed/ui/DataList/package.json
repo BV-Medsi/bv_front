@@ -1,0 +1,8 @@
+{
+  "main": "./DataList.cjs.js",
+  "module": "./DataList.es.js",
+  "types": "./../types/components/DataList/DataList.vue.d.ts",
+  "browser": {
+    "./sfc": "./DataList.vue"
+  }
+}

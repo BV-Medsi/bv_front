@@ -1,0 +1,8 @@
+{
+  "main": "./EmptyState.cjs.js",
+  "module": "./EmptyState.es.js",
+  "types": "./../types/components/EmptyState/EmptyState.vue.d.ts",
+  "browser": {
+    "./sfc": "./EmptyState.vue"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "main": "./InputDate.cjs.js",
+  "module": "./InputDate.es.js",
+  "types": "./../types/components/InputDate/InputDate.vue.d.ts",
+  "browser": {
+    "./sfc": "./InputDate.vue"
+  }
+}

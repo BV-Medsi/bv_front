@@ -1,0 +1,8 @@
+{
+  "main": "./TransitionExpand.cjs.js",
+  "module": "./TransitionExpand.es.js",
+  "types": "./../types/components/TransitionExpand/TransitionExpand.vue.d.ts",
+  "browser": {
+    "./sfc": "./TransitionExpand.vue"
+  }
+}

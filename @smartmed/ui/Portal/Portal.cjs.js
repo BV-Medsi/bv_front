@@ -1,0 +1,1 @@
+"use strict";const e=require("vue"),t={appendTo:"body"},r={name:"Portal"},n=e.defineComponent({...r,props:e.mergeDefaults({appendTo:{}},t),setup(p){return(o,s)=>(e.openBlock(),e.createBlock(e.Teleport,{to:o.appendTo},[e.renderSlot(o.$slots,"default")],8,["to"]))}});module.exports=n;

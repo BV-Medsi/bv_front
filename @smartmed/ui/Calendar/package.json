@@ -1,0 +1,8 @@
+{
+  "main": "./Calendar.cjs.js",
+  "module": "./Calendar.es.js",
+  "types": "./../types/components/Calendar/Calendar.vue.d.ts",
+  "browser": {
+    "./sfc": "./Calendar.vue"
+  }
+}

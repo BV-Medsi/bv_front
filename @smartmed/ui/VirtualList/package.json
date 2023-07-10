@@ -1,0 +1,8 @@
+{
+  "main": "./VirtualList.cjs.js",
+  "module": "./VirtualList.es.js",
+  "types": "./../types/components/VirtualList/VirtualList.vue.d.ts",
+  "browser": {
+    "./sfc": "./VirtualList.vue"
+  }
+}

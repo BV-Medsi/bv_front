@@ -1,0 +1,8 @@
+{
+  "main": "./Spinner.cjs.js",
+  "module": "./Spinner.es.js",
+  "types": "./../types/components/Spinner/Spinner.vue.d.ts",
+  "browser": {
+    "./sfc": "./Spinner.vue"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "main": "./TimePreview.cjs.js",
+  "module": "./TimePreview.es.js",
+  "types": "./../types/components/TimePreview/TimePreview.vue.d.ts",
+  "browser": {
+    "./sfc": "./TimePreview.vue"
+  }
+}

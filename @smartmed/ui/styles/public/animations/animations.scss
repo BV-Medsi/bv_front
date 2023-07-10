@@ -1,0 +1,112 @@
+.fade-enter-active,
+.fade-leave-active {
+  @include transition(opacity, 0.4s, ease);
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-height16-enter-active,
+.fade-height16-leave-active {
+  @include transition(all, 0.4s, ease);
+  max-height: 16px;
+}
+
+.fade-height16-enter-from,
+.fade-height16-leave-to {
+  opacity: 0;
+  max-height: 0;
+}
+
+.smed-table-bar {
+  &_bottom {
+    &-enter-active,
+    &-leave-active {
+      @include transition(transform);
+
+      transform: translateY(0);
+    }
+
+    &-enter-from,
+    &-leave-to {
+      transform: translateY(100%);
+    }
+  }
+
+  &_left {
+    &-enter-active,
+    &-leave-active {
+      @include transition(transform);
+
+      transform: translateX(0);
+    }
+
+    &-enter-from,
+    &-leave-to {
+      transform: translateX(-100%);
+    }
+  }
+
+  &_right {
+    &-enter-active,
+    &-leave-active {
+      @include transition(transform);
+
+      transform: translateX(0);
+    }
+
+    &-enter-from,
+    &-leave-to {
+      transform: translateX(100%);
+    }
+  }
+
+  &_top {
+    &-enter-active,
+    &-leave-active {
+      @include transition(transform);
+
+      transform: translateY(0);
+    }
+
+    &-enter-from,
+    &-leave-to {
+      transform: translateY(-100%);
+    }
+  }
+}
+
+.smed-mobile-popup-enter-active,
+.smed-mobile-popup-leave-active {
+  @include transition(all);
+
+  transform: translate(0);
+  opacity: 1;
+}
+
+.smed-mobile-popup-enter-from,
+.smed-mobile-popup-leave-to {
+  transform: translateY(10%);
+  opacity: 0;
+}
+
+.smed-list-transition-move,
+.smed-list-transition-enter-active,
+.smed-list-transition-leave-active {
+  @include transition(all);
+}
+
+/* 2. declare enter from and leave to state */
+.smed-list-transition-enter-from,
+.smed-list-transition-leave-to {
+  opacity: 0;
+  transform: translate(0, 30px);
+}
+
+/* 3. ensure leaving items are taken out of layout flow so that moving
+      animations can be calculated correctly. */
+.smed-list-transition-leave-active {
+  position: absolute;
+}

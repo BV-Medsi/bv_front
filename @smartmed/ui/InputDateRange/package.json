@@ -1,0 +1,8 @@
+{
+  "main": "./InputDateRange.cjs.js",
+  "module": "./InputDateRange.es.js",
+  "types": "./../types/components/InputDateRange/InputDateRange.vue.d.ts",
+  "browser": {
+    "./sfc": "./InputDateRange.vue"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "main": "./Notification.cjs.js",
+  "module": "./Notification.es.js",
+  "types": "./../types/components/Notification/Notification.vue.d.ts",
+  "browser": {
+    "./sfc": "./Notification.vue"
+  }
+}

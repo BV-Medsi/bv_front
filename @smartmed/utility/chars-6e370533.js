@@ -1,0 +1,1 @@
+"use strict";const R="₽",A=" ",C="“",H=",",E="”",O="•",U="−",_="–",L=`${A}${_}${A}`;exports.CHAR_BULL=O;exports.CHAR_COMMA=H;exports.CHAR_DASH=_;exports.CHAR_LEFT_DOUBLE_QOUTE=C;exports.CHAR_MINUS=U;exports.CHAR_NO_BREAK_SPACE=A;exports.CHAR_RANGE_SEPARATOR=L;exports.CHAR_RIGHT_DOBULE_QOUTE=E;exports.CHAR_RUBLE=R;

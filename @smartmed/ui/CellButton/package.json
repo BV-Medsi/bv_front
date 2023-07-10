@@ -1,0 +1,8 @@
+{
+  "main": "./CellButton.cjs.js",
+  "module": "./CellButton.es.js",
+  "types": "./../types/components/CellButton/CellButton.vue.d.ts",
+  "browser": {
+    "./sfc": "./CellButton.vue"
+  }
+}

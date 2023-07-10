@@ -1,0 +1,8 @@
+{
+  "main": "./Root.cjs.js",
+  "module": "./Root.es.js",
+  "types": "./../types/components/Root/Root.vue.d.ts",
+  "browser": {
+    "./sfc": "./Root.vue"
+  }
+}

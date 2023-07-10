@@ -1,0 +1,1 @@
+"use strict";const n=require("vue");function r(e){const t=e&&e();return!t||t.length===0?!1:t.findIndex(o=>o.type!==n.Comment)!==-1}function f(e){return typeof e=="function"?n.computed(e):n.ref(e)}function u(e){n.getCurrentScope()&&n.onBeforeUnmount(e)}exports.hasSlotContent=r;exports.resolveRef=f;exports.tryOnBeforeUnmount=u;

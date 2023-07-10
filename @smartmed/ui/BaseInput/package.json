@@ -1,0 +1,8 @@
+{
+  "main": "./BaseInput.cjs.js",
+  "module": "./BaseInput.es.js",
+  "types": "./../types/components/BaseInput/BaseInput.vue.d.ts",
+  "browser": {
+    "./sfc": "./BaseInput.vue"
+  }
+}

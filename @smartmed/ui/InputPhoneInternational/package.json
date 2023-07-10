@@ -1,0 +1,8 @@
+{
+  "main": "./InputPhoneInternational.cjs.js",
+  "module": "./InputPhoneInternational.es.js",
+  "types": "./../types/components/InputPhoneInternational/InputPhoneInternational.vue.d.ts",
+  "browser": {
+    "./sfc": "./InputPhoneInternational.vue"
+  }
+}

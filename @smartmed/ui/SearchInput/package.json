@@ -1,0 +1,8 @@
+{
+  "main": "./SearchInput.cjs.js",
+  "module": "./SearchInput.es.js",
+  "types": "./../types/components/SearchInput/SearchInput.vue.d.ts",
+  "browser": {
+    "./sfc": "./SearchInput.vue"
+  }
+}

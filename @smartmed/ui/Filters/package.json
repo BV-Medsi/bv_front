@@ -1,0 +1,8 @@
+{
+  "main": "./Filters.cjs.js",
+  "module": "./Filters.es.js",
+  "types": "./../types/components/Filters/Filters.vue.d.ts",
+  "browser": {
+    "./sfc": "./Filters.vue"
+  }
+}

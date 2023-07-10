@@ -1,0 +1,8 @@
+{
+  "main": "./Island.cjs.js",
+  "module": "./Island.es.js",
+  "types": "./../types/components/Island/Island.vue.d.ts",
+  "browser": {
+    "./sfc": "./Island.vue"
+  }
+}

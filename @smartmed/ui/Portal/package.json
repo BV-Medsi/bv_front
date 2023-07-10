@@ -1,0 +1,8 @@
+{
+  "main": "./Portal.cjs.js",
+  "module": "./Portal.es.js",
+  "types": "./../types/components/Portal/Portal.vue.d.ts",
+  "browser": {
+    "./sfc": "./Portal.vue"
+  }
+}

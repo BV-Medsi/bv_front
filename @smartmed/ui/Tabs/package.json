@@ -1,0 +1,8 @@
+{
+  "main": "./Tabs.cjs.js",
+  "module": "./Tabs.es.js",
+  "types": "./../types/components/Tabs/Tabs.vue.d.ts",
+  "browser": {
+    "./sfc": "./Tabs.vue"
+  }
+}

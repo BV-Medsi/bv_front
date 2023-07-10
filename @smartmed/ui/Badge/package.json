@@ -1,0 +1,8 @@
+{
+  "main": "./Badge.cjs.js",
+  "module": "./Badge.es.js",
+  "types": "./../types/components/Badge/Badge.vue.d.ts",
+  "browser": {
+    "./sfc": "./Badge.vue"
+  }
+}

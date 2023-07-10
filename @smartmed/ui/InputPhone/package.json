@@ -1,0 +1,8 @@
+{
+  "main": "./InputPhone.cjs.js",
+  "module": "./InputPhone.es.js",
+  "types": "./../types/components/InputPhone/InputPhone.vue.d.ts",
+  "browser": {
+    "./sfc": "./InputPhone.vue"
+  }
+}

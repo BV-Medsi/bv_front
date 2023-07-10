@@ -1,0 +1,8 @@
+{
+  "main": "./Tooltip.cjs.js",
+  "module": "./Tooltip.es.js",
+  "types": "./../types/components/Tooltip/Tooltip.vue.d.ts",
+  "browser": {
+    "./sfc": "./Tooltip.vue"
+  }
+}

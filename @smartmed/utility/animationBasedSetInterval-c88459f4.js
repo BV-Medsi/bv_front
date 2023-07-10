@@ -1,0 +1,1 @@
+"use strict";const s=(i,o)=>{const n={id:null};let a=performance.now();const e=t=>{t-a>=o&&(i(t),a=t),n.id=requestAnimationFrame(e)};return n.id=requestAnimationFrame(e),{stop:()=>{n.id!==null&&cancelAnimationFrame(n.id)}}};exports.animationBasedSetInterval=s;

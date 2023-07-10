@@ -1,0 +1,122 @@
+@mixin flex($h: null, $v: null) {
+  display: flex;
+  @if ($h) {
+    justify-content: $h;
+  }
+  @if ($v) {
+    align-items: $v;
+  }
+}
+
+@mixin size($w: null, $h: null) {
+  @if ($w) {
+    width: $w;
+  }
+  @if ($h) {
+    height: $h;
+  } @else if($w) {
+    height: $w;
+  }
+}
+
+@mixin disabled($opacity: null) {
+  opacity: $opacity;
+  pointer-events: none;
+}
+
+@mixin clearinput() {
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: none;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  color: inherit;
+  caret-color: currentColor;
+  outline: none;
+  appearance: none;
+  word-break: keep-all;
+  text-align: left;
+  -webkit-text-fill-color: currentColor; // for Safari
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    border-radius: inherit;
+    -webkit-text-fill-color: inherit !important;
+    color: inherit !important;
+    background-color: transparent !important;
+    -webkit-box-shadow: 0 0 0 1000px var(--smed-base-07) 5c0 inset !important; // to overlay native background
+  }
+}
+
+@mixin clearbutton() {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: inherit;
+  line-height: inherit;
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+
+@mixin transition($prop, $duration: 0.2s, $timing: ease-in-out) {
+  transition: $prop $duration $timing;
+}
+
+@mixin rotatableListItem() {
+  position: absolute;
+  display: flex;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin strict-size($width, $height) {
+  min-width: $width;
+  min-height: $height;
+
+  width: $width;
+  height: $height;
+
+  max-width: $width;
+  max-height: $height;
+}
+
+@mixin customscroll() {
+  // exclude non-supporting browsers
+  @media all and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-thumb {
+      width: 1rem;
+      height: 1rem;
+      border-radius: 6.25rem;
+      background-clip: padding-box;
+      border: 2.667rem solid transparent;
+    }
+
+    &::-webkit-scrollbar {
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--smed-base-02);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: var(--smed-base-03);
+    }
+
+    &::-webkit-scrollbar-thumb:active {
+      background-color: var(--smed-base-04);
+    }
+  }
+}

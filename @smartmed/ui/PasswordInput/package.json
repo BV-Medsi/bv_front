@@ -1,0 +1,8 @@
+{
+  "main": "./PasswordInput.cjs.js",
+  "module": "./PasswordInput.es.js",
+  "types": "./../types/components/PasswordInput/PasswordInput.vue.d.ts",
+  "browser": {
+    "./sfc": "./PasswordInput.vue"
+  }
+}

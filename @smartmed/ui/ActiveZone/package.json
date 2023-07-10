@@ -1,0 +1,8 @@
+{
+  "main": "./ActiveZone.cjs.js",
+  "module": "./ActiveZone.es.js",
+  "types": "./../types/components/ActiveZone/ActiveZone.vue.d.ts",
+  "browser": {
+    "./sfc": "./ActiveZone.vue"
+  }
+}

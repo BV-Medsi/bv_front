@@ -1,0 +1,8 @@
+{
+  "main": "./BaseButton.cjs.js",
+  "module": "./BaseButton.es.js",
+  "types": "./../types/components/BaseButton/BaseButton.vue.d.ts",
+  "browser": {
+    "./sfc": "./BaseButton.vue"
+  }
+}

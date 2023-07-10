@@ -1,0 +1,74 @@
+@mixin smed-text_ultra() {
+  font-size: 42px;
+  line-height: 52px;
+  font-weight: 910;
+}
+
+@mixin smed-text_h1() {
+  font-size: 34px;
+  line-height: 41px;
+}
+
+@mixin smed-text_h2() {
+  font-size: 28px;
+  line-height: 34px;
+}
+
+@mixin smed-text_h3() {
+  font-size: 22px;
+  line-height: 28px;
+}
+
+@mixin smed-text_h4() {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+@mixin smed-text_h5() {
+  @include smed-text_h4;
+}
+
+@mixin smed-text_body-xl() {
+  font-size: 17px;
+  line-height: 22px;
+}
+
+@mixin smed-text_body-md() {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+@mixin smed-text_body-sm() {
+  font-size: 15px;
+  line-height: 20px;
+}
+
+@mixin smed-text_body-xs() {
+  font-size: 13px;
+  line-height: 18px;
+}
+
+@mixin smed-text_caption() {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+@mixin smed-text_uppercase() {
+  text-transform: uppercase;
+}
+
+@mixin smed-text_wide() {
+  font-weight: 910;
+}
+
+@mixin smed-text_bold() {
+  font-weight: 700;
+}
+
+@mixin smed-text_regular {
+  font-weight: 400;
+}
+
+@mixin smed-text_medium() {
+  font-weight: 500;
+}

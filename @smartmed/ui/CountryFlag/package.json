@@ -1,0 +1,8 @@
+{
+  "main": "./CountryFlag.cjs.js",
+  "module": "./CountryFlag.es.js",
+  "types": "./../types/components/CountryFlag/CountryFlag.vue.d.ts",
+  "browser": {
+    "./sfc": "./CountryFlag.vue"
+  }
+}

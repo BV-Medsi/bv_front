@@ -1,0 +1,8 @@
+{
+  "main": "./TableBar.cjs.js",
+  "module": "./TableBar.es.js",
+  "types": "./../types/components/TableBar/TableBar.vue.d.ts",
+  "browser": {
+    "./sfc": "./TableBar.vue"
+  }
+}

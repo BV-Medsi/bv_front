@@ -1,0 +1,8 @@
+{
+  "main": "./TimePicker.cjs.js",
+  "module": "./TimePicker.es.js",
+  "types": "./../types/components/TimePicker/TimePicker.vue.d.ts",
+  "browser": {
+    "./sfc": "./TimePicker.vue"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "main": "./Carousel.cjs.js",
+  "module": "./Carousel.es.js",
+  "types": "./../types/components/Carousel/Carousel.vue.d.ts",
+  "browser": {
+    "./sfc": "./Carousel.vue"
+  }
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"Portal.props.d.ts","sourceRoot":"","sources":["../../../../components/Portal/Portal.props.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAE,MAAM,KAAK,CAAC;AAE5B,oBAAY,WAAW,GAAG;IACxB,QAAQ,CAAC,EAAE,MAAM,CAAC;CACnB,CAAC;AAEF,oBAAY,WAAW,GAAG;IACxB,OAAO,EAAE,CAAC,KAAK,EAAE,EAAE,KAAK,aAAa,CAAC,KAAK,CAAC,CAAC;CAC9C,CAAC;AAEF,eAAO,MAAM,kBAAkB;;CAErB,CAAC"}

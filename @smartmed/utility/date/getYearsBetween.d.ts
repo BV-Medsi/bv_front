@@ -1,0 +1,2 @@
+export declare function getYearsBetween(currentYear: number, min: number, max: number, yearStep?: number, yearLimit?: number): ReadonlyArray<ReadonlyArray<number>>;
+//# sourceMappingURL=getYearsBetween.d.ts.map

@@ -1,0 +1,8 @@
+{
+  "main": "./Control.cjs.js",
+  "module": "./Control.es.js",
+  "types": "./../types/components/Control/Control.vue.d.ts",
+  "browser": {
+    "./sfc": "./Control.vue"
+  }
+}

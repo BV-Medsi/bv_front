@@ -1,0 +1,8 @@
+{
+  "main": "./NumberInput.cjs.js",
+  "module": "./NumberInput.es.js",
+  "types": "./../types/components/NumberInput/NumberInput.vue.d.ts",
+  "browser": {
+    "./sfc": "./NumberInput.vue"
+  }
+}

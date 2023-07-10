@@ -1,0 +1,8 @@
+{
+  "main": "./Expand.cjs.js",
+  "module": "./Expand.es.js",
+  "types": "./../types/components/Expand/Expand.vue.d.ts",
+  "browser": {
+    "./sfc": "./Expand.vue"
+  }
+}

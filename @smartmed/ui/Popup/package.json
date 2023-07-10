@@ -1,0 +1,8 @@
+{
+  "main": "./Popup.cjs.js",
+  "module": "./Popup.es.js",
+  "types": "./../types/components/Popup/Popup.vue.d.ts",
+  "browser": {
+    "./sfc": "./Popup.vue"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "main": "./RotatableList.cjs.js",
+  "module": "./RotatableList.es.js",
+  "types": "./../types/components/RotatableList/RotatableList.vue.d.ts",
+  "browser": {
+    "./sfc": "./RotatableList.vue"
+  }
+}

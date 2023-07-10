@@ -1,0 +1,8 @@
+{
+  "main": "./InputBonus.cjs.js",
+  "module": "./InputBonus.es.js",
+  "types": "./../types/components/InputBonus/InputBonus.vue.d.ts",
+  "browser": {
+    "./sfc": "./InputBonus.vue"
+  }
+}

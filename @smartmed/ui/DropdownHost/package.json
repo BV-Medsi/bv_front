@@ -1,0 +1,8 @@
+{
+  "main": "./DropdownHost.cjs.js",
+  "module": "./DropdownHost.es.js",
+  "types": "./../types/components/DropdownHost/DropdownHost.vue.d.ts",
+  "browser": {
+    "./sfc": "./DropdownHost.vue"
+  }
+}

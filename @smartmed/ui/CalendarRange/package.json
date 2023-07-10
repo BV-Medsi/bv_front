@@ -1,0 +1,8 @@
+{
+  "main": "./CalendarRange.cjs.js",
+  "module": "./CalendarRange.es.js",
+  "types": "./../types/components/CalendarRange/CalendarRange.vue.d.ts",
+  "browser": {
+    "./sfc": "./CalendarRange.vue"
+  }
+}

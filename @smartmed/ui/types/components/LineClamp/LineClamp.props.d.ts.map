@@ -1,0 +1,1 @@
+{"version":3,"file":"LineClamp.props.d.ts","sourceRoot":"","sources":["../../../../components/LineClamp/LineClamp.props.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAE,MAAM,KAAK,CAAC;AAE5B,oBAAY,cAAc,GAAG;IAC3B,UAAU,EAAE,MAAM,CAAC;IAEnB,UAAU,EAAE,MAAM,CAAC;CACpB,CAAC;AAEF,oBAAY,cAAc,GAAG;IAC3B,OAAO,EAAE,CAAC,KAAK,EAAE,EAAE,KAAK,aAAa,CAAC,KAAK,CAAC,CAAC;CAC9C,CAAC"}

@@ -1,0 +1,8 @@
+{
+  "main": "./Combobox.cjs.js",
+  "module": "./Combobox.es.js",
+  "types": "./../types/components/Combobox/Combobox.vue.d.ts",
+  "browser": {
+    "./sfc": "./Combobox.vue"
+  }
+}

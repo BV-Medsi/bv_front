@@ -1,0 +1,8 @@
+{
+  "main": "./Alert.cjs.js",
+  "module": "./Alert.es.js",
+  "types": "./../types/components/Alert/Alert.vue.d.ts",
+  "browser": {
+    "./sfc": "./Alert.vue"
+  }
+}

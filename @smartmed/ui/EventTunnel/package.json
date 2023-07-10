@@ -1,0 +1,8 @@
+{
+  "main": "./EventTunnel.cjs.js",
+  "module": "./EventTunnel.es.js",
+  "types": "./../types/components/EventTunnel/EventTunnel.vue.d.ts",
+  "browser": {
+    "./sfc": "./EventTunnel.vue"
+  }
+}

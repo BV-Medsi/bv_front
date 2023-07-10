@@ -1,0 +1,50 @@
+@mixin generate-space($direction) {
+  @for $i from 1 through 12 {
+    &_#{$direction}-#{$i} {
+      @if $direction == all {
+        margin: calc(var(--smed-space) * $i);
+      }
+
+      @if $direction == top {
+        margin-top: calc(var(--smed-space) * $i);
+      }
+
+      @if $direction == bottom {
+        margin-bottom: calc(var(--smed-space) * $i);
+      }
+
+      @if $direction == vertical {
+        margin-top: calc(var(--smed-space) * $i);
+        margin-bottom: calc(var(--smed-space) * $i);
+      }
+
+      @if $direction == left {
+        margin-left: calc(var(--smed-space) * $i);
+      }
+
+      @if $direction == right {
+        margin-right: calc(var(--smed-space) * $i);
+      }
+
+      @if $direction == horizontal {
+        margin-right: calc(var(--smed-space) * $i);
+        margin-left: calc(var(--smed-space) * $i);
+      }
+    }
+  }
+}
+
+.smed-space {
+  @include generate-space(all);
+  @include generate-space(top);
+  @include generate-space(bottom);
+  @include generate-space(vertical);
+  @include generate-space(left);
+  @include generate-space(right);
+  @include generate-space(horizontal);
+
+  &_auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

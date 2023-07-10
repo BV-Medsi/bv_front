@@ -1,0 +1,8 @@
+{
+  "main": "./CalendarMobile.cjs.js",
+  "module": "./CalendarMobile.es.js",
+  "types": "./../types/components/CalendarMobile/CalendarMobile.vue.d.ts",
+  "browser": {
+    "./sfc": "./CalendarMobile.vue"
+  }
+}

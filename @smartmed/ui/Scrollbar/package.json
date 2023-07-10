@@ -1,0 +1,8 @@
+{
+  "main": "./Scrollbar.cjs.js",
+  "module": "./Scrollbar.es.js",
+  "types": "./../types/components/Scrollbar/Scrollbar.vue.d.ts",
+  "browser": {
+    "./sfc": "./Scrollbar.vue"
+  }
+}

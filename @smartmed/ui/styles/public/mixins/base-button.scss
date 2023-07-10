@@ -1,0 +1,120 @@
+@mixin base-button-themes() {
+  @include transition(background-color);
+
+  &_loading {
+    pointer-events: none;
+
+    & > *:not(.spinner) {
+      opacity: 0;
+    }
+  }
+
+  &_disabled {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  &_primary {
+    background-color: var(--smed-primary);
+    color: var(--smed-base-07);
+
+    &_hovered:not(&_disabled) {
+      background-color: var(--smed-primary-hover);
+    }
+
+    &:active:not(&_disabled) {
+      background-color: var(--smed-primary-active);
+    }
+
+    &_disabled {
+      background-color: var(--smed-primary-disabled);
+    }
+  }
+
+  &_secondary {
+    background-color: var(--smed-secondary);
+    color: var(--smed-base-01);
+
+    &_hovered:not(&_disabled) {
+      background-color: var(--smed-base-03);
+    }
+
+    &:active:not(&_disabled) {
+      background-color: var(--smed-base-02);
+    }
+
+    &_disabled {
+      background-color: var(--smed-base-05);
+      color: var(--smed-base-07);
+    }
+  }
+
+  &_outlined {
+    background-color: var(--smed-base-07);
+    color: var(--smed-primary);
+
+    &_hovered:not(&_disabled) {
+      background-color: var(--smed-base-06);
+      color: var(--smed-primary-hover);
+    }
+
+    &:active:not(&_disabled) {
+      background-color: var(--smed-base-05);
+    }
+
+    &_disabled {
+      color: var(--smed-base-04);
+    }
+  }
+
+  &_secondaryOutlined {
+    background-color: var(--smed-base-07);
+    color: var(--smed-base-02);
+
+    &_hovered:not(&_disabled) {
+      background-color: var(--smed-base-06);
+    }
+
+    &:active:not(&_disabled) {
+      background-color: var(--smed-base-05);
+    }
+
+    &_disabled {
+      color: var(--smed-base-04);
+    }
+  }
+
+  &_grey {
+    background-color: var(--smed-base-06);
+    color: var(--smed-base-01);
+
+    &_hovered:not(&_disabled) {
+      background-color: var(--smed-base-05);
+    }
+
+    &:active:not(&_disabled) {
+      background-color: var(--smed-base-04);
+    }
+
+    &_disabled {
+      color: var(--smed-base-04);
+    }
+  }
+
+  &_delete {
+    background-color: var(--smed-base-05);
+    color: var(--smed-error);
+
+    &_hovered:not(&_disabled) {
+      background-color: var(--smed-base-04);
+    }
+
+    &:active:not(&_disabled) {
+      background-color: var(--smed-base-03);
+    }
+
+    &_disabled {
+      color: var(--smed-base-07);
+    }
+  }
+}

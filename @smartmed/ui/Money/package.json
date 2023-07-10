@@ -1,0 +1,8 @@
+{
+  "main": "./Money.cjs.js",
+  "module": "./Money.es.js",
+  "types": "./../types/components/Money/Money.vue.d.ts",
+  "browser": {
+    "./sfc": "./Money.vue"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "main": "./Pagination.cjs.js",
+  "module": "./Pagination.es.js",
+  "types": "./../types/components/Pagination/Pagination.vue.d.ts",
+  "browser": {
+    "./sfc": "./Pagination.vue"
+  }
+}

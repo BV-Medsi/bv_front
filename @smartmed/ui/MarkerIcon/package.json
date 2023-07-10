@@ -1,0 +1,8 @@
+{
+  "main": "./MarkerIcon.cjs.js",
+  "module": "./MarkerIcon.es.js",
+  "types": "./../types/components/MarkerIcon/MarkerIcon.vue.d.ts",
+  "browser": {
+    "./sfc": "./MarkerIcon.vue"
+  }
+}

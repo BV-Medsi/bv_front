@@ -1,0 +1,8 @@
+{
+  "main": "./FieldError.cjs.js",
+  "module": "./FieldError.es.js",
+  "types": "./../types/components/FieldError/FieldError.vue.d.ts",
+  "browser": {
+    "./sfc": "./FieldError.vue"
+  }
+}

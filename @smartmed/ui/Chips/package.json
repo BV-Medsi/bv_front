@@ -1,0 +1,8 @@
+{
+  "main": "./Chips.cjs.js",
+  "module": "./Chips.es.js",
+  "types": "./../types/components/Chips/Chips.vue.d.ts",
+  "browser": {
+    "./sfc": "./Chips.vue"
+  }
+}

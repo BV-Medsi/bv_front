@@ -1,0 +1,36 @@
+{
+  "name": "@smartmed/utility",
+  "version": "1.0.3",
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.medsi.pro:smartmed/front/web/kernel.git"
+  },
+  "publishConfig": {
+    "@smartmed:registry": "https://nexus.medsi.pro/repository/npm-local/"
+  },
+  "license": "MIT",
+  "types": "./index.ts",
+  "scripts": {
+    "build": "vite build",
+    "postbuild": "node create-package-json.js && node copy-package-json.js",
+    "lint": "eslint . --ext .vue,.ts --fix",
+    "test:unit": "jest"
+  },
+  "peerDependencies": {
+    "@maskito/core": "^0.15.0",
+    "@maskito/kit": "^0.15.0",
+    "vue": "^3.2.31"
+  },
+  "devDependencies": {
+    "@maskito/core": "^0.15.0",
+    "@maskito/kit": "^0.15.0",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "@smartmed/testing": "*",
+    "@smartmed/tsconfig": "*",
+    "@types/jest": "^29.5.0",
+    "jest": "^26.6.3",
+    "rollup-plugin-typescript-paths": "^1.4.0",
+    "ts-jest": "^26.5.6",
+    "vue": "^3.2.31"
+  }
+}

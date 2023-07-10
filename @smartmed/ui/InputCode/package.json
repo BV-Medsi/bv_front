@@ -1,0 +1,8 @@
+{
+  "main": "./InputCode.cjs.js",
+  "module": "./InputCode.es.js",
+  "types": "./../types/components/InputCode/InputCode.vue.d.ts",
+  "browser": {
+    "./sfc": "./InputCode.vue"
+  }
+}

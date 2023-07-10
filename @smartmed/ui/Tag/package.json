@@ -1,0 +1,8 @@
+{
+  "main": "./Tag.cjs.js",
+  "module": "./Tag.es.js",
+  "types": "./../types/components/Tag/Tag.vue.d.ts",
+  "browser": {
+    "./sfc": "./Tag.vue"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "main": "./InputMoney.cjs.js",
+  "module": "./InputMoney.es.js",
+  "types": "./../types/components/InputMoney/InputMoney.vue.d.ts",
+  "browser": {
+    "./sfc": "./InputMoney.vue"
+  }
+}

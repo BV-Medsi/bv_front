@@ -1,0 +1,8 @@
+{
+  "main": "./BackButton.cjs.js",
+  "module": "./BackButton.es.js",
+  "types": "./../types/components/BackButton/BackButton.vue.d.ts",
+  "browser": {
+    "./sfc": "./BackButton.vue"
+  }
+}

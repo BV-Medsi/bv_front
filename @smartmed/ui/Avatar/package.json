@@ -1,0 +1,8 @@
+{
+  "main": "./Avatar.cjs.js",
+  "module": "./Avatar.es.js",
+  "types": "./../types/components/Avatar/Avatar.vue.d.ts",
+  "browser": {
+    "./sfc": "./Avatar.vue"
+  }
+}

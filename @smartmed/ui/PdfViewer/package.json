@@ -1,0 +1,8 @@
+{
+  "main": "./PdfViewer.cjs.js",
+  "module": "./PdfViewer.es.js",
+  "types": "./../types/components/PdfViewer/PdfViewer.vue.d.ts",
+  "browser": {
+    "./sfc": "./PdfViewer.vue"
+  }
+}

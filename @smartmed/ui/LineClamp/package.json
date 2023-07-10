@@ -1,0 +1,8 @@
+{
+  "main": "./LineClamp.cjs.js",
+  "module": "./LineClamp.es.js",
+  "types": "./../types/components/LineClamp/LineClamp.vue.d.ts",
+  "browser": {
+    "./sfc": "./LineClamp.vue"
+  }
+}

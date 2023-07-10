@@ -1,0 +1,8 @@
+{
+  "main": "./BaseCheckbox.cjs.js",
+  "module": "./BaseCheckbox.es.js",
+  "types": "./../types/components/BaseCheckbox/BaseCheckbox.vue.d.ts",
+  "browser": {
+    "./sfc": "./BaseCheckbox.vue"
+  }
+}

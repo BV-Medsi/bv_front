@@ -1,0 +1,42 @@
+:root {
+  @include light-theme;
+}
+
+html {
+  @include hide-scroll;
+
+  height: auto;
+}
+
+body {
+  @include smed-text_body-xl;
+
+  height: auto;
+  font-weight: 400;
+  letter-spacing: 0px;
+  font-family: "MTSSans", BlinkMacSystemFont, "Roboto", "Segoe UI",
+    "Helvetica Neue", Arial, sans-serif;
+  color: var(--smed-base-01);
+}
+
+a {
+  color: var(--smed-primary);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.smed-focused-element {
+  box-shadow: inset 0px 0px 0px 2px var(--smed-base-01);
+  outline: none !important;
+}
+
+.smed-dark-theme {
+  @include dark-theme;
+}
+
+.smed-light-theme {
+  @include light-theme;
+}

@@ -1,0 +1,8 @@
+{
+  "main": "./Toggle.cjs.js",
+  "module": "./Toggle.es.js",
+  "types": "./../types/components/Toggle/Toggle.vue.d.ts",
+  "browser": {
+    "./sfc": "./Toggle.vue"
+  }
+}

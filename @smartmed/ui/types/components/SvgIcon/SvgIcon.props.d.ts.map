@@ -1,0 +1,1 @@
+{"version":3,"file":"SvgIcon.props.d.ts","sourceRoot":"","sources":["../../../../components/SvgIcon/SvgIcon.props.ts"],"names":[],"mappings":"AAAA,oBAAY,YAAY,GAAG;IACzB,IAAI,EAAE,MAAM,CAAC;IAEb,IAAI,CAAC,EAAE,IAAI,GAAG,IAAI,GAAG,IAAI,GAAG,IAAI,GAAG,KAAK,GAAG,MAAM,GAAG,CAAC,MAAM,EAAE,MAAM,CAAC,CAAC;IAErE,MAAM,CAAC,EAAE,OAAO,CAAC;CAClB,CAAC;AAEF,eAAO,MAAM,mBAAmB;;CAEtB,CAAC"}

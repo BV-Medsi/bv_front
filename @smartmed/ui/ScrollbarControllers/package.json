@@ -1,0 +1,8 @@
+{
+  "main": "./ScrollbarControllers.cjs.js",
+  "module": "./ScrollbarControllers.es.js",
+  "types": "./../types/components/ScrollbarControllers/ScrollbarControllers.vue.d.ts",
+  "browser": {
+    "./sfc": "./ScrollbarControllers.vue"
+  }
+}

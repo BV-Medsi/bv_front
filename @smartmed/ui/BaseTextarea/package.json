@@ -1,0 +1,8 @@
+{
+  "main": "./BaseTextarea.cjs.js",
+  "module": "./BaseTextarea.es.js",
+  "types": "./../types/components/BaseTextarea/BaseTextarea.vue.d.ts",
+  "browser": {
+    "./sfc": "./BaseTextarea.vue"
+  }
+}

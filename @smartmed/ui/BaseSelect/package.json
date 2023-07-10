@@ -1,0 +1,8 @@
+{
+  "main": "./BaseSelect.cjs.js",
+  "module": "./BaseSelect.es.js",
+  "types": "./../types/components/BaseSelect/BaseSelect.vue.d.ts",
+  "browser": {
+    "./sfc": "./BaseSelect.vue"
+  }
+}

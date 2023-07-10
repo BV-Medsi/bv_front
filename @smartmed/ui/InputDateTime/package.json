@@ -1,0 +1,8 @@
+{
+  "main": "./InputDateTime.cjs.js",
+  "module": "./InputDateTime.es.js",
+  "types": "./../types/components/InputDateTime/InputDateTime.vue.d.ts",
+  "browser": {
+    "./sfc": "./InputDateTime.vue"
+  }
+}
