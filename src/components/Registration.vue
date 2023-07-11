@@ -47,7 +47,7 @@ const sign_in = () => {
     return
   }
   axios.post(
-      "http://100.71.101.22:8000/reg",
+      "http://100.71.101.22:5000/reg",
       {
         last_name: auth.value.last_name,
         name: auth.value.name,
@@ -78,7 +78,8 @@ const sign_in = () => {
   background-color: white;
   border-radius: 16px;
   padding: 12px;
-  width: 300px;
+  width: 375px;
+  height: 768px;
 }
 .field{
   margin: 10px;

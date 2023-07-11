@@ -33,7 +33,7 @@ const sign_in = () => {
     return
   }
   axios.post(
-      "http://100.71.101.22:8000/",
+      "http://100.71.75.112:5000/",
       {
         username: auth.value.username,
         password: auth.value.password
@@ -60,7 +60,8 @@ const sign_in = () => {
   background-color: white;
   border-radius: 16px;
   padding: 12px;
-  width: 300px;
+  width: 375px;
+  height: 768px;
 }
 .field{
   margin: 10px;
