@@ -1,5 +1,5 @@
 <script setup>
-import Auth from "./components/Registration.vue"
+import Auth from "./components/Auth.vue"
 import Root from "@smartmed/ui/Root";
 
 import Tab from "./components/Tabs/Tab.vue";
@@ -12,7 +12,7 @@ import Registration from "./components/Registration.vue";
 <!--  </div>-->
   <TabsWrapper>
     <Tab title="Регистрация"><Registration></Registration></Tab>
-<!--    <Tab title="Вход"><Auth></Auth></Tab>-->
+    <Tab title="Вход"><Auth></Auth></Tab>
   </TabsWrapper>
 </template>
 
