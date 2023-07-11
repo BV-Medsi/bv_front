@@ -1,19 +1,13 @@
 <script setup>
-import Auth from "./components/Auth.vue"
-import Root from "@smartmed/ui/Root";
-
-import Tab from "./components/Tabs/Tab.vue";
-import TabsWrapper from "./components/Tabs/TabsWrapper.vue";
-import Registration from "./components/Registration.vue";
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-<!--  <div :class="app">-->
-<!--  </div>-->
-  <TabsWrapper>
-    <Tab title="Регистрация"><Registration></Registration></Tab>
-    <Tab title="Вход"><Auth></Auth></Tab>
-  </TabsWrapper>
+  <router-link to="/">HOME</router-link> |
+  <router-link to="/login">LOGIN</router-link> |
+  <router-link to="/chat">CHAT</router-link> |
+  <router-link to="/results">RESULTS</router-link>
+  <router-view :key="$route.path" />
 </template>
 
 <style module>

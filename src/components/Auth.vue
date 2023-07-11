@@ -47,9 +47,11 @@ const sign_in = () => {
 <template>
   <div :class="$style.auth">
     <p class="smed-text_h2 smed-text_medium" :class="$style.title">Добро пожаловать в BV_Medsi!</p>
-    <BaseInput v-model="auth.username" :is-error="is_filled_username" :class="$style.field" placeholder="Username"/>
-    <PasswordInput v-model="auth.password" :is-error="is_filled_password" :class="$style.field" placeholder="Password"/>
-    <BaseButton @click="sign_in" :class="$style.button">Вход</BaseButton>
+    <form @submit.prevent="sign_in">
+      <BaseInput v-model="auth.username" :is-error="is_filled_username" :class="$style.field" placeholder="Username"/>
+      <PasswordInput v-model="auth.password" :is-error="is_filled_password" :class="$style.field" placeholder="Password"/>
+      <BaseButton type="submit" :class="$style.button">Вход</BaseButton>
+    </form>
   </div>
 </template>
 

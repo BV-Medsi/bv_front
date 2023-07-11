@@ -1,0 +1,25 @@
+<template>
+  <div>
+    <input type="number" v-model="response" min="0">
+  </div>
+</template>
+
+<script setup>
+import {ref, watch} from 'vue';
+
+const props = defineProps(['stepData']);
+
+const response = ref(props.stepData || null);
+
+const emit = defineEmits(['update:response']);
+
+watch(response, (newValue) => {
+  if (newValue) {
+    emit('update:response', newValue);
+  }
+})
+</script>
+
+<style scoped lang="scss">
+
+</style>

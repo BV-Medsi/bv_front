@@ -4,10 +4,11 @@ import App from './App.vue'
 import '@smartmed/ui/styles/global.scss';
 import  { ActiveElementPlugin } from '@smartmed/ui/plugins';
 import {createPinia} from "pinia";
+import { router } from './router'
 
 const pinia = createPinia()
 const app = createApp(App)
-
 app.use(pinia)
+app.use(router)
 app.use(ActiveElementPlugin)
 app.mount('#app')
