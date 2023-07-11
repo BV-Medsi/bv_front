@@ -1,6 +1,6 @@
 <template>
   <div class="tabs">
-    <ul class="tabs__header">
+    <ul class="tabs_header">
       <li v-for="title in tabTitles"
           :key="title"
           @click="selectedTitle = title"
