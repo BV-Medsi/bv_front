@@ -52,10 +52,10 @@ const sign_in = () => {
   axios.post(
       "http://100.71.101.22:8000/reg",
       {
-        last_name: "1",
-        name: "auth.value.name",
-        username: "auth.value.username",
-        password: "auth.value.password"
+        last_name: auth.value.last_name,
+        name: auth.value.name,
+        username: auth.value.username,
+        password: auth.value.password
       }
   )
 }

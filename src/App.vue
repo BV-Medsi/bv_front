@@ -11,7 +11,7 @@ import TabsWrapper from "./components/Tabs/TabsWrapper.vue";
 <!--  </div>-->
   <TabsWrapper>
     <Tab title="dfsjl"><Auth></Auth></Tab>
-    <Tab title="ДАЛАЛАЛЛАЛ"><Auth></Auth></Tab>
+    <Tab title="ДАЛАЛАЛЛАЛ"><Auth ></Auth></Tab>
   </TabsWrapper>
 </template>
 
