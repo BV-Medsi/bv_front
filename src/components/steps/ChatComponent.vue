@@ -1,12 +1,11 @@
 <script setup>
 import { useStore } from '../../store';
-import {computed, ref} from 'vue';
+import {computed} from 'vue';
 import { useRouter } from 'vue-router';
 import BaseButton from "@smartmed/ui/BaseButton";
 
 const store = useStore();
 const router = useRouter();
-let response = ref(null);
 
 const currentStep = computed(() => store.steps[store.currentStepIndex]);
 
@@ -15,10 +14,11 @@ const handleUpdateResponse = (newResponseValue) => {
 };
 
 const goToPrevStep = () => {
-  store.goToPrevStep();
-
-  const prevStep = store.steps[store.currentStepIndex];
-  router.push(`/chat/${prevStep.id}`);
+  if (store.currentStepIndex > 0) {
+    store.goToPrevStep();
+    const prevStep = store.steps[store.currentStepIndex];
+    router.push(`/chat/${prevStep.id}`);
+  }
 };
 
 const goToNextStep = () => {

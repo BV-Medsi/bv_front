@@ -2,11 +2,11 @@
   <div>
     <label>
       <input type="radio" value="male" v-model="response">
-      Женщина
+      Мужчина
     </label>
     <label>
       <input type="radio" value="female" v-model="response">
-      Мужчина
+      Женщина
     </label>
   </div>
 </template>
@@ -21,8 +21,6 @@ const response = ref(props.stepData || null);
 const emit = defineEmits(['update:response']);
 
 watch(response, (newValue) => {
-  if (newValue) {
-    emit('update:response', newValue);
-  }
+  emit('update:response', newValue);
 })
 </script>

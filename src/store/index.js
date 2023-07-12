@@ -24,45 +24,36 @@ export const useStore = defineStore({
             {
                 id: ROUTES.SYMPTOMS,
                 question: "Выберите ваши симптомы",
-                data: {
-                    chronicSymptoms: [
-                        {
-                            isChecked: false,
-                            name: 'Глубокая боль'
-                        },
-                        {
-                            isChecked: false,
-                            name: 'Кожная боль'
-                        },
-                        {
-                            isChecked: false,
-                            name: 'Нейропатическая боль'
-                        },
-                        {
-                            isChecked: false,
-                            name: 'Острая боль'
-                        },
-                        {
-                            isChecked: false,
-                            name: 'Рефлекторная боль'
-                        },
-                    ]
-                },
+                data: [
+                    {
+                        isChecked: false,
+                        name: 'Глубокая боль'
+                    },
+                    {
+                        isChecked: false,
+                        name: 'Кожная боль'
+                    },
+                    {
+                        isChecked: false,
+                        name: 'Нейропатическая боль'
+                    },
+                    {
+                        isChecked: false,
+                        name: 'Острая боль'
+                    },
+                    {
+                        isChecked: false,
+                        name: 'Рефлекторная боль'
+                    }
+                ],
                 isValid: false
             }
         ],
         currentStepIndex: 0,
-        symptoms: [],
-        chronicSymptoms: [],
-        extraInfo: {
-            weight: null,
-            height: null,
-            sugarLevel: null
-        }
     }),
     actions: {
         goToNextStep() {
-            if (this.currentStepIndex < this.steps.length - 1) {
+            if (this.currentStepIndex < this.steps.length) {
                 this.currentStepIndex++;
             }
         },
@@ -72,10 +63,10 @@ export const useStore = defineStore({
             }
         },
         validateAndUpdateStep(stepIndex, data) {
-            if (data !== null) {
-                this.steps[stepIndex].data = data
-                this.steps[stepIndex].isValid = true
-            }
+            this.steps[stepIndex].data = data;
+            this.steps[stepIndex].isValid = Array.isArray(data)
+                ? data.some(el => el.isChecked)
+                : !!data
         }
     },
 })
