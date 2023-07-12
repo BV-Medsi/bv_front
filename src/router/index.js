@@ -3,11 +3,13 @@ import {useStore} from "../store/index.js";
 export const ROUTES  = {
     GENDER: 'select-gender',
     AGE: 'select-age',
+    IMAGE_SYMPTOMS: 'select-image-symptoms',
     SYMPTOMS:'select-symptoms'
 }
 const ResultComponent = () => import("../components/ResultComponent.vue");
 const AuthComponent = () => import("../components/AuthComponent.vue");
 import {defineAsyncComponent} from "vue";
+const SelectImageSymptomsComponent = () => import("../components/steps/SelectImageSymptomsComponent.vue");
 const ChatComponent = () => import("../components/steps/ChatComponent.vue");
 const SelectSymptomsComponent = () => import("../components/steps/SelectSymptomsComponent.vue");
 const SelectAgeComponent = () => import("../components/steps/SelectAgeComponent.vue");
@@ -24,6 +26,7 @@ const routes = [
             {path: '', redirect: `/chat/${ROUTES.GENDER}`},
             {path: ROUTES.GENDER, component: SelectGenderComponent},
             {path: ROUTES.AGE, component: SelectAgeComponent},
+            {path: ROUTES.IMAGE_SYMPTOMS, component: SelectImageSymptomsComponent},
             {path: ROUTES.SYMPTOMS, component: SelectSymptomsComponent},
         ]
     },
