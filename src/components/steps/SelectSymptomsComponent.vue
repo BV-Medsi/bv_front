@@ -8,9 +8,7 @@ const response = ref([...props.stepData]);
 const emit = defineEmits(['update:response']);
 
 watch(response, (newValue) => {
-  if (newValue) {
-    emit('update:response', newValue);
-  }
+  emit('update:response', newValue);
 })
 
 const handleItemSelected = (symptom) => {
@@ -22,7 +20,9 @@ const handleItemSelected = (symptom) => {
 
 <template>
   <ul class="list">
-    <li :class="['item', symptom.isChecked && 'selected']" v-for="symptom in response" @click="handleItemSelected(symptom)">{{symptom.name}}</li>
+    <li :class="['item', symptom.isChecked && 'selected']" v-for="symptom in response"
+        @click="handleItemSelected(symptom)">{{ symptom.name }}
+    </li>
   </ul>
 </template>
 

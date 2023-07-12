@@ -50,28 +50,23 @@ export const useStore = defineStore({
             }
         ],
         currentStepIndex: 0,
-        lastValidStepIndex: 0,
     }),
     actions: {
         goToNextStep() {
-            if (this.currentStepIndex < this.steps.length - 1) {
+            if (this.currentStepIndex < this.steps.length) {
                 this.currentStepIndex++;
-                if (this.steps[this.currentStepIndex].isValid) {
-                    this.lastValidStepIndex = this.currentStepIndex;
-                }
             }
         },
         goToPrevStep() {
             if (this.currentStepIndex > 0) {
-                this.currentStepIndex = this.lastValidStepIndex;
+                this.currentStepIndex--;
             }
         },
         validateAndUpdateStep(stepIndex, data) {
-            if (data !== null) {
-                this.steps[stepIndex].data = data
-                this.steps[stepIndex].isValid = true
-                this.lastValidStepIndex = stepIndex;
-            }
+            this.steps[stepIndex].data = data;
+            this.steps[stepIndex].isValid = Array.isArray(data)
+                ? data.some(el => el.isChecked)
+                : !!data
         }
     },
 })

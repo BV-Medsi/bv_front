@@ -21,8 +21,6 @@ const response = ref(props.stepData || null);
 const emit = defineEmits(['update:response']);
 
 watch(response, (newValue) => {
-  if (newValue) {
-    emit('update:response', newValue);
-  }
+  emit('update:response', newValue);
 })
 </script>

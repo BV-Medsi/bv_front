@@ -10,7 +10,6 @@ const router = useRouter();
 const steps = computed(() => store.steps);
 
 const goBackToLastStep = () => {
-  store.goToPrevStep();
   const prevStep = store.steps[store.currentStepIndex];
   router.push(`/chat/${prevStep.id}`);
 };

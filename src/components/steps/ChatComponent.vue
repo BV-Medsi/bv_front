@@ -15,8 +15,6 @@ const handleUpdateResponse = (newResponseValue) => {
 
 const goToPrevStep = () => {
   if (store.currentStepIndex > 0) {
-    store.currentStepIndex--;
-    store.lastValidStepIndex--;
     store.goToPrevStep();
     const prevStep = store.steps[store.currentStepIndex];
     router.push(`/chat/${prevStep.id}`);
