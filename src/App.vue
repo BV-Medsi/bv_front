@@ -1,5 +1,11 @@
 <script setup>
 import { RouterView } from 'vue-router'
+
+import Auth from "./components/Auth.vue"
+import Root from "@smartmed/ui/Root";
+import Disclaimer from "./components/Disclaimer.vue";
+import app from "./App.vue";
+
 </script>
 
 <template>
