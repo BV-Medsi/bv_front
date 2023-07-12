@@ -2,11 +2,11 @@
   <div>
     <label>
       <input type="radio" value="male" v-model="response">
-      Женщина
+      Мужчина
     </label>
     <label>
       <input type="radio" value="female" v-model="response">
-      Мужчина
+      Женщина
     </label>
   </div>
 </template>

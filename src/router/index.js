@@ -1,4 +1,5 @@
 import {createRouter, createWebHistory} from 'vue-router';
+import {useStore} from "../store/index.js";
 export const ROUTES  = {
     GENDER: 'select-gender',
     AGE: 'select-age',
@@ -20,16 +21,26 @@ const routes = [
     {
         path: '/chat', component: ChatComponent,
         children: [
-            {path: '', redirect: '/chat/select-gender'},
+            {path: '', redirect: `/chat/${ROUTES.GENDER}`},
             {path: ROUTES.GENDER, component: SelectGenderComponent},
             {path: ROUTES.AGE, component: SelectAgeComponent},
             {path: ROUTES.SYMPTOMS, component: SelectSymptomsComponent},
         ]
     },
     {path: '/results', component: ResultComponent}
-]
+];
 
 export const router = createRouter({
     history: createWebHistory(),
     routes
+});
+
+router.beforeEach((to, from, next) => {
+    const store = useStore();
+    if (to.path.startsWith('/chat')) {
+        const stepId = to.path.split('/')[2];
+        const stepIndex = store.steps.findIndex(step => step.id === stepId);
+        if (stepIndex > 0 && !store.steps[stepIndex - 1].isValid) next(`/chat/${ROUTES.GENDER}`)
+        else next();
+    } else next();
 })
