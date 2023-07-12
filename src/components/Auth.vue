@@ -20,7 +20,7 @@ const is_filled_username  = computed(() => {
 })
 
 const is_filled_password  = computed(() => {
-  return auth.value.password === "" && auth.value.password !== null
+  return auth.value.password === "" && auth.value.password !== null //d
 })
 
 const sign_in = () => {
