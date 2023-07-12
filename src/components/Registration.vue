@@ -10,7 +10,7 @@ import {computed, ref} from "vue";
 
 
 const auth = ref({
-  username: null,
+  username: null, //d
   password: null,
   name: null,
   last_name: null
