@@ -1,7 +1,7 @@
 <script setup>
-import { useStore } from '../../store';
-import {computed} from 'vue';
-import { useRouter } from 'vue-router';
+import { useStore } from "../../store";
+import { computed } from "vue";
+import { useRouter } from "vue-router";
 import BaseButton from "@smartmed/ui/BaseButton";
 
 const store = useStore();
@@ -31,21 +31,33 @@ const goToNextStep = () => {
       const nextStep = store.steps[store.currentStepIndex];
       router.push(`/chat/${nextStep.id}`);
     } else {
-      router.push('/results');
+      router.push("/results");
     }
   }
 };
 </script>
 
 <template>
-  <div>
+  <div :class="$style.auth">
     <h1>Пожалуйста, ответьте на вопрос.</h1>
     <BaseButton @click="goToPrevStep">&blacktriangleleft;</BaseButton>
     <p>{{ currentStep.question }}</p>
-    <router-view :stepData="currentStep.data" @update:response="handleUpdateResponse($event)"/>
-    <BaseButton :disabled="!currentStep.isValid" @click="goToNextStep">&blacktriangleright;</BaseButton>
+    <router-view
+      :stepData="currentStep.data"
+      @update:response="handleUpdateResponse($event)"
+    />
+    <BaseButton :disabled="!currentStep.isValid" @click="goToNextStep"
+      >&blacktriangleright;</BaseButton
+    >
   </div>
 </template>
 
-<style scoped lang="scss">
+<style module>
+.auth {
+  background-color: rgb(255, 255, 255);
+  border-radius: 16px;
+  padding: 12px;
+  width: 371px;
+  height: 812px;
+}
 </style>
