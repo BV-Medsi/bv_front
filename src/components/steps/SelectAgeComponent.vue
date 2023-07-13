@@ -24,5 +24,4 @@ watch(response, (newValue) => {
 </script>
 
 <style scoped lang="scss">
-
 </style>

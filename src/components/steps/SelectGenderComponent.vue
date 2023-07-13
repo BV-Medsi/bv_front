@@ -13,7 +13,6 @@
 
 <script setup>
 import {ref, watch} from 'vue';
-import Message from "../Message.vue";
 
 const props = defineProps(['stepData']);
 
@@ -27,3 +26,5 @@ watch(response, (newValue) => {
   }
 })
 </script>
+<style module>
+</style>

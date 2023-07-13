@@ -38,7 +38,7 @@ const goToNextStep = () => {
 </script>
 
 <template>
-  <div>
+  <div class="screen_background">
     <h1>Пожалуйста, ответьте на вопрос.</h1>
     <BaseButton @click="goToPrevStep">&blacktriangleleft;</BaseButton>
     <p>{{ currentStep.question }}</p>

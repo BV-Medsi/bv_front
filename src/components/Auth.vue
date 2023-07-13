@@ -61,7 +61,7 @@ const sign_in = () => {
   border-radius: 16px;
   padding: 12px;
   width: 375px;
-  height: 768px;
+  height: 760px;
 }
 .field{
   margin: 10px;

@@ -7,12 +7,11 @@ import { RouterView } from 'vue-router'
   <router-link to="/login">LOGIN</router-link> |
   <router-link to="/chat">CHAT</router-link> |
   <router-link to="/results">RESULTS</router-link>
-  <router-view :key="$route.path" />
+  <router-view :key="$route.path" class="router_bcg"/>
 </template>
 
 <style module>
 .app{
   background-color: #1a1a1a;
 }
-
 </style>
