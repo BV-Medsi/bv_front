@@ -1,20 +1,22 @@
 import {createRouter, createWebHistory} from 'vue-router';
 import {useStore} from "../store/index.js";
-export const ROUTES  = {
+
+export const ROUTES = {
     GENDER: 'select-gender',
     AGE: 'select-age',
     IMAGE_SYMPTOMS: 'select-image-symptoms',
-    SYMPTOMS:'select-symptoms'
+    SYMPTOMS: 'select-symptoms'
 }
 const ResultComponent = () => import("../components/ResultComponent.vue");
 const AuthComponent = () => import("../components/AuthComponent.vue");
 import {defineAsyncComponent} from "vue";
-const SelectImageSymptomsComponent = () => import("../components/steps/SelectImageSymptomsComponent.vue");
+import {storeToRefs} from "pinia";
+
+const SelectImageSymptomsComponent = () => import("../components/steps/SelectImageSymptomsComponent/index.vue");
 const ChatComponent = () => import("../components/steps/ChatComponent.vue");
 const SelectSymptomsComponent = () => import("../components/steps/SelectSymptomsComponent.vue");
 const SelectAgeComponent = () => import("../components/steps/SelectAgeComponent.vue");
 const SelectGenderComponent = () => import("../components/steps/SelectGenderComponent.vue");
-
 const HomeComponent = () => import("../components/HomeComponent.vue");
 
 const routes = [

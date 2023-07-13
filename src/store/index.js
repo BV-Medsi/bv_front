@@ -66,6 +66,9 @@ export const useStore = defineStore({
         ],
         currentStepIndex: 0,
     }),
+    getters: {
+        getGender: state => state.steps[0].data,
+    },
     actions: {
         goToNextStep() {
             if (this.currentStepIndex < this.steps.length) {
