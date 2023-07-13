@@ -1,11 +1,15 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
-<div>HOME</div>
+  <div :class="$style.auth">HOME</div>
 </template>
 
-<style scoped lang="scss">
-
+<style module>
+.auth {
+  background-color: rgb(255, 255, 255);
+  border-radius: 16px;
+  padding: 12px;
+  width: 371px;
+  height: 812px;
+}
 </style>
