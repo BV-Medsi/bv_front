@@ -2,10 +2,13 @@
   <div>
     <input type="number" v-model="response" min="0">
   </div>
+
 </template>
 
 <script setup>
 import {ref, watch} from 'vue';
+
+import Message from "../Message.vue";
 
 const props = defineProps(['stepData']);
 
