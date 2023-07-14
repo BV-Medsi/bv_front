@@ -1,6 +1,6 @@
 <script setup>
-import {computed,ref} from 'vue';
-import { useStore } from '../../../store';
+import {computed, ref} from 'vue';
+import {useStore} from '../../../store';
 
 import BaseButton from '@smartmed/ui/BaseButton';
 import FemaleBack from "./components/FemaleBack.vue";
@@ -13,26 +13,31 @@ const store = useStore();
 const {getGender} = storeToRefs(store);
 const side = ref('front');
 const toggleSide = () => {
-  side.value === 'back'? side.value = 'front' : side.value = 'back';
+  side.value === 'back' ? side.value = 'front' : side.value = 'back';
 }
 
 const getComponent = computed(() => {
-  switch(side.value) {
+  switch (side.value) {
     case 'front':
-      return getGender.value === 'female'? FemaleFront : MaleFront;
+      return getGender.value === 'female' ? FemaleFront : MaleFront;
       break;
     case 'back':
-      return getGender.value === 'female'? FemaleBack : MaleBack;
+      return getGender.value === 'female' ? FemaleBack : MaleBack;
       break;
-    default: return null;
+    default:
+      return null;
   }
 });
+
+const handleSelectedPartUpdate = val => {
+  console.log(val)
+}
 </script>
 
 <template>
   <div :stepData="$props.stepData" class="wrapper">
     <BaseButton @click="toggleSide()" class="btn">⟲</BaseButton>
-    <component :is="getComponent" />
+    <component :is="getComponent" @select:part="handleSelectedPartUpdate"/>
   </div>
 </template>
 
@@ -40,6 +45,7 @@ const getComponent = computed(() => {
 .wrapper {
   position: relative;
 }
+
 .btn {
   position: absolute;
   top: 50%;
