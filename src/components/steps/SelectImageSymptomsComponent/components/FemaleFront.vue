@@ -9,7 +9,7 @@ const reactiveOpacity = ref({
   [PARTS.neck]: 0,
   [PARTS.chest]: 0,
   [PARTS.arms]: 0,
-  [PARTS.stomach]: 0,
+  [PARTS.abdomen]: 0,
   [PARTS.pelvis]: 0,
   [PARTS.back]: 0,
   [PARTS.buttock]: 0,
@@ -61,11 +61,11 @@ const handlePartSelect = val => {
             d="M8.52 35.72c1.744-13.435 7.811-25.114 18.2-35.037h123.821c9.908 11.453 16.51 24.082 19.805 37.888 4.944 20.708 2.83 17.258 2.83 38.873s2.782 25.816 0 36.541c-2.781 10.725-10.337 23.322-27.39 19.952-17.052-3.37-27.935-11.882-58.309-11.882s-32.355 14.208-56.153 14.208c-15.865 0-26.126-11.908-30.782-35.726l5.362-29.352c0-10.208.872-22.029 2.616-35.464z"
             :opacity="reactiveOpacity[PARTS.chest]" transform="scale(0.315,0.315), translate(403,202)"
             :class="$style.layers"></path>
-      <path @click="handlePartSelect(PARTS.stomach)" @mouseenter="handleMouseEnter(PARTS.stomach)"
-            @mouseleave="handleMouseLeave(PARTS.stomach)" fill="#83B7D6"
+      <path @click="handlePartSelect(PARTS.abdomen)" @mouseenter="handleMouseEnter(PARTS.abdomen)"
+            @mouseleave="handleMouseLeave(PARTS.abdomen)" fill="#83B7D6"
             fill-rule="nonzero"
             d="M-.049.237c7.026 14.855 16.397 22.282 28.114 22.282 17.575 0 41.623-15.162 53.669-15.162s53.173 11.304 66.425 11.304c8.835 0 15.386-6.141 19.652-18.424-3.688 34.957-8.454 67.118-14.298 96.485 0 8.203 4.766 20.911 14.298 38.125-30.557 24.397-59.25 36.595-86.077 36.595-40.24 0-55.266-9.768-78.568-36.595-3.215-2.499 7.907-7.912 7.907-44.757 0-24.563-3.707-54.514-11.122-89.853z"
-            :opacity="reactiveOpacity[PARTS.stomach]" transform="scale(0.315,0.315), translate(408,315)"
+            :opacity="reactiveOpacity[PARTS.abdomen]" transform="scale(0.315,0.315), translate(408,315)"
             :class="$style.layers"></path>
       <path @click="handlePartSelect(PARTS.legs)" @mouseenter="handleMouseEnter(PARTS.legs)"
             @mouseleave="handleMouseLeave(PARTS.legs)" fill="#83B7D6"

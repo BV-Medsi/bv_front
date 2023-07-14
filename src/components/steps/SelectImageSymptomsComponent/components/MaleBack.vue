@@ -9,7 +9,7 @@ const reactiveOpacity = ref({
   [PARTS.neck]: 0,
   [PARTS.chest]: 0,
   [PARTS.arms]: 0,
-  [PARTS.stomach]: 0,
+  [PARTS.abdomen]: 0,
   [PARTS.pelvis]: 0,
   [PARTS.back]: 0,
   [PARTS.buttock]: 0,

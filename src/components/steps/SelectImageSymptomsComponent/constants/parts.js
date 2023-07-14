@@ -3,7 +3,7 @@ export const PARTS = {
     neck: 'neck',
     chest: 'chest',
     arms: 'arms',
-    stomach:'stomach',
+    abdomen:'abdomen',
     pelvis:'pelvis',
     back: 'back',
     buttock: 'buttock',

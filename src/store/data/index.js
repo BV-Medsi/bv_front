@@ -77,7 +77,7 @@ export const symptomsData = {
             isChecked: false
         }
     ],
-    stomach: [
+    abdomen: [
         {
             name: 'Боль в животе',
             isChecked: false

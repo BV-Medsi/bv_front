@@ -38,9 +38,9 @@ export const useStore = defineStore({
                         isSelected: false,
                         symptoms: [...symptomsData.arms]
                     },
-                    stomach: {
+                    abdomen: {
                         isSelected: false,
-                        symptoms: [...symptomsData.stomach]
+                        symptoms: [...symptomsData.abdomen]
                     },
                     back: {
                         isSelected: false,
