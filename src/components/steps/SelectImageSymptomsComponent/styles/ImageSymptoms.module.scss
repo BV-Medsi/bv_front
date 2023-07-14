@@ -1,7 +1,7 @@
 .layers {
   cursor: pointer;
-  opacity: 0;
   outline: none;
+  transition: opacity 200ms ease-in-out;
 
   &:hover &.hover-both {
     opacity: .525;
