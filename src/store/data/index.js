@@ -1,5 +1,7 @@
+import {PARTS} from "../../components/steps/SelectImageSymptomsComponent/constants/parts.js";
+
 export const symptomsData = {
-    head: [
+    [PARTS.head]: [
         {
             name: 'Головная боль',
             isChecked: false
@@ -25,7 +27,8 @@ export const symptomsData = {
             isChecked: false
         }
     ],
-    chest: [
+    [PARTS.neck]: [],
+    [PARTS.chest]: [
         {
             name: 'Кашель',
             isChecked: false
@@ -39,7 +42,7 @@ export const symptomsData = {
             isChecked: false
         }
     ],
-    arms: [
+    [PARTS.arms]: [
         {
             name: 'Подергивание руки',
             isChecked: false
@@ -77,7 +80,7 @@ export const symptomsData = {
             isChecked: false
         }
     ],
-    abdomen: [
+    [PARTS.abdomen]: [
         {
             name: 'Боль в животе',
             isChecked: false
@@ -99,19 +102,20 @@ export const symptomsData = {
             isChecked: false
         }
     ],
-    back: [
+    [PARTS.back]: [
         {
             name: 'Боль в пояснице',
             isChecked: false
         }
     ],
-    buttock: [
+    [PARTS.pelvis]: [],
+    [PARTS.buttock]: [
         {
             name: 'кровь в кале',
             isChecked: false
         }
     ],
-    legs: [
+    [PARTS.legs]: [
         {
             name: 'Боль в ноге',
             isChecked: false

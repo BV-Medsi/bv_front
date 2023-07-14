@@ -10,7 +10,8 @@ import MaleBack from "./components/MaleBack.vue";
 import {storeToRefs} from "pinia";
 
 const store = useStore();
-const {getGender} = storeToRefs(store);
+const {getGender, getSelectedPartSymptoms} = storeToRefs(store);
+const {selectImageSymptom} = store;
 const side = ref('front');
 const toggleSide = () => {
   side.value === 'back' ? side.value = 'front' : side.value = 'back';
@@ -30,12 +31,14 @@ const getComponent = computed(() => {
 });
 
 const handleSelectedPartUpdate = val => {
-  console.log(val)
+  console.log(val);
+  selectImageSymptom(val);
 }
 </script>
 
 <template>
   <div :stepData="$props.stepData" class="wrapper">
+    <pre>{{ getSelectedPartSymptoms }}</pre>
     <BaseButton @click="toggleSide()" class="btn">⟲</BaseButton>
     <component :is="getComponent" @select:part="handleSelectedPartUpdate"/>
   </div>

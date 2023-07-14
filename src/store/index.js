@@ -31,6 +31,10 @@ export const useStore = defineStore({
                         isSelected: false,
                         symptoms: [...symptomsData[PARTS.head]]
                     },
+                    [PARTS.neck]: {
+                        isSelected: false,
+                        symptoms: [...symptomsData[PARTS.neck]]
+                    },
                     [PARTS.chest]: {
                         isSelected: false,
                         symptoms: [...symptomsData[PARTS.chest]]
@@ -46,6 +50,10 @@ export const useStore = defineStore({
                     [PARTS.back]: {
                         isSelected: false,
                         symptoms: [...symptomsData[PARTS.back]]
+                    },
+                    [PARTS.pelvis]: {
+                        isSelected: false,
+                        symptoms: [...symptomsData[PARTS.pelvis]]
                     },
                     [PARTS.buttock]: {
                         isSelected: false,
@@ -69,6 +77,15 @@ export const useStore = defineStore({
     }),
     getters: {
         getGender: state => state.steps[0].data,
+        getSelectedPartSymptoms: (state) => {
+            const imageSymptomsStep = state.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);
+            for(let part in imageSymptomsStep.data) {
+                if(imageSymptomsStep.data[part].isSelected) {
+                    return imageSymptomsStep.data[part].symptoms;
+                }
+            }
+            return [];
+        }
     },
     actions: {
         goToNextStep() {
@@ -94,6 +111,20 @@ export const useStore = defineStore({
                     break;
                 default:
                     this.steps[stepIndex].isValid = !!data;
+            }
+        },
+        selectImageSymptom(part) {
+            const imageSymptomsStep = this.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);
+            if (imageSymptomsStep) {
+                if (imageSymptomsStep.data[part].isSelected) return;
+
+                Object.keys(imageSymptomsStep.data).forEach(key => {
+                    imageSymptomsStep.data[key].isSelected = false;
+                });
+
+                imageSymptomsStep.data[part].isSelected = true;
+
+                this.validateAndUpdateStep(this.steps.indexOf(imageSymptomsStep), imageSymptomsStep.data);
             }
         }
     }
