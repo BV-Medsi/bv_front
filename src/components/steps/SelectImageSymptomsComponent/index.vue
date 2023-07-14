@@ -3,6 +3,7 @@ import {computed, ref} from 'vue';
 import {useStore} from '../../../store';
 
 import BaseButton from '@smartmed/ui/BaseButton';
+import SymptomsList from "./components/SymptomsList.vue";
 import FemaleBack from "./components/FemaleBack.vue";
 import FemaleFront from "./components/FemaleFront.vue";
 import MaleFront from "./components/MaleFront.vue";
@@ -11,7 +12,7 @@ import {storeToRefs} from "pinia";
 
 const store = useStore();
 const {getGender, getSelectedPartSymptoms} = storeToRefs(store);
-const {selectImageSymptom} = store;
+const {selectImageSymptom, updateSymptomStatus} = store;
 const side = ref('front');
 const toggleSide = () => {
   side.value === 'back' ? side.value = 'front' : side.value = 'back';
@@ -31,16 +32,15 @@ const getComponent = computed(() => {
 });
 
 const handleSelectedPartUpdate = val => {
-  console.log(val);
   selectImageSymptom(val);
 }
 </script>
 
 <template>
   <div :stepData="$props.stepData" class="wrapper">
-    <pre>{{ getSelectedPartSymptoms }}</pre>
     <BaseButton @click="toggleSide()" class="btn">⟲</BaseButton>
     <component :is="getComponent" @select:part="handleSelectedPartUpdate"/>
+    <SymptomsList :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus"/>
   </div>
 </template>
 

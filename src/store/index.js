@@ -79,8 +79,8 @@ export const useStore = defineStore({
         getGender: state => state.steps[0].data,
         getSelectedPartSymptoms: (state) => {
             const imageSymptomsStep = state.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);
-            for(let part in imageSymptomsStep.data) {
-                if(imageSymptomsStep.data[part].isSelected) {
+            for (let part in imageSymptomsStep.data) {
+                if (imageSymptomsStep.data[part].isSelected) {
                     return imageSymptomsStep.data[part].symptoms;
                 }
             }
@@ -124,6 +124,20 @@ export const useStore = defineStore({
 
                 imageSymptomsStep.data[part].isSelected = true;
 
+                this.validateAndUpdateStep(this.steps.indexOf(imageSymptomsStep), imageSymptomsStep.data);
+            }
+        },
+        updateSymptomStatus(symptom) {
+            const imageSymptomsStep = this.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);
+            if (imageSymptomsStep) {
+                for (let part in imageSymptomsStep.data) {
+                    if (imageSymptomsStep.data[part].isSelected) {
+                        const symptomToUpdate = imageSymptomsStep.data[part].symptoms.find(s => s.name === symptom.name);
+                        if (symptomToUpdate) {
+                            symptomToUpdate.isChecked = symptom.isChecked;
+                        }
+                    }
+                }
                 this.validateAndUpdateStep(this.steps.indexOf(imageSymptomsStep), imageSymptomsStep.data);
             }
         }
