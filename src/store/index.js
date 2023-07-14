@@ -1,6 +1,7 @@
 import {defineStore} from 'pinia'
 import {ROUTES} from "../router/index.js";
 import {symptomsData} from "./data/index.js";
+import {PARTS} from "../components/steps/SelectImageSymptomsComponent/constants/parts.js";
 
 export const useStore = defineStore({
     id: "therapist-store",
@@ -26,33 +27,33 @@ export const useStore = defineStore({
                 id: ROUTES.IMAGE_SYMPTOMS,
                 question: "Выберите область тела, где вы ощущаете симптомы",
                 data: {
-                    head: {
+                    [PARTS.head]: {
                         isSelected: false,
-                        symptoms: [...symptomsData.head]
+                        symptoms: [...symptomsData[PARTS.head]]
                     },
-                    chest: {
+                    [PARTS.chest]: {
                         isSelected: false,
-                        symptoms: [...symptomsData.chest]
+                        symptoms: [...symptomsData[PARTS.chest]]
                     },
-                    arms: {
+                    [PARTS.arms]: {
                         isSelected: false,
-                        symptoms: [...symptomsData.arms]
+                        symptoms: [...symptomsData[PARTS.arms]]
                     },
-                    abdomen: {
+                    [PARTS.abdomen]: {
                         isSelected: false,
-                        symptoms: [...symptomsData.abdomen]
+                        symptoms: [...symptomsData[PARTS.abdomen]]
                     },
-                    back: {
+                    [PARTS.back]: {
                         isSelected: false,
-                        symptoms: [...symptomsData.back]
+                        symptoms: [...symptomsData[PARTS.back]]
                     },
-                    buttocks: {
+                    [PARTS.buttock]: {
                         isSelected: false,
-                        symptoms: [...symptomsData.buttock]
+                        symptoms: [...symptomsData[PARTS.buttock]]
                     },
-                    legs: {
+                    [PARTS.legs]: {
                         isSelected: false,
-                        symptoms: [...symptomsData.legs]
+                        symptoms: [...symptomsData[PARTS.legs]]
                     }
                 },
                 isValid: false
