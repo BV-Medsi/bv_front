@@ -5,17 +5,19 @@
       <base-input v-model="weight" size="md" description="Указать в килограммах" label="Вес" :class="$style.inputField"/>
       <base-input v-model="height" size="md" description="Указать в сантиметрах" label="Рост" :class="$style.inputField"/>
       <base-input v-model="age" size="md" description="Указать в годах" label="Возраст" :class="$style.inputField"/>
+      <div :class="$style.chooseGender">
+        <label>
+          <input :class="$style.radio_button" type="radio" value="male" v-model="response">
+          <span class="smed-text_body-md">Мужчина</span>
+        </label>
+        <label>
+          <input :class="$style.radio_button" type="radio" value="female" v-model="response">
+          <span class="smed-text_body-md">Женщина</span>
+        </label>
+      </div>
       <hr/>
     </div>
     <div>
-      <!--    <label>-->
-      <!--      <input :class="$style.radio_button" type="radio" value="male" v-model="response">-->
-      <!--      Мужчина-->
-      <!--    </label>-->
-      <!--    <label>-->
-      <!--      <input :class="$style.radio_button" type="radio" value="female" v-model="response">-->
-      <!--      Женщина-->
-      <!--    </label>-->
       <h2 class="smed-text_h3 smed-text_medium" :class="$style.header">Хронические заболевания</h2>
       <BaseButton icon="plus" @click="addDisease" :disabled="isDiseasesButton" :class="$style.addButton">Добавить хроническое заболевание</BaseButton>
       <combobox v-for="(disease, index) in diseases"
@@ -135,5 +137,9 @@ hr {
 }
 .nextButton{
   margin-top: 10px;
+}
+.chooseGender{
+  display: grid;
+  text-align: left;
 }
 </style>
