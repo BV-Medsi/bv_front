@@ -1,0 +1,10 @@
+.layers {
+  cursor: pointer;
+  outline: none;
+  transition: opacity 200ms ease-in-out;
+
+  &:hover &.hover-both {
+    opacity: .525;
+    transition: opacity .5s linear;
+  }
+}
