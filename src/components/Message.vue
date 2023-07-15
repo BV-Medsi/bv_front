@@ -1,13 +1,16 @@
 <script setup>
-
+const props = defineProps({
+  avatar: Boolean,
+  title: Boolean
+})
 </script>
 
 <template>
   <div class="message">
 
-    <img src="/src/assets/avatar.svg" alt="" class="avatar">
+    <img src="/src/assets/avatar.svg" alt="" class="avatar" v-if="props.avatar">
     <p class="message_bcg" align="left">
-      <span class="title">Виртуальный терапевт</span>
+      <span class="title" v-if="props.title">Виртуальный терапевт</span>
       <slot></slot>
     </p>
 
@@ -16,6 +19,7 @@
 </template>
 
 <style scoped lang="scss">
+
 .title{
   color: var(--colors-grey-1, #A8A8A8);
 
@@ -38,6 +42,7 @@
 .message{
   display: flex;
   position: relative;
+  margin-left: 45px;
 }
 .message_bcg{
   border-radius: 16px 16px 16px 4px;

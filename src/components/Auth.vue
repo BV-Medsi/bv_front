@@ -3,9 +3,14 @@ import BaseButton from "@smartmed/ui/BaseButton";
 import BaseInput from "@smartmed/ui/BaseInput";
 import PasswordInput from "@smartmed/ui/PasswordInput";
 
-import axios from "axios";
+import {axiosApiInstance} from "../services/api.js";
+import {tokenStorage} from "../services/TokenStorage.js";
 
 import { computed, ref } from "vue";
+import {useRouter} from "vue-router";
+import Message from "./Message.vue";
+
+const router = useRouter();
 
 const auth = ref({
   username: null,
@@ -20,7 +25,9 @@ const is_filled_password = computed(() => {
   return auth.value.password === "" && auth.value.password !== null; //d
 });
 
-const sign_in = () => {
+axiosApiInstance.get("http://100.71.75.112:5001/me")
+
+const sign_in = async () => {
   if (
     is_filled_password.value ||
     is_filled_username.value ||
@@ -30,15 +37,20 @@ const sign_in = () => {
     alert("Заполните все поля");
     return;
   }
-  axios.post("http://100.71.75.112:5000/", {
+
+  const data = await axiosApiInstance.post("http://100.71.75.112:5001/", {
     username: auth.value.username,
     password: auth.value.password,
   });
+  tokenStorage.set(data.data.access_token)
+
+
+  router.push("/chat");
 };
 </script>
 
 <template>
-  <div :class="$style.screen">
+  <div class="screen">
     <p class="smed-text_h2 smed-text_medium" :class="$style.title">
       Добро пожаловать в BV_Medsi!
     </p>
@@ -61,14 +73,6 @@ const sign_in = () => {
 </template>
 
 <style module>
-.screen {
-  background-color: rgb(255, 255, 255);
-  border-radius: 16px;
-  padding: 12px;
-
-  width: 375px;
-  height: 762px;
-}
 .field {
   margin: 10px;
 }

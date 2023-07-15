@@ -35,9 +35,16 @@ a {
 a:hover {
   color: #535bf2;
 }
-
-body {
+.screen {
   background-color: #f6f6f6;
+  border-radius: 16px;
+  padding: 12px;
+
+  width: 375px;
+  height: 762px;
+}
+body {
+  background-color: rgb(206, 206, 206);
   margin: 0;
   display: flex;
   place-items: center;
@@ -50,11 +57,11 @@ h1 {
   line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
-  gap: 8px;
-  margin: 280px 20px 10px 20px;
-}
+/*button {*/
+/*  border-radius: 8px;*/
+/*  gap: 8px;*/
+/*  margin: 280px 20px 10px 20px;*/
+/*}*/
 .info_image{
   text-align:  start;
   margin: 60% 185px 0px 20px;

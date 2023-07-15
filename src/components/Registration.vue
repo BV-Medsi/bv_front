@@ -3,7 +3,7 @@ import BaseButton from "@smartmed/ui/BaseButton";
 import BaseInput from "@smartmed/ui/BaseInput";
 import PasswordInput from "@smartmed/ui/PasswordInput";
 
-import axios from "axios";
+import {axiosApiInstance} from "../services/api.js";
 
 import { computed, ref } from "vue";
 
@@ -44,7 +44,7 @@ const sign_in = () => {
     alert("Заполните все поля");
     return;
   }
-  axios.post("http://100.71.101.22:5000/reg", {
+  axiosApiInstance.post("http://100.71.75.112:5001/reg", {
     last_name: auth.value.last_name,
     name: auth.value.name,
     username: auth.value.username,
@@ -54,7 +54,7 @@ const sign_in = () => {
 </script>
 
 <template>
-  <div :class="$style.screen">
+  <div class="screen">
     <p class="smed-text_h2 smed-text_medium" :class="$style.title">
       Добро пожаловать в BV_Medsi!
     </p>
@@ -89,13 +89,6 @@ const sign_in = () => {
 </template>
 
 <style module>
-.screen {
-  background-color: white;
-  border-radius: 16px;
-  padding: 12px;
-  width: 375px;
-  height: 762px;
-}
 .field {
   margin: 10px;
 }

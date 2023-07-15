@@ -45,7 +45,8 @@ router.beforeEach((to, from, next) => {
     if (to.path.startsWith('/chat')) {
         const stepId = to.path.split('/')[2];
         const stepIndex = store.steps.findIndex(step => step.id === stepId);
-        if (stepIndex > 0 && !store.steps[stepIndex - 1].isValid) next(`/chat/${ROUTES.GENDER}`)
-        else next();
+        //if (stepIndex > 0 && !store.steps[stepIndex - 1].isValid) next(`/chat/${ROUTES.GENDER}`)
+        //else next();
+        next();
     } else next();
 })
