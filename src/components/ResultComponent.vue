@@ -17,7 +17,7 @@ const goBackToLastStep = () => {
 </script>
 
 <template>
-  <div>
+  <div :class="$style.screen">
     <h1>Собранные данные:</h1>
     <div v-for="(step, index) in steps" :key="index">
       <h2>{{ step.question }}</h2>
@@ -27,5 +27,12 @@ const goBackToLastStep = () => {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style module>
+.screen {
+  background-color: rgb(255, 255, 255);
+  border-radius: 16px;
+  padding: 12px;
+  width: 371px;
+  height: 812px;
+}
 </style>

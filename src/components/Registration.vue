@@ -54,7 +54,7 @@ const sign_in = () => {
 </script>
 
 <template>
-  <div :class="$style.auth">
+  <div :class="$style.screen">
     <p class="smed-text_h2 smed-text_medium" :class="$style.title">
       Добро пожаловать в BV_Medsi!
     </p>
@@ -89,12 +89,12 @@ const sign_in = () => {
 </template>
 
 <style module>
-.auth {
+.screen {
   background-color: white;
   border-radius: 16px;
   padding: 12px;
-  width: 371px;
-  height: 812px;
+  width: 375px;
+  height: 762px;
 }
 .field {
   margin: 10px;

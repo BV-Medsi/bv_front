@@ -38,7 +38,7 @@ const goToNextStep = () => {
 </script>
 
 <template>
-  <div :class="$style.auth">
+  <div :class="$style.screen">
     <h1>Пожалуйста, ответьте на вопрос.</h1>
     <BaseButton @click="goToPrevStep">&blacktriangleleft;</BaseButton>
     <p>{{ currentStep.question }}</p>
@@ -53,11 +53,11 @@ const goToNextStep = () => {
 </template>
 
 <style module>
-.auth {
+.screen {
   background-color: rgb(255, 255, 255);
   border-radius: 16px;
   padding: 12px;
-  width: 371px;
+  width: 375px;
   height: 812px;
 }
 </style>
