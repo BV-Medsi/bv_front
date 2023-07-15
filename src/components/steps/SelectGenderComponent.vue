@@ -8,11 +8,13 @@
       <input type="radio" value="female" v-model="response">
       Женщина
     </label>
+
   </div>
 </template>
 
 <script setup>
 import {ref, watch} from 'vue';
+import Message from "../Message.vue";
 
 const props = defineProps(['stepData']);
 
@@ -24,3 +26,5 @@ watch(response, (newValue) => {
   emit('update:response', newValue);
 })
 </script>
+<style module>
+</style>

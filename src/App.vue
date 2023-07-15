@@ -13,7 +13,7 @@ import app from "./App.vue";
   <router-link to="/login">LOGIN</router-link> |
   <router-link to="/chat">CHAT</router-link> |
   <router-link to="/results">RESULTS</router-link>
-  <router-view :key="$route.path" />
+  <router-view :key="$route.path" class="router_bcg"/>
 </template>
 
 <style module>
