@@ -44,7 +44,11 @@ const sign_in = async () => {
   });
   tokenStorage.set(data.data.access_token)
 
+  const has_card = await axiosApiInstance.post("http://100.71.75.112:5001/is-medical-card", {
+    token: data.data.access_token
+  });
 
+  //TODO add checker for has_card.data
   router.push("/chat");
 };
 </script>
