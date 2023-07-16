@@ -67,7 +67,7 @@ import {storeToRefs} from "pinia";
 
 const route = useRouter();
 const store = useStore();
-const {goToNextStep, validateAndUpdateStep} = store;
+const {validateAndUpdateStep} = store;
 const {getInitialData} = storeToRefs(store);
 
 const initialData = reactive(getInitialData.value);
@@ -82,7 +82,6 @@ defineProps(['stepData'])
 
 const nextStep = () => {
   store.updateInitialData(initialData);
-  goToNextStep();
   route.push('select-image-symptoms')
 };
 
