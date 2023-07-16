@@ -87,6 +87,7 @@ export const useStore = defineStore({
     }),
     getters: {
         getInitialData: state => state.steps[0].data,
+        getAdditionalData: state => state.steps[3].data,
         getSelectedPartSymptoms: (state) => {
             const imageSymptomsStep = state.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);
             for (let part in imageSymptomsStep.data) {
@@ -95,6 +96,21 @@ export const useStore = defineStore({
                 }
             }
             return [];
+        },
+        getCorrectSymptomsData: (state) =>{
+            const imageSymptomsStep = state.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);
+            let dict = {};
+            for(let part in imageSymptomsStep.data){
+                let checkedSymptomsArray = [];
+                for(let symptom in imageSymptomsStep.data[part].symptoms){
+                    let object = imageSymptomsStep.data[part].symptoms[symptom];
+                    if(object.isChecked){
+                        checkedSymptomsArray.push(object.name)
+                    }
+                }
+                dict[part] = checkedSymptomsArray;
+            }
+            return dict;
         }
     },
     actions: {

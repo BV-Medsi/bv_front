@@ -32,7 +32,7 @@
                 :value="disease.value"
                 @input="value => store.updateDisease(index, value)"
                 size="md"
-                :items="['0', '1', '2']"
+                :items="[]"
                 placeholder="Выберите болезнь:"
       />
       <hr/>

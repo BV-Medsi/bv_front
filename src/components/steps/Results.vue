@@ -2,30 +2,59 @@
 
 import Layout from "../Layout.vue";
 import {axiosApiInstance} from "../../services/api.js";
-import {ref} from "vue";
+import {reactive, ref} from "vue";
 import Spinner from '@smartmed/ui/Spinner';
 import {useStore} from "../../store/index.js";
 import {PARTS} from "./SelectImageSymptomsComponent/constants/parts.js";
+import BaseButton from "../../../@smartmed/ui/BaseButton";
+import {storeToRefs} from "pinia";
+
+// const prepareData = () =>{
+//   let dict = {};
+//   const step1 = store.steps[1].data
+//   for(let body_part in PARTS){
+//     let checkedSymptomsArray = [];
+//     for(let part in step1[body_part].symptoms){
+//       let object = step1[body_part].symptoms[part];
+//       if(object.isChecked){
+//         checkedSymptomsArray.push(object.name)
+//       }
+//     }
+//     dict[body_part] = checkedSymptomsArray;
+//   }
+// }
 
 const store = useStore();
-const step3 = store.steps[3].data
-const isLoading = ref(false);
-isLoading.value = true;
-const getResults = await axiosApiInstance.post("/predict", {
-    card_id: store.steps[0].data.card_id,
-    complaints: {
-      [PARTS.head]: store.steps[1].data[PARTS.head].symptoms,
-    },
 
-    indicators: {
-      temperature: step3.temperature,
-      pressure: step3.pressure,
-      growth: step3.growth,
-      weight: step3.weight,
-      sugar: step3.sugar,
-      oxygen: step3.oxygen
-  }
-})
+const {getAdditionalData} = storeToRefs(store)
+const additionalData = reactive(getAdditionalData)
+
+const {getCorrectSymptomsData} = storeToRefs(store)
+const correctSymptomsData = reactive(getCorrectSymptomsData.value)
+
+const logging = () => {
+  console.log(correctSymptomsData)
+}
+
+const isLoading = ref(false);
+
+
+isLoading.value = true;
+// const getResults = await axiosApiInstance.post("/predict", {
+//     card_id: store.steps[0].data.card_id,
+//     complaints: {
+//       [PARTS.head]: store.steps[1].data[PARTS.head].symptoms,
+//     },
+//
+//     indicators: {
+//       temperature: additionalData.temperature,
+//       pressure: additionalData.pressure,
+//       growth: additionalData.growth,
+//       weight: additionalData.weight,
+//       sugar: additionalData.sugar,
+//       oxygen: additionalData.oxygen
+//   }
+// })
 isLoading.value = false;
 
 
@@ -33,7 +62,7 @@ isLoading.value = false;
 
 <template>
 <Layout>
-<Spinner v-if="isLoading"></Spinner>
+  <BaseButton @click="logging">Check data</BaseButton>
 </Layout>
 </template>
 

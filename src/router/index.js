@@ -11,9 +11,6 @@ export const ROUTES = {
 }
 const ResultComponent = () => import("../components/ResultComponent.vue");
 const AuthComponent = () => import("../components/AuthComponent.vue");
-import {defineAsyncComponent} from "vue";
-import {storeToRefs} from "pinia";
-
 const SelectImageSymptomsComponent = () => import("../components/steps/SelectImageSymptomsComponent/index.vue");
 const ChatComponent = () => import("../components/steps/ChatComponent.vue");
 const SelectSymptomsComponent = () => import("../components/steps/SelectSymptomsComponent.vue");
