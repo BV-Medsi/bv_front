@@ -2,7 +2,7 @@ import {createRouter, createWebHistory} from 'vue-router';
 import {useStore} from "../store/index.js";
 
 export const ROUTES = {
-    GENDER: 'select-gender',
+    GENERAL_CARD: 'general-card',
     AGE: 'select-age',
     IMAGE_SYMPTOMS: 'select-image-symptoms',
     SYMPTOMS: 'select-symptoms'
@@ -24,8 +24,8 @@ const routes = [
     {
         path: '/chat', component: ChatComponent,
         children: [
-            {path: '', redirect: `/chat/${ROUTES.GENDER}`},
-            {path: ROUTES.GENDER, component: SelectGenderComponent},
+            {path: '', redirect: `/chat/${ROUTES.GENERAL_CARD}`},
+            {path: ROUTES.GENERAL_CARD, component: SelectGenderComponent},
             {path: ROUTES.IMAGE_SYMPTOMS, component: SelectImageSymptomsComponent},
             {path: ROUTES.SYMPTOMS, component: SelectSymptomsComponent},
         ]
@@ -43,7 +43,7 @@ export const router = createRouter({
 //     if (to.path.startsWith('/chat')) {
 //         const stepId = to.path.split('/')[2];
 //         const stepIndex = store.steps.findIndex(step => step.id === stepId);
-//         if (stepIndex > 0 && !store.steps[stepIndex - 1].isValid) next(`/chat/${ROUTES.GENDER}`)
+//         if (stepIndex > 0 && !store.steps[stepIndex - 1].isValid) next(`/chat/${ROUTES.GENERAL_CARD}`)
 //         else next();
 //         next();
 //     } else next();

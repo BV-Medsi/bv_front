@@ -11,7 +11,7 @@ import MaleBack from "./components/MaleBack.vue";
 import {storeToRefs} from "pinia";
 
 const store = useStore();
-const {getGender, getSelectedPartSymptoms} = storeToRefs(store);
+const {getInitialData, getSelectedPartSymptoms} = storeToRefs(store);
 const {selectImageSymptom, updateSymptomStatus} = store;
 const side = ref('front');
 const toggleSide = () => {
@@ -21,10 +21,10 @@ const toggleSide = () => {
 const getComponent = computed(() => {
   switch (side.value) {
     case 'front':
-      return getGender.value === 'female' ? FemaleFront : MaleFront;
+      return getInitialData.value.gender === 'female' ? FemaleFront : MaleFront;
       break;
     case 'back':
-      return getGender.value === 'female' ? FemaleBack : MaleBack;
+      return getInitialData.value.gender === 'female' ? FemaleBack : MaleBack;
       break;
     default:
       return null;
@@ -34,10 +34,11 @@ const getComponent = computed(() => {
 const handleSelectedPartUpdate = val => {
   selectImageSymptom(val);
 }
+
 </script>
 
 <template>
-  <div :stepData="$props.stepData" class="wrapper">
+  <div class="wrapper">
     <BaseButton @click="toggleSide()" class="btn">⟲</BaseButton>
     <component :is="getComponent" @select:part="handleSelectedPartUpdate"/>
     <SymptomsList :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus"/>

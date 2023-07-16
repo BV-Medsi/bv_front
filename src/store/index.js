@@ -8,18 +8,15 @@ export const useStore = defineStore({
     state: () => ({
         steps: [
             {
-                id: ROUTES.GENDER,
+                id: ROUTES.GENERAL_CARD,
                 question: "Выберите ваш пол",
                 data: {
-                    gender: null
-                },
-                isValid: false
-            },
-            {
-                id: ROUTES.AGE,
-                question: "Укажите ваш возраст",
-                data: {
-                    age: null
+                    gender: null,
+                    age: null,
+                    weight: null,
+                    height: null,
+                    diseases: [],
+                    operations: [],
                 },
                 isValid: false
             },
@@ -76,7 +73,7 @@ export const useStore = defineStore({
         currentStepIndex: 0,
     }),
     getters: {
-        getGender: state => state.steps[0].data,
+        getInitialData: state => state.steps[0].data,
         getSelectedPartSymptoms: (state) => {
             const imageSymptomsStep = state.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);
             for (let part in imageSymptomsStep.data) {
@@ -98,9 +95,40 @@ export const useStore = defineStore({
                 this.currentStepIndex--;
             }
         },
+        updateInitialData(data) {
+            if (!data) return;
+            const firstStep = this.steps[0];
+            firstStep.data.gender = data.gender;
+            firstStep.data.age = data.age;
+            firstStep.data.weight = data.weight;
+            firstStep.data.height = data.height;
+            firstStep.data.diseases = data.diseases;
+            firstStep.data.operations = data.operations;
+        },
+        updateDisease(index, value) {
+            const firstStep = this.steps[0];
+            firstStep.data.diseases[index].value = value;
+        },
+        updateOperation(index, value) {
+            const firstStep = this.steps[0];
+            firstStep.data.operations[index].value = value;
+        },
+        addDisease() {
+            const firstStep = this.steps[0];
+            firstStep.data.diseases.push({ value: '' });
+        },
+        addOperation() {
+            const firstStep = this.steps[0];
+            firstStep.data.operations.push({ value: '' });
+        },
         validateAndUpdateStep(stepIndex, data) {
             this.steps[stepIndex].data = data;
+
             switch (this.steps[stepIndex].id) {
+                case ROUTES.GENERAL_CARD:
+                    const { gender, age, weight, height } = this.steps[stepIndex].data;
+                    this.steps[stepIndex].isValid = !!gender && !!age && !!weight && !!height;
+                    break;
                 case ROUTES.IMAGE_SYMPTOMS:
                     this.steps[stepIndex].isValid = Object.values(data).some(
                         el => el.isSelected && el.symptoms.some(symptom => symptom.isChecked)

@@ -2,16 +2,21 @@
   <div :class="$style.screen">
     <div>
       <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Медицинская карта</h2>
-      <base-input v-model="weight" size="md" description="Указать в килограммах" label="Вес" :class="$style.inputField"/>
-      <base-input v-model="height" size="md" description="Указать в сантиметрах" label="Рост" :class="$style.inputField"/>
-      <base-input v-model="age" size="md" description="Указать в годах" label="Возраст" :class="$style.inputField"/>
+      <base-input v-model="initialData.weight" size="md" description="Указать в килограммах" label="Вес"
+                  :class="$style.inputField"/>
+      <base-input v-model="initialData.height" size="md" description="Указать в сантиметрах" label="Рост"
+                  :class="$style.inputField"/>
+      <base-input v-model="initialData.age" size="md" description="Указать в годах" label="Возраст"
+                  :class="$style.inputField"/>
       <div :class="$style.chooseGender">
         <label>
-          <input :class="$style.radio_button" type="radio" value="male" v-model="response">
+          <input :class="$style.radio_button" type="radio" value="male"
+                 :checked="initialData.gender === 'male'" v-model="initialData.gender">
           <span class="smed-text_body-md">Мужчина</span>
         </label>
         <label>
-          <input :class="$style.radio_button" type="radio" value="female" v-model="response">
+          <input :class="$style.radio_button" type="radio" value="female"
+                 :checked="initialData.gender === 'female'" v-model="initialData.gender">
           <span class="smed-text_body-md">Женщина</span>
         </label>
       </div>
@@ -19,10 +24,13 @@
     </div>
     <div>
       <h2 class="smed-text_h3 smed-text_medium" :class="$style.header">Хронические заболевания</h2>
-      <BaseButton icon="plus" @click="addDisease" :disabled="isDiseasesButton" :class="$style.addButton">Добавить хроническое заболевание</BaseButton>
-      <combobox v-for="(disease, index) in diseases"
+      <BaseButton icon="plus" @click="addDisease" :disabled="isDiseasesButton" :class="$style.addButton">Добавить
+        хроническое заболевание
+      </BaseButton>
+      <combobox v-for="(disease, index) in initialData.diseases"
                 :key="index"
-                v-model="disease.value"
+                :value="disease.value"
+                @input="value => store.updateDisease(index, value)"
                 size="md"
                 :items="['0', '1', '2']"
                 placeholder="Выберите болезнь:"
@@ -30,76 +38,61 @@
       <hr/>
       <div>
         <h2 class="smed-text_h3 smed-text_medium" :class="$style.header">Перенесенные операции</h2>
-        <BaseButton icon="plus" @click="addOperation" :disabled="isOperationsButton" :class="$style.addButton">Добавить перенесенные операции</BaseButton>
-        <combobox v-for="(operation, index) in operations"
+        <BaseButton icon="plus" @click="addOperation" :disabled="isOperationsButton" :class="$style.addButton">Добавить
+          перенесенные операции
+        </BaseButton>
+        <combobox v-for="(operation, index) in initialData.operations"
                   :key="index"
-                  v-model="operation.value"
+                  :value="operation.value"
+                  @input="value => store.updateOperation(index, value)"
                   size="md"
                   :items="['3', '4', '5']"
                   placeholder="Выберите операцию:"
         />
       </div>
-      <BaseButton @click="nextStep" :class="$style.nextButton">Далее</BaseButton>
-  </div>
+      <BaseButton :disabled="!store.steps[0].isValid" @click="nextStep" :class="$style.nextButton">Далее</BaseButton>
+    </div>
   </div>
 </template>
 
+
 <script setup>
-import {computed, ref, watch} from 'vue';
+import {computed, reactive, watch} from 'vue';
 import Combobox from "../../../@smartmed/ui/Combobox";
 import BaseButton from "../../../@smartmed/ui/BaseButton";
 import {useRouter} from "vue-router";
 import BaseInput from "../../../@smartmed/ui/BaseInput";
-
-const props = defineProps(['stepData']);
-
-const response = ref(props.stepData || null);
-
-const emit = defineEmits(['update:response']);
-
-const value = ref('');
-
-const age = ref('');
-const weight = ref('');
-const height = ref('');
-
-
-const diseases = ref([])
-const operations = ref([])
-
-const isDiseasesButton = computed(() => diseases.value.length >= 1)
-const isOperationsButton = computed(() => operations.value.length >= 1);
+import {useStore} from "../../store/index.js";
+import {storeToRefs} from "pinia";
 
 const route = useRouter();
+const store = useStore();
+const {goToNextStep, validateAndUpdateStep} = store;
+const {getInitialData} = storeToRefs(store);
+
+const initialData = reactive(getInitialData.value);
+
+watch(initialData, () => {
+  validateAndUpdateStep(0, initialData);
+});
+
+const isDiseasesButton = computed(() => initialData.diseases.length >= 1);
+const isOperationsButton = computed(() => initialData.operations.length >= 1);
+defineProps(['stepData'])
 
 const nextStep = () => {
-  const data = {
-    gender: response.value,
-    height: height.value,
-    diseases: diseases.value,
-    weight: weight.value,
-    operations: [],
-    age: age.value,
-  }
-  emit('update:response', data);
+  store.updateInitialData(initialData);
+  goToNextStep();
   route.push('select-image-symptoms')
-}
+};
 
-const addDisease = () =>{
-  diseases.value.push({
-    value: "",
+const addDisease = () => {
+  initialData.diseases.push("");
+};
 
-  })
-}
-
-const addOperation = () =>{
-  operations.value.push({
-    value: "",
-  })
-}
-// watch(response, (newValue) => {
-//   emit('update:response', newValue);`
-// })
+const addOperation = () => {
+  initialData.operations.push("");
+};
 </script>
 <style module>
 h2{
