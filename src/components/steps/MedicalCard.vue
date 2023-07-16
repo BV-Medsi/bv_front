@@ -1,11 +1,11 @@
 <template>
-  <div :class="$style.screen">
+  <Layout>
     <div>
       <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Медицинская карта</h2>
-      <base-input v-model="initialData.weight" size="md" description="Указать в килограммах" label="Вес"
-                  :class="$style.inputField"/>
-      <base-input v-model="initialData.height" size="md" description="Указать в сантиметрах" label="Рост"
-                  :class="$style.inputField"/>
+<!--      <base-input v-model="initialData.weight" size="md" description="Указать в килограммах" label="Вес"-->
+<!--                  :class="$style.inputField"/>-->
+<!--      <base-input v-model="initialData.height" size="md" description="Указать в сантиметрах" label="Рост"-->
+<!--                  :class="$style.inputField"/>-->
       <base-input v-model="initialData.age" size="md" description="Указать в годах" label="Возраст"
                   :class="$style.inputField"/>
       <div :class="$style.chooseGender">
@@ -52,7 +52,7 @@
       </div>
       <BaseButton :disabled="!store.steps[0].isValid" @click="nextStep" :class="$style.nextButton">Далее</BaseButton>
     </div>
-  </div>
+  </Layout>
 </template>
 
 
@@ -64,6 +64,7 @@ import {useRouter} from "vue-router";
 import BaseInput from "../../../@smartmed/ui/BaseInput";
 import {useStore} from "../../store/index.js";
 import {storeToRefs} from "pinia";
+import Layout from "../Layout.vue";
 
 const route = useRouter();
 const store = useStore();
@@ -106,13 +107,6 @@ hr {
   height: 1px;
   border: none;
   background-color: rgb(206, 206, 206);
-}
-.screen {
-  background-color: #f6f6f6;
-  border-radius: 16px;
-  padding: 20px;
-  width: 375px;
-  height: 812px;
 }
 .title{
   margin-bottom: 12px;

@@ -5,7 +5,9 @@ export const ROUTES = {
     GENERAL_CARD: 'general-card',
     AGE: 'select-age',
     IMAGE_SYMPTOMS: 'select-image-symptoms',
-    SYMPTOMS: 'select-symptoms'
+    SYMPTOMS: 'select-symptoms',
+    INDICATORS: 'select-indicators',
+    RESULTS: 'results'
 }
 const ResultComponent = () => import("../components/ResultComponent.vue");
 const AuthComponent = () => import("../components/AuthComponent.vue");
@@ -17,6 +19,8 @@ const ChatComponent = () => import("../components/steps/ChatComponent.vue");
 const SelectSymptomsComponent = () => import("../components/steps/SelectSymptomsComponent.vue");
 const SelectGenderComponent = () => import("../components/steps/MedicalCard.vue");
 const HomeComponent = () => import("../components/HomeComponent.vue");
+const Indicators = () => import("../components/steps/Indicators.vue");
+const Results = () => import("../components/steps/Results.vue")
 
 const routes = [
     {path: '/', component: HomeComponent},
@@ -28,6 +32,8 @@ const routes = [
             {path: ROUTES.GENERAL_CARD, component: SelectGenderComponent},
             {path: ROUTES.IMAGE_SYMPTOMS, component: SelectImageSymptomsComponent},
             {path: ROUTES.SYMPTOMS, component: SelectSymptomsComponent},
+            {path: ROUTES.INDICATORS, component: Indicators},
+            {path: ROUTES.RESULTS, component: Results}
         ]
     },
     {path: '/results', component: ResultComponent}

@@ -54,7 +54,7 @@ const sign_in = () => {
 </script>
 
 <template>
-  <div class="screen">
+  <div>
     <p class="smed-text_h2 smed-text_medium" :class="$style.title">
       Добро пожаловать в BV_Medsi!
     </p>

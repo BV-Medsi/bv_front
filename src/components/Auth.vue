@@ -8,7 +8,7 @@ import {tokenStorage} from "../services/TokenStorage.js";
 
 import { computed, ref } from "vue";
 import {useRouter} from "vue-router";
-import Message from "./Message.vue";
+import {useStore} from "../store/index.js";
 
 const router = useRouter();
 
@@ -27,6 +27,8 @@ const is_filled_password = computed(() => {
 
 axiosApiInstance.get("http://100.71.75.112:5001/me")
 
+const store = useStore();
+
 const sign_in = async () => {
   if (
     is_filled_password.value ||
@@ -38,23 +40,22 @@ const sign_in = async () => {
     return;
   }
 
-  const data = await axiosApiInstance.post("http://100.71.75.112:5001/", {
+  const data = await axiosApiInstance.post("/", {
     username: auth.value.username,
     password: auth.value.password,
   });
   tokenStorage.set(data.data.access_token)
 
-  const has_card = await axiosApiInstance.post("http://100.71.75.112:5001/is-medical-card", {
-    token: data.data.access_token
-  });
-
-  //TODO add checker for has_card.data
+  const get_card = await axiosApiInstance.post("/card")
+  if(get_card.status === 200){
+    store.updateInitialData(get_card.data)
+  }
   router.push("/chat");
 };
 </script>
 
 <template>
-  <div class="screen">
+  <div>
     <p class="smed-text_h2 smed-text_medium" :class="$style.title">
       Добро пожаловать в BV_Medsi!
     </p>

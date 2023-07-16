@@ -10,6 +10,7 @@ axiosApiInstance.interceptors.request.use(
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
+        config.baseURL = "http://127.0.0.1:8000/"
         return config;
     },
     error => {

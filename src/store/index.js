@@ -11,10 +11,12 @@ export const useStore = defineStore({
                 id: ROUTES.GENERAL_CARD,
                 question: "Выберите ваш пол",
                 data: {
+                    card_id: null,
                     gender: null,
                     age: null,
-                    weight: null,
-                    height: null,
+                    // weight: null,
+                    // height: null,
+                    chronic_diseases: [],
                     diseases: [],
                     operations: [],
                 },
@@ -68,6 +70,17 @@ export const useStore = defineStore({
                 question: "Выберите ваши симптомы",
                 data: [...symptomsData.other],
                 isValid: false
+            },
+            {
+                id: ROUTES.INDICATORS,
+                data : {
+                    temperature: null,
+                    pressure: null,
+                    growth: null,
+                    weight: null,
+                    sugar: null,
+                    oxygen: null
+                }
             }
         ],
         currentStepIndex: 0,
@@ -98,12 +111,12 @@ export const useStore = defineStore({
         updateInitialData(data) {
             if (!data) return;
             const firstStep = this.steps[0];
+            firstStep.data.card_id = data.card_id;
             firstStep.data.gender = data.gender;
             firstStep.data.age = data.age;
-            firstStep.data.weight = data.weight;
-            firstStep.data.height = data.height;
             firstStep.data.diseases = data.diseases;
             firstStep.data.operations = data.operations;
+            firstStep.data.chronic_diseases = data.chronic_diseases;
         },
         updateDisease(index, value) {
             const firstStep = this.steps[0];
@@ -126,8 +139,8 @@ export const useStore = defineStore({
 
             switch (this.steps[stepIndex].id) {
                 case ROUTES.GENERAL_CARD:
-                    const { gender, age, weight, height } = this.steps[stepIndex].data;
-                    this.steps[stepIndex].isValid = !!gender && !!age && !!weight && !!height;
+                    const { gender, age } = this.steps[stepIndex].data;
+                    this.steps[stepIndex].isValid = !!gender && !!age;
                     break;
                 case ROUTES.IMAGE_SYMPTOMS:
                     this.steps[stepIndex].isValid = Object.values(data).some(

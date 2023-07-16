@@ -43,12 +43,17 @@ const handleSelectedPartUpdate = val => {
     <component :is="getComponent" @select:part="handleSelectedPartUpdate"/>
     <SymptomsList :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus"/>
     <BaseButton @click="$router.push('/chat')">Назад</BaseButton>
+    <BaseButton @click="$router.push('/chat/select-indicators')">Далее</BaseButton>
   </div>
 </template>
 
 <style scoped lang="scss">
 .wrapper {
   position: relative;
+  background-color: #f6f6f6;
+  border-radius: 16px;
+  width: 375px;
+  justify-content: center;
 }
 
 .btn {
