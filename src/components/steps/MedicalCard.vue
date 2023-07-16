@@ -81,7 +81,7 @@ const nextStep = () => {
     operations: [],
     age: age.value,
   }
-  //emit('update:response', data);
+  emit('update:response', data);
   route.push('select-image-symptoms')
 }
 

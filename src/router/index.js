@@ -13,7 +13,7 @@ import {defineAsyncComponent} from "vue";
 import {storeToRefs} from "pinia";
 
 const SelectImageSymptomsComponent = () => import("../components/steps/SelectImageSymptomsComponent/index.vue");
-const ChatComponent = () => import("../components/steps/MedicalCard.vue");
+const ChatComponent = () => import("../components/steps/ChatComponent.vue");
 const SelectSymptomsComponent = () => import("../components/steps/SelectSymptomsComponent.vue");
 const SelectGenderComponent = () => import("../components/steps/MedicalCard.vue");
 const HomeComponent = () => import("../components/HomeComponent.vue");
@@ -38,13 +38,13 @@ export const router = createRouter({
     routes
 });
 
-router.beforeEach((to, from, next) => {
-    const store = useStore();
-    if (to.path.startsWith('/chat')) {
-        const stepId = to.path.split('/')[2];
-        const stepIndex = store.steps.findIndex(step => step.id === stepId);
-        //if (stepIndex > 0 && !store.steps[stepIndex - 1].isValid) next(`/chat/${ROUTES.GENDER}`)
-        //else next();
-        next();
-    } else next();
-})
+// router.beforeEach((to, from, next) => {
+//     const store = useStore();
+//     if (to.path.startsWith('/chat')) {
+//         const stepId = to.path.split('/')[2];
+//         const stepIndex = store.steps.findIndex(step => step.id === stepId);
+//         if (stepIndex > 0 && !store.steps[stepIndex - 1].isValid) next(`/chat/${ROUTES.GENDER}`)
+//         else next();
+//         next();
+//     } else next();
+// })

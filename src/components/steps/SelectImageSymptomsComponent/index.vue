@@ -41,6 +41,7 @@ const handleSelectedPartUpdate = val => {
     <BaseButton @click="toggleSide()" class="btn">⟲</BaseButton>
     <component :is="getComponent" @select:part="handleSelectedPartUpdate"/>
     <SymptomsList :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus"/>
+    <BaseButton @click="$router.push('/chat')">Назад</BaseButton>
   </div>
 </template>
 
