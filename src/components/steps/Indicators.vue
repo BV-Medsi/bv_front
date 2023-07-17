@@ -6,23 +6,23 @@
                   :class="$style.inputField"/>
       <base-input v-model="additionalData.growth" size="md" description="Указать в сантиметрах" label="Рост"
                   :class="$style.inputField"/>
+      <base-input v-model="additionalData.temperature" size="md" label="Температура "
+                  :class="$style.inputField"/>
       <base-input v-model="additionalData.oxygen" size="md" label="Кислород в крови"
                   :class="$style.inputField"/>
       <base-input v-model="additionalData.pressure" size="md" label="Давление"
                   :class="$style.inputField"/>
       <base-input v-model="additionalData.sugar" size="md" label="Сахар в крови"
                   :class="$style.inputField"/>
-      <base-input v-model="additionalData.temperature" size="md" label="Температура "
-                  :class="$style.inputField"/>
       </div>
-    <BaseButton @click="nextStep">Получить результат</BaseButton>
+    <BaseButton @click="nextStep" :disabled="!steps[3].isValid">Получить результат</BaseButton>
     </Layout>
 </template>
 
 
 <script setup>
 import BaseInput from "../../../@smartmed/ui/BaseInput";
-import {reactive, ref} from "vue";
+import {reactive, watch} from "vue";
 import Layout from "../Layout.vue";
 import BaseButton from "../../../@smartmed/ui/BaseButton";
 import {useRouter} from "vue-router";
@@ -33,11 +33,15 @@ import {storeToRefs} from "pinia";
 const router = useRouter();
 const store = useStore();
 
-const {getAdditionalData} = storeToRefs(store);
+const {getAdditionalData, steps} = storeToRefs(store);
+const {validateAndUpdateStep} = reactive(store);
 
 const additionalData = reactive(getAdditionalData.value);
 
-console.log(additionalData)
+watch(additionalData, () => {
+  validateAndUpdateStep(3, additionalData);
+});
+
 const nextStep = () =>{
   router.push("/chat/results")
 }

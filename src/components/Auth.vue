@@ -25,7 +25,7 @@ const is_filled_password = computed(() => {
   return auth.value.password === "" && auth.value.password !== null; //d
 });
 
-axiosApiInstance.get("http://100.71.75.112:5001/me")
+axiosApiInstance.get("http://5.63.159.74:5001/me")
 
 const store = useStore();
 
@@ -40,16 +40,11 @@ const sign_in = async () => {
     return;
   }
 
-  const data = await axiosApiInstance.post("/", {
+  const data = await axiosApiInstance.post("http://5.63.159.74:5001/", {
     username: auth.value.username,
     password: auth.value.password,
   });
   tokenStorage.set(data.data.access_token)
-
-  const get_card = await axiosApiInstance.get("/card")
-  if(get_card.status === 200){
-    store.updateInitialData(get_card.data, get_card.status)
-  }
   router.push("/chat");
 };
 </script>

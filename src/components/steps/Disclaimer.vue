@@ -5,12 +5,17 @@ import {useRouter} from "vue-router";
 import {useStore} from "../../store/index.js";
 import {ROUTES} from "../../router/index.js";
 import {onMounted} from "vue";
+import {axiosApiInstance} from "../../services/api.js";
 
 const store = useStore()
 const router = useRouter()
 const {acceptTerms} = store;
-const nextStep = () =>{
+const nextStep = async () =>{
   acceptTerms();
+  // const get_card = await axiosApiInstance.get("http://5.63.159.74:5001/card")
+  // if(get_card.status === 200){
+  //   store.updateInitialData(get_card.data, get_card.status)
+  // }
   router.push('/chat/' + ROUTES.GENERAL_CARD)
 }
 onMounted(() => {

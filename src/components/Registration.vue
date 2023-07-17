@@ -6,6 +6,15 @@ import PasswordInput from "@smartmed/ui/PasswordInput";
 import {axiosApiInstance} from "../services/api.js";
 
 import { computed, ref } from "vue";
+import {tokenStorage} from "../services/TokenStorage.js";
+import {useRouter} from "vue-router";
+
+import Spinner from "../../@smartmed/ui/Spinner";
+
+
+const router = useRouter();
+
+const isLoading = ref(false);
 
 const auth = ref({
   username: null, //d
@@ -30,7 +39,7 @@ const is_filled_last_name = computed(() => {
   return auth.value.last_name === "" && auth.value.last_name !== null;
 });
 
-const sign_in = () => {
+const sign_in = async () => {
   if (
     is_filled_password.value ||
     is_filled_username.value ||
@@ -44,12 +53,29 @@ const sign_in = () => {
     alert("Заполните все поля");
     return;
   }
-  axiosApiInstance.post("http://100.71.75.112:5001/reg", {
-    last_name: auth.value.last_name,
-    name: auth.value.name,
-    username: auth.value.username,
-    password: auth.value.password,
-  });
+  isLoading.value = true;
+  const check_name = await axiosApiInstance.post("http://5.63.159.74:5001/check_username", {
+    username: auth.value.username
+  })
+  isLoading.value = false;
+  if(check_name.data.answer === false){
+    alert("Имя пользователя занято")
+  }else{
+    isLoading.value = true;
+    await axiosApiInstance.post("http://5.63.159.74:5001/reg", {
+      last_name: auth.value.last_name,
+      name: auth.value.name,
+      username: auth.value.username,
+      password: auth.value.password,
+    });
+    const authentication = await axiosApiInstance.post("http://5.63.159.74:5001/", {
+      username: auth.value.username,
+      password: auth.value.password,
+    });
+    isLoading.value = false;
+    tokenStorage.set(authentication.data.access_token)
+    router.push("/chat")
+  }
 };
 </script>
 
