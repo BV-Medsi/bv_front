@@ -1,5 +1,5 @@
 <script setup>
-import BaseButton from "@smartmed/ui/types/components/BaseButton/BaseButton.vue.js"
+import BaseButton from "../../../@smartmed/ui/BaseButton";
 
 </script>
 

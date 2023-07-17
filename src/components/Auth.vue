@@ -85,6 +85,6 @@ const sign_in = async () => {
   margin-bottom: 20px;
 }
 .button {
-  width:
+  width: 100%;
 }
 </style>
