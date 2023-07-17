@@ -52,8 +52,10 @@ const handleStepNext = () => {
 <template>
   <div class="wrapper">
     <BaseButton @click="toggleSide()" class="btn">⟲</BaseButton>
-    <component :is="getComponent" @select:part="handleSelectedPartUpdate"/>
-    <SymptomsList :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus"/>
+    <div class="image_wrapper">
+      <component :is="getComponent" @select:part="handleSelectedPartUpdate"/>
+    </div>
+    <SymptomsList :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus" class="symptoms_list"/>
     <BaseButton @click="handleStepBack">Назад</BaseButton>
     <BaseButton @click="handleStepNext" :disabled="!steps[2].isValid">Далее</BaseButton>
   </div>
@@ -64,10 +66,17 @@ const handleStepNext = () => {
   position: relative;
   background-color: #f6f6f6;
   border-radius: 16px;
-  width: 375px;
+  width: 100%;
+  max-width: 375px;
   justify-content: center;
 }
-
+.symptoms_list{
+  position: fixed;
+  bottom: 0;
+}
+.image_wrapper{
+  width: 100%;
+}
 .btn {
   position: absolute;
   top: 50%;

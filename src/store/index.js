@@ -72,13 +72,8 @@ export const useStore = defineStore({
                 isValid: false
             },
             {
-                id: ROUTES.SYMPTOMS,
-                question: "Выберите ваши симптомы",
-                data: [...symptomsData.other],
-                isValid: false
-            },
-            {
                 id: ROUTES.INDICATORS,
+                isValid: false,
                 data : {
                     temperature: null,
                     pressure: null,
@@ -179,6 +174,10 @@ export const useStore = defineStore({
                     break;
                 case ROUTES.SYMPTOMS:
                     this.steps[stepIndex].isValid = data.some(el => el.isChecked);
+                    break;
+                case ROUTES.INDICATORS:
+                    const { temperature, growth, weight } = this.steps[stepIndex].data;
+                    this.steps[stepIndex].isValid = temperature !== null && growth !== null && weight !== null;
                     break;
                 default:
                     this.steps[stepIndex].isValid = !!data;

@@ -4,6 +4,7 @@ import Layout from "../Layout.vue";
 import {useRouter} from "vue-router";
 import {useStore} from "../../store/index.js";
 import {ROUTES} from "../../router/index.js";
+import {onMounted} from "vue";
 
 const store = useStore()
 const router = useRouter()
@@ -12,6 +13,9 @@ const nextStep = () =>{
   acceptTerms();
   router.push('/chat/' + ROUTES.GENERAL_CARD)
 }
+onMounted(() => {
+  store.$reset()
+})
 </script>
 
 <template>
