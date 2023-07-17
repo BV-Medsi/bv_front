@@ -1,10 +1,14 @@
 <script setup>
 
+import HeaderNav from "./HeaderNav.vue";
 </script>
 
 <template>
 <div class="screen">
-  <slot/>
+  <header-nav class="header"/>
+  <div class="content">
+    <slot />
+  </div>
 </div>
 </template>
 
@@ -12,8 +16,21 @@
 .screen{
   background-color: #f6f6f6;
   border-radius: 16px;
-  padding: 20px;
   max-width: 375px;
-  height: 100vh;
+  margin: 0 auto;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+}
+.header{
+  margin-bottom: 20px;
+}
+
+.content{
+  flex: 1;
+  height: 100%;
 }
 </style>

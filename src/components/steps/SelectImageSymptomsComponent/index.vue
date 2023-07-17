@@ -11,12 +11,12 @@ import MaleBack from "./components/MaleBack.vue";
 import {storeToRefs} from "pinia";
 import {ROUTES} from "../../../router/index.js";
 import {useRouter} from "vue-router";
+import Layout from "../../Layout.vue";
 
 const store = useStore();
 const {getInitialData, getSelectedPartSymptoms, steps} = storeToRefs(store);
 const {selectImageSymptom, updateSymptomStatus, goToNextStep, goToPrevStep} = store;
 const side = ref('front');
-
 const toggleSide = () => {
   side.value === 'back' ? side.value = 'front' : side.value = 'back';
 }
@@ -25,16 +25,16 @@ const getComponent = computed(() => {
   switch (side.value) {
     case 'front':
       return getInitialData.value.gender === 'female' ? FemaleFront : MaleFront;
-      break;
     case 'back':
       return getInitialData.value.gender === 'female' ? FemaleBack : MaleBack;
-      break;
     default:
       return null;
   }
 });
 
+const isPartSelected = ref(false);
 const handleSelectedPartUpdate = val => {
+  isPartSelected.value = true;
   selectImageSymptom(val);
 }
 const router = useRouter();
@@ -47,40 +47,80 @@ const handleStepNext = () => {
   goToNextStep()
   router.push('/chat/' + ROUTES.INDICATORS)
 }
+
+const symptomsListRef = ref(null);
+
+import { onClickOutside } from '@vueuse/core';
+
+onClickOutside(symptomsListRef, () => {
+  isPartSelected.value = false;
+});
+
+defineProps(['isValid']);
 </script>
 
 <template>
-  <div class="wrapper">
-    <BaseButton @click="toggleSide()" class="btn">⟲</BaseButton>
-    <div class="image_wrapper">
-      <component :is="getComponent" @select:part="handleSelectedPartUpdate"/>
+  <layout>
+    <div class="wrapper">
+      <div class="image-wrapper">
+        <BaseButton @click="toggleSide()" class="btn">⟲</BaseButton>
+        <component :is="getComponent" @select:part="handleSelectedPartUpdate"/>
+      </div>
+      <div class="controls">
+        <BaseButton @click="handleStepBack">Назад</BaseButton>
+        <BaseButton @click="handleStepNext" :disabled="!isValid">Далее</BaseButton>
+      </div>
     </div>
-    <SymptomsList :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus" class="symptoms_list"/>
-    <BaseButton @click="handleStepBack">Назад</BaseButton>
-    <BaseButton @click="handleStepNext" :disabled="!steps[2].isValid">Далее</BaseButton>
-  </div>
+    <SymptomsList @go-next="handleStepNext" :is-valid="isValid" ref="symptomsListRef" :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus" :class="['symptoms_list', isPartSelected && 'open']"/>
+  </layout>
 </template>
 
 <style scoped lang="scss">
 .wrapper {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  justify-content: space-between;
+  inset: 0;
+  z-index: 0;
+  padding: 20px;
+}
+
+.image-wrapper {
+  width: 100%;
+  top: 100px;
   position: relative;
-  background-color: #f6f6f6;
-  border-radius: 16px;
-  width: 100%;
-  max-width: 375px;
-  justify-content: center;
 }
-.symptoms_list{
-  position: fixed;
-  bottom: 0;
-}
-.image_wrapper{
-  width: 100%;
-}
+
 .btn {
   position: absolute;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.symptoms_list {
+  position: absolute;
+  background-color: #fff;
+  bottom: 0;
+  top: 100%;
+  height: 0;
+  z-index: 1;
+  padding: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+  &.open {
+    top: auto;
+    height: auto;
+  }
 }
 </style>

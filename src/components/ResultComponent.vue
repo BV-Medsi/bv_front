@@ -1,8 +1,9 @@
 <script setup>
-import { useStore } from '../store';
-import { computed } from 'vue';
-import { useRouter } from 'vue-router';
+import {useStore} from '../store';
+import {computed} from 'vue';
+import {useRouter} from 'vue-router';
 import BaseButton from "@smartmed/ui/BaseButton";
+import Layout from "./Layout.vue";
 
 const store = useStore();
 const router = useRouter();
@@ -16,22 +17,21 @@ const goBackToLastStep = () => {
 </script>
 
 <template>
-  <div :class="$style.screen">
-    <h1>Собранные данные:</h1>
-    <div v-for="(step, index) in steps" :key="index">
-      <h2>{{ step.question }}</h2>
-      <pre>{{ step.data }}</pre>
+  <layout>
+    <div class="results-wrapper">
+      <h1>Собранные данные:</h1>
+      <div v-for="(step, index) in steps" :key="index">
+        <h2>{{ step.question }}</h2>
+        <pre>{{ step.data }}</pre>
+      </div>
+      <BaseButton @click="goBackToLastStep">Go Back</BaseButton>
     </div>
-    <BaseButton @click="goBackToLastStep">Go Back</BaseButton>
-  </div>
+  </layout>
 </template>
 
-<style module>
-.screen {
-  background-color: rgb(255, 255, 255);
-  border-radius: 16px;
-  padding: 12px;
-  width: 371px;
-  height: 812px;
+<style scoped>
+.results-wrapper{
+  overflow-y: auto;
+  height: 100%;
 }
 </style>

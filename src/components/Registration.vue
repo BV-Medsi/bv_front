@@ -41,14 +41,14 @@ const is_filled_last_name = computed(() => {
 
 const sign_in = async () => {
   if (
-    is_filled_password.value ||
-    is_filled_username.value ||
-    is_filled_last_name.value ||
-    is_filled_name.value ||
-    auth.value.password === null ||
-    auth.value.username === null ||
-    auth.value.name === null ||
-    auth.value.last_name == null
+      is_filled_password.value ||
+      is_filled_username.value ||
+      is_filled_last_name.value ||
+      is_filled_name.value ||
+      auth.value.password === null ||
+      auth.value.username === null ||
+      auth.value.name === null ||
+      auth.value.last_name == null
   ) {
     alert("Заполните все поля");
     return;
@@ -86,28 +86,28 @@ const sign_in = async () => {
     </p>
     <form @submit.prevent="sign_in">
       <BaseInput
-        v-model="auth.username"
-        :is-error="is_filled_username"
-        :class="$style.field"
-        placeholder="Username"
+          v-model="auth.username"
+          :is-error="is_filled_username"
+          :class="$style.field"
+          placeholder="Username"
       />
       <BaseInput
-        v-model="auth.name"
-        :is-error="is_filled_name"
-        :class="$style.field"
-        placeholder="Name"
+          v-model="auth.name"
+          :is-error="is_filled_name"
+          :class="$style.field"
+          placeholder="Name"
       />
       <BaseInput
-        v-model="auth.last_name"
-        :is-error="is_filled_last_name"
-        :class="$style.field"
-        placeholder="Last name"
+          v-model="auth.last_name"
+          :is-error="is_filled_last_name"
+          :class="$style.field"
+          placeholder="Last name"
       />
       <PasswordInput
-        v-model="auth.password"
-        :is-error="is_filled_password"
-        :class="$style.field"
-        placeholder="Password"
+          v-model="auth.password"
+          :is-error="is_filled_password"
+          :class="$style.field"
+          placeholder="Password"
       />
       <BaseButton type="submit" :class="$style.button">Регистрация</BaseButton>
     </form>
@@ -118,9 +118,11 @@ const sign_in = async () => {
 .field {
   margin: 10px;
 }
+
 .title {
   margin-bottom: 20px;
 }
+
 .button {
   margin-top: 10px;
 }
