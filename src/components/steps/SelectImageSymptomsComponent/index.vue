@@ -9,6 +9,7 @@ import FemaleFront from "./components/FemaleFront.vue";
 import MaleFront from "./components/MaleFront.vue";
 import MaleBack from "./components/MaleBack.vue";
 import {storeToRefs} from "pinia";
+import {ROUTES} from "../../../router/index.js";
 
 const store = useStore();
 const {getInitialData, getSelectedPartSymptoms} = storeToRefs(store);
@@ -42,7 +43,7 @@ const handleSelectedPartUpdate = val => {
     <BaseButton @click="toggleSide()" class="btn">⟲</BaseButton>
     <component :is="getComponent" @select:part="handleSelectedPartUpdate"/>
     <SymptomsList :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus"/>
-    <BaseButton @click="$router.push('/chat')">Назад</BaseButton>
+    <BaseButton @click="$router.push('/chat/' + ROUTES.GENERAL_CARD)">Назад</BaseButton>
     <BaseButton @click="$router.push('/chat/select-indicators')">Далее</BaseButton>
   </div>
 </template>

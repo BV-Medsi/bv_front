@@ -50,7 +50,6 @@ const sign_in = async () => {
   if(get_card.status === 200){
     store.updateInitialData(get_card.data, get_card.status)
   }
-
   router.push("/chat");
 };
 </script>

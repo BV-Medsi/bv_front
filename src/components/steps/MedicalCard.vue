@@ -46,7 +46,7 @@
                   placeholder="Выберите операцию:"
         />
       </div>
-      <BaseButton :disabled="!store.steps[0].isValid" @click="nextStep" :class="$style.nextButton">Далее</BaseButton>
+      <BaseButton :disabled="!store.steps[1].isValid" @click="nextStep" :class="$style.nextButton">Далее</BaseButton>
     </div>
   </Layout>
 </template>
@@ -83,23 +83,23 @@ const isOperationsButton = computed(() => initialData.operations.length >= 1);
 defineProps(['stepData'])
 
 const nextStep = async () => {
-  if(statusCode === 200){
-    const postMedicalCard = await axiosApiInstance.post("/card/create_card", {
-      age: initialData.age,
-      gender: initialData.gender,
-      operations: initialData.operations,
-      diseases: initialData.diseases,
-      chronic_diseases: initialData.chronic_diseases
-    })
-  }else{
-    const updateMedicalCard = await axiosApiInstance.patch("/card/update_card", {
-      age: initialData.age,
-      gender: initialData.gender,
-      operations: initialData.operations,
-      diseases: initialData.diseases,
-      chronic_diseases: initialData.chronic_diseases
-    })
-  }
+  // if(statusCode === 200){
+  //   const postMedicalCard = await axiosApiInstance.post("/card/create_card", {
+  //     age: initialData.age,
+  //     gender: initialData.gender,
+  //     operations: initialData.operations,
+  //     diseases: initialData.diseases,
+  //     chronic_diseases: initialData.chronic_diseases
+  //   })
+  // }else{
+  //   const updateMedicalCard = await axiosApiInstance.patch("/card/update_card", {
+  //     age: initialData.age,
+  //     gender: initialData.gender,
+  //     operations: initialData.operations,
+  //     diseases: initialData.diseases,
+  //     chronic_diseases: initialData.chronic_diseases
+  //   })
+  // }
   store.updateInitialData(initialData);
   route.push('select-image-symptoms')
 };

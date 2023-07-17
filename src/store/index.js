@@ -122,6 +122,9 @@ export const useStore = defineStore({
             const medicalCardStep = state.steps.find(step => step.id === ROUTES.GENERAL_CARD);
             return medicalCardStep.status_code;
         },
+        getGeneralCardStep : (state) => {
+            return state.steps.find(s => s.id === ROUTES.GENERAL_CARD);
+        },
     },
     actions: {
         goToNextStep() {
@@ -136,29 +139,28 @@ export const useStore = defineStore({
         },
         updateInitialData(data, code=404) {
             if (!data) return;
-            const firstStep = this.steps[0];
-            firstStep.status_code = code;
-            firstStep.data.card_id = data.card_id;
-            firstStep.data.gender = data.gender;
-            firstStep.data.age = data.age;
-            firstStep.data.diseases = data.diseases;
-            firstStep.data.operations = data.operations;
-            firstStep.data.chronic_diseases = data.chronic_diseases;
+            this.getGeneralCardStep.status_code = code;
+            this.getGeneralCardStep.data.card_id = data.card_id;
+            this.getGeneralCardStep.data.gender = data.gender;
+            this.getGeneralCardStep.data.age = data.age;
+            this.getGeneralCardStep.data.diseases = data.diseases;
+            this.getGeneralCardStep.data.operations = data.operations;
+            this.getGeneralCardStep.data.chronic_diseases = data.chronic_diseases;
         },
         updateDisease(index, value) {
-            const firstStep = this.steps[0];
+            const firstStep = this.steps[1];
             firstStep.data.diseases[index].value = value;
         },
         updateOperation(index, value) {
-            const firstStep = this.steps[0];
+            const firstStep = this.steps[1];
             firstStep.data.operations[index].value = value;
         },
         addDisease() {
-            const firstStep = this.steps[0];
+            const firstStep = this.steps[1];
             firstStep.data.diseases.push({ value: '' });
         },
         addOperation() {
-            const firstStep = this.steps[0];
+            const firstStep = this.steps[1];
             firstStep.data.operations.push({ value: '' });
         },
         validateAndUpdateStep(stepIndex, data) {
