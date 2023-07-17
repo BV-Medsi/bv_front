@@ -3,7 +3,7 @@ import BaseCheckbox from "@smartmed/ui/BaseCheckbox";
 import BaseButton from "@smartmed/ui/BaseButton";
 
 const props = defineProps(['symptoms', 'isValid']);
-const emit = defineEmits(['select:symptom']);
+const emit = defineEmits(['select:symptom', 'go-next']);
 const handleSymptomSelection = symptom => {
   emit('select:symptom', symptom);
 }
@@ -17,7 +17,7 @@ const handleSymptomSelection = symptom => {
                       @change="handleSymptomSelection(symptom)"/>
       </li>
     </ul>
-    <BaseButton :disabled="!isValid">Продолжить</BaseButton>
+    <BaseButton :disabled="!isValid" @click="$emit('go-next')">Продолжить</BaseButton>
   </div>
 </template>
 

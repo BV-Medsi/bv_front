@@ -68,10 +68,10 @@ defineProps(['isValid']);
       </div>
       <div class="controls">
         <BaseButton @click="handleStepBack">Назад</BaseButton>
-        <BaseButton @click="handleStepNext" :disabled="!steps[2].isValid">Далее</BaseButton>
+        <BaseButton @click="handleStepNext" :disabled="!isValid">Далее</BaseButton>
       </div>
     </div>
-    <SymptomsList :isValid="isValid" ref="symptomsListRef" :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus" :class="['symptoms_list', isPartSelected && 'open']"/>
+    <SymptomsList @go-next="handleStepNext" :isValid="isValid" ref="symptomsListRef" :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus" :class="['symptoms_list', isPartSelected && 'open']"/>
   </layout>
 </template>
 
