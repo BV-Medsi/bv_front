@@ -71,7 +71,7 @@ defineProps(['isValid']);
         <BaseButton @click="handleStepNext" :disabled="!isValid">Далее</BaseButton>
       </div>
     </div>
-    <SymptomsList @go-next="handleStepNext" :isValid="isValid" ref="symptomsListRef" :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus" :class="['symptoms_list', isPartSelected && 'open']"/>
+    <SymptomsList @go-next="handleStepNext" :is-valid="isValid" ref="symptomsListRef" :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus" :class="['symptoms_list', isPartSelected && 'open']"/>
   </layout>
 </template>
 

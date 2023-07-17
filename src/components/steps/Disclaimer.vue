@@ -9,27 +9,28 @@ import {onMounted} from "vue";
 const store = useStore()
 const router = useRouter()
 const {acceptTerms} = store;
-const nextStep = () =>{
+const nextStep = () => {
   acceptTerms();
   router.push('/chat/' + ROUTES.GENERAL_CARD)
 }
 onMounted(() => {
   store.$reset()
-})
+});
 </script>
 
 <template>
   <Layout>
-    <p class="info_image"><img src="../../assets/info.svg"></p>
+    <p class="info_image"><img src="/src/assets/info.svg"></p>
     <p class="smed-text_h3 smed-text_medium text_terapevt_1">Виртуальный терапевт</p>
-    <p class="smed-text_h4 text_terapevt_2">Виртуальный терапевт - это интеллектуальный медицинчский помощник просто расскажи ему о своих недомоганиях и он скажет тебе к какому врачу тебе нужно обратиться</p>
+    <p class="smed-text_h4 text_terapevt_2">Виртуальный терапевт - это интеллектуальный медицинчский помощник просто
+      расскажи ему о своих недомоганиях и он скажет тебе к какому врачу тебе нужно обратиться</p>
     <BaseButton class="base_button_disclaimer" :class="$style.nextButton" @click="nextStep">Продолжить</BaseButton>
   </Layout>
 
 </template>
 
 <style module>
-.nextButton{
+.nextButton {
   margin-top: 50px;
 }
 </style>

@@ -2,51 +2,54 @@
   <Layout>
     <div>
       <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Дополнительная информация</h2>
-      <base-input v-model="additionalData.weight" size="md" description="Указать в килограммах" label="Вес"
+      <base-input v-model="data.weight" size="md" description="Указать в килограммах" label="Вес"
                   :class="$style.inputField"/>
-      <base-input v-model="additionalData.growth" size="md" description="Указать в сантиметрах" label="Рост"
+      <base-input v-model="data.growth" size="md" description="Указать в сантиметрах" label="Рост"
                   :class="$style.inputField"/>
-      <base-input v-model="additionalData.oxygen" size="md" label="Кислород в крови"
+      <base-input v-model="data.oxygen" size="md" label="Кислород в крови"
                   :class="$style.inputField"/>
-      <base-input v-model="additionalData.pressure" size="md" label="Давление"
+      <base-input v-model="data.pressure" size="md" label="Давление"
                   :class="$style.inputField"/>
-      <base-input v-model="additionalData.sugar" size="md" label="Сахар в крови"
+      <base-input v-model="data.sugar" size="md" label="Сахар в крови"
                   :class="$style.inputField"/>
-      <base-input v-model="additionalData.temperature" size="md" label="Температура "
+      <base-input v-model="data.temperature" size="md" label="Температура "
                   :class="$style.inputField"/>
-      </div>
-    <BaseButton @click="nextStep">Получить результат</BaseButton>
-    </Layout>
+    </div>
+    <BaseButton @click="nextStep" :disabled="!isValid">Получить результат</BaseButton>
+  </Layout>
 </template>
 
 
 <script setup>
 import BaseInput from "../../../@smartmed/ui/BaseInput";
-import {reactive, ref} from "vue";
+import {ref, watch} from "vue";
 import Layout from "../Layout.vue";
 import BaseButton from "../../../@smartmed/ui/BaseButton";
 import {useRouter} from "vue-router";
-import {useStore} from "../../store/index.js";
-import {storeToRefs} from "pinia";
-
 
 const router = useRouter();
-const store = useStore();
 
-const {getAdditionalData} = storeToRefs(store);
-
-const additionalData = reactive(getAdditionalData.value);
-
-const nextStep = () =>{
+const nextStep = () => {
   router.push("/chat/results")
 }
+const props = defineProps(['stepData', 'isValid']);
+const data = ref(props.stepData);
+const emit = defineEmits(['update:response']);
+
+watch(data, (newValue) => {
+  emit('update:response', newValue);
+}, {
+  deep: true
+});
+
 </script>
 <style module>
-.title{
+.title {
   margin-bottom: 12px;
   text-align: left;
 }
-.inputField{
+
+.inputField {
   margin-bottom: 12px;
   text-align: left;
 }

@@ -172,9 +172,6 @@ export const useStore = defineStore({
                         el => el.isSelected && el.symptoms.some(symptom => symptom.isChecked)
                     );
                     break;
-                case ROUTES.SYMPTOMS:
-                    this.steps[stepIndex].isValid = data.some(el => el.isChecked);
-                    break;
                 case ROUTES.INDICATORS:
                     const { temperature, growth, weight } = this.steps[stepIndex].data;
                     this.steps[stepIndex].isValid = temperature !== null && growth !== null && weight !== null;

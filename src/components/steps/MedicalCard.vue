@@ -46,7 +46,7 @@
                   placeholder="Выберите операцию:"
         />
       </div>
-      <BaseButton :disabled="!store.steps[1].isValid" @click="nextStep" :class="$style.nextButton">Далее</BaseButton>
+      <BaseButton :disabled="!isValid" @click="nextStep" :class="$style.nextButton">Далее</BaseButton>
     </div>
   </Layout>
 </template>
@@ -82,7 +82,7 @@ watch(initialData, () => {
 
 const isDiseasesButton = computed(() => initialData.diseases.length >= 1);
 const isOperationsButton = computed(() => initialData.operations.length >= 1);
-defineProps(['stepData'])
+defineProps(['stepData', 'isValid'])
 
 const nextStep = async () => {
   // if(statusCode === 200){
