@@ -2,10 +2,6 @@
   <Layout>
     <div>
       <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Медицинская карта</h2>
-<!--      <base-input v-model="initialData.weight" size="md" description="Указать в килограммах" label="Вес"-->
-<!--                  :class="$style.inputField"/>-->
-<!--      <base-input v-model="initialData.height" size="md" description="Указать в сантиметрах" label="Рост"-->
-<!--                  :class="$style.inputField"/>-->
       <base-input v-model="initialData.age" size="md" description="Указать в годах" label="Возраст"
                   :class="$style.inputField"/>
       <div :class="$style.chooseGender">
@@ -79,7 +75,7 @@ const statusCode = reactive(getStatusCode);
 const initialData = reactive(getInitialData.value);
 
 watch(initialData, () => {
-  validateAndUpdateStep(0, initialData);
+  validateAndUpdateStep(1, initialData);
 });
 
 const isDiseasesButton = computed(() => initialData.diseases.length >= 1);
@@ -96,7 +92,7 @@ const nextStep = async () => {
       chronic_diseases: initialData.chronic_diseases
     })
   }else{
-    const updateMedicalCard = await axiosApiInstance.update("/card/update_card", {
+    const updateMedicalCard = await axiosApiInstance.patch("/card/update_card", {
       age: initialData.age,
       gender: initialData.gender,
       operations: initialData.operations,

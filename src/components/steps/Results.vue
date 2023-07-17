@@ -1,4 +1,3 @@
-<script src="../../services/api.js"></script>
 <script setup>
 
 import Layout from "../Layout.vue";
@@ -9,8 +8,6 @@ import {useStore} from "../../store/index.js";
 import {PARTS} from "./SelectImageSymptomsComponent/constants/parts.js";
 import BaseButton from "../../../@smartmed/ui/BaseButton";
 import {storeToRefs} from "pinia";
-
-// const prepareData = () =>{
 
 const store = useStore();
 

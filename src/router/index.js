@@ -27,7 +27,7 @@ const routes = [
     {
         path: '/chat', component: ChatComponent,
         children: [
-            {path: '', redirect: `/chat/${ROUTES.GENERAL_CARD}`},
+            {path: '', redirect: `/chat/${ROUTES.DISCLAIMER}`},
             {path: ROUTES.DISCLAIMER, component: Disclaimer},
             {path: ROUTES.GENERAL_CARD, component: SelectGenderComponent},
             {path: ROUTES.IMAGE_SYMPTOMS, component: SelectImageSymptomsComponent},

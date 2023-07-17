@@ -8,6 +8,13 @@ export const useStore = defineStore({
     state: () => ({
         steps: [
             {
+                id: ROUTES.DISCLAIMER,
+                isValid: false,
+                data: {
+                    hasAcceptedTerms: false,
+                }
+            },
+            {
                 id: ROUTES.GENERAL_CARD,
                 question: "Выберите ваш пол",
                 status_code: 404,
@@ -15,8 +22,6 @@ export const useStore = defineStore({
                     card_id: null,
                     gender: null,
                     age: null,
-                    // weight: null,
-                    // height: null,
                     chronic_diseases: [],
                     diseases: [],
                     operations: [],
@@ -87,7 +92,7 @@ export const useStore = defineStore({
         currentStepIndex: 0,
     }),
     getters: {
-        getInitialData: state => state.steps[0].data,
+        getInitialData: state => state.steps[1].data,
         getAdditionalData: state => state.steps[3].data,
         getSelectedPartSymptoms: (state) => {
             const imageSymptomsStep = state.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);
@@ -175,6 +180,11 @@ export const useStore = defineStore({
                 default:
                     this.steps[stepIndex].isValid = !!data;
             }
+        },
+        acceptTerms(){
+            this.steps[0].data.hasAcceptedTerms = true;
+            this.steps[0].isValid = true;
+            this.goToNextStep();
         },
         selectImageSymptom(part) {
             const imageSymptomsStep = this.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);
