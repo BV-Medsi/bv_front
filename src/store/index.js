@@ -139,13 +139,14 @@ export const useStore = defineStore({
         },
         updateInitialData(data, code=404) {
             if (!data) return;
-            this.getGeneralCardStep.status_code = code;
-            this.getGeneralCardStep.data.card_id = data.card_id;
-            this.getGeneralCardStep.data.gender = data.gender;
-            this.getGeneralCardStep.data.age = data.age;
-            this.getGeneralCardStep.data.diseases = data.diseases;
-            this.getGeneralCardStep.data.operations = data.operations;
-            this.getGeneralCardStep.data.chronic_diseases = data.chronic_diseases;
+            const generalCardStep = this.steps.find(s => s.id === ROUTES.GENERAL_CARD);
+            generalCardStep.status_code = code;
+            generalCardStep.data.card_id = data.card_id;
+            generalCardStep.data.gender = data.gender;
+            generalCardStep.data.age = data.age;
+            generalCardStep.data.diseases = data.diseases;
+            generalCardStep.data.operations = data.operations;
+            generalCardStep.data.chronic_diseases = data.chronic_diseases;
         },
         updateDisease(index, value) {
             const firstStep = this.steps[1];
