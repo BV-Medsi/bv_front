@@ -37,7 +37,6 @@ const {getAdditionalData} = storeToRefs(store);
 
 const additionalData = reactive(getAdditionalData.value);
 
-console.log(additionalData)
 const nextStep = () =>{
   router.push("/chat/results")
 }

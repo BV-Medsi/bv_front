@@ -1,7 +1,8 @@
 <script setup>
-import {ref} from 'vue';
+import BaseCheckbox from "@smartmed/ui/BaseCheckbox";
+import BaseButton from "@smartmed/ui/BaseButton";
 
-const props = defineProps(['symptoms', 'onSymptomsChange']);
+const props = defineProps(['symptoms', 'isValid']);
 const emit = defineEmits(['select:symptom']);
 const handleSymptomSelection = symptom => {
   emit('select:symptom', symptom);
@@ -10,12 +11,23 @@ const handleSymptomSelection = symptom => {
 
 <template>
   <div class="wrapper">
-    <ul>
+    <ul class="list">
       <li v-for="(symptom, index) in symptoms" :key="index">
-        <input type="checkbox" :id="'symptom-' + index" v-model="symptom.isChecked"
-               @change="handleSymptomSelection(symptom)">
-        <label :for="'symptom-' + index">{{ symptom.name }}</label>
+        <BaseCheckbox type="checkbox" :id="'symptom-' + index" v-model="symptom.isChecked" :label="symptom.name"
+                      @change="handleSymptomSelection(symptom)"/>
       </li>
     </ul>
+    <BaseButton :disabled="!isValid">Продолжить</BaseButton>
   </div>
 </template>
+
+<style scoped>
+.wrapper {
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+.list {
+  margin-bottom: 20px;
+}
+</style>

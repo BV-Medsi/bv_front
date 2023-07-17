@@ -17,7 +17,6 @@ const store = useStore();
 const {getInitialData, getSelectedPartSymptoms, steps} = storeToRefs(store);
 const {selectImageSymptom, updateSymptomStatus, goToNextStep, goToPrevStep} = store;
 const side = ref('front');
-
 const toggleSide = () => {
   side.value === 'back' ? side.value = 'front' : side.value = 'back';
 }
@@ -33,9 +32,9 @@ const getComponent = computed(() => {
   }
 });
 
-const isPartSelected = ref('0');
+const isPartSelected = ref(false);
 const handleSelectedPartUpdate = val => {
-  isPartSelected.value = 'auto';
+  isPartSelected.value = true;
   selectImageSymptom(val);
 }
 const router = useRouter();
@@ -48,6 +47,16 @@ const handleStepNext = () => {
   goToNextStep()
   router.push('/chat/' + ROUTES.INDICATORS)
 }
+
+const symptomsListRef = ref(null);
+
+import { onClickOutside } from '@vueuse/core';
+
+onClickOutside(symptomsListRef, () => {
+  isPartSelected.value = false;
+});
+
+defineProps(['isValid']);
 </script>
 
 <template>
@@ -62,7 +71,7 @@ const handleStepNext = () => {
         <BaseButton @click="handleStepNext" :disabled="!steps[2].isValid">Далее</BaseButton>
       </div>
     </div>
-    <SymptomsList :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus" class="symptoms_list"/>
+    <SymptomsList :isValid="isValid" ref="symptomsListRef" :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus" :class="['symptoms_list', isPartSelected && 'open']"/>
   </layout>
 </template>
 
@@ -74,6 +83,7 @@ const handleStepNext = () => {
   justify-content: space-between;
   inset: 0;
   z-index: 0;
+  padding: 20px;
 }
 
 .image-wrapper {
@@ -95,15 +105,22 @@ const handleStepNext = () => {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 20px;
 }
 
 .symptoms_list {
   position: absolute;
   background-color: #fff;
   bottom: 0;
-  height: v-bind(isPartSelected);
-  top: v-bind(isPartSelected);
+  top: 100%;
+  height: 0;
   z-index: 1;
+  padding: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+  &.open {
+    top: auto;
+    height: auto;
+  }
 }
 </style>
