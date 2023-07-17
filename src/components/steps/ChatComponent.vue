@@ -1,6 +1,7 @@
 <script setup>
-import { useStore } from '../../store';
+import {useStore} from '../../store';
 import {computed} from 'vue';
+import Layout from "../Layout.vue";
 
 const store = useStore();
 
@@ -10,11 +11,8 @@ const handleUpdateResponse = (newResponseValue) => {
   store.validateAndUpdateStep(store.currentStepIndex, newResponseValue);
 };
 </script>
-
 <template>
-  <div>
-    <router-view :stepData="currentStep.data" @update:response="handleUpdateResponse($event)"/>
-  </div>
+  <router-view :stepData="currentStep.data" @update:response="handleUpdateResponse($event)"/>
 </template>
 
 <style scoped lang="scss">

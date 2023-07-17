@@ -11,6 +11,7 @@ import MaleBack from "./components/MaleBack.vue";
 import {storeToRefs} from "pinia";
 import {ROUTES} from "../../../router/index.js";
 import {useRouter} from "vue-router";
+import Layout from "../../Layout.vue";
 
 const store = useStore();
 const {getInitialData, getSelectedPartSymptoms, steps} = storeToRefs(store);
@@ -25,16 +26,16 @@ const getComponent = computed(() => {
   switch (side.value) {
     case 'front':
       return getInitialData.value.gender === 'female' ? FemaleFront : MaleFront;
-      break;
     case 'back':
       return getInitialData.value.gender === 'female' ? FemaleBack : MaleBack;
-      break;
     default:
       return null;
   }
 });
 
+const isPartSelected = ref('0');
 const handleSelectedPartUpdate = val => {
+  isPartSelected.value = 'auto';
   selectImageSymptom(val);
 }
 const router = useRouter();
@@ -50,37 +51,59 @@ const handleStepNext = () => {
 </script>
 
 <template>
-  <div class="wrapper">
-    <BaseButton @click="toggleSide()" class="btn">⟲</BaseButton>
-    <div class="image_wrapper">
-      <component :is="getComponent" @select:part="handleSelectedPartUpdate"/>
+  <layout>
+    <div class="wrapper">
+      <div class="image-wrapper">
+        <BaseButton @click="toggleSide()" class="btn">⟲</BaseButton>
+        <component :is="getComponent" @select:part="handleSelectedPartUpdate"/>
+      </div>
+      <div class="controls">
+        <BaseButton @click="handleStepBack">Назад</BaseButton>
+        <BaseButton @click="handleStepNext" :disabled="!steps[2].isValid">Далее</BaseButton>
+      </div>
     </div>
     <SymptomsList :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus" class="symptoms_list"/>
-    <BaseButton @click="handleStepBack">Назад</BaseButton>
-    <BaseButton @click="handleStepNext" :disabled="!steps[2].isValid">Далее</BaseButton>
-  </div>
+  </layout>
 </template>
 
 <style scoped lang="scss">
 .wrapper {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  justify-content: space-between;
+  inset: 0;
+  z-index: 0;
+}
+
+.image-wrapper {
+  width: 100%;
+  top: 100px;
   position: relative;
-  background-color: #f6f6f6;
-  border-radius: 16px;
-  width: 100%;
-  max-width: 375px;
-  justify-content: center;
 }
-.symptoms_list{
-  position: fixed;
-  bottom: 0;
-}
-.image_wrapper{
-  width: 100%;
-}
+
 .btn {
   position: absolute;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.symptoms_list {
+  position: absolute;
+  background-color: #fff;
+  bottom: 0;
+  height: v-bind(isPartSelected);
+  top: v-bind(isPartSelected);
+  z-index: 1;
 }
 </style>
