@@ -44,13 +44,12 @@ export const router = createRouter({
     routes
 });
 
-// router.beforeEach((to, from, next) => {
-//     const store = useStore();
-//     if (to.path.startsWith('/chat')) {
-//         const stepId = to.path.split('/')[2];
-//         const stepIndex = store.steps.findIndex(step => step.id === stepId);
-//         if (stepIndex > 0 && !store.steps[stepIndex - 1].isValid) next(`/chat/${ROUTES.GENERAL_CARD}`)
-//         else next();
-//         next();
-//     } else next();
-// })
+router.beforeEach((to, from, next) => {
+    const store = useStore();
+    if (to.path.startsWith('/chat')) {
+        const stepId = to.path.split('/')[2];
+        const stepIndex = store.steps.findIndex(step => step.id === stepId);
+        if (stepIndex > 0 && !store.steps[stepIndex - 1].isValid) next(`/chat/${ROUTES.DISCLAIMER}`)
+        else next();
+    } else next();
+})

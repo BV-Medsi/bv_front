@@ -71,6 +71,8 @@ const {validateAndUpdateStep} = store;
 const {getInitialData} = storeToRefs(store);
 const {getStatusCode} = storeToRefs(store);
 
+const {goToNextStep} = store;
+
 const statusCode = reactive(getStatusCode);
 const initialData = reactive(getInitialData.value);
 
@@ -101,6 +103,7 @@ const nextStep = async () => {
   //   })
   // }
   store.updateInitialData(initialData);
+  goToNextStep();
   route.push('select-image-symptoms')
 };
 
