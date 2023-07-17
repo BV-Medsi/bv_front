@@ -11,19 +11,6 @@ import BaseButton from "../../../@smartmed/ui/BaseButton";
 import {storeToRefs} from "pinia";
 
 // const prepareData = () =>{
-//   let dict = {};
-//   const step1 = store.steps[1].data
-//   for(let body_part in PARTS){
-//     let checkedSymptomsArray = [];
-//     for(let part in step1[body_part].symptoms){
-//       let object = step1[body_part].symptoms[part];
-//       if(object.isChecked){
-//         checkedSymptomsArray.push(object.name)
-//       }
-//     }
-//     dict[body_part] = checkedSymptomsArray;
-//   }
-// }
 
 const store = useStore();
 
