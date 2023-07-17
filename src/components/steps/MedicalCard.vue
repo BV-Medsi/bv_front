@@ -65,12 +65,17 @@ import BaseInput from "../../../@smartmed/ui/BaseInput";
 import {useStore} from "../../store/index.js";
 import {storeToRefs} from "pinia";
 import Layout from "../Layout.vue";
+import {axiosApiInstance} from "../../services/api.js";
 
 const route = useRouter();
 const store = useStore();
-const {validateAndUpdateStep} = store;
-const {getInitialData} = storeToRefs(store);
 
+const {validateAndUpdateStep} = store;
+
+const {getInitialData} = storeToRefs(store);
+const {getStatusCode} = storeToRefs(store);
+
+const statusCode = reactive(getStatusCode);
 const initialData = reactive(getInitialData.value);
 
 watch(initialData, () => {
@@ -81,7 +86,24 @@ const isDiseasesButton = computed(() => initialData.diseases.length >= 1);
 const isOperationsButton = computed(() => initialData.operations.length >= 1);
 defineProps(['stepData'])
 
-const nextStep = () => {
+const nextStep = async () => {
+  if(statusCode === 200){
+    const postMedicalCard = await axiosApiInstance.post("/card/create_card", {
+      age: initialData.age,
+      gender: initialData.gender,
+      operations: initialData.operations,
+      diseases: initialData.diseases,
+      chronic_diseases: initialData.chronic_diseases
+    })
+  }else{
+    const updateMedicalCard = await axiosApiInstance.update("/card/update_card", {
+      age: initialData.age,
+      gender: initialData.gender,
+      operations: initialData.operations,
+      diseases: initialData.diseases,
+      chronic_diseases: initialData.chronic_diseases
+    })
+  }
   store.updateInitialData(initialData);
   route.push('select-image-symptoms')
 };

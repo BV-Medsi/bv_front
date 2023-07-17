@@ -10,6 +10,7 @@ export const useStore = defineStore({
             {
                 id: ROUTES.GENERAL_CARD,
                 question: "Выберите ваш пол",
+                status_code: 404,
                 data: {
                     card_id: null,
                     gender: null,
@@ -111,7 +112,11 @@ export const useStore = defineStore({
                 dict[part] = checkedSymptomsArray;
             }
             return dict;
-        }
+        },
+        getStatusCode: (state) => {
+            const medicalCardStep = state.steps.find(step => step.id === ROUTES.GENERAL_CARD);
+            return medicalCardStep.status_code;
+        },
     },
     actions: {
         goToNextStep() {
@@ -124,9 +129,10 @@ export const useStore = defineStore({
                 this.currentStepIndex--;
             }
         },
-        updateInitialData(data) {
+        updateInitialData(data, code=404) {
             if (!data) return;
             const firstStep = this.steps[0];
+            firstStep.status_code = code;
             firstStep.data.card_id = data.card_id;
             firstStep.data.gender = data.gender;
             firstStep.data.age = data.age;
@@ -156,7 +162,7 @@ export const useStore = defineStore({
             switch (this.steps[stepIndex].id) {
                 case ROUTES.GENERAL_CARD:
                     const { gender, age } = this.steps[stepIndex].data;
-                    this.steps[stepIndex].isValid = !!gender && !!age;
+                    this.steps[stepIndex].isValid = !!gender && !!age && age > 0 && age <= 122;
                     break;
                 case ROUTES.IMAGE_SYMPTOMS:
                     this.steps[stepIndex].isValid = Object.values(data).some(

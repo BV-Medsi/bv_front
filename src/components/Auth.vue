@@ -6,7 +6,7 @@ import PasswordInput from "@smartmed/ui/PasswordInput";
 import {axiosApiInstance} from "../services/api.js";
 import {tokenStorage} from "../services/TokenStorage.js";
 
-import { computed, ref } from "vue";
+import {computed, onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 import {useStore} from "../store/index.js";
 
@@ -48,7 +48,7 @@ const sign_in = async () => {
 
   const get_card = await axiosApiInstance.post("/card")
   if(get_card.status === 200){
-    store.updateInitialData(get_card.data)
+    store.updateInitialData(get_card.data, get_card.status)
   }
   router.push("/chat");
 };

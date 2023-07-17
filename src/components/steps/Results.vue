@@ -1,3 +1,4 @@
+<script src="../../services/api.js"></script>
 <script setup>
 
 import Layout from "../Layout.vue";
