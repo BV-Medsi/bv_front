@@ -3,19 +3,17 @@ import BaseButton from "@smartmed/ui/BaseButton";
 import BaseInput from "@smartmed/ui/BaseInput";
 import PasswordInput from "@smartmed/ui/PasswordInput";
 
-import {axiosApiInstance} from "../services/api.js";
-
 import { computed, ref } from "vue";
-import {tokenStorage} from "../services/TokenStorage.js";
 import {useRouter} from "vue-router";
 
 import Spinner from "../../@smartmed/ui/Spinner";
-import Layout from "./Layout.vue";
+import {useAuthStore} from "../store/auth.js";
 
 
 const router = useRouter();
+const authStore = useAuthStore();
 
-const isLoading = ref(false);
+const {registration, checkUsername, login} = authStore;
 
 const auth = ref({
   username: null, //d
@@ -54,29 +52,30 @@ const sign_in = async () => {
     alert("Заполните все поля");
     return;
   }
-  isLoading.value = true;
-  const check_name = await axiosApiInstance.post("http://5.63.159.74:5001/check_username", {
-    username: auth.value.username
-  })
-  isLoading.value = false;
-  if(check_name.data.answer === false){
-    alert("Имя пользователя занято")
-  }else{
-    isLoading.value = true;
-    await axiosApiInstance.post("http://5.63.159.74:5001/reg", {
-      last_name: auth.value.last_name,
-      name: auth.value.name,
-      username: auth.value.username,
-      password: auth.value.password,
-    });
-    const authentication = await axiosApiInstance.post("http://5.63.159.74:5001/", {
-      username: auth.value.username,
-      password: auth.value.password,
-    });
-    isLoading.value = false;
-    tokenStorage.set(authentication.data.access_token)
+  const isValidUsername = await checkUsername(auth.value.username);
+  if(isValidUsername){
+    await registration(auth.value);
+    await login({username: auth.value.username, password: auth.value.password});
     router.push("/chat")
   }
+  // isLoading.value = true;
+  // const check_name = await axiosApiInstance.post("http://5.63.159.74:5001/check_username", {
+  //   username: auth.value.username
+  // })
+  // isLoading.value = false;
+  // if(check_name.data.answer === false){
+  //   alert("Имя пользователя занято")
+  // }else{
+  //   isLoading.value = true;
+  //
+  //   const authentication = await axiosApiInstance.post("http://5.63.159.74:5001/", {
+  //     username: auth.value.username,
+  //     password: auth.value.password,
+  //   });
+  //   isLoading.value = false;
+  //   tokenStorage.set(authentication.data.access_token)
+  //   router.push("/chat")
+  // }
 };
 </script>
 

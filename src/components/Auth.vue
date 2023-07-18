@@ -3,13 +3,18 @@ import BaseButton from "@smartmed/ui/BaseButton";
 import BaseInput from "@smartmed/ui/BaseInput";
 import PasswordInput from "@smartmed/ui/PasswordInput";
 
-import {axiosApiInstance} from "../services/api.js";
-import {tokenStorage} from "../services/TokenStorage.js";
+import {useAuthStore} from "../store/auth.js";
 
 import {computed, ref} from "vue";
 import {useRouter} from "vue-router";
+import {storeToRefs} from "pinia";
+import Spinner from "../../@smartmed/ui/Spinner";
 
 const router = useRouter();
+const authStore = useAuthStore();
+
+const {login} = authStore;
+const {isLoading} = storeToRefs(authStore);
 
 const auth = ref({
   username: null,
@@ -34,18 +39,17 @@ const sign_in = async () => {
     alert("Заполните все поля");
     return;
   }
-
-  const data = await axiosApiInstance.post("http://5.63.159.74:5001/", {
+  login({
     username: auth.value.username,
     password: auth.value.password,
-  });
-  tokenStorage.set(data.data.access_token)
-  router.push("/chat");
+  })
+  await router.push("/chat");
 };
 </script>
 
 <template>
-  <div>
+  <Spinner v-if="isLoading"></Spinner>
+  <div v-else>
     <p class="smed-text_h2 smed-text_medium" :class="$style.title">
       Добро пожаловать в BV_Medsi!
     </p>
