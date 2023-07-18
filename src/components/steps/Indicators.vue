@@ -8,7 +8,6 @@
                   :class="$style.inputField"/>
       <base-input v-model="additionalData.temperature" size="md" label="Температура "
                   :class="$style.inputField"/>
-      <base-input v-model="additionalData.oxygen" size="md" label="Кислород в крови"
       <base-input v-model="data.oxygen" size="md" label="Кислород в крови"
                   :class="$style.inputField"/>
       <base-input v-model="data.pressure" size="md" label="Давление"
@@ -42,6 +41,7 @@ watch(additionalData, () => {
 });
 
 const nextStep = () =>{
+
   router.push("/chat/results")
 }
 const props = defineProps(['stepData', 'isValid']);
