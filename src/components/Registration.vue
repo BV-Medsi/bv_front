@@ -8,12 +8,14 @@ import {useRouter} from "vue-router";
 
 import Spinner from "../../@smartmed/ui/Spinner";
 import {useAuthStore} from "../store/auth.js";
+import {storeToRefs} from "pinia";
 
 
 const router = useRouter();
 const authStore = useAuthStore();
 
 const {registration, checkUsername, login} = authStore;
+const {isLoading} = storeToRefs(authStore);
 
 const auth = ref({
   username: null, //d

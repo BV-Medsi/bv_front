@@ -5,7 +5,6 @@ import HeaderNav from "./HeaderNav.vue";
 
 <template>
 <div class="screen">
-  <header-nav class="header"/>
   <div class="content">
     <slot />
   </div>
@@ -24,9 +23,6 @@ import HeaderNav from "./HeaderNav.vue";
   flex-direction: column;
   position: relative;
   min-height: 100vh;
-}
-.header{
-  margin-bottom: 20px;
 }
 
 .content{

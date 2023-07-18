@@ -8,36 +8,36 @@ export const useAuthStore = defineStore({
     state: () => ({
         user: null,
         token: tokenStorage.get(),
-        isLoading: false
+        isLoading: false,
+        isAuthenticated: false,
     }),
     actions: {
-        async login(data){
+        async login(data) {
             this.isLoading = true;
-            try{
+            try {
                 const response = await axiosApiInstance.post(BASE_URL, {
                     username: data.username,
                     password: data.password,
                 })
                 this.token = response.data.access_token;
-                console.log(response.status )
+                console.log(response.status)
                 tokenStorage.set(this.token);
-            }catch(e){
+            } catch (e) {
                 console.log(e)
-            }
-            finally {
+            } finally {
                 this.isLoading = false;
             }
         },
-        async checkToken(){
-            if(!this.token){
+        async checkToken() {
+            if (!this.token) {
                 return false;
             }
-            try{
+            try {
                 const response = await axiosApiInstance.get(BASE_URL + "me");
                 this.user = response.data;
                 return true;
-            }catch (e){
-                if(e.response && [401, 402, 403].includes(e.response.status)){
+            } catch (e) {
+                if (e.response && [401, 402, 403].includes(e.response.status)) {
                     this.logout();
                 }
                 return false;
@@ -50,35 +50,38 @@ export const useAuthStore = defineStore({
         },
         async registration(userData) {
             this.isLoading = true;
-            try{
+            try {
                 await axiosApiInstance.post(BASE_URL + "reg", {
                     username: userData.username,
                     name: userData.name,
                     lastname: userData.lastname,
                     password: userData.password
                 });
-            }catch(e){
+            } catch (e) {
 
-            }finally {
+            } finally {
                 this.isLoading = false;
             }
         },
-        async checkUsername(usernameValue){
+        async checkUsername(usernameValue) {
             this.isLoading = true;
-            try{
+            try {
                 const response = await axiosApiInstance.post(BASE_URL + "check_username", {
                     username: usernameValue
                 });
-                if(!response.data.answer){
+                if (!response.data.answer) {
                     alert("Имя пользователя занято");
                     return false;
                 }
                 return true;
-            }catch (e) {
+            } catch (e) {
 
-            }finally {
+            } finally {
                 this.isLoading = false
             }
-        }
+        },
+        setAuthenticated(value) {
+            this.isAuthenticated = value;
+        },
     }
 });
