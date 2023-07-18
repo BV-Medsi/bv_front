@@ -6,9 +6,9 @@
                   :class="$style.inputField"/>
       <base-input v-model="data.growth" size="md" description="Указать в сантиметрах" label="Рост"
                   :class="$style.inputField"/>
-      <base-input v-model="additionalData.temperature" size="md" label="Температура "
+      <base-input v-model="data.temperature" size="md" label="Температура "
                   :class="$style.inputField"/>
-      <base-input v-model="additionalData.oxygen" size="md" label="Кислород в крови"
+      <base-input v-model="data.oxygen" size="md" label="Кислород в крови"
                   :class="$style.inputField"/>
       <base-input v-model="data.oxygen" size="md" label="Кислород в крови"
                   :class="$style.inputField"/>

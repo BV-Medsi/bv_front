@@ -132,16 +132,14 @@ export const useStore = defineStore({
                 this.currentStepIndex--;
             }
         },
-        updateInitialData(data, code=404) {
-            if (!data) return;
-            const generalCardStep = this.steps.find(s => s.id === ROUTES.GENERAL_CARD);
-            generalCardStep.status_code = code;
-            generalCardStep.data.card_id = data.card_id;
-            generalCardStep.data.gender = data.gender;
-            generalCardStep.data.age = data.age;
-            generalCardStep.data.diseases = data.diseases;
-            generalCardStep.data.operations = data.operations;
-            generalCardStep.data.chronic_diseases = data.chronic_diseases;
+        updateCardData(data){
+            const cardData = this.steps[1].data;
+            cardData.card_id = data.card_id;
+            cardData.age = data.age;
+            cardData.gender = data.gender;
+            cardData.operations = data.operations;
+            cardData.diseases = data.diseases;
+            cardData.chronic_diseases = data.chronic_diseases;
         },
         validateAndUpdateStep(stepIndex, data) {
             this.steps[stepIndex].data = data;

@@ -71,7 +71,7 @@
 
 
 <script setup>
-import {computed, reactive, ref, watch} from 'vue';
+import {computed, onMounted, reactive, ref, watch} from 'vue';
 import Combobox from "../../../@smartmed/ui/Combobox";
 import BaseButton from "../../../@smartmed/ui/BaseButton";
 import {useRouter} from "vue-router";
@@ -80,12 +80,20 @@ import {useStore} from "../../store/index.js";
 import {storeToRefs} from "pinia";
 import Layout from "../Layout.vue";
 import {axiosApiInstance} from "../../services/api.js";
+import {useCardStore} from "../../store/card.js";
 
 const route = useRouter();
 const store = useStore();
 
 const props = defineProps(['stepData', 'isValid']);
 const data = ref(props.stepData);
+
+const cardStore = useCardStore()
+const {getCard, updateCard, createCard} = cardStore;
+
+onMounted(async ()=> {
+  const hasCard = await getCard()
+})
 
 watch(() => data.value, () => {
   validateAndUpdateStep(1, data.value);
