@@ -10,6 +10,7 @@ import {tokenStorage} from "../services/TokenStorage.js";
 import {useRouter} from "vue-router";
 
 import Spinner from "../../@smartmed/ui/Spinner";
+import Layout from "./Layout.vue";
 
 
 const router = useRouter();
@@ -80,7 +81,8 @@ const sign_in = async () => {
 </script>
 
 <template>
-  <div>
+  <Spinner v-if="isLoading"></Spinner>
+  <div v-else>
     <p class="smed-text_h2 smed-text_medium" :class="$style.title">
       Добро пожаловать в BV_Medsi!
     </p>

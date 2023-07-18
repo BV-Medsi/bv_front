@@ -6,9 +6,8 @@ import PasswordInput from "@smartmed/ui/PasswordInput";
 import {axiosApiInstance} from "../services/api.js";
 import {tokenStorage} from "../services/TokenStorage.js";
 
-import {computed, onMounted, ref} from "vue";
+import {computed, ref} from "vue";
 import {useRouter} from "vue-router";
-import {useStore} from "../store/index.js";
 
 const router = useRouter();
 
@@ -24,10 +23,6 @@ const is_filled_username = computed(() => {
 const is_filled_password = computed(() => {
   return auth.value.password === "" && auth.value.password !== null; //d
 });
-
-axiosApiInstance.get("http://5.63.159.74:5001/me")
-
-const store = useStore();
 
 const sign_in = async () => {
   if (

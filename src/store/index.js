@@ -143,22 +143,6 @@ export const useStore = defineStore({
             generalCardStep.data.operations = data.operations;
             generalCardStep.data.chronic_diseases = data.chronic_diseases;
         },
-        updateDisease(index, value) {
-            const firstStep = this.steps[1];
-            firstStep.data.diseases[index].value = value;
-        },
-        updateOperation(index, value) {
-            const firstStep = this.steps[1];
-            firstStep.data.operations[index].value = value;
-        },
-        addDisease() {
-            const firstStep = this.steps[1];
-            firstStep.data.diseases.push({ value: '' });
-        },
-        addOperation() {
-            const firstStep = this.steps[1];
-            firstStep.data.operations.push({ value: '' });
-        },
         validateAndUpdateStep(stepIndex, data) {
             this.steps[stepIndex].data = data;
 
