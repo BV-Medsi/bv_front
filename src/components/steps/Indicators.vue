@@ -8,13 +8,15 @@
                   :class="$style.inputField"/>
       <base-input v-model="additionalData.temperature" size="md" label="Температура "
                   :class="$style.inputField"/>
+      <base-input v-model="additionalData.oxygen" size="md" label="Кислород в крови"
+                  :class="$style.inputField"/>
       <base-input v-model="data.oxygen" size="md" label="Кислород в крови"
                   :class="$style.inputField"/>
       <base-input v-model="data.pressure" size="md" label="Давление"
                   :class="$style.inputField"/>
       <base-input v-model="data.sugar" size="md" label="Сахар в крови"
                   :class="$style.inputField"/>
-      </div>
+    </div>
     <BaseButton @click="nextStep" :disabled="!steps[3].isValid">Получить результат</BaseButton>
   </Layout>
 </template>
@@ -41,7 +43,6 @@ watch(additionalData, () => {
 });
 
 const nextStep = () =>{
-
   router.push("/chat/results")
 }
 const props = defineProps(['stepData', 'isValid']);
