@@ -9,6 +9,7 @@
       <base-input v-model="additionalData.temperature" size="md" label="Температура "
                   :class="$style.inputField"/>
       <base-input v-model="additionalData.oxygen" size="md" label="Кислород в крови"
+                  :class="$style.inputField"/>
       <base-input v-model="data.oxygen" size="md" label="Кислород в крови"
                   :class="$style.inputField"/>
       <base-input v-model="data.pressure" size="md" label="Давление"
