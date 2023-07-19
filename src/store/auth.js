@@ -20,7 +20,7 @@ export const useAuthStore = defineStore({
                     password: data.password,
                 })
                 this.token = response.data.access_token;
-                console.log(response.status )
+                this.setAuthenticated(true);
                 tokenStorage.set(this.token);
             }catch(e){
                 console.log(e)

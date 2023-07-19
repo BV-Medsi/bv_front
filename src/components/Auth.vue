@@ -39,11 +39,11 @@ const sign_in = async () => {
     alert("Заполните все поля");
     return;
   }
-  login({
+  await login({
     username: auth.value.username,
     password: auth.value.password,
   })
-  await router.push("/chat");
+  router.push("/chat");
 };
 </script>
 
@@ -66,7 +66,7 @@ const sign_in = async () => {
         :class="$style.field"
         placeholder="Password"
       />
-      <BaseButton type="submit" :class="$style.button">Вход</BaseButton>
+      <BaseButton type="submit">Вход</BaseButton>
     </form>
   </div>
 </template>
@@ -77,8 +77,5 @@ const sign_in = async () => {
 }
 .title {
   margin-bottom: 20px;
-}
-.button {
-  width: 100%;
 }
 </style>

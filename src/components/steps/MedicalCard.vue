@@ -200,7 +200,8 @@ hr {
 .addButton{
   margin-bottom: 8px;
   width: 100%;
-
+  display: flex;
+  justify-content: flex-start;
 }
 .nextButton{
   margin-top: 10px;

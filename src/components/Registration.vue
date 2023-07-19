@@ -8,12 +8,15 @@ import {useRouter} from "vue-router";
 
 import Spinner from "../../@smartmed/ui/Spinner";
 import {useAuthStore} from "../store/auth.js";
+import {storeToRefs} from "pinia";
 
 
 const router = useRouter();
 const authStore = useAuthStore();
 
 const {registration, checkUsername, login} = authStore;
+
+const {isLoading} = storeToRefs(authStore);
 
 const auth = ref({
   username: null, //d
@@ -59,24 +62,6 @@ const sign_in = async () => {
     await login({username: auth.value.username, password: auth.value.password});
     router.push("/chat")
   }
-  // isLoading.value = true;
-  // const check_name = await axiosApiInstance.post("http://5.63.159.74:5001/check_username", {
-  //   username: auth.value.username
-  // })
-  // isLoading.value = false;
-  // if(check_name.data.answer === false){
-  //   alert("Имя пользователя занято")
-  // }else{
-  //   isLoading.value = true;
-  //
-  //   const authentication = await axiosApiInstance.post("http://5.63.159.74:5001/", {
-  //     username: auth.value.username,
-  //     password: auth.value.password,
-  //   });
-  //   isLoading.value = false;
-  //   tokenStorage.set(authentication.data.access_token)
-  //   router.push("/chat")
-  // }
 };
 </script>
 
