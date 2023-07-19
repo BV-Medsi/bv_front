@@ -2,27 +2,23 @@
 
 import Layout from "../Layout.vue";
 import {axiosApiInstance} from "../../services/api.js";
-import {reactive, ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import Spinner from '@smartmed/ui/Spinner';
-import {useStore} from "../../store/index.js";
+import {useStore} from "../../store/steps.js";
 import {PARTS} from "./SelectImageSymptomsComponent/constants/parts.js";
 import BaseButton from "../../../@smartmed/ui/BaseButton";
 import {storeToRefs} from "pinia";
 
 const store = useStore();
 
-const {getAdditionalData} = storeToRefs(store)
-const additionalData = reactive(getAdditionalData)
-
 const {getCorrectSymptomsData} = storeToRefs(store)
+
 const correctSymptomsData = reactive(getCorrectSymptomsData.value)
 
-const logging = () => {
-  console.log(correctSymptomsData)
-}
-
-const isLoading = ref(false);
-
+const {setCurrentStepIndex} = store;
+onMounted(() => {
+  setCurrentStepIndex(4);
+})
 
 </script>
 

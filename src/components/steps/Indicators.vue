@@ -22,17 +22,17 @@
 
 <script setup>
 import BaseInput from "../../../@smartmed/ui/BaseInput";
-import {reactive, watch, ref} from "vue";
+import {reactive, watch, ref, onMounted} from "vue";
 import Layout from "../Layout.vue";
 import BaseButton from "../../../@smartmed/ui/BaseButton";
 import {useRouter} from "vue-router";
 import {storeToRefs} from "pinia";
-import {useStore} from "../../store/index.js";
+import {useStore} from "../../store/steps.js";
 
 const router = useRouter();
 const store = useStore();
 const {getAdditionalData} = storeToRefs(store);
-const {validateAndUpdateStep, goToNextStep} = reactive(store);
+const {validateAndUpdateStep, setCurrentStepIndex} = reactive(store);
 
 const additionalData = reactive(getAdditionalData.value);
 
@@ -40,8 +40,11 @@ watch(additionalData, () => {
   validateAndUpdateStep(3, additionalData);
 });
 
+onMounted(() => {
+  setCurrentStepIndex(3);
+})
+
 const nextStep = () =>{
-  goToNextStep()
   router.push("/chat/results")
 }
 const props = defineProps(['stepData', 'isValid']);

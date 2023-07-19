@@ -2,8 +2,11 @@
   <Layout>
     <div>
       <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Медицинская карта</h2>
-      <base-input v-model="data.age" size="md" description="Указать в годах" label="Возраст"
-                  :class="$style.inputField"/>
+      <base-input v-model="data.age" size="md" description="Укажите возраст от 0 до 120 лет" label="Возраст"
+                  :class="$style.inputField"
+                  :is-error="data.age !== null && !isAgeValid"
+      >
+      </base-input>
       <div :class="$style.chooseGender">
         <label>
           <input :class="$style.radio_button" type="radio" value="male"
@@ -76,7 +79,7 @@ import Combobox from "../../../@smartmed/ui/Combobox";
 import BaseButton from "../../../@smartmed/ui/BaseButton";
 import {useRouter} from "vue-router";
 import BaseInput from "../../../@smartmed/ui/BaseInput";
-import {useStore} from "../../store/index.js";
+import {useStore} from "../../store/steps.js";
 import {storeToRefs} from "pinia";
 import Layout from "../Layout.vue";
 import {axiosApiInstance} from "../../services/api.js";
@@ -91,9 +94,7 @@ const data = ref(props.stepData);
 const cardStore = useCardStore()
 const {getCard, updateCard, createCard} = cardStore;
 
-onMounted(async ()=> {
-  const hasCard = await getCard()
-})
+const hasCard = ref(false);
 
 watch(() => data.value, () => {
   validateAndUpdateStep(1, data.value);
@@ -101,7 +102,7 @@ watch(() => data.value, () => {
   deep: true
 });
 
-const {validateAndUpdateStep, goToNextStep} = store;
+const {validateAndUpdateStep, setCurrentStepIndex} = store;
 
 const diseasesItems = [
   'Ишемическая болезнь сердца',
@@ -160,10 +161,17 @@ const isChronicDiseasesButton = computed(() => data.value.chronic_diseases.lengt
 const isDiseasesButton = computed(() => data.value.diseases.length >= diseasesItems.length);
 const isOperationsButton = computed(() => data.value.operations.length >= operationsItems.length);
 const nextStep = async () => {
-  goToNextStep();
   route.push('select-image-symptoms')
 };
 
+onMounted(async () => {
+  setCurrentStepIndex(1);
+  hasCard.value = await getCard();
+})
+
+const isAgeValid = computed(() => {
+  return data.value.age > 0 && data.value.age <= 120;
+})
 
 </script>
 <style module>

@@ -5,6 +5,9 @@ class TokenStorage {
     set(token) {
         localStorage.setItem("__siriusToken", token);
     }
+    remove(){
+        localStorage.removeItem("__siriusToken")
+    }
 }
 const tokenStorage = new TokenStorage()
 export {

@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import {tokenStorage} from "../services/TokenStorage.js";
 import {axiosApiInstance} from "../services/api.js";
-import {useStore} from "./index.js";
+import {useStore} from "./steps.js";
 
 const BASE_URL = "http://5.63.159.74:5000/v1/"
 const store = useStore();

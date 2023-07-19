@@ -1,5 +1,5 @@
 <script setup>
-import {useStore} from '../store';
+import {useStore} from '../store/steps.js';
 import {computed} from 'vue';
 import {useRouter} from 'vue-router';
 import BaseButton from "@smartmed/ui/BaseButton";

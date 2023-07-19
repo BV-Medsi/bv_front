@@ -130,16 +130,6 @@ export const useStore = defineStore({
         },
     },
     actions: {
-        goToNextStep() {
-            if (this.currentStepIndex < this.steps.length) {
-                this.currentStepIndex++;
-            }
-        },
-        goToPrevStep() {
-            if (this.currentStepIndex > 0) {
-                this.currentStepIndex--;
-            }
-        },
         updateCardData(data){
             const cardData = this.steps[1].data;
             cardData.card_id = data.card_id;
@@ -170,10 +160,13 @@ export const useStore = defineStore({
                     this.steps[stepIndex].isValid = !!data;
             }
         },
+        setCurrentStepIndex(index){
+            this.currentStepIndex = index;
+        },
         acceptTerms(){
             this.steps[0].data.hasAcceptedTerms = true;
             this.steps[0].isValid = true;
-            this.goToNextStep();
+            this.currentStepIndex = 1;
         },
         selectImageSymptom(part) {
             const imageSymptomsStep = this.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);

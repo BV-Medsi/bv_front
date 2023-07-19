@@ -1,6 +1,6 @@
 <script setup>
-import {computed, ref} from 'vue';
-import {useStore} from '../../../store';
+import {computed, onMounted, ref} from 'vue';
+import {useStore} from '../../../store/steps.js';
 
 import BaseButton from '@smartmed/ui/BaseButton';
 import SymptomsList from "./components/SymptomsList.vue";
@@ -13,10 +13,17 @@ import {ROUTES} from "../../../router/index.js";
 import {useRouter} from "vue-router";
 import Layout from "../../Layout.vue";
 
+
+
 const store = useStore();
 const {getInitialData, getSelectedPartSymptoms, steps} = storeToRefs(store);
-const {selectImageSymptom, updateSymptomStatus, goToNextStep, goToPrevStep} = store;
+const {selectImageSymptom, updateSymptomStatus, setCurrentStepIndex} = store;
 const side = ref('front');
+
+onMounted(()=>{
+  setCurrentStepIndex(2);
+})
+
 const toggleSide = () => {
   side.value === 'back' ? side.value = 'front' : side.value = 'back';
 }
@@ -39,12 +46,10 @@ const handleSelectedPartUpdate = val => {
 }
 const router = useRouter();
 const handleStepBack = () => {
-  goToPrevStep()
   router.push('/chat/' + ROUTES.GENERAL_CARD)
 }
 
 const handleStepNext = () => {
-  goToNextStep()
   router.push('/chat/' + ROUTES.INDICATORS)
 }
 

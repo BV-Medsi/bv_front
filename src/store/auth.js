@@ -8,7 +8,8 @@ export const useAuthStore = defineStore({
     state: () => ({
         user: null,
         token: tokenStorage.get(),
-        isLoading: false
+        isLoading: false,
+        isAuthenticated: false,
     }),
     actions: {
         async login(data){
@@ -46,7 +47,7 @@ export const useAuthStore = defineStore({
         logout() {
             this.token = null;
             this.user = null;
-            tokenStorage.set(null);
+            tokenStorage.remove();
         },
         async registration(userData) {
             this.isLoading = true;
@@ -79,6 +80,9 @@ export const useAuthStore = defineStore({
             }finally {
                 this.isLoading = false
             }
-        }
+        },
+        setAuthenticated(value) {
+            this.isAuthenticated = value;
+        },
     }
 });
