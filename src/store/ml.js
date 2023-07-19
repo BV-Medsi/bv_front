@@ -6,5 +6,10 @@ export const useMlStore= defineStore({
     id: "ml-store",
     state: () => ({
 
-    })
+    }),
+    actions: {
+        predictValues(data){
+
+        }
+    }
 })

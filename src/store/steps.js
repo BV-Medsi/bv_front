@@ -1,6 +1,6 @@
 import {defineStore} from 'pinia'
 import {ROUTES} from "../router/index.js";
-import {symptomsData} from "./data/index.js";
+import {symptomsData} from "./data/symptomsData.js";
 import {PARTS} from "../components/steps/SelectImageSymptomsComponent/constants/parts.js";
 
 export const useStore = defineStore({
@@ -90,7 +90,7 @@ export const useStore = defineStore({
                     doctor2: {},
                     doctor3: {}
                 }
-            }
+            },
         ],
         currentStepIndex: 0,
     }),
