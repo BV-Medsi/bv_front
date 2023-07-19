@@ -6,6 +6,6 @@ import Root from "@smartmed/ui/Root";
 
 <template>
   <Root>
-    <router-view :key="$route.path" class="router_bcg"/>
+    <router-view :key="$route.path"/>
   </Root>
 </template>

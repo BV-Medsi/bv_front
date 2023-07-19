@@ -74,7 +74,7 @@
 
 
 <script setup>
-import {computed, onMounted, reactive, ref, watch} from 'vue';
+import {computed, onBeforeMount, onMounted, reactive, ref, watch} from 'vue';
 import Combobox from "../../../@smartmed/ui/Combobox";
 import BaseButton from "../../../@smartmed/ui/BaseButton";
 import {useRouter} from "vue-router";
@@ -157,17 +157,17 @@ const availableOperationsItems = computed(() => {
   return operationsItems.filter(operation => !data.value.operations.includes(operation));
 });
 
-const isChronicDiseasesButton = computed(() => data.value.chronic_diseases.length >= chronicDiseasesItems.length);
-const isDiseasesButton = computed(() => data.value.diseases.length >= diseasesItems.length);
-const isOperationsButton = computed(() => data.value.operations.length >= operationsItems.length);
-const nextStep = async () => {
-  route.push('select-image-symptoms')
-};
-
-onMounted(async () => {
+onBeforeMount(async () => {
   setCurrentStepIndex(1);
   hasCard.value = await getCard();
 })
+
+const isChronicDiseasesButton = computed(() => data.value.chronic_diseases.length >= chronicDiseasesItems?.length);
+const isDiseasesButton = computed(() => data.value.diseases.length >= diseasesItems?.length);
+const isOperationsButton = computed(() => data.value.operations.length >= operationsItems?.length);
+const nextStep = async () => {
+  route.push('select-image-symptoms')
+};
 
 const isAgeValid = computed(() => {
   return data.value.age > 0 && data.value.age <= 120;

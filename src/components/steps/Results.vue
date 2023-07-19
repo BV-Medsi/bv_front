@@ -20,11 +20,16 @@ onMounted(() => {
   setCurrentStepIndex(4);
 })
 
+const check = () =>{
+  console.log(correctSymptomsData)
+}
+
 </script>
 
 <template>
 <Layout>
   <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Результаты</h2>
+
 </Layout>
 </template>
 

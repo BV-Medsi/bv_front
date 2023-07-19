@@ -117,7 +117,9 @@ export const useStore = defineStore({
                         checkedSymptomsArray.push(object.name)
                     }
                 }
-                dict[part] = checkedSymptomsArray;
+                if(checkedSymptomsArray.length !== 0){
+                    dict[part] = checkedSymptomsArray;
+                }
             }
             return dict;
         },
