@@ -10,14 +10,12 @@
                   :class="$style.inputField"/>
       <base-input v-model="data.oxygen" size="md" label="Кислород в крови"
                   :class="$style.inputField"/>
-      <base-input v-model="data.oxygen" size="md" label="Кислород в крови"
-                  :class="$style.inputField"/>
       <base-input v-model="data.pressure" size="md" label="Давление"
                   :class="$style.inputField"/>
       <base-input v-model="data.sugar" size="md" label="Сахар в крови"
                   :class="$style.inputField"/>
     </div>
-    <BaseButton @click="nextStep" :disabled="!steps[3].isValid">Получить результат</BaseButton>
+    <BaseButton @click="nextStep" :disabled="!isValid">Получить результат</BaseButton>
   </Layout>
 </template>
 
@@ -33,8 +31,8 @@ import {useStore} from "../../store/index.js";
 
 const router = useRouter();
 const store = useStore();
-const {getAdditionalData, steps} = storeToRefs(store);
-const {validateAndUpdateStep} = reactive(store);
+const {getAdditionalData} = storeToRefs(store);
+const {validateAndUpdateStep, goToNextStep} = reactive(store);
 
 const additionalData = reactive(getAdditionalData.value);
 
@@ -43,6 +41,7 @@ watch(additionalData, () => {
 });
 
 const nextStep = () =>{
+  goToNextStep()
   router.push("/chat/results")
 }
 const props = defineProps(['stepData', 'isValid']);

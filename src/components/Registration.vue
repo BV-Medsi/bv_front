@@ -54,6 +54,7 @@ const sign_in = async () => {
   }
   const isValidUsername = await checkUsername(auth.value.username);
   if(isValidUsername){
+    console.log(auth.value);
     await registration(auth.value);
     await login({username: auth.value.username, password: auth.value.password});
     router.push("/chat")

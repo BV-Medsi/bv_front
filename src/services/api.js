@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {tokenStorage} from "./TokenStorage.js";
-export const axiosApiInstance = axios.create();
+export const axiosApiInstance= axios.create();
 // Request interceptor for API calls
 axiosApiInstance.interceptors.request.use(
     async config => {

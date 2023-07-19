@@ -24,33 +24,16 @@ const logging = () => {
 const isLoading = ref(false);
 
 
-isLoading.value = true;
-// const getResults = await axiosApiInstance.post("/predict", {
-//     card_id: store.steps[0].data.card_id,
-//     complaints: {
-//       [PARTS.head]: store.steps[1].data[PARTS.head].symptoms,
-//     },
-//
-//     indicators: {
-//       temperature: additionalData.temperature,
-//       pressure: additionalData.pressure,
-//       growth: additionalData.growth,
-//       weight: additionalData.weight,
-//       sugar: additionalData.sugar,
-//       oxygen: additionalData.oxygen
-//   }
-// })
-isLoading.value = false;
-
-
 </script>
 
 <template>
 <Layout>
-  <BaseButton @click="logging">Check data</BaseButton>
+  <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Результаты</h2>
 </Layout>
 </template>
 
-<style scoped lang="scss">
-
+<style module>
+.title{
+  text-align: left;
+}
 </style>

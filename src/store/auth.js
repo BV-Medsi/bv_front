@@ -54,7 +54,7 @@ export const useAuthStore = defineStore({
                 await axiosApiInstance.post(BASE_URL + "reg", {
                     username: userData.username,
                     name: userData.name,
-                    lastname: userData.lastname,
+                    last_name: userData.last_name,
                     password: userData.password
                 });
             }catch(e){

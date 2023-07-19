@@ -82,6 +82,14 @@ export const useStore = defineStore({
                     sugar: null,
                     oxygen: null
                 }
+            },
+            {
+                id: ROUTES.RESULTS,
+                data: {
+                    doctor1: {},
+                    doctor2: {},
+                    doctor3: {}
+                }
             }
         ],
         currentStepIndex: 0,

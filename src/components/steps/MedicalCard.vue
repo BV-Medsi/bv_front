@@ -160,23 +160,6 @@ const isChronicDiseasesButton = computed(() => data.value.chronic_diseases.lengt
 const isDiseasesButton = computed(() => data.value.diseases.length >= diseasesItems.length);
 const isOperationsButton = computed(() => data.value.operations.length >= operationsItems.length);
 const nextStep = async () => {
-  // if(statusCode === 200){
-  //   const postMedicalCard = await axiosApiInstance.post("/card/create_card", {
-  //     age: data.age,
-  //     gender: data.gender,
-  //     operations: data.operations,
-  //     diseases: data.diseases,
-  //     chronic_diseases: data.chronic_diseases
-  //   })
-  // }else{
-  //   const updateMedicalCard = await axiosApiInstance.patch("/card/update_card", {
-  //     age: data.age,
-  //     gender: data.gender,
-  //     operations: data.operations,
-  //     diseases: data.diseases,
-  //     chronic_diseases: data.chronic_diseases
-  //   })
-  // }
   goToNextStep();
   route.push('select-image-symptoms')
 };
