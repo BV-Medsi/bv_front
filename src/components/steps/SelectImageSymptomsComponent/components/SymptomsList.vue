@@ -2,8 +2,13 @@
 import BaseCheckbox from "@smartmed/ui/BaseCheckbox";
 import BaseButton from "@smartmed/ui/BaseButton";
 
+<<<<<<< Updated upstream
 const props = defineProps(['symptoms', 'isValid']);
 const emit = defineEmits(['select:symptom', 'go-next']);
+=======
+defineProps(['symptoms']);
+const emit = defineEmits(['select:symptom']);
+>>>>>>> Stashed changes
 const handleSymptomSelection = symptom => {
   emit('select:symptom', symptom);
 }

@@ -3,7 +3,13 @@
     <div>
       <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Медицинская карта</h2>
       <base-input v-model="data.age" size="md" description="Указать в годах" label="Возраст"
-                  :class="$style.inputField"/>
+                  :class="$style.inputField"
+                  :is-error="data.age !== null && !isAgeValid"
+      >
+        <template #description>
+          Укажите возраст от 0 до 120 лет
+        </template>
+      </base-input>
       <div :class="$style.chooseGender">
         <label>
           <input :class="$style.radio_button" type="radio" value="male"
@@ -180,8 +186,9 @@ const nextStep = async () => {
   goToNextStep();
   route.push('select-image-symptoms')
 };
-
-
+const isAgeValid = computed(() => {
+  return data.value.age > 0 && data.value.age <= 120;
+})
 </script>
 <style module>
 h2{

@@ -3,7 +3,7 @@ import BaseButton from "@smartmed/ui/BaseButton";
 import BaseInput from "@smartmed/ui/BaseInput";
 import PasswordInput from "@smartmed/ui/PasswordInput";
 
-import { computed, ref } from "vue";
+import {computed, ref} from "vue";
 import {useRouter} from "vue-router";
 
 import Spinner from "../../@smartmed/ui/Spinner";
@@ -55,10 +55,12 @@ const sign_in = async () => {
     return;
   }
   const isValidUsername = await checkUsername(auth.value.username);
-  if(isValidUsername){
+  if (isValidUsername) {
     await registration(auth.value);
     await login({username: auth.value.username, password: auth.value.password});
     router.push("/chat")
+  } else {
+    alert("Пользователь с таким именем уже зарегистрирован");
   }
   // isLoading.value = true;
   // const check_name = await axiosApiInstance.post("http://5.63.159.74:5001/check_username", {
@@ -82,7 +84,7 @@ const sign_in = async () => {
 </script>
 
 <template>
-  <Spinner v-if="isLoading"></Spinner>
+  <Spinner v-if="isLoading" :class="$style.spinner"></Spinner>
   <div v-else>
     <p class="smed-text_h2 smed-text_medium" :class="$style.title">
       Добро пожаловать в BV_Medsi!
@@ -128,5 +130,12 @@ const sign_in = async () => {
 
 .button {
   margin-top: 10px;
+}
+
+.spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>

@@ -48,7 +48,7 @@ const sign_in = async () => {
 </script>
 
 <template>
-  <Spinner v-if="isLoading"></Spinner>
+  <Spinner v-if="isLoading" :class="$style.spinner"></Spinner>
   <div v-else>
     <p class="smed-text_h2 smed-text_medium" :class="$style.title">
       Добро пожаловать в BV_Medsi!
@@ -75,10 +75,19 @@ const sign_in = async () => {
 .field {
   margin: 10px;
 }
+
 .title {
   margin-bottom: 20px;
 }
+
 .button {
   width: 100%;
+}
+
+.spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>

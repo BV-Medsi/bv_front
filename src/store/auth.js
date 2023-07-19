@@ -20,7 +20,6 @@ export const useAuthStore = defineStore({
                     password: data.password,
                 })
                 this.token = response.data.access_token;
-                console.log(response.status)
                 tokenStorage.set(this.token);
             } catch (e) {
                 console.log(e)
@@ -29,9 +28,7 @@ export const useAuthStore = defineStore({
             }
         },
         async checkToken() {
-            if (!this.token) {
-                return false;
-            }
+            if (!this.token) return false;
             try {
                 const response = await axiosApiInstance.get(BASE_URL + "me");
                 this.user = response.data;
@@ -54,7 +51,7 @@ export const useAuthStore = defineStore({
                 await axiosApiInstance.post(BASE_URL + "reg", {
                     username: userData.username,
                     name: userData.name,
-                    lastname: userData.lastname,
+                    last_name: userData.last_name,
                     password: userData.password
                 });
             } catch (e) {
