@@ -15,6 +15,3 @@ import Layout from "./Layout.vue";
   </Layout>
 </template>
 
-<style scoped lang="scss">
-
-</style>

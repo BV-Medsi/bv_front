@@ -1,55 +1,65 @@
 <script setup>
-
-import Layout from "../Layout.vue";
-import {onMounted, reactive} from "vue";
+import {onMounted, reactive, watch, watchEffect} from "vue";
 import {useStore} from "../../store/steps.js";
 import {storeToRefs} from "pinia";
-import Combobox from "../../../@smartmed/ui/Combobox";
+import Combobox from "@smartmed/ui/Combobox";
 import {useMlStore} from "../../store/ml.js";
 
 const store = useStore();
 const mlStore = useMlStore();
 
 const {getCorrectSymptomsData} = storeToRefs(store)
+const {selectDoctor, selectClinic} = store;
+
 const {predictValues} = mlStore;
 
 const correctSymptomsData = reactive(getCorrectSymptomsData.value)
-const props = defineProps(['stepData'])
-
+const props = defineProps(['stepData', 'isValid']);
+const emit = defineEmits(['update:response']);
 onMounted(async () => {
   predictValues()
-})
+});
 
-const test = "jfsd";
-
-const check = () =>{
-  console.log(correctSymptomsData)
-}
+watch(() => props.stepData, (newValue, oldValue) => {
+  emit('update:response', newValue);
+}, {deep: true})
 
 </script>
 
 <template>
-<Layout>
   <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Результаты</h2>
   <p :class="$style.subtitle" class="smed-text_h3">Здесь представлен список врачей которых вы можете посетить.</p>
   <div>
-    <h2 class="smed-text_h3 smed-text_medium" :class="$style.header">{{test}}</h2>
-    <combobox model-value="">
-
-    </combobox>
-    <hr/>
-    <h2 class="smed-text_h3 smed-text_medium" :class="$style.header">Хронические заболевания</h2>
-    <hr/>
+    <div>
+      <h2 class="smed-text_h3 smed-text_medium" :class="$style.header">Doctors</h2>
+      <div v-for="(doctor, doctorIndex) in stepData.doctors"
+           :key="`doctor-${doctorIndex}`">
+        <div class="doctor">
+          <input type="checkbox" v-model="doctor.isSelected" @change="selectDoctor(doctor.name)">
+          <h3 class="smed-text_h3 smed-text_medium">{{ doctor.name }}</h3>
+        </div>
+        <div v-for="(clinic, clinicIndex) in doctor.clinics"
+             :key="`clinic-${clinicIndex}`">
+          <input :disabled="!doctor.isSelected" type="checkbox" v-model="clinic.isChecked" @change="selectClinic(doctor.name, clinic.name)">
+          <p>{{ clinic.name }}</p>
+        </div>
+      </div>
+    </div>
   </div>
-</Layout>
 </template>
 
 <style module>
-.title{
+.doctor {
+  display: flex;
+  align-items: center;
+}
+
+.title {
   text-align: left;
   margin-bottom: 40px;
 }
-.subtitle{
+
+.subtitle {
   text-align: left;
   margin-bottom: 20px;
 }

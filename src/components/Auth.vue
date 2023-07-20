@@ -8,7 +8,7 @@ import {useAuthStore} from "../store/auth.js";
 import {computed, ref} from "vue";
 import {useRouter} from "vue-router";
 import {storeToRefs} from "pinia";
-import Spinner from "../../@smartmed/ui/Spinner";
+import Spinner from "@smartmed/ui/Spinner";
 
 const router = useRouter();
 const authStore = useAuthStore();

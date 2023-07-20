@@ -1,5 +1,5 @@
 <script setup>
-import {computed, onMounted, ref} from 'vue';
+import {computed, ref} from 'vue';
 import {useStore} from '../../../store/steps.js';
 
 import BaseButton from '@smartmed/ui/BaseButton';
@@ -11,14 +11,13 @@ import MaleBack from "./components/MaleBack.vue";
 import {storeToRefs} from "pinia";
 import {ROUTES} from "../../../router/index.js";
 import {useRouter} from "vue-router";
-import Layout from "../../Layout.vue";
 
 const store = useStore();
 const {getInitialData, getSelectedPartSymptoms, steps} = storeToRefs(store);
 const {selectImageSymptom, updateSymptomStatus} = store;
 const side = ref('front');
 
-defineProps(['isValid']);
+defineProps(['stepData', 'isValid']);
 
 const toggleSide = () => {
   side.value === 'back' ? side.value = 'front' : side.value = 'back';
@@ -51,7 +50,7 @@ const handleStepNext = () => {
 
 const symptomsListRef = ref(null);
 
-import { onClickOutside } from '@vueuse/core';
+import {onClickOutside} from '@vueuse/core';
 
 onClickOutside(symptomsListRef, () => {
   isPartSelected.value = false;
@@ -60,19 +59,18 @@ onClickOutside(symptomsListRef, () => {
 </script>
 
 <template>
-  <layout>
-    <div class="wrapper">
-      <div class="image-wrapper">
-        <BaseButton @click="toggleSide()" class="btn">⟲</BaseButton>
-        <component :is="getComponent" @select:part="handleSelectedPartUpdate"/>
-      </div>
-      <div class="controls">
-        <BaseButton @click="handleStepBack">Назад</BaseButton>
-        <BaseButton @click="handleStepNext" :disabled="!isValid">Далее</BaseButton>
-      </div>
+  <div class="wrapper">
+    <div class="image-wrapper">
+      <BaseButton @click="toggleSide()" class="btn">⟲</BaseButton>
+      <component :is="getComponent" @select:part="handleSelectedPartUpdate"/>
     </div>
-    <SymptomsList @go-next="handleStepNext" :is-valid="isValid" ref="symptomsListRef" :symptoms="getSelectedPartSymptoms" @select:symptom="updateSymptomStatus" :class="['symptoms_list', isPartSelected && 'open']"/>
-  </layout>
+    <div class="controls">
+      <BaseButton @click="handleStepBack">Назад</BaseButton>
+      <BaseButton @click="handleStepNext" :disabled="!isValid">Далее</BaseButton>
+    </div>
+  </div>
+  <SymptomsList @go-next="handleStepNext" :is-valid="isValid" ref="symptomsListRef" :symptoms="getSelectedPartSymptoms"
+                @select:symptom="updateSymptomStatus" :class="['symptoms_list', isPartSelected && 'open']"/>
 </template>
 
 <style scoped lang="scss">

@@ -74,7 +74,7 @@ export const useStore = defineStore({
             {
                 id: ROUTES.INDICATORS,
                 isValid: false,
-                data : {
+                data: {
                     temperature: null,
                     pressure: null,
                     growth: null,
@@ -86,9 +86,35 @@ export const useStore = defineStore({
             {
                 id: ROUTES.RESULTS,
                 data: {
-                    doctor1: {},
-                    doctor2: {},
-                    doctor3: {}
+                    doctors: [
+                        {
+                            isSelected: false,
+                            name: 'Терапевт',
+                            prediction: 0.8,
+                            clinics: [{
+                                name: 'Clinic One',
+                                isChecked: false
+                            },
+                                {
+                                    name: 'Clinic Two',
+                                    isChecked: false
+                                }]
+                        },
+                        {
+                            isSelected: false,
+                            name: 'Хирург',
+                            prediction: 0.8,
+                            clinics: [{
+                                name: 'Clinic One',
+                                isChecked: false
+                            },
+                                {
+                                    name: 'Clinic Two',
+                                    isChecked: false
+                                }],
+                        }
+                    ],
+                    isValid: false
                 }
             },
         ],
@@ -106,18 +132,18 @@ export const useStore = defineStore({
             }
             return [];
         },
-        getCorrectSymptomsData: (state) =>{
+        getCorrectSymptomsData: (state) => {
             const imageSymptomsStep = state.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);
             let dict = {};
-            for(let part in imageSymptomsStep.data){
+            for (let part in imageSymptomsStep.data) {
                 let checkedSymptomsArray = [];
-                for(let symptom in imageSymptomsStep.data[part].symptoms){
+                for (let symptom in imageSymptomsStep.data[part].symptoms) {
                     let object = imageSymptomsStep.data[part].symptoms[symptom];
-                    if(object.isChecked){
+                    if (object.isChecked) {
                         checkedSymptomsArray.push(object.name)
                     }
                 }
-                if(checkedSymptomsArray.length !== 0){
+                if (checkedSymptomsArray.length !== 0) {
                     dict[part] = checkedSymptomsArray;
                 }
             }
@@ -127,12 +153,12 @@ export const useStore = defineStore({
             const medicalCardStep = state.steps.find(step => step.id === ROUTES.GENERAL_CARD);
             return medicalCardStep.status_code;
         },
-        getGeneralCardStep : (state) => {
+        getGeneralCardStep: (state) => {
             return state.steps.find(s => s.id === ROUTES.GENERAL_CARD);
         },
     },
     actions: {
-        updateCardData(data){
+        updateCardData(data) {
             const cardData = this.steps[1].data;
             cardData.card_id = data.card_id;
             cardData.age = data.age;
@@ -141,12 +167,48 @@ export const useStore = defineStore({
             cardData.diseases = data.diseases;
             cardData.chronic_diseases = data.chronic_diseases;
         },
+        selectDoctor(doctorName) {
+            const resultsStep = this.steps.find(step => step.id === ROUTES.RESULTS);
+            if (resultsStep) {
+                resultsStep.data.doctors.forEach(doctor => {
+                    if (doctor.name === doctorName) {
+                        doctor.isSelected = true;
+                        doctor.clinics.forEach(clinic => {
+                            clinic.isChecked = false;
+                        });
+                    } else {
+                        doctor.isSelected = false;
+                        doctor.clinics.forEach(clinic => {
+                            clinic.isChecked = false;
+                        });
+                    }
+                });
+                this.validateAndUpdateStep(this.steps.indexOf(resultsStep), resultsStep.data);
+            }
+        },
+
+        selectClinic(doctorName, clinicName) {
+            const resultsStep = this.steps.find(step => step.id === ROUTES.RESULTS);
+            if (resultsStep) {
+                const selectedDoctor = resultsStep.data.doctors.find(doctor => doctor.name === doctorName);
+                if (selectedDoctor) {
+                    if (!selectedDoctor.isSelected) {
+                        console.error("Please select a doctor before selecting a clinic.");
+                        return;
+                    }
+                    selectedDoctor.clinics.forEach(clinic => {
+                        clinic.isChecked = clinic.name === clinicName;
+                    });
+                }
+                this.validateAndUpdateStep(this.steps.indexOf(resultsStep), resultsStep.data);
+            }
+        },
         validateAndUpdateStep(stepIndex, data) {
             this.steps[stepIndex].data = data;
 
             switch (this.steps[stepIndex].id) {
                 case ROUTES.GENERAL_CARD:
-                    const { gender, age } = this.steps[stepIndex].data;
+                    const {gender, age} = this.steps[stepIndex].data;
                     this.steps[stepIndex].isValid = !!gender && !!age && age > 0 && age <= 122;
                     break;
                 case ROUTES.IMAGE_SYMPTOMS:
@@ -155,8 +217,13 @@ export const useStore = defineStore({
                     );
                     break;
                 case ROUTES.INDICATORS:
-                    const { temperature, growth, weight } = this.steps[stepIndex].data;
+                    const {temperature, growth, weight} = this.steps[stepIndex].data;
                     this.steps[stepIndex].isValid = temperature !== null && growth !== null && weight !== null;
+                    break;
+                case ROUTES.RESULTS:
+                    this.steps[stepIndex].isValid = this.steps[stepIndex].data.doctors.some(
+                        doctor => doctor.isSelected && doctor.clinics.some(clinic => clinic.isChecked)
+                    );
                     break;
                 default:
                     this.steps[stepIndex].isValid = !!data;
@@ -168,7 +235,7 @@ export const useStore = defineStore({
                 this.currentStepIndex = foundIndex;
             }
         },
-        acceptTerms(){
+        acceptTerms() {
             this.steps[0].data.hasAcceptedTerms = true;
             this.steps[0].isValid = true;
             this.currentStepIndex = 1;
