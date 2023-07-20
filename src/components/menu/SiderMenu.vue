@@ -8,6 +8,7 @@ import {useRouter} from "vue-router";
 import {useStore} from "../../store/steps.js";
 import {useAuthStore} from '../../store/auth.js'
 import BurgerButton from "./BurgerButton.vue";
+import {nextTick} from "vue";
 
 defineProps(['open']);
 const links = [
@@ -30,6 +31,12 @@ const handleLinkClick = (link) => {
   }
   emit('toggle');
 }
+
+const handleLogout = async () => {
+  emit('toggle');
+  logout();
+  router.push('/login');
+}
 </script>
 
 <template>
@@ -40,7 +47,7 @@ const handleLinkClick = (link) => {
         <router-link :to="link.path" v-for="link in links" @click.native="handleLinkClick(link)">
           {{ link.name }}
         </router-link>
-        <base-button @click="logout();handleLinkClick({path: '/login'})">Выйти</base-button>
+        <base-button @click="handleLogout">Выйти</base-button>
       </div>
     </div>
   </div>
