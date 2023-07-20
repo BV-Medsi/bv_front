@@ -16,6 +16,6 @@ app.use(ActiveElementPlugin)
 const authStore = useAuthStore();
 
 authStore.checkToken().then(result => {
-    authStore.setAuthenticated(result);
+    authStore.setAuthenticated(!result);
     app.mount('#app');
 });

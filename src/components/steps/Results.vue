@@ -5,8 +5,6 @@ import {axiosApiInstance} from "../../services/api.js";
 import {computed, onMounted, reactive, ref} from "vue";
 import Spinner from '@smartmed/ui/Spinner';
 import {useStore} from "../../store/steps.js";
-import {PARTS} from "./SelectImageSymptomsComponent/constants/parts.js";
-import BaseButton from "../../../@smartmed/ui/BaseButton";
 import {storeToRefs} from "pinia";
 import Combobox from "../../../@smartmed/ui/Combobox";
 import {useMlStore} from "../../store/ml.js";
@@ -19,14 +17,9 @@ const {getCorrectSymptomsData} = storeToRefs(store)
 const {predictValues} = mlStore;
 
 const correctSymptomsData = reactive(getCorrectSymptomsData.value)
-
 const props = defineProps(['stepData'])
 
-const data = props.stepData;
-
-const {setCurrentStepIndex} = store;
 onMounted(async () => {
-  setCurrentStepIndex(4);
   predictValues()
 })
 

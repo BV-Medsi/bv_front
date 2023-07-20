@@ -4,7 +4,7 @@ import {symptomsData} from "./data/symptomsData.js";
 import {PARTS} from "../components/steps/SelectImageSymptomsComponent/constants/parts.js";
 
 export const useStore = defineStore({
-    id: "therapist-store",
+    id: "steps-store",
     state: () => ({
         steps: [
             {
@@ -154,7 +154,7 @@ export const useStore = defineStore({
                     break;
                 case ROUTES.IMAGE_SYMPTOMS:
                     this.steps[stepIndex].isValid = Object.values(data).some(
-                        el => el.isSelected && el.symptoms.some(symptom => symptom.isChecked)
+                        el => el.symptoms.some(symptom => symptom.isChecked)
                     );
                     break;
                 case ROUTES.INDICATORS:
@@ -165,8 +165,11 @@ export const useStore = defineStore({
                     this.steps[stepIndex].isValid = !!data;
             }
         },
-        setCurrentStepIndex(index){
-            this.currentStepIndex = index;
+        setCurrentStepIndex(id) {
+            const foundIndex = this.steps.findIndex(step => step.id === id);
+            if (foundIndex !== -1) {
+                this.currentStepIndex = foundIndex;
+            }
         },
         acceptTerms(){
             this.steps[0].data.hasAcceptedTerms = true;
