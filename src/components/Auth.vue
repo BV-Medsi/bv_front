@@ -66,7 +66,7 @@ const sign_in = async () => {
         :class="$style.field"
         placeholder="Password"
       />
-      <BaseButton type="submit">Вход</BaseButton>
+      <BaseButton type="submit" :class="$style.base_button">Вход</BaseButton>
     </form>
   </div>
 </template>
@@ -83,5 +83,9 @@ const sign_in = async () => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.base_button{
+  width: 94%;
+  margin: 30px 0px;
 }
 </style>

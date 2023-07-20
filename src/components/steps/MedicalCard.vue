@@ -66,7 +66,7 @@
                   placeholder="Выберите операцию:"
         />
       </div>
-      <BaseButton :disabled="!isValid" @click="nextStep" :class="$style.nextButton">Далее</BaseButton>
+      <BaseButton :disabled="!isValid" @click="nextStep" :class="$style.base_button">Далее</BaseButton>
     </div>
 
   </Layout>
@@ -83,13 +83,14 @@ import {useStore} from "../../store/steps.js";
 import Layout from "../Layout.vue";
 import {useCardStore} from "../../store/card.js";
 
+
 const route = useRouter();
 const store = useStore();
 
 const props = defineProps(['stepData', 'isValid']);
 
 const cardStore = useCardStore()
-const {getCard} = cardStore;
+const {getCard, updateCard, createCard} = cardStore;
 
 const hasCard = ref(false);
 
@@ -162,6 +163,13 @@ onMounted(async () => {
 })
 
 const nextStep = async () => {
+  console.log(hasCard.value)
+  if(hasCard.value){
+    //updateCard(props.stepData)
+  }else{
+    console.log(props.stepData[0])
+    //createCard(props.stepData[0])
+  }
   route.push('select-image-symptoms')
 };
 
@@ -199,11 +207,12 @@ hr {
   display: flex;
   justify-content: flex-start;
 }
-.nextButton{
-  margin-top: 10px;
-}
 .chooseGender{
   display: grid;
   text-align: left;
+}
+.base_button{
+  width: 100%;
+  margin: 30px 0px;
 }
 </style>

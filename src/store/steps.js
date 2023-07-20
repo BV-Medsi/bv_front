@@ -83,17 +83,54 @@ export const useStore = defineStore({
                     oxygen: null
                 }
             },
+
             {
                 id: ROUTES.RESULTS,
                 data: {
-                    doctor1: {},
-                    doctor2: {},
-                    doctor3: {},
-                    place1: '',
-                    place2: '',
-                    place3: ''
+                    doctors: [
+                        {
+                            isSelected: false,
+                            name: 'Терапевт',
+                            prediction: 0.8,
+                            clinics: [{
+                                name: 'Clinic One',
+                                isChecked: false
+                            },
+                                {
+                                    name: 'Clinic Two',
+                                    isChecked: false
+                                }]
+                        },
+                        {
+                            isSelected: false,
+                            name: 'Хирург',
+                            prediction: 0.8,
+                            clinics: [{
+                                name: 'Clinic One',
+                                isChecked: false
+                            },
+                                {
+                                    name: 'Clinic Two',
+                                    isChecked: false
+                                }],
+                        },
+                        {
+                            isSelected: false,
+                            name: 'Кардиолог',
+                            prediction: 0.8,
+                            clinics: [{
+                                name: 'Clinic One',
+                                isChecked: false
+                            },
+                                {
+                                    name: 'Clinic Two',
+                                    isChecked: false
+                                }],
+                        }
+                    ],
+                    isValid: false
                 }
-            },
+            }
         ],
         currentStepIndex: 0,
     }),
@@ -133,6 +170,7 @@ export const useStore = defineStore({
         getGeneralCardStep : (state) => {
             return state.steps.find(s => s.id === ROUTES.GENERAL_CARD);
         },
+
     },
     actions: {
         updateCardData(data){
@@ -143,6 +181,42 @@ export const useStore = defineStore({
             cardData.operations = data.operations;
             cardData.diseases = data.diseases;
             cardData.chronic_diseases = data.chronic_diseases;
+        },
+        selectDoctor(doctorName) {
+            const resultsStep = this.steps.find(step => step.id === ROUTES.RESULTS);
+            if (resultsStep) {
+                resultsStep.data.doctors.forEach(doctor => {
+                    if (doctor.name === doctorName) {
+                        doctor.isSelected = true;
+                        doctor.clinics.forEach(clinic => {
+                            clinic.isChecked = false;
+                        });
+                    } else {
+                        doctor.isSelected = false;
+                        doctor.clinics.forEach(clinic => {
+                            clinic.isChecked = false;
+                        });
+                    }
+                });
+                this.validateAndUpdateStep(this.steps.indexOf(resultsStep), resultsStep.data);
+            }
+        },
+
+        selectClinic(doctorName, clinicName) {
+            const resultsStep = this.steps.find(step => step.id === ROUTES.RESULTS);
+            if (resultsStep) {
+                const selectedDoctor = resultsStep.data.doctors.find(doctor => doctor.name === doctorName);
+                if (selectedDoctor) {
+                    if (!selectedDoctor.isSelected) {
+                        console.error("Please select a doctor before selecting a clinic.");
+                        return;
+                    }
+                    selectedDoctor.clinics.forEach(clinic => {
+                        clinic.isChecked = clinic.name === clinicName;
+                    });
+                }
+                this.validateAndUpdateStep(this.steps.indexOf(resultsStep), resultsStep.data);
+            }
         },
         validateAndUpdateStep(stepIndex, data) {
             this.steps[stepIndex].data = data;
@@ -160,6 +234,11 @@ export const useStore = defineStore({
                 case ROUTES.INDICATORS:
                     const { temperature, growth, weight } = this.steps[stepIndex].data;
                     this.steps[stepIndex].isValid = temperature !== null && growth !== null && weight !== null;
+                    break;
+                case ROUTES.RESULTS:
+                    this.steps[stepIndex].isValid = this.steps[stepIndex].data.doctors.some(
+                        doctor => doctor.isSelected && doctor.clinics.some(clinic => clinic.isChecked)
+                    );
                     break;
                 default:
                     this.steps[stepIndex].isValid = !!data;
@@ -190,6 +269,7 @@ export const useStore = defineStore({
                 this.validateAndUpdateStep(this.steps.indexOf(imageSymptomsStep), imageSymptomsStep.data);
             }
         },
+
         updateSymptomStatus(symptom) {
             const imageSymptomsStep = this.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);
             if (imageSymptomsStep) {

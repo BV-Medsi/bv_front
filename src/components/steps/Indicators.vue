@@ -15,7 +15,7 @@
       <base-input v-model="stepData.sugar" size="md" label="Сахар в крови"
                   :class="$style.inputField"/>
     </div>
-    <BaseButton @click="nextStep" :disabled="!isValid">Получить результат</BaseButton>
+    <BaseButton @click="nextStep" :disabled="!isValid" :class="$style.base_button">Получить результат</BaseButton>
   </Layout>
 </template>
 
@@ -58,5 +58,9 @@ const props = defineProps(['stepData', 'isValid']);
 .inputField {
   margin-bottom: 12px;
   text-align: left;
+}
+.base_button{
+  width: 100%;
+  margin: 20px 0px;
 }
 </style>

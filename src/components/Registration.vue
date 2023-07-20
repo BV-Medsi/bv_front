@@ -96,7 +96,7 @@ const sign_in = async () => {
           :class="$style.field"
           placeholder="Password"
       />
-      <BaseButton type="submit" :class="$style.button">Регистрация</BaseButton>
+      <BaseButton type="submit" :class="$style.base_button">Регистрация</BaseButton>
     </form>
   </div>
 </template>
@@ -110,8 +110,9 @@ const sign_in = async () => {
   margin-bottom: 20px;
 }
 
-.button {
-  margin-top: 10px;
+.base_button{
+  width: 94%;
+  margin: 30px 0px;
 }
 .spinner {
   position: fixed;

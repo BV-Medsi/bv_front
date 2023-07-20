@@ -1,79 +1,81 @@
 <script setup>
 
 import Layout from "../Layout.vue";
-import {axiosApiInstance} from "../../services/api.js";
-import {computed, onMounted, reactive, ref} from "vue";
-import Spinner from '@smartmed/ui/Spinner';
+import {onMounted, reactive, ref, watch} from "vue";
 import {useStore} from "../../store/steps.js";
 import {storeToRefs} from "pinia";
-import Combobox from "../../../@smartmed/ui/Combobox";
 import {useMlStore} from "../../store/ml.js";
-import {doctorsData} from "../../store/data/doctorsData.js";
+import BaseCheckbox from "../../../@smartmed/ui/BaseCheckbox";
+import BaseButton from "../../../@smartmed/ui/BaseButton";
 
 const store = useStore();
 const mlStore = useMlStore();
 
 const {getCorrectSymptomsData} = storeToRefs(store)
+const {selectClinic, selectDoctor} = store
 const {predictValues} = mlStore;
 
 const correctSymptomsData = reactive(getCorrectSymptomsData.value)
-const props = defineProps(['stepData'])
+
+const props = defineProps(['stepData', 'isValid'])
 
 onMounted(async () => {
-  predictValues()
+  //predictValues();
 })
 
-
-const test = "Врач акушер гинеколог";
-const test2 = 'Врач кардиолог'
-
-const check = () =>{
-  console.log(correctSymptomsData)
+function getClinicsList(doctorInd, data) {
+  let list = [];
+  const clinicsData = data.doctors[doctorInd].clinics
+  for (let clinic_number in clinicsData) {
+    list.push(clinicsData[clinic_number])
+  }
+  return list;
 }
 
-const isPlaceChoosed = computed(() => data.place1 === '' && data.place2 === '' && data.place3 === '');
+const emit = defineEmits(['update:response']);
 
-const handleUpdate = (value, plc) => {
-  console.log(value)
+watch(() => props.stepData, (newValue, oldValue) => {
+  emit('update:response', newValue);
+}, {deep: true})
+
+const filial = ref('');
+
+const handleUpdate = (value) => {
+  console.log(filial.value)
   if (value === '' || value === null) {
-    data[plc] = '';
   } else {
-    data[plc] = value;
   }
 }
+
+const active = ref([false, false, false, false]);
+
 </script>
 
 <template>
-<Layout>
-  <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Результаты</h2>
-  <p :class="$style.subtitle" class="smed-text_h3">Здесь представлен список врачей которых вы можете посетить.</p>
-  <div>
-    <h2 class="smed-text_h3 smed-text_medium" :class="$style.header">{{test}}</h2>
-    <combobox
-              @update:modelValue="value => handleUpdate(value, 'place')"
-              :key="`doctor1`"
-              size="md"
-              :disabled="!isPlaceChoosed"
-              :modelValue="data.place1"
-              :items="doctorsData[test]"
-              placeholder="Выберите подразделение:"
-    />
-    <hr/>
-  </div>
-  <div>
-    <h2 class="smed-text_h3 smed-text_medium" :class="$style.header">{{test2}}</h2>
-    <combobox
-        @update:modelValue="value => handleUpdate(value, 'place2')"
-        :key="`doctor1`"
-        size="md"
-        :disabled="!isPlaceChoosed"
-        :modelValue="data.place2"
-        :items="doctorsData[test2]"
-        placeholder="Выберите подразделение:"
-    />
-    <hr/>
-  </div>
-</Layout>
+  <Layout>
+    <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Результаты</h2>
+    <p :class="$style.subtitle" class="smed-text_h3">Здесь представлен список врачей, которых вы можете посетить</p>
+    <div>
+      <div v-for="(doctor, doctorIndex) in stepData.doctors"
+           :key="`doctor-${doctorIndex}`" align="left">
+        <div :class="$style.doctor_header">
+          <BaseCheckbox v-model="doctor.isSelected" @change="selectDoctor(doctor.name)" :class="$style.check_box_doctor"></BaseCheckbox>
+          <h3 class="smed-text_h3 smed-text_medium">{{ doctor.name }}</h3>
+        </div>
+
+        <div v-for="(clinic, clinicIndex) in doctor.clinics">
+          <div :class="$style.clinic">
+            <BaseCheckbox v-model="clinic.isChecked" :disabled="!doctor.isSelected" :class="$style.check_box_clinic" @change="selectClinic(doctor.name, clinic.name)"></BaseCheckbox>
+            <h3 class="smed-text_body-md">{{ clinic.name }}</h3>
+          </div>
+        </div>
+        <hr/>
+      </div>
+
+      <BaseButton class="base_button_2">Записаться</BaseButton>
+
+    </div>
+  </Layout>
 </template>
 
 <style module>
@@ -83,6 +85,28 @@ const handleUpdate = (value, plc) => {
 }
 .subtitle{
   text-align: left;
+  margin-bottom: 20px;
+}
+h3{
+  cursor: pointer;
+}
+.doctor_header{
+  display: flex;
+  text-align: left;
+  align-items: center;
+}
+.clinic{
+  display: flex;
+  text-align: left;
+  align-items: center;
+}
+.check_box_doctor{
+  margin: 10px;
+}
+.check_box_clinic{
+  margin: 5px 10px 5px 30px;
+}
+.title{
   margin-bottom: 20px;
 }
 </style>

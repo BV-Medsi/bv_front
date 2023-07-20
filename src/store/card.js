@@ -31,10 +31,10 @@ export const useCardStore = defineStore({
             this.isLoading = true;
             try{
                 const response = await axiosApiInstance.get(BASE_URL + "card");
-                if([401, 403].includes(response.status)){
+                if([500, 404, 401, 403].includes(response.status)){
                     return false;
                 }else{
-                    updateCardData(response.data);
+                    await updateCardData(response.data);
                     return true;
                 }
             }catch (e){

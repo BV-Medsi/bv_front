@@ -21,12 +21,15 @@
   text-align: start;
   margin: 10px 20px 0px 20px;
 }
-.base_button_disclaimer {
+.base_button {
           width: 89%;
           height: 5%;
           padding: 10px 16px 10px 16px;
         }
-
+.base_button_2{
+  width: 94%;
+  margin: 30px 0px;
+}
 a {
   font-weight: 500;
   color: #646cff;
