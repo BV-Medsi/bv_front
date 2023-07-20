@@ -2,20 +2,20 @@
   <Layout>
     <div>
       <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Медицинская карта</h2>
-      <base-input v-model="data.age" size="md" description="Укажите возраст от 0 до 120 лет" label="Возраст"
+      <base-input v-model="stepData.age" size="md" description="Укажите возраст от 0 до 120 лет" label="Возраст"
                   :class="$style.inputField"
-                  :is-error="data.age !== null && !isAgeValid"
+                  :is-error="stepData.age !== null && !isAgeValid"
       >
       </base-input>
       <div :class="$style.chooseGender">
         <label>
           <input :class="$style.radio_button" type="radio" value="male"
-                 :checked="data.gender === 'male'" v-model="data.gender">
+                 :checked="stepData.gender === 'male'" v-model="stepData.gender">
           <span class="smed-text_body-md">Мужчина</span>
         </label>
         <label>
           <input :class="$style.radio_button" type="radio" value="female"
-                 :checked="data.gender === 'female'" v-model="data.gender">
+                 :checked="stepData.gender === 'female'" v-model="stepData.gender">
           <span class="smed-text_body-md">Женщина</span>
         </label>
       </div>
@@ -27,10 +27,10 @@
         Добавить
         заболевание
       </BaseButton>
-      <combobox v-for="(disease, index) in data.diseases.filter(customFilter)"
+      <combobox v-for="(disease, index) in stepData.diseases?.filter(customFilter)"
                 @update:modelValue="value => handleUpdate('diseases', index, value)"
                 :key="`disease-${index}`"
-                :modelValue="data.diseases[index]"
+                :modelValue="stepData.diseases[index]"
                 size="md"
                 :items="availableDiseasesItems"
                 placeholder="Выберите болезнь:"
@@ -42,10 +42,10 @@
         Добавить
         хроническое заболевание
       </BaseButton>
-      <combobox v-for="(disease, index) in data.chronic_diseases.filter(customFilter)"
+      <combobox v-for="(disease, index) in stepData.chronic_diseases?.filter(customFilter)"
                 :key="`chronic_disease-${index}`"
                 @update:modelValue="value => handleUpdate('chronic_diseases', index, value)"
-                :modelValue="data.chronic_diseases[index]"
+                :modelValue="stepData.chronic_diseases[index]"
                 size="md"
                 :items="availableChronicDiseasesItems"
                 placeholder="Выберите болезнь:"
@@ -57,10 +57,10 @@
                     :class="$style.addButton">Добавить
           перенесенные операции
         </BaseButton>
-        <combobox v-for="(operation, index) in data.operations.filter(customFilter)"
+        <combobox v-for="(operation, index) in stepData.operations?.filter(customFilter)"
                   :key="`operations-${index}`"
                   @update:modelValue="value => handleUpdate('operations', index, value)"
-                  :modelValue="data.operations[index]"
+                  :modelValue="stepData.operations[index]"
                   size="md"
                   :items="availableOperationsItems"
                   placeholder="Выберите операцию:"
@@ -74,35 +74,32 @@
 
 
 <script setup>
-import {computed, onBeforeMount, onMounted, reactive, ref, watch} from 'vue';
+import {computed, onMounted, ref, watch} from 'vue';
 import Combobox from "../../../@smartmed/ui/Combobox";
 import BaseButton from "../../../@smartmed/ui/BaseButton";
 import {useRouter} from "vue-router";
 import BaseInput from "../../../@smartmed/ui/BaseInput";
 import {useStore} from "../../store/steps.js";
-import {storeToRefs} from "pinia";
 import Layout from "../Layout.vue";
-import {axiosApiInstance} from "../../services/api.js";
 import {useCardStore} from "../../store/card.js";
 
 const route = useRouter();
 const store = useStore();
 
 const props = defineProps(['stepData', 'isValid']);
-const data = ref(props.stepData);
 
 const cardStore = useCardStore()
-const {getCard, updateCard, createCard} = cardStore;
+const {getCard} = cardStore;
 
 const hasCard = ref(false);
 
-watch(() => data.value, () => {
-  validateAndUpdateStep(1, data.value);
+watch(() => props.stepData, () => {
+  validateAndUpdateStep(1, props.stepData);
 }, {
   deep: true
 });
 
-const {validateAndUpdateStep, setCurrentStepIndex} = store;
+const {validateAndUpdateStep} = store;
 
 const diseasesItems = [
   'Ишемическая болезнь сердца',
@@ -128,16 +125,16 @@ const operationsItems = [
 ];
 
 const addEntry = category => {
-  if(!data.value[category].includes(null)){
-    data.value[category].push(null);
+  if (!props.stepData.value[category].includes(null)) {
+    props.stepData.value[category].push(null);
   }
 }
 
 const handleUpdate = (category, index, value) => {
   if (value === '' || value === null) {
-    data.value[category].splice(index, 1);
+    props.stepData.value[category].splice(index, 1);
   } else {
-    data.value[category][index] = value;
+    props.stepData.value[category][index] = value;
   }
 }
 
@@ -146,31 +143,30 @@ const customFilter = (item) => {
 }
 
 const availableDiseasesItems = computed(() => {
-  return diseasesItems.filter(disease => !data.value.diseases.includes(disease));
+  return diseasesItems.filter(disease => !props.stepData.diseases.includes(disease));
 });
 
 const availableChronicDiseasesItems = computed(() => {
-  return chronicDiseasesItems.filter(disease => !data.value.chronic_diseases.includes(disease));
+  return chronicDiseasesItems.filter(disease => !props.stepData.chronic_diseases.includes(disease));
 });
 
 const availableOperationsItems = computed(() => {
-  return operationsItems.filter(operation => !data.value.operations.includes(operation));
+  return operationsItems.filter(operation => !props.stepData.operations.includes(operation));
 });
 
-onBeforeMount(async () => {
-  setCurrentStepIndex(1);
+const isChronicDiseasesButton = computed(() => props.stepData.chronic_diseases?.length >= chronicDiseasesItems.length);
+const isDiseasesButton = computed(() => props.stepData.diseases?.length >= diseasesItems.length);
+const isOperationsButton = computed(() => props.stepData.operations?.length >= operationsItems.length);
+onMounted(async () => {
   hasCard.value = await getCard();
 })
 
-const isChronicDiseasesButton = computed(() => data.value.chronic_diseases.length >= chronicDiseasesItems?.length);
-const isDiseasesButton = computed(() => data.value.diseases.length >= diseasesItems?.length);
-const isOperationsButton = computed(() => data.value.operations.length >= operationsItems?.length);
 const nextStep = async () => {
   route.push('select-image-symptoms')
 };
 
 const isAgeValid = computed(() => {
-  return data.value.age > 0 && data.value.age <= 120;
+  return props.stepData.age > 0 && props.stepData.age <= 120;
 })
 
 </script>

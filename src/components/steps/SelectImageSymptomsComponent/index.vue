@@ -13,16 +13,12 @@ import {ROUTES} from "../../../router/index.js";
 import {useRouter} from "vue-router";
 import Layout from "../../Layout.vue";
 
-
-
 const store = useStore();
 const {getInitialData, getSelectedPartSymptoms, steps} = storeToRefs(store);
-const {selectImageSymptom, updateSymptomStatus, setCurrentStepIndex} = store;
+const {selectImageSymptom, updateSymptomStatus} = store;
 const side = ref('front');
 
-onMounted(()=>{
-  setCurrentStepIndex(2);
-})
+defineProps(['isValid']);
 
 const toggleSide = () => {
   side.value === 'back' ? side.value = 'front' : side.value = 'back';
@@ -61,7 +57,6 @@ onClickOutside(symptomsListRef, () => {
   isPartSelected.value = false;
 });
 
-defineProps(['isValid']);
 </script>
 
 <template>
