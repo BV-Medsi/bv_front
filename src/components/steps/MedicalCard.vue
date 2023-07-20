@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <div>
     <div>
       <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Медицинская карта</h2>
       <base-input v-model="stepData.age" size="md" description="Укажите возраст от 0 до 120 лет" label="Возраст"
@@ -68,19 +68,17 @@
       </div>
       <BaseButton :disabled="!isValid" @click="nextStep" :class="$style.base_button">Далее</BaseButton>
     </div>
-
-  </Layout>
+  </div>
 </template>
 
 
 <script setup>
 import {computed, onMounted, ref, watch} from 'vue';
-import Combobox from "../../../@smartmed/ui/Combobox";
-import BaseButton from "../../../@smartmed/ui/BaseButton";
+import Combobox from "@smartmed/ui/Combobox";
+import BaseButton from "@smartmed/ui/BaseButton";
 import {useRouter} from "vue-router";
-import BaseInput from "../../../@smartmed/ui/BaseInput";
+import BaseInput from "@smartmed/ui/BaseInput";
 import {useStore} from "../../store/steps.js";
-import Layout from "../Layout.vue";
 import {useCardStore} from "../../store/card.js";
 
 

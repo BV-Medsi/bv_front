@@ -1,35 +1,41 @@
 <script setup>
 
-import HeaderNav from "./HeaderNav.vue";
 </script>
 
 <template>
-<div class="screen">
-  <header-nav class="header"/>
-  <div class="content">
-    <slot />
+  <div class="inner">
+    <div class="content">
+      <slot/>
+    </div>
   </div>
-</div>
 </template>
 
 <style scoped lang="scss">
-.screen{
-  background-color: #f6f6f6;
-  border-radius: 16px;
-  max-width: 375px;
-  margin: 0 auto;
+.inner {
   padding: 20px;
+  margin-top: 50px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  position: relative;
-  min-height: 100vh;
-}
-.header{
-  margin-bottom: 20px;
 }
 
-.content{
+.header {
+  margin-bottom: 20px;
+  z-index: 9999;
+  position: absolute;
+  height: 100vh;
+  width: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  transition: width 0.2s;
+
+  &.open {
+    width: 100%;
+  }
+}
+
+.content {
   flex: 1;
   height: 100%;
 }

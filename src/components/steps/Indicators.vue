@@ -1,5 +1,4 @@
 <template>
-  <Layout>
     <div>
       <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Дополнительная информация</h2>
       <base-input v-model="stepData.weight" size="md" description="Указать в килограммах" label="Вес"
@@ -16,15 +15,13 @@
                   :class="$style.inputField"/>
     </div>
     <BaseButton @click="nextStep" :disabled="!isValid" :class="$style.base_button">Получить результат</BaseButton>
-  </Layout>
 </template>
 
 
 <script setup>
-import BaseInput from "../../../@smartmed/ui/BaseInput";
-import {reactive, watch, ref, onMounted} from "vue";
-import Layout from "../Layout.vue";
-import BaseButton from "../../../@smartmed/ui/BaseButton";
+import BaseInput from "@smartmed/ui/BaseInput";
+import {reactive, watch, onMounted} from "vue";
+import BaseButton from "@smartmed/ui/BaseButton";
 import {useRouter} from "vue-router";
 import {storeToRefs} from "pinia";
 import {useStore} from "../../store/steps.js";
@@ -61,6 +58,6 @@ const props = defineProps(['stepData', 'isValid']);
 }
 .base_button{
   width: 100%;
-  margin: 20px 0px;
+  margin: 20px 0;
 }
 </style>

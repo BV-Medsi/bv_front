@@ -4,12 +4,12 @@ import {useAuthStore} from "../store/auth.js";
 import {storeToRefs} from "pinia";
 
 export const ROUTES = {
+    DISCLAIMER: 'disclaimer',
     GENERAL_CARD: 'general-card',
-    AGE: 'select-age',
     IMAGE_SYMPTOMS: 'select-image-symptoms',
     INDICATORS: 'select-indicators',
     RESULTS: 'results',
-    DISCLAIMER: 'disclaimer'
+    HISTORY: 'history',
 }
 const ResultComponent = () => import("../components/ResultComponent.vue");
 const AuthComponent = () => import("../components/AuthComponent.vue");
@@ -18,12 +18,14 @@ const ChatComponent = () => import("../components/steps/ChatComponent.vue");
 const SelectGenderComponent = () => import("../components/steps/MedicalCard.vue");
 const HomeComponent = () => import("../components/HomeComponent.vue");
 const Indicators = () => import("../components/steps/Indicators.vue");
-const Results = () => import("../components/steps/Results.vue")
-const Disclaimer = () => import("../components/steps/Disclaimer.vue")
+const Results = () => import("../components/steps/Results.vue");
+const Disclaimer = () => import("../components/steps/Disclaimer.vue");
+const History = () => import("../components/History.vue");
 
 const routes = [
     {path: '/', component: HomeComponent, redirect: '/chat'},
     {path: '/login', component: AuthComponent},
+    {path: '/history', component: History},
     {
         path: '/chat', component: ChatComponent,
         children: [

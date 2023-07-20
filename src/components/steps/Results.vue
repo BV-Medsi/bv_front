@@ -17,11 +17,14 @@ const {predictValues} = mlStore;
 
 const correctSymptomsData = reactive(getCorrectSymptomsData.value)
 
-const props = defineProps(['stepData', 'isValid'])
-
+const props = defineProps(['stepData', 'isValid']);
 onMounted(async () => {
   //predictValues();
-})
+});
+
+watch(() => props.stepData, (newValue, oldValue) => {
+  emit('update:response', newValue);
+}, {deep: true})
 
 function getClinicsList(doctorInd, data) {
   let list = [];

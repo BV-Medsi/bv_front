@@ -74,7 +74,7 @@ export const useStore = defineStore({
             {
                 id: ROUTES.INDICATORS,
                 isValid: false,
-                data : {
+                data: {
                     temperature: null,
                     pressure: null,
                     growth: null,
@@ -83,7 +83,6 @@ export const useStore = defineStore({
                     oxygen: null
                 }
             },
-
             {
                 id: ROUTES.RESULTS,
                 data: {
@@ -146,18 +145,18 @@ export const useStore = defineStore({
             }
             return [];
         },
-        getCorrectSymptomsData: (state) =>{
+        getCorrectSymptomsData: (state) => {
             const imageSymptomsStep = state.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);
             let dict = {};
-            for(let part in imageSymptomsStep.data){
+            for (let part in imageSymptomsStep.data) {
                 let checkedSymptomsArray = [];
-                for(let symptom in imageSymptomsStep.data[part].symptoms){
+                for (let symptom in imageSymptomsStep.data[part].symptoms) {
                     let object = imageSymptomsStep.data[part].symptoms[symptom];
-                    if(object.isChecked){
+                    if (object.isChecked) {
                         checkedSymptomsArray.push(object.name)
                     }
                 }
-                if(checkedSymptomsArray.length !== 0){
+                if (checkedSymptomsArray.length !== 0) {
                     dict[part] = checkedSymptomsArray;
                 }
             }
@@ -170,10 +169,9 @@ export const useStore = defineStore({
         getGeneralCardStep : (state) => {
             return state.steps.find(s => s.id === ROUTES.GENERAL_CARD);
         },
-
     },
     actions: {
-        updateCardData(data){
+        updateCardData(data) {
             const cardData = this.steps[1].data;
             cardData.card_id = data.card_id;
             cardData.age = data.age;
@@ -250,7 +248,7 @@ export const useStore = defineStore({
                 this.currentStepIndex = foundIndex;
             }
         },
-        acceptTerms(){
+        acceptTerms() {
             this.steps[0].data.hasAcceptedTerms = true;
             this.steps[0].isValid = true;
             this.currentStepIndex = 1;
@@ -269,7 +267,6 @@ export const useStore = defineStore({
                 this.validateAndUpdateStep(this.steps.indexOf(imageSymptomsStep), imageSymptomsStep.data);
             }
         },
-
         updateSymptomStatus(symptom) {
             const imageSymptomsStep = this.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);
             if (imageSymptomsStep) {

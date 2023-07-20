@@ -1,19 +1,10 @@
 <script setup>
+import SiderMenu from "./menu/SiderMenu.vue";
 
+defineProps(['open']);
+defineEmits(['toggle']);
 </script>
 
 <template>
-  <div class="menu">
-    <router-link to="/">HOME</router-link>
-    |
-    <router-link to="/login">LOGIN</router-link>
-    |
-    <router-link to="/chat">CHAT</router-link>
-    |
-    <router-link to="/results">RESULTS</router-link>
-  </div>
+  <sider-menu @toggle="$emit('toggle')" :open="open"/>
 </template>
-
-<style scoped lang="scss">
-
-</style>

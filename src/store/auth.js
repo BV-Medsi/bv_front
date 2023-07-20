@@ -1,8 +1,10 @@
 import {defineStore} from "pinia";
 import {tokenStorage} from "../services/TokenStorage.js";
 import {axiosApiInstance} from "../services/api.js";
+import {useRouter} from "vue-router";
 
 const BASE_URL = "http://5.63.159.74:5001/";
+
 export const useAuthStore = defineStore({
     id: "auth-store",
     state: () => ({
@@ -20,7 +22,7 @@ export const useAuthStore = defineStore({
                     password: data.password,
                 })
                 this.token = response.data.access_token;
-                this.setAuthenticated(true); 
+                this.setAuthenticated(true);
                 tokenStorage.set(this.token);
             }catch(e){
                 console.log(e)
@@ -44,9 +46,10 @@ export const useAuthStore = defineStore({
                 return false;
             }
         },
-        logout() {
+        async logout() {
             this.token = null;
             this.user = null;
+            this.setAuthenticated(false);
             tokenStorage.remove();
         },
         async registration(userData) {
