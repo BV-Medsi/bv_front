@@ -49,7 +49,6 @@ router.beforeEach((to, from, next) => {
     const store = useStore();
     const authStore = useAuthStore();
     const {isAuthenticated} = storeToRefs(authStore);
-
     if (!isAuthenticated.value && to.path !== '/login') {
         next('/login');
     } else if (isAuthenticated.value && to.path === '/login') {
