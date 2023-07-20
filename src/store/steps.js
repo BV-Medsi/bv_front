@@ -88,7 +88,10 @@ export const useStore = defineStore({
                 data: {
                     doctor1: {},
                     doctor2: {},
-                    doctor3: {}
+                    doctor3: {},
+                    place1: '',
+                    place2: '',
+                    place3: ''
                 }
             },
         ],
