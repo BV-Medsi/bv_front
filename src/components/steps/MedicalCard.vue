@@ -125,16 +125,16 @@ const operationsItems = [
 ];
 
 const addEntry = category => {
-  if (!props.stepData.value[category].includes(null)) {
-    props.stepData.value[category].push(null);
+  if (!props.stepData[category].includes(null)) {
+    props.stepData[category].push(null);
   }
 }
 
 const handleUpdate = (category, index, value) => {
   if (value === '' || value === null) {
-    props.stepData.value[category].splice(index, 1);
+    props.stepData[category].splice(index, 1);
   } else {
-    props.stepData.value[category][index] = value;
+    props.stepData[category][index] = value;
   }
 }
 
