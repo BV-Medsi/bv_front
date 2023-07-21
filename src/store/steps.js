@@ -259,7 +259,7 @@ export const useStepsStore = defineStore({
                     break;
                 case ROUTES.INDICATORS:
                     const {temperature, growth, weight} = this.steps[stepIndex].data;
-                    this.steps[stepIndex].isValid = temperature !== null && growth !== null && weight !== null;
+                    this.steps[stepIndex].isValid = temperature > 0 && growth > 0 && weight > 0;
                     break;
                 case ROUTES.RESULTS:
                     this.steps[stepIndex].isValid = this.steps[stepIndex].data.doctors.some(

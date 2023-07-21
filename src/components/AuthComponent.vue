@@ -8,10 +8,17 @@ import Layout from "./Layout.vue";
 
 <template>
   <Layout>
+    <p class="smed-text_h2 smed-text_medium" :class="$style.title">
+      Добро пожаловать!
+    </p>
     <TabsWrapper>
       <Tab title="Регистрация"><Registration></Registration></Tab>
       <Tab title="Вход"><Auth></Auth></Tab>
     </TabsWrapper>
   </Layout>
 </template>
-
+<style module>
+.title {
+  margin-bottom: 20px;
+}
+</style>

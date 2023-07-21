@@ -67,33 +67,30 @@ const sign_in = async () => {
 <template>
   <Spinner v-if="isLoading" :class="$style.spinner"></Spinner>
   <div v-else>
-    <p class="smed-text_h2 smed-text_medium" :class="$style.title">
-      Добро пожаловать в BV_Medsi!
-    </p>
     <form @submit.prevent="sign_in">
       <BaseInput
           v-model="auth.username"
           :is-error="is_filled_username"
           :class="$style.field"
-          placeholder="Username"
+          placeholder="Логин"
       />
       <BaseInput
           v-model="auth.name"
           :is-error="is_filled_name"
           :class="$style.field"
-          placeholder="Name"
+          placeholder="Имя"
       />
       <BaseInput
           v-model="auth.last_name"
           :is-error="is_filled_last_name"
           :class="$style.field"
-          placeholder="Last name"
+          placeholder="Фамилия"
       />
       <PasswordInput
           v-model="auth.password"
           :is-error="is_filled_password"
           :class="$style.field"
-          placeholder="Password"
+          placeholder="Пароль"
       />
       <BaseButton type="submit" :class="$style.base_button">Регистрация</BaseButton>
     </form>
