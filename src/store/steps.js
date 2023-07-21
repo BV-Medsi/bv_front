@@ -3,6 +3,15 @@ import {ROUTES} from "../router/index.js";
 import {symptomsData} from "./data/symptomsData.js";
 import {PARTS} from "../components/steps/SelectImageSymptomsComponent/constants/parts.js";
 
+function mapResponseToObject(response, doctors) {
+    for (let i = 0; i < doctors.length; i++) {
+        const doctorName = doctors[i].name;
+        if (response.answer.hasOwnProperty(doctorName)) {
+            doctors[i].prediction = response.answer[doctorName];
+        }
+    }
+}
+
 export const useStepsStore = defineStore({
     id: "steps-store",
     state: () => ({
@@ -104,7 +113,7 @@ export const useStepsStore = defineStore({
                         {
                             isSelected: false,
                             name: 'Хирург',
-                            prediction: 0.8,
+                            prediction: 0.9,
                             clinics: [{
                                 name: 'Clinic One',
                                 isChecked: false
@@ -117,7 +126,7 @@ export const useStepsStore = defineStore({
                         {
                             isSelected: false,
                             name: 'Кардиолог',
-                            prediction: 0.8,
+                            prediction: 1,
                             clinics: [{
                                 name: 'Clinic One',
                                 isChecked: false
@@ -146,28 +155,41 @@ export const useStepsStore = defineStore({
             }
             return [];
         },
-        getCorrectSymptomsData: (state) => {
-            const imageSymptomsStep = state.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);
-            let dict = {};
-            for (let part in imageSymptomsStep.data) {
-                let checkedSymptomsArray = [];
-                for (let symptom in imageSymptomsStep.data[part].symptoms) {
-                    let object = imageSymptomsStep.data[part].symptoms[symptom];
-                    if (object.isChecked) {
-                        checkedSymptomsArray.push(object.name)
-                    }
+        getInicatorsData(state) {
+            const indicatorsStep = state.steps.find(step => step.id === ROUTES.INDICATORS);
+            const dict = {};
+            for (const field in indicatorsStep.data) {
+                if (indicatorsStep.data[field]!== null) {
+                    dict[field] = indicatorsStep.data[field];
                 }
+            }
+            return dict;
+        },
+        getCorrectSymptomsData(state) {
+            const imageSymptomsStep = state.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);
+            const dict = {};
+
+            for (const part in imageSymptomsStep.data) {
+                const partData = imageSymptomsStep.data[part];
+                const checkedSymptomsArray = partData.symptoms.reduce((acc, symptom) => {
+                    if (symptom.isChecked) {
+                        acc.push(symptom.name);
+                    }
+                    return acc;
+                }, []);
+
                 if (checkedSymptomsArray.length !== 0) {
                     dict[part] = checkedSymptomsArray;
                 }
             }
+
             return dict;
         },
         getStatusCode: (state) => {
             const medicalCardStep = state.steps.find(step => step.id === ROUTES.GENERAL_CARD);
             return medicalCardStep.status_code;
         },
-        getGeneralCardStep : (state) => {
+        getGeneralCardStep: (state) => {
             return state.steps.find(s => s.id === ROUTES.GENERAL_CARD);
         },
     },
@@ -218,12 +240,16 @@ export const useStepsStore = defineStore({
                 this.validateAndUpdateStep(this.steps.indexOf(resultsStep), resultsStep.data);
             }
         },
+        setPrediction(data) {
+            const dataToUpdate = this.steps.find(s => s.id === ROUTES.RESULTS).data;
+            mapResponseToObject(data, dataToUpdate)
+        },
         validateAndUpdateStep(stepIndex, data) {
             this.steps[stepIndex].data = data;
 
             switch (this.steps[stepIndex].id) {
                 case ROUTES.GENERAL_CARD:
-                    const { gender, age } = this.steps[stepIndex].data;
+                    const {gender, age} = this.steps[stepIndex].data;
                     this.steps[stepIndex].isValid = [0, 1].includes(gender) && !!age && age > 0 && age <= 122;
                     break;
                 case ROUTES.IMAGE_SYMPTOMS:
@@ -232,7 +258,7 @@ export const useStepsStore = defineStore({
                     );
                     break;
                 case ROUTES.INDICATORS:
-                    const { temperature, growth, weight } = this.steps[stepIndex].data;
+                    const {temperature, growth, weight} = this.steps[stepIndex].data;
                     this.steps[stepIndex].isValid = temperature !== null && growth !== null && weight !== null;
                     break;
                 case ROUTES.RESULTS:

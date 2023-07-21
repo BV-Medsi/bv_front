@@ -1,39 +1,41 @@
 <script setup>
 
 import Layout from "../Layout.vue";
-import {onMounted, reactive, ref, watch} from "vue";
+import {computed, onMounted, unref, watch} from "vue";
 import {useStepsStore} from "../../store/steps.js";
 import {storeToRefs} from "pinia";
 import {useMlStore} from "../../store/ml.js";
-import BaseCheckbox from "../../../@smartmed/ui/BaseCheckbox";
-import BaseButton from "../../../@smartmed/ui/BaseButton";
+import BaseCheckbox from "@smartmed/ui/BaseCheckbox";
+import BaseButton from "@smartmed/ui/BaseButton";
 
 const store = useStepsStore();
 const mlStore = useMlStore();
 
-const {getCorrectSymptomsData} = storeToRefs(store)
+const {getCorrectSymptomsData, getInicatorsData, steps} = storeToRefs(store)
 const {selectClinic, selectDoctor} = store
 const {predictValues} = mlStore;
 
-const correctSymptomsData = reactive(getCorrectSymptomsData.value)
+import {useCardStore} from '../../store/card.js'
+import {ROUTES} from "../../router/index.js";
 
+const cardStore = useCardStore();
 const props = defineProps(['stepData', 'isValid']);
+const {cardId} = storeToRefs(cardStore);
+
+const payload = {
+  card_id: cardId.value,
+  complaints: getCorrectSymptomsData.value,
+  indicators: getInicatorsData.value
+}
+
 onMounted(async () => {
-  //predictValues();
+  console.log(payload)
+  predictValues();
 });
 
 watch(() => props.stepData, (newValue, oldValue) => {
   emit('update:response', newValue);
 }, {deep: true})
-
-function getClinicsList(doctorInd, data) {
-  let list = [];
-  const clinicsData = data.doctors[doctorInd].clinics
-  for (let clinic_number in clinicsData) {
-    list.push(clinicsData[clinic_number])
-  }
-  return list;
-}
 
 const emit = defineEmits(['update:response']);
 
@@ -41,17 +43,7 @@ watch(() => props.stepData, (newValue, oldValue) => {
   emit('update:response', newValue);
 }, {deep: true})
 
-const filial = ref('');
-
-const handleUpdate = (value) => {
-  console.log(filial.value)
-  if (value === '' || value === null) {
-  } else {
-  }
-}
-
-const active = ref([false, false, false, false]);
-
+const sortedDoctors = computed(() => props.stepData.doctors.filter((a, b) => a.prediction - b.prediction))
 </script>
 
 <template>
@@ -59,16 +51,18 @@ const active = ref([false, false, false, false]);
     <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Результаты</h2>
     <p :class="$style.subtitle" class="smed-text_h3">Здесь представлен список врачей, которых вы можете посетить</p>
     <div>
-      <div v-for="(doctor, doctorIndex) in stepData.doctors"
+      <div v-for="(doctor, doctorIndex) in sortedDoctors.value"
            :key="`doctor-${doctorIndex}`" align="left">
         <div :class="$style.doctor_header">
-          <BaseCheckbox v-model="doctor.isSelected" @change="selectDoctor(doctor.name)" :class="$style.check_box_doctor"></BaseCheckbox>
+          <BaseCheckbox v-model="doctor.isSelected" @change="selectDoctor(doctor.name)"
+                        :class="$style.check_box_doctor"></BaseCheckbox>
           <h3 class="smed-text_h3 smed-text_medium">{{ doctor.name }}</h3>
         </div>
 
         <div v-for="(clinic, clinicIndex) in doctor.clinics">
           <div :class="$style.clinic">
-            <BaseCheckbox v-model="clinic.isChecked" :disabled="!doctor.isSelected" :class="$style.check_box_clinic" @change="selectClinic(doctor.name, clinic.name)"></BaseCheckbox>
+            <BaseCheckbox v-model="clinic.isChecked" :disabled="!doctor.isSelected" :class="$style.check_box_clinic"
+                          @change="selectClinic(doctor.name, clinic.name)"></BaseCheckbox>
             <h3 class="smed-text_body-md">{{ clinic.name }}</h3>
           </div>
         </div>
@@ -82,34 +76,41 @@ const active = ref([false, false, false, false]);
 </template>
 
 <style module>
-.title{
+.title {
   text-align: left;
   margin-bottom: 40px;
 }
-.subtitle{
+
+.subtitle {
   text-align: left;
   margin-bottom: 20px;
 }
-h3{
+
+h3 {
   cursor: pointer;
 }
-.doctor_header{
+
+.doctor_header {
   display: flex;
   text-align: left;
   align-items: center;
 }
-.clinic{
+
+.clinic {
   display: flex;
   text-align: left;
   align-items: center;
 }
-.check_box_doctor{
+
+.check_box_doctor {
   margin: 10px;
 }
-.check_box_clinic{
+
+.check_box_clinic {
   margin: 5px 10px 5px 30px;
 }
-.title{
+
+.title {
   margin-bottom: 20px;
 }
 </style>
