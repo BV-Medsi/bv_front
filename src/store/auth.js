@@ -21,6 +21,10 @@ export const useAuthStore = defineStore({
                     username: data.username,
                     password: data.password,
                 })
+                if (response.data.error) {
+                    alert('Ошибка авторизации\n' + response.data.error)
+                    return this.logout();
+                }
                 this.token = response.data.access_token;
                 this.setAuthenticated(true);
                 tokenStorage.set(this.token);

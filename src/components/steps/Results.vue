@@ -1,7 +1,7 @@
 <script setup>
 
 import Layout from "../Layout.vue";
-import {computed, onMounted, unref, watch} from "vue";
+import {onMounted, watch} from "vue";
 import {useStepsStore} from "../../store/steps.js";
 import {storeToRefs} from "pinia";
 import {useMlStore} from "../../store/ml.js";
@@ -29,7 +29,6 @@ const payload = {
 }
 
 onMounted(async () => {
-  console.log(payload)
   predictValues();
 });
 
@@ -38,12 +37,6 @@ watch(() => props.stepData, (newValue, oldValue) => {
 }, {deep: true})
 
 const emit = defineEmits(['update:response']);
-
-watch(() => props.stepData, (newValue, oldValue) => {
-  emit('update:response', newValue);
-}, {deep: true})
-
-const sortedDoctors = computed(() => props.stepData.doctors.filter((a, b) => a.prediction - b.prediction))
 </script>
 
 <template>
@@ -51,7 +44,7 @@ const sortedDoctors = computed(() => props.stepData.doctors.filter((a, b) => a.p
     <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Результаты</h2>
     <p :class="$style.subtitle" class="smed-text_h3">Здесь представлен список врачей, которых вы можете посетить</p>
     <div>
-      <div v-for="(doctor, doctorIndex) in sortedDoctors.value"
+      <div v-for="(doctor, doctorIndex) in stepData.doctors?.sort((a, b) => b.prediction - a.prediction)"
            :key="`doctor-${doctorIndex}`" align="left">
         <div :class="$style.doctor_header">
           <BaseCheckbox v-model="doctor.isSelected" @change="selectDoctor(doctor.name)"
