@@ -2,11 +2,11 @@
 import BaseButton from "@smartmed/ui/BaseButton";
 import Layout from "../Layout.vue";
 import {useRouter} from "vue-router";
-import {useStore} from "../../store/steps.js";
+import {useStepsStore} from "../../store/steps.js";
 import {ROUTES} from "../../router/index.js";
 import {onMounted} from "vue";
 
-const store = useStore()
+const store = useStepsStore()
 const router = useRouter()
 const {acceptTerms} = store;
 const nextStep = async () => {

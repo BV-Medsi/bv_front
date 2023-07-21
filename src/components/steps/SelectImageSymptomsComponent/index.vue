@@ -1,6 +1,6 @@
 <script setup>
 import {computed, ref} from 'vue';
-import {useStore} from '../../../store/steps.js';
+import {useStepsStore} from '../../../store/steps.js';
 
 import BaseButton from '@smartmed/ui/BaseButton';
 import SymptomsList from "./components/SymptomsList.vue";
@@ -12,7 +12,7 @@ import {storeToRefs} from "pinia";
 import {ROUTES} from "../../../router/index.js";
 import {useRouter} from "vue-router";
 
-const store = useStore();
+const store = useStepsStore();
 const {getInitialData, getSelectedPartSymptoms, steps} = storeToRefs(store);
 const {selectImageSymptom, updateSymptomStatus} = store;
 const side = ref('front');

@@ -1,11 +1,11 @@
 <script setup>
-import {useStore} from '../../store/steps.js';
+import {useStepsStore} from '../../store/steps.js';
 import {computed, onMounted, watch} from 'vue';
 import BaseButton from "@smartmed/ui/BaseButton";
 import {useRoute} from 'vue-router';
 
 const route = useRoute();
-const store = useStore();
+const store = useStepsStore();
 
 const currentStep = computed(() => store.steps[store.currentStepIndex]);
 

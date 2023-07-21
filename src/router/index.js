@@ -1,5 +1,5 @@
 import {createRouter, createWebHistory} from 'vue-router';
-import {useStore} from "../store/steps.js";
+import {useStepsStore} from "../store/steps.js";
 import {useAuthStore} from "../store/auth.js";
 import {storeToRefs} from "pinia";
 
@@ -46,7 +46,7 @@ export const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    const store = useStore();
+    const store = useStepsStore();
     const authStore = useAuthStore();
     const {isAuthenticated} = storeToRefs(authStore);
     if (!isAuthenticated.value && to.path !== '/login') {

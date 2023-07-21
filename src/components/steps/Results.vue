@@ -2,13 +2,13 @@
 
 import Layout from "../Layout.vue";
 import {onMounted, reactive, ref, watch} from "vue";
-import {useStore} from "../../store/steps.js";
+import {useStepsStore} from "../../store/steps.js";
 import {storeToRefs} from "pinia";
 import {useMlStore} from "../../store/ml.js";
 import BaseCheckbox from "../../../@smartmed/ui/BaseCheckbox";
 import BaseButton from "../../../@smartmed/ui/BaseButton";
 
-const store = useStore();
+const store = useStepsStore();
 const mlStore = useMlStore();
 
 const {getCorrectSymptomsData} = storeToRefs(store)

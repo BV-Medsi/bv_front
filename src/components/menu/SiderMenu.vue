@@ -5,7 +5,7 @@ const router = useRouter();
 
 import BaseButton from '@smartmed/ui/BaseButton';
 import {useRouter} from "vue-router";
-import {useStore} from "../../store/steps.js";
+import {useStepsStore} from "../../store/steps.js";
 import {useAuthStore} from '../../store/auth.js'
 import BurgerButton from "./BurgerButton.vue";
 import {nextTick} from "vue";
@@ -22,7 +22,7 @@ const links = [
   }
 ];
 const emit = defineEmits(['toggle'])
-const {acceptTerms} = useStore();
+const {acceptTerms} = useStepsStore();
 const {logout} = useAuthStore();
 
 const handleLinkClick = (link) => {

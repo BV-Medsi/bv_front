@@ -24,10 +24,10 @@ import {reactive, watch, onMounted} from "vue";
 import BaseButton from "@smartmed/ui/BaseButton";
 import {useRouter} from "vue-router";
 import {storeToRefs} from "pinia";
-import {useStore} from "../../store/steps.js";
+import {useStepsStore} from "../../store/steps.js";
 
 const router = useRouter();
-const store = useStore();
+const store = useStepsStore();
 const {getAdditionalData} = storeToRefs(store);
 const {validateAndUpdateStep, setCurrentStepIndex} = reactive(store);
 

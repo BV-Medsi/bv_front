@@ -78,12 +78,12 @@ import Combobox from "@smartmed/ui/Combobox";
 import BaseButton from "@smartmed/ui/BaseButton";
 import {useRouter} from "vue-router";
 import BaseInput from "@smartmed/ui/BaseInput";
-import {useStore} from "../../store/steps.js";
+import {useStepsStore} from "../../store/steps.js";
 import {useCardStore} from "../../store/card.js";
 
 
 const route = useRouter();
-const store = useStore();
+const store = useStepsStore();
 
 const props = defineProps(['stepData', 'isValid']);
 
