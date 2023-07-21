@@ -162,9 +162,9 @@ onMounted(async () => {
 
 const nextStep = async () => {
   if(hasCard.value){
-    //updateCard(props.stepData)
+    updateCard(props.stepData)
   }else{
-    //createCard(props.stepData[0])
+    createCard(props.stepData)
   }
   route.push('select-image-symptoms')
 };

@@ -16,7 +16,7 @@ export const useCardStore = defineStore({
         async createCard(cardData){
             this.isLoading = true;
             try{
-                const response = await axiosApiInstance.post(BASE_URL+"card/create_card", {
+                await axiosApiInstance.post(BASE_URL+"card/create_card", {
                     age: cardData.age,
                     gender: cardData.gender,
                     operations: cardData.operations,
@@ -31,6 +31,7 @@ export const useCardStore = defineStore({
             this.isLoading = true;
             try{
                 const response = await axiosApiInstance.get(BASE_URL + "card");
+                this.cardId = response.data.id;
                 if([500, 404, 401, 403].includes(response.status)){
                     return false;
                 }else{

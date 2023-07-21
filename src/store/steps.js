@@ -19,7 +19,8 @@ export const useStepsStore = defineStore({
                 question: "Выберите ваш пол",
                 status_code: 404,
                 data: {
-                    card_id: null,
+                    id: null,
+                    user_id: null,
                     gender: null,
                     age: null,
                     chronic_diseases: [],
@@ -173,7 +174,8 @@ export const useStepsStore = defineStore({
     actions: {
         updateCardData(data) {
             const cardData = this.steps[1].data;
-            cardData.card_id = data.card_id;
+            cardData.id = data.id;
+            cardData.user_id = data.user_id;
             cardData.age = data.age;
             cardData.gender = data.gender;
             cardData.operations = data.operations;
