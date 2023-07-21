@@ -26,9 +26,9 @@ const toggleSide = () => {
 const getComponent = computed(() => {
   switch (side.value) {
     case 'front':
-      return getInitialData.value.gender === 'female' ? FemaleFront : MaleFront;
+      return getInitialData.value.gender === 1 ? FemaleFront : MaleFront;
     case 'back':
-      return getInitialData.value.gender === 'female' ? FemaleBack : MaleBack;
+      return getInitialData.value.gender === 1 ? FemaleBack : MaleBack;
     default:
       return null;
   }

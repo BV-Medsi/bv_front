@@ -9,13 +9,13 @@
       </base-input>
       <div :class="$style.chooseGender">
         <label>
-          <input :class="$style.radio_button" type="radio" value="male"
-                 :checked="stepData.gender === 'male'" v-model="stepData.gender">
+          <input :class="$style.radio_button" type="radio" :value="0"
+                 :checked="stepData.gender === 0" v-model="stepData.gender">
           <span class="smed-text_body-md">Мужчина</span>
         </label>
         <label>
-          <input :class="$style.radio_button" type="radio" value="female"
-                 :checked="stepData.gender === 'female'" v-model="stepData.gender">
+          <input :class="$style.radio_button" type="radio" :value="1"
+                 :checked="stepData.gender === 1" v-model="stepData.gender">
           <span class="smed-text_body-md">Женщина</span>
         </label>
       </div>
