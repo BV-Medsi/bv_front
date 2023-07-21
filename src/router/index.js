@@ -20,12 +20,12 @@ const HomeComponent = () => import("../components/HomeComponent.vue");
 const Indicators = () => import("../components/steps/Indicators.vue");
 const Results = () => import("../components/steps/Results.vue");
 const Disclaimer = () => import("../components/steps/Disclaimer.vue");
-const History = () => import("../components/History.vue");
+const HistoryComponent = () => import("../components/HistoryComponent.vue");
 
 const routes = [
     {path: '/', component: HomeComponent, redirect: '/chat'},
     {path: '/login', component: AuthComponent},
-    {path: '/history', component: History},
+    {path: '/history', component: HistoryComponent},
     {
         path: '/chat', component: ChatComponent,
         children: [

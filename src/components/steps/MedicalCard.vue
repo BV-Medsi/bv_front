@@ -161,11 +161,9 @@ onMounted(async () => {
 })
 
 const nextStep = async () => {
-  console.log(hasCard.value)
   if(hasCard.value){
     //updateCard(props.stepData)
   }else{
-    console.log(props.stepData[0])
     //createCard(props.stepData[0])
   }
   route.push('select-image-symptoms')
