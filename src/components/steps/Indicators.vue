@@ -10,15 +10,16 @@
       <base-input v-model="stepData.temperature" size="md" label="Температура "
                   :class="$style.inputField"
                   :is-error="!isValueValid(stepData.temperature) && stepData.temperature != null"/>
-      <base-input v-model="stepData.oxygen" size="md" label="Кислород в крови"
-                  :class="$style.inputField"
-                  :is-error="!isValueValid(stepData.oxygen) && stepData.oxygen != null"/>
-      <base-input v-model="stepData.pressure" size="md" label="Давление"
-                  :class="$style.inputField"
-                  :is-error="!isValueValid(stepData.pressure) && stepData.pressure != null"/>
-      <base-input v-model="stepData.sugar" size="md" label="Сахар в крови"
-                  :class="$style.inputField"
-                  :is-error="!isValueValid(stepData.sugar) && stepData.sugar != null"/>
+<!--      <base-input v-model="stepData.oxygen" size="md" label="Кислород в крови"-->
+<!--                  :class="$style.inputField"-->
+<!--                  :is-error="!isValueValid(stepData.oxygen) && stepData.oxygen != null"/>-->
+<!--      <base-input v-model="stepData.pressure" size="md" label="Давление"-->
+<!--                  :class="$style.inputField"-->
+<!--                  :is-error="!isValueValid(stepData.pressure) && stepData.pressure != null"/>-->
+<!--      <base-input v-model="stepData.sugar" size="md" label="Сахар в крови"-->
+<!--                  :class="$style.inputField"-->
+<!--                  :is-error="!isValueValid(stepData.sugar) && stepData.sugar != null"/>-->
+      <base-textarea v-model="stepData.inlines_history" label="Опишите свои жалобы подробнее" :class="$style.describe" />
     </div>
     <BaseButton @click="nextStep" :disabled="!isValid" :class="$style.base_button">Получить результат</BaseButton>
 </template>
@@ -31,6 +32,7 @@ import BaseButton from "@smartmed/ui/BaseButton";
 import {useRouter} from "vue-router";
 import {storeToRefs} from "pinia";
 import {useStepsStore} from "../../store/steps.js";
+import BaseTextarea from "../../../@smartmed/ui/BaseTextarea";
 
 const router = useRouter();
 const store = useStepsStore();
@@ -71,5 +73,8 @@ const props = defineProps(['stepData', 'isValid']);
 .base_button{
   width: 100%;
   margin: 20px 0;
+}
+.describe{
+  text-align: left;
 }
 </style>

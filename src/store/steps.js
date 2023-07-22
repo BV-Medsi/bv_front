@@ -28,8 +28,8 @@ export const useStepsStore = defineStore({
                 question: "Выберите ваш пол",
                 status_code: 404,
                 data: {
-                    id: null,
-                    user_id: null,
+                    //id: null,
+                    //user_id: null,
                     gender: null,
                     age: null,
                     chronic_diseases: [],
@@ -86,12 +86,14 @@ export const useStepsStore = defineStore({
                 isValid: false,
                 data: {
                     temperature: null,
-                    pressure: null,
+                    pressure: 0,
                     growth: null,
                     weight: null,
-                    sugar: null,
-                    oxygen: null
-                }
+                    sugar: 0,
+                    oxygen: 0,
+                },
+                inlines_history: ''
+
             },
             {
                 id: ROUTES.RESULTS,
@@ -155,15 +157,19 @@ export const useStepsStore = defineStore({
             }
             return [];
         },
-        getInicatorsData(state) {
+        getIndicatorsData(state) {
             const indicatorsStep = state.steps.find(step => step.id === ROUTES.INDICATORS);
             const dict = {};
             for (const field in indicatorsStep.data) {
-                if (indicatorsStep.data[field]!== null) {
-                    dict[field] = indicatorsStep.data[field];
+                if (indicatorsStep.data[field]!== null && field !== 'inlines_history') {
+                    dict[field] = Number(indicatorsStep.data[field]);
                 }
             }
             return dict;
+        },
+        getInlinesHistory(state){
+            const indicatorsStep = state.steps.find(step => step.id === ROUTES.INDICATORS);
+            return indicatorsStep.data['inlines_history'];
         },
         getCorrectSymptomsData(state) {
             const imageSymptomsStep = state.steps.find(step => step.id === ROUTES.IMAGE_SYMPTOMS);
@@ -196,8 +202,8 @@ export const useStepsStore = defineStore({
     actions: {
         updateCardData(data) {
             const cardData = this.steps[1].data;
-            cardData.id = data.id;
-            cardData.user_id = data.user_id;
+            //cardData.id = data.id;
+            //cardData.user_id = data.user_id;
             cardData.age = data.age;
             cardData.gender = data.gender;
             cardData.operations = data.operations;
