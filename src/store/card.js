@@ -3,7 +3,7 @@ import {tokenStorage} from "../services/TokenStorage.js";
 import {axiosApiInstance} from "../services/api.js";
 import {useStepsStore} from "./steps.js";
 
-const BASE_URL = "http://5.63.159.74:5000/v1/"
+const BASE_URL = "https://mltherapist.ru/api/v1/"
 const store = useStepsStore();
 const {updateCardData} = store;
 export const useCardStore = defineStore({

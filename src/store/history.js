@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import {axiosApiInstance} from "../services/api.js";
 
-const BASE_URL = 'http://5.63.159.74:5002/';
+const BASE_URL = 'https://mltherapist.ru/api/v1/';
 export const useHistoryStore = defineStore({
     id: 'history-store',
     state: () => ({
@@ -26,7 +26,7 @@ export const useHistoryStore = defineStore({
             try {
                 const lastItemId = this.history?.at(-1)?.id;
                 if (!lastItemId) return;
-                const response = axiosApiInstance.post(BASE_URL + 'history/get_previouse_history_item/' + id);
+                const response = axiosApiInstance.post(BASE_URL + 'history/get_previous_history_item/' + id);
                 this.history.push(response.data);
             } catch (e) {
                 console.error(e);

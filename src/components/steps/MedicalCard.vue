@@ -80,8 +80,6 @@ import {useRouter} from "vue-router";
 import BaseInput from "@smartmed/ui/BaseInput";
 import {useStepsStore} from "../../store/steps.js";
 import {useCardStore} from "../../store/card.js";
-
-
 const route = useRouter();
 const store = useStepsStore();
 

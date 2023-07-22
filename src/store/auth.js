@@ -3,7 +3,7 @@ import {tokenStorage} from "../services/TokenStorage.js";
 import {axiosApiInstance} from "../services/api.js";
 import {useRoute, useRouter} from "vue-router";
 
-const BASE_URL = "http://5.63.159.74:5001/";
+const BASE_URL = "https://mltherapist.ru/auth/";
 
 export const useAuthStore = defineStore({
     id: "auth-store",
