@@ -1,0 +1,39 @@
+
+name: Deploy Docker image
+
+on:
+  push:
+    branches:
+      - dev
+      - ci-check
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  BuildImage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v1
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/bv-medsi/bv-front:${{ github.ref_name }}
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: docker login ghcr.io -u ${{ github.repository_owner }} -p ${{ secrets.GITHUB_TOKEN }}; docker run --rm -v "/srv/frontend:/ext_folder" ghcr.io/bv-medsi/bv-front:${{ github.ref_name }} bash -c "cp -R dist /ext_folder"
