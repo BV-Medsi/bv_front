@@ -46,7 +46,6 @@ export const useAuthStore = defineStore({
                 if (e.response && [401, 402, 403].includes(e.response.status)) {
                     this.logout();
                 }
-                console.log(e.response)
                 return false;
             }
         },

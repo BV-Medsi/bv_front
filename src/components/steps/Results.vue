@@ -11,7 +11,7 @@ import BaseButton from "@smartmed/ui/BaseButton";
 const store = useStepsStore();
 const mlStore = useMlStore();
 
-const {getCorrectSymptomsData, getInicatorsData, steps} = storeToRefs(store)
+const {getCorrectSymptomsData, getIndicatorsData, steps, getInlinesHistory} = storeToRefs(store)
 const {selectClinic, selectDoctor} = store
 const {predictValues} = mlStore;
 
@@ -23,13 +23,15 @@ const props = defineProps(['stepData', 'isValid']);
 const {cardId} = storeToRefs(cardStore);
 
 const payload = {
-  card_id: cardId.value,
+  // card_id: cardId.value,
   complaints: getCorrectSymptomsData.value,
-  indicators: getInicatorsData.value
+  inlines_history: getInlinesHistory.value,
+  indicators: getIndicatorsData.value
 }
 
 onMounted(async () => {
-  predictValues();
+  console.log(payload)
+  await predictValues(payload);
 });
 
 watch(() => props.stepData, (newValue, oldValue) => {

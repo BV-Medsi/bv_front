@@ -99,18 +99,16 @@ watch(() => props.stepData, () => {
 const {validateAndUpdateStep} = store;
 
 const diseasesItems = [
-  'Ишемическая болезнь сердца',
-  'Гипертоническая болезнь',
-  'Диабет',
-  'Онкологические заболевания'
+  'ОРВИ',
+    "Гайморит",
+    "Корь",
+    "Гастродуоденит",
 ];
 
 const chronicDiseasesItems = [
-  'Ишемическая болезнь сердца',
-  'Гипертоническая болезнь',
-  'Сахарный диабет',
-  'Хроническая обструктивная болезнь легких',
-  'Ревматоидный артрит'
+  'Диабет',
+  'Туберкулез',
+  'Аутизм',
 ];
 
 const operationsItems = [
@@ -160,6 +158,7 @@ onMounted(async () => {
 
 const nextStep = async () => {
   if(hasCard.value){
+    console.log(props.stepData)
     await updateCard(props.stepData)
   }else{
     await createCard(props.stepData)

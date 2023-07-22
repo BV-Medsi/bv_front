@@ -51,6 +51,7 @@ export const useCardStore = defineStore({
         },
         async updateCard(cardData){
             try{
+                console.log(cardData)
                 await axiosApiInstance.patch(BASE_URL + "card/update_card", {
                     age: cardData.age,
                     gender: cardData.gender,
