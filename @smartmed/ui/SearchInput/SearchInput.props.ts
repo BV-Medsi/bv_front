@@ -20,4 +20,5 @@ export const SearchInputDefaultProps = {
 
 export type SearchInputExpose = {
   baseInputWrapper: BaseInputExpose['wrapper'];
+  focus: () => void;
 };

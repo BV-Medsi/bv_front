@@ -5,6 +5,7 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__
     readonly label: "";
     readonly size: "md";
     readonly isError: false;
+    readonly pseudoHovered: false;
 }>, {
     focus: () => void;
     blur: () => void;
@@ -16,12 +17,14 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__
     readonly label: "";
     readonly size: "md";
     readonly isError: false;
+    readonly pseudoHovered: false;
 }>>> & {
     "onUpdate:modelValue"?: ((value: boolean | null) => any) | undefined;
 }, {
     label: string;
     size: "sm" | "md" | "lg";
     disabled: boolean;
+    pseudoHovered: boolean;
     modelValue: boolean | null;
     isError: boolean;
 }, {}>, BaseCheckboxSlots>;

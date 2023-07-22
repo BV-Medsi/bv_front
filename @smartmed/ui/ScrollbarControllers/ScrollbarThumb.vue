@@ -1,7 +1,10 @@
 <template><div ref="thumbRef" /></template>
 
 <script setup lang="ts">
-import { ANIMATION_FRAME_EVENTS_TOKEN } from '@smartmed/ui/tokens';
+import {
+  ANIMATION_FRAME_EVENTS_TOKEN,
+  SCROLLBAR_REF_TOKEN,
+} from '@smartmed/ui/tokens';
 import { useThrottleFn } from '@smartmed/utility/functions';
 import {
   computed,
@@ -13,10 +16,7 @@ import {
   watch,
 } from 'vue';
 
-import {
-  SCROLLBAR_REF_TOKEN,
-  SCROLLBAR_WRAPPER_TOKEN,
-} from './scrollbarTokens';
+import { SCROLLBAR_WRAPPER_TOKEN } from './scrollbarTokens';
 
 const MIN_WIDTH = 24;
 const POLLING_TIME = 1000 / 15;

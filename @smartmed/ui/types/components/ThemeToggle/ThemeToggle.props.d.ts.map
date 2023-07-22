@@ -1,0 +1,1 @@
+{"version":3,"file":"ThemeToggle.props.d.ts","sourceRoot":"","sources":["../../../../components/ThemeToggle/ThemeToggle.props.ts"],"names":[],"mappings":"AAAA,oBAAY,gBAAgB,GAAG;IAC7B,KAAK,EAAE,MAAM,GAAG,OAAO,CAAC;CACzB,CAAC;AAEF,oBAAY,gBAAgB,GAAG;IAC7B,CAAC,CAAC,EAAE,cAAc,EAAE,KAAK,EAAE,gBAAgB,CAAC,OAAO,CAAC,GAAG,IAAI,CAAC;CAC7D,CAAC"}

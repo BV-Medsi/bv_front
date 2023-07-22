@@ -1,0 +1,8 @@
+{
+  "main": "./NavigationBarMobile.cjs.js",
+  "module": "./NavigationBarMobile.es.js",
+  "types": "./../types/components/NavigationBarMobile/NavigationBarMobile.vue.d.ts",
+  "browser": {
+    "./sfc": "./NavigationBarMobile.vue"
+  }
+}

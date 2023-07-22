@@ -1,11 +1,10 @@
 import "./Popup.css";
-import { defineComponent as N, mergeDefaults as K, toRefs as L, inject as $, ref as _, provide as M, computed as R, watch as f, onBeforeUnmount as T, openBlock as i, createBlock as F, unref as t, withCtx as P, createVNode as C, Transition as I, withDirectives as U, createElementBlock as d, normalizeClass as l, createElementVNode as g, toDisplayString as A, createCommentVNode as r, renderSlot as j, withModifiers as w, withKeys as H } from "vue";
+import { defineComponent as N, mergeDefaults as K, toRefs as L, inject as $, ref as m, provide as M, computed as R, watch as f, onBeforeUnmount as T, openBlock as i, createBlock as F, unref as t, withCtx as P, createVNode as C, Transition as I, withDirectives as U, createElementBlock as d, normalizeClass as l, createElementVNode as g, toDisplayString as A, createCommentVNode as r, renderSlot as j, withModifiers as w, withKeys as H } from "vue";
 import W from "@smartmed/ui/Portal";
 import q from "@smartmed/ui/SvgIcon";
-import { POPUPS_HOST_TOKEN as G, IS_POPUP_MOBILE_TOKEN as J } from "@smartmed/ui/tokens";
-import { useOverscroll as Q } from "@smartmed/ui/use";
-import { EscDirective as X, FocustrapDirective as Y } from "@smartmed/utility/directives";
-import { S as Z } from "../scrollbarTokens-5a5285c0.mjs";
+import { POPUPS_HOST_TOKEN as G, IS_POPUP_MOBILE_TOKEN as J, SCROLLBAR_REF_TOKEN as Q } from "@smartmed/ui/tokens";
+import { useOverscroll as X } from "@smartmed/ui/use";
+import { EscDirective as Y, FocustrapDirective as Z } from "@smartmed/utility/directives";
 import { _ as x } from "../_plugin-vue_export-helper-dad06003.mjs";
 const ee = {
   modelValue: !1,
@@ -26,9 +25,9 @@ const ee = {
   }, ee),
   emits: ["update:modelValue"],
   setup(E, { emit: O }) {
-    const B = E, { modelValue: n, dismissible: y, size: v } = L(B), u = $(G), a = Symbol(), c = $(J, _(!1)), b = _(null), k = Q("all", (e) => e);
-    M(Z, k), u.value.registerPopup(a);
-    const m = _(n.value), S = R(() => v.value === "full"), p = () => {
+    const B = E, { modelValue: n, dismissible: y, size: v } = L(B), u = $(G), a = Symbol(), c = $(J, m(!1)), b = m(null), k = X("all", (e) => e);
+    M(Q, k), u.value.registerPopup(a);
+    const _ = m(n.value), S = R(() => v.value === "full"), p = () => {
       O("update:modelValue", !1);
     };
     f(
@@ -48,12 +47,12 @@ const ee = {
     }, z = () => {
       y.value && p();
     }, D = () => {
-      m.value = !1;
+      _.value = !1;
     };
     return f(
       n,
       (e) => {
-        e && (m.value = e);
+        e && (_.value = e);
       },
       { immediate: !0 }
     ), f(
@@ -62,7 +61,7 @@ const ee = {
         e && e.focus();
       },
       { immediate: !0 }
-    ), (e, o) => m.value ? (i(), F(t(W), {
+    ), (e, o) => _.value ? (i(), F(t(W), {
       key: 0,
       "append-to": "#smed_popups-host"
     }, {
@@ -119,8 +118,8 @@ const ee = {
                 ], 2)) : r("", !0)
               ], 2)
             ], 2)), [
-              [t(X), { onEvent: z }],
-              [t(Y)]
+              [t(Y), { onEvent: z }],
+              [t(Z)]
             ]) : r("", !0)
           ]),
           _: 3
@@ -129,7 +128,7 @@ const ee = {
       _: 3
     })) : r("", !0);
   }
-}), se = "_wrapper_134hf_1", le = "_popup_134hf_15", pe = "_popup_sm_134hf_24", ne = "_popup_md_134hf_27", ie = "_popup_lg_134hf_30", re = "_popup_full_134hf_33", ue = "_popup_mobile_134hf_40", ae = "_content_134hf_59", ce = "_content_full_134hf_64", me = "_content_mobile_134hf_70", _e = "_sticky_134hf_74", fe = "_close_134hf_81", de = "_title_134hf_94", ye = {
+}), se = "_wrapper_134hf_1", le = "_popup_134hf_15", pe = "_popup_sm_134hf_24", ne = "_popup_md_134hf_27", ie = "_popup_lg_134hf_30", re = "_popup_full_134hf_33", ue = "_popup_mobile_134hf_40", ae = "_content_134hf_59", ce = "_content_full_134hf_64", _e = "_content_mobile_134hf_70", me = "_sticky_134hf_74", fe = "_close_134hf_81", de = "_title_134hf_94", ye = {
   wrapper: se,
   popup: le,
   popup_sm: pe,
@@ -139,13 +138,13 @@ const ee = {
   popup_mobile: ue,
   content: ae,
   content_full: ce,
-  content_mobile: me,
-  sticky: _e,
+  content_mobile: _e,
+  sticky: me,
   close: fe,
   title: de
 }, ve = {
   $style: ye
-}, Be = /* @__PURE__ */ x(te, [["__cssModules", ve]]);
+}, Oe = /* @__PURE__ */ x(te, [["__cssModules", ve]]);
 export {
-  Be as default
+  Oe as default
 };

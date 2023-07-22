@@ -1,0 +1,8 @@
+{
+  "main": "./PrimitiveCheckbox.cjs.js",
+  "module": "./PrimitiveCheckbox.es.js",
+  "types": "./../types/components/PrimitiveCheckbox/PrimitiveCheckbox.vue.d.ts",
+  "browser": {
+    "./sfc": "./PrimitiveCheckbox.vue"
+  }
+}

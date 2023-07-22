@@ -11,6 +11,7 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__
     dataAutomationId: "smed-base-input-native";
 }>, {
     baseInputWrapper: import("vue").ComputedRef<HTMLElement | null>;
+    focus: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
     "update:modelValue": (value: string) => void;
 }, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<SearchInputProps>, {

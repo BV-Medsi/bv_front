@@ -61,6 +61,7 @@ export default {
 import Portal from '@smartmed/ui/Portal';
 import SvgIcon from '@smartmed/ui/SvgIcon';
 import { IS_POPUP_MOBILE_TOKEN, POPUPS_HOST_TOKEN } from '@smartmed/ui/tokens';
+import { SCROLLBAR_REF_TOKEN } from '@smartmed/ui/tokens';
 import { useOverscroll } from '@smartmed/ui/use';
 import {
   EscDirective as vEsc,
@@ -78,7 +79,6 @@ import {
 } from 'vue';
 
 import { PopupsHostService } from '../Root/PopupsHost.vue';
-import { SCROLLBAR_REF_TOKEN } from '../ScrollbarControllers/scrollbarTokens';
 import {
   PopupDefaultProps,
   PopupEmits,

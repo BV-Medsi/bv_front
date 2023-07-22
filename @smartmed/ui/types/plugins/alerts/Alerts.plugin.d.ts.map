@@ -1,0 +1,1 @@
+{"version":3,"file":"Alerts.plugin.d.ts","sourceRoot":"","sources":["../../../../plugins/alerts/Alerts.plugin.ts"],"names":[],"mappings":"AACA,OAAO,EAA6B,MAAM,EAAE,MAAM,KAAK,CAAC;AAExD,oBAAY,aAAa,GAAG;IAC1B,SAAS,EAAE,GAAG,CAAC;IACf,QAAQ,EAAE,KAAK,GAAG,WAAW,GAAG,QAAQ,GAAG,cAAc,CAAC;IAC1D,cAAc,EACV,sBAAsB,GACtB,4BAA4B,GAC5B,MAAM,CAAC;CACZ,CAAC;AAsBF,eAAO,MAAM,YAAY,EAAE,MAE1B,CAAC"}

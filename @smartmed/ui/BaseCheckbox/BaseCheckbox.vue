@@ -1,24 +1,18 @@
 <template>
   <label
-    v-hovered="{
-      onEvent: onHover,
-    }"
+    v-hovered="hoveredProps"
     :class="[$style.label, $style['label_' + size]]"
     :disabled="computedDisabled"
     :for="id"
   >
-    <div
-      :class="[
-        $style.checkbox,
-        $style['checkbox_' + size],
-        modelValue !== false && $style.checkbox_checked,
-        computedInvalid && $style.checkbox_invalid,
-        computedDisabled && $style.checkbox_disabled,
-        computedHovered && $style.checkbox_hovered,
-      ]"
+    <primitive-checkbox
+      :value="modelValue"
+      :invalid="computedInvalid"
+      :disabled="computedDisabled"
+      :hovered="computedHovered"
+      :size="size"
+      :focused="focused"
     >
-      <svg-icon v-if="modelValue !== false" :size="size" :name="iconName" />
-
       <input
         :id="id"
         ref="native"
@@ -28,7 +22,7 @@
         :disabled="computedDisabled"
         @change="onChange"
       />
-    </div>
+    </primitive-checkbox>
 
     <span v-if="hasContent">
       <slot>
@@ -38,14 +32,8 @@
   </label>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'BaseCheckbox',
-};
-</script>
-
 <script setup lang="ts">
-import SvgIcon from '@smartmed/ui/SvgIcon';
+import PrimitiveCheckbox from '@smartmed/ui/PrimitiveCheckbox';
 import {
   useControlDisabled,
   useControlInvalid,
@@ -62,6 +50,10 @@ import {
   BaseCheckboxSlots,
 } from './BaseCheckbox.props';
 
+defineOptions({
+  name: 'BaseCheckbox',
+});
+
 const props = withDefaults(
   defineProps<BaseCheckboxProps>(),
   BaseCheckboxDefaultProps
@@ -74,15 +66,11 @@ defineSlots<BaseCheckboxSlots>();
 const { modelValue, isError, disabled, pseudoHovered, label } = toRefs(props);
 
 const slots = useSlots();
-const { id, native, focus, blur } = useInteractive();
+const { id, native, focus, blur, focused } = useInteractive();
 const computedInvalid = useControlInvalid(isError);
 const computedDisabled = useControlDisabled(disabled);
 
 const hovered = ref(false);
-
-const iconName = computed(() => {
-  return modelValue.value === null ? 'minus' : 'check';
-});
 
 const computedHovered = computed(() => {
   return pseudoHovered.value || hovered.value;
@@ -99,6 +87,10 @@ const onChange = (event: Event) => {
 
 const onHover = (value: boolean) => {
   hovered.value = value;
+};
+
+const hoveredProps = {
+  onEvent: onHover,
 };
 
 defineExpose({

@@ -36,11 +36,11 @@ export default {
 
 <script setup lang="ts">
 import { ANIMATION_FRAME_EVENTS_TOKEN } from '@smartmed/ui/tokens';
+import { SCROLLBAR_REF_TOKEN } from '@smartmed/ui/tokens';
 import { useThrottleFn } from '@smartmed/utility/functions';
 import { computed, inject, Ref, ref, watch } from 'vue';
 
 import ScrollbarThumb from './ScrollbarThumb.vue';
-import { SCROLLBAR_REF_TOKEN } from './scrollbarTokens';
 import ScrollbarWrapper from './ScrollbarWrapper.vue';
 
 const animationEvents = inject<Ref<number>>(ANIMATION_FRAME_EVENTS_TOKEN)!;

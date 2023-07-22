@@ -17,5 +17,6 @@ export declare const SearchInputDefaultProps: {
 };
 export declare type SearchInputExpose = {
     baseInputWrapper: BaseInputExpose['wrapper'];
+    focus: () => void;
 };
 //# sourceMappingURL=SearchInput.props.d.ts.map

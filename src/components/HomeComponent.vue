@@ -1,15 +1,9 @@
-<script setup></script>
+<script setup>
+import Layout from "./Layout.vue";
+</script>
 
 <template>
-  <div :class="$style.screen">HOME</div>
+  <layout>
+    <div>HOME</div>
+  </layout>
 </template>
-
-<style module>
-.screen {
-  background-color: rgb(255, 255, 255);
-  border-radius: 16px;
-  padding: 12px;
-  width: 371px;
-  height: 812px;
-}
-</style>

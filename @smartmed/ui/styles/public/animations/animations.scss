@@ -98,15 +98,28 @@
   @include transition(all);
 }
 
-/* 2. declare enter from and leave to state */
 .smed-list-transition-enter-from,
 .smed-list-transition-leave-to {
   opacity: 0;
   transform: translate(0, 30px);
 }
 
-/* 3. ensure leaving items are taken out of layout flow so that moving
-      animations can be calculated correctly. */
 .smed-list-transition-leave-active {
+  position: absolute;
+}
+
+.smed-list-right-transition-move,
+.smed-list-right-transition-enter-active,
+.smed-list-right-transition-leave-active {
+  @include transition(all);
+}
+
+.smed-list-right-transition-enter-from,
+.smed-list-right-transition-leave-to {
+  opacity: 0;
+  transform: translate(30px, 0);
+}
+
+.smed-list-right-transition-leave-active {
   position: absolute;
 }

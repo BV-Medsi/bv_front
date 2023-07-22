@@ -1,0 +1,8 @@
+{
+  "main": "./PrimitiveRadio.cjs.js",
+  "module": "./PrimitiveRadio.es.js",
+  "types": "./../types/components/PrimitiveRadio/PrimitiveRadio.vue.d.ts",
+  "browser": {
+    "./sfc": "./PrimitiveRadio.vue"
+  }
+}

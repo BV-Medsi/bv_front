@@ -1,144 +1,150 @@
 import "./Root.css";
-import { defineComponent as T, ref as c, onBeforeUnmount as A, openBlock as m, createElementBlock as d, createElementVNode as O, normalizeClass as i, createVNode as v, TransitionGroup as C, withCtx as k, Fragment as E, renderList as P, createBlock as R, unref as w, watch as D, Transition as M, createCommentVNode as N, provide as p, readonly as y, renderSlot as K } from "vue";
-import g from "@smartmed/ui/ScrollbarControllers";
-import { HINT_HOST_TOKEN as q, POPUPS_HOST_TOKEN as F, TABLE_BAR_HOST_TOKEN as L, DROPDOWN_HOST_TOKEN as V, ANIMATION_FRAME_EVENTS_TOKEN as j, ALERTS_HOST_TOKEN as I } from "@smartmed/ui/tokens";
-import { i as U } from "../isMobile-2b62b6a9.mjs";
-import z from "@smartmed/ui/Alert";
-import { _ as b } from "../_plugin-vue_export-helper-dad06003.mjs";
-import { useOverscroll as G } from "@smartmed/ui/use";
-const H = {
+import { defineComponent as H, ref as r, inject as K, onBeforeUnmount as M, openBlock as m, createElementBlock as f, createElementVNode as R, normalizeClass as d, unref as b, createVNode as $, TransitionGroup as L, withCtx as A, Fragment as C, renderList as j, createBlock as E, resolveDynamicComponent as q, watch as F, Transition as B, createCommentVNode as k, provide as y, readonly as h, renderSlot as I } from "vue";
+import V from "@smartmed/ui/ScrollbarControllers";
+import { ALERTS_OPTIONS_TOKEN as U, HINT_HOST_TOKEN as x, POPUPS_HOST_TOKEN as z, TABLE_BAR_HOST_TOKEN as G, DROPDOWN_HOST_TOKEN as W, ANIMATION_FRAME_EVENTS_TOKEN as J, ALERTS_HOST_TOKEN as Q } from "@smartmed/ui/tokens";
+import { i as X } from "../isMobile-2b62b6a9.mjs";
+import { _ as O } from "../_plugin-vue_export-helper-dad06003.mjs";
+import { useOverscroll as Y } from "@smartmed/ui/use";
+const N = {
   type: "success",
   autoClose: !0,
-  closeTimeout: 5e3
-}, W = /* @__PURE__ */ T({
+  closeTimeout: 5e3,
+  data: void 0
+}, Z = /* @__PURE__ */ H({
   name: "AlertsHost",
   __name: "AlertsHost",
-  setup(t, { expose: a }) {
-    const o = c([]), e = /* @__PURE__ */ new Map(), u = c(null), f = (s, n, _ = H) => {
+  setup(l, { expose: n }) {
+    const s = r([]), e = /* @__PURE__ */ new Map(), c = r(null), o = K(U, null), _ = o != null && o.component ? o.component : "div", a = o != null && o.transitionName ? o.transitionName : "none", p = (o == null ? void 0 : o.position) || "bottom", i = (t, T, u = N) => {
       const {
-        type: h = H.type,
-        autoClose: $ = H.autoClose,
-        closeTimeout: S = H.closeTimeout
-      } = _;
-      if (o.value = o.value.concat({
-        id: s,
-        content: n,
-        type: h,
-        closable: $
-      }), $) {
-        const B = setTimeout(() => {
-          l(s);
-        }, S);
-        e.set(s, B);
+        type: S = N.type,
+        autoClose: g = N.autoClose,
+        closeTimeout: P = N.closeTimeout
+      } = u;
+      if (s.value = s.value.concat({
+        id: t,
+        content: T,
+        type: S,
+        closable: g,
+        data: u.data
+      }), g) {
+        const D = setTimeout(() => {
+          v(t);
+        }, P);
+        e.set(t, D);
       }
-    }, l = (s) => {
-      const n = e.get(s);
-      n && clearTimeout(n), e.delete(s), o.value = o.value.filter(({ id: _ }) => _ !== s);
-    }, r = () => {
-      const s = o.value[0];
-      s && l(s.id);
+    }, v = (t) => {
+      const T = e.get(t);
+      T && clearTimeout(T), e.delete(t), s.value = s.value.filter(({ id: u }) => u !== t);
+    }, w = () => {
+      const t = s.value[0];
+      t && v(t.id);
     };
-    return A(() => {
-      o.value.forEach((s) => l(s.id));
-    }), a({
-      elementRef: u,
-      show: f,
-      close: l,
-      closeLast: r
-    }), (s, n) => (m(), d("div", {
+    return M(() => {
+      s.value.forEach((t) => v(t.id));
+    }), n({
+      elementRef: c,
+      show: i,
+      close: v,
+      closeLast: w
+    }), (t, T) => (m(), f("div", {
       id: "smed-alerts-host",
       ref_key: "elementRef",
-      ref: u
+      ref: c
     }, [
-      O("div", {
-        class: i(s.$style.root)
+      R("div", {
+        class: d([t.$style.root, t.$style["root_" + b(p)]])
       }, [
-        v(C, {
+        $(L, {
           tag: "ui",
-          name: "smed-list-transition",
-          class: i(s.$style.container)
+          name: b(a),
+          class: d(t.$style.container)
         }, {
-          default: k(() => [
-            (m(!0), d(E, null, P(o.value, (_) => (m(), R(w(z), {
-              key: _.id,
+          default: A(() => [
+            (m(!0), f(C, null, j(s.value, (u) => (m(), E(q(b(_)), {
+              key: u.id,
               class: "smed-space_bottom-4",
-              type: _.type,
-              content: _.content,
-              closable: _.closable,
-              onClose: (h) => l(_.id)
-            }, null, 8, ["type", "content", "closable", "onClose"]))), 128))
+              type: u.type,
+              content: u.content,
+              data: u.data,
+              closable: u.closable,
+              onClose: (S) => v(u.id)
+            }, null, 40, ["type", "content", "data", "closable", "onClose"]))), 128))
           ]),
           _: 1
-        }, 8, ["class"])
+        }, 8, ["name", "class"])
       ], 2)
     ], 512));
   }
-}), J = "_root_154tb_1", Q = "_container_154tb_8", X = {
-  root: J,
-  container: Q
-}, Y = {
-  $style: X
-}, Z = /* @__PURE__ */ b(W, [["__cssModules", Y]]), x = T({
+}), ee = "_root_1gwxm_1", oe = "_root_bottom_1gwxm_12", te = "_container_1gwxm_18", se = "_root_top_1gwxm_21", le = {
+  root: ee,
+  root_bottom: oe,
+  "root_bottom-right": "_root_bottom-right_1gwxm_15",
+  container: te,
+  root_top: se,
+  "root_top-right": "_root_top-right_1gwxm_24"
+}, ne = {
+  $style: le
+}, ae = /* @__PURE__ */ O(Z, [["__cssModules", ne]]), re = H({
   name: "DropdownHost",
   setup() {
     return {
-      element: c(null)
+      element: r(null)
     };
   }
-}), ee = {
+}), ce = {
   id: "smed_dropdown-host",
   ref: "element"
 };
-function se(t, a, o, e, u, f) {
-  return m(), d("div", ee, null, 512);
+function _e(l, n, s, e, c, o) {
+  return m(), f("div", ce, null, 512);
 }
-const oe = /* @__PURE__ */ b(x, [["render", se]]), te = T({
+const ue = /* @__PURE__ */ O(re, [["render", _e]]), ie = H({
   name: "PopupsHost",
   setup() {
-    const t = /* @__PURE__ */ new Map(), a = c(!1), o = c(!1);
+    const l = /* @__PURE__ */ new Map(), n = r(!1), s = r(!1);
     let e = null;
-    D(a, (r) => {
-      r ? e = setTimeout(() => o.value = !0) : (e && (clearTimeout(e), e = null), o.value = !1);
+    F(n, (a) => {
+      a ? e = setTimeout(() => s.value = !0) : (e && (clearTimeout(e), e = null), s.value = !1);
     });
-    const u = (r) => {
-      t.set(r, null);
-    }, f = (r, s) => {
-      t.set(r, s ? /* @__PURE__ */ new Date() : null), a.value = Array.from(t.values()).some((n) => n);
-    }, l = (r) => {
-      t.delete(r), a.value = Array.from(t.values()).some(Boolean);
+    const c = (a) => {
+      l.set(a, null);
+    }, o = (a, p) => {
+      l.set(a, p ? /* @__PURE__ */ new Date() : null), n.value = Array.from(l.values()).some((i) => i);
+    }, _ = (a) => {
+      l.delete(a), n.value = Array.from(l.values()).some(Boolean);
     };
-    return A(() => {
+    return M(() => {
       e && clearTimeout(e);
     }), {
-      isShown: a,
-      animation: o,
-      registerPopup: u,
-      setOpen: f,
-      remove: l
+      isShown: n,
+      animation: s,
+      registerPopup: c,
+      setOpen: o,
+      remove: _
     };
   }
-}), le = "_host_je562_1", ne = "_host_overlay_je562_9", ae = "_host_animation_je562_25", re = {
-  host: le,
-  host_overlay: ne,
-  host_animation: ae
+}), me = "_host_je562_1", de = "_host_overlay_je562_9", fe = "_host_animation_je562_25", pe = {
+  host: me,
+  host_overlay: de,
+  host_animation: fe
 };
-function ce(t, a, o, e, u, f) {
-  return m(), d("div", {
+function ve(l, n, s, e, c, o) {
+  return m(), f("div", {
     id: "smed_popups-host",
-    class: i([
-      t.$style.host,
-      t.isShown && t.$style.host_overlay,
-      t.animation && t.$style.host_animation
+    class: d([
+      l.$style.host,
+      l.isShown && l.$style.host_overlay,
+      l.animation && l.$style.host_animation
     ])
   }, null, 2);
 }
-const ue = {
-  $style: re
-}, _e = /* @__PURE__ */ b(te, [["render", ce], ["__cssModules", ue]]), ie = { id: "smed_table-bar-host" }, me = /* @__PURE__ */ O("div", { id: "smed_table-bars" }, null, -1), fe = { id: "smed_table-bar-overlayable" }, de = /* @__PURE__ */ T({
+const ye = {
+  $style: pe
+}, he = /* @__PURE__ */ O(ie, [["render", ve], ["__cssModules", ye]]), $e = { id: "smed_table-bar-host" }, Te = /* @__PURE__ */ R("div", { id: "smed_table-bars" }, null, -1), be = { id: "smed_table-bar-overlayable" }, He = /* @__PURE__ */ H({
   __name: "TableBarHost",
-  setup(t, { expose: a }) {
-    const o = G("all", (l) => l), e = c(!1);
-    return a({
+  setup(l, { expose: n }) {
+    const s = Y("all", (_) => _), e = r(!1);
+    return n({
       isOverlay: e,
       showOverlay: () => {
         e.value = !0;
@@ -146,86 +152,85 @@ const ue = {
       hideOverlay: () => {
         e.value = !1;
       }
-    }), (l, r) => (m(), d("div", ie, [
-      me,
-      O("div", fe, [
-        v(M, { name: "fade" }, {
-          default: k(() => [
-            e.value ? (m(), d("div", {
+    }), (_, a) => (m(), f("div", $e, [
+      Te,
+      R("div", be, [
+        $(B, { name: "fade" }, {
+          default: A(() => [
+            e.value ? (m(), f("div", {
               key: 0,
               ref_key: "overscrollRef",
-              ref: o,
-              class: i(l.$style.overlay)
-            }, null, 2)) : N("", !0)
+              ref: s,
+              class: d(_.$style.overlay)
+            }, null, 2)) : k("", !0)
           ]),
           _: 1
         })
       ])
     ]));
   }
-}), pe = "_overlay_11lww_1", ye = {
-  overlay: pe
-}, ve = {
-  $style: ye
-}, he = /* @__PURE__ */ b(de, [["__cssModules", ve]]), $e = {
+}), Oe = "_overlay_11lww_1", we = {
+  overlay: Oe
+}, Ne = {
+  $style: we
+}, Re = /* @__PURE__ */ O(He, [["__cssModules", Ne]]), Ee = {
   name: "Root"
-}, Te = /* @__PURE__ */ T({
-  ...$e,
-  setup(t) {
-    const a = c(null), o = c(null), e = c(null), u = c(null), f = c(null), l = c(NaN), r = U(), s = () => {
-      l.value = requestAnimationFrame(s);
+}, ke = /* @__PURE__ */ H({
+  ...Ee,
+  setup(l) {
+    const n = r(null), s = r(null), e = r(null), c = r(null), o = r(null), _ = r(NaN), a = X(), p = () => {
+      _.value = requestAnimationFrame(p);
     };
-    return l.value = requestAnimationFrame(s), p(q, y(o)), p(F, y(e)), p(L, y(u)), p(V, y(f)), p(j, y(l)), p(I, y(a)), (n, _) => (m(), d(E, null, [
-      w(r) ? N("", !0) : (m(), R(M, {
+    return _.value = requestAnimationFrame(p), y(x, h(s)), y(z, h(e)), y(G, h(c)), y(W, h(o)), y(J, h(_)), y(Q, h(n)), (i, v) => (m(), f(C, null, [
+      b(a) ? k("", !0) : (m(), E(B, {
         key: 0,
         name: "fade"
       }, {
-        default: k(() => {
-          var h, $;
+        default: A(() => {
+          var w, t;
           return [
-            !((h = e.value) != null && h.isShown) && !(($ = u.value) != null && $.isOverlay) ? (m(), R(w(g), {
+            !((w = e.value) != null && w.isShown) && !((t = c.value) != null && t.isOverlay) ? (m(), E(b(V), {
               key: 0,
-              class: i(n.$style.scrollbar)
-            }, null, 8, ["class"])) : N("", !0)
+              class: d(i.$style.scrollbar)
+            }, null, 8, ["class"])) : k("", !0)
           ];
         }),
         _: 1
       })),
-      K(n.$slots, "default"),
-      v(he, {
+      I(i.$slots, "default"),
+      $(Re, {
         ref_key: "tableBarHostRef",
-        ref: u,
-        class: i(n.$style.host)
+        ref: c,
+        class: d(i.$style.host)
       }, null, 8, ["class"]),
-      v(_e, {
+      $(he, {
         ref_key: "popupsHostRef",
         ref: e,
-        class: i(n.$style.host)
+        class: d(i.$style.host)
       }, null, 8, ["class"]),
-      v(Z, {
+      $(ae, {
         ref_key: "alertsHostRef",
-        ref: a,
-        class: i(n.$style.host)
-      }, null, 8, ["class"]),
-      v(oe, {
+        ref: n
+      }, null, 512),
+      $(ue, {
         ref_key: "dropdownHostRef",
-        ref: f,
-        class: i(n.$style.host)
+        ref: o,
+        class: d(i.$style.host)
       }, null, 8, ["class"]),
-      O("div", {
+      R("div", {
         id: "smed_hints-host",
         ref_key: "hintsHostRef",
-        ref: o,
-        class: i(n.$style.host)
+        ref: s,
+        class: d(i.$style.host)
       }, null, 2)
     ], 64));
   }
-}), be = "_host_qf25v_1", He = "_scrollbar_qf25v_9", Oe = {
-  host: be,
-  scrollbar: He
-}, Re = {
-  $style: Oe
-}, Ce = /* @__PURE__ */ b(Te, [["__cssModules", Re]]);
+}), Ae = "_host_qf25v_1", Se = "_scrollbar_qf25v_9", ge = {
+  host: Ae,
+  scrollbar: Se
+}, Me = {
+  $style: ge
+}, qe = /* @__PURE__ */ O(ke, [["__cssModules", Me]]);
 export {
-  Ce as default
+  qe as default
 };

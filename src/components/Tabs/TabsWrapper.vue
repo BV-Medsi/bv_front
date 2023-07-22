@@ -44,16 +44,20 @@ export default {
   list-style: none;
   padding: 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }
 .tabs_header li {
   background-color: #e0e0e0;
-  width: 120px;
+  width: 200px;
+
   text-align: center;
   cursor: pointer;
   transition: 0.4s all ease-out;
   padding: 10px 5px;
   border-radius: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 10px;
 }
 .tabs_header li.selected {
   background-color: #00b2acff;

@@ -21,12 +21,15 @@
   text-align: start;
   margin: 10px 20px 0px 20px;
 }
-.base_button_disclaimer {
+.base_button {
           width: 89%;
           height: 5%;
           padding: 10px 16px 10px 16px;
         }
-
+.base_button_2{
+  width: 94%;
+  margin: 30px 0px;
+}
 a {
   font-weight: 500;
   color: #646cff;
@@ -35,9 +38,8 @@ a {
 a:hover {
   color: #535bf2;
 }
-
 body {
-  background-color: #f6f6f6;
+  background-color: rgb(206, 206, 206);
   margin: 0;
   display: flex;
   place-items: center;
@@ -50,18 +52,14 @@ h1 {
   line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
-  gap: 8px;
-  margin: 280px 20px 10px 20px;
-}
+/*button {*/
+/*  border-radius: 8px;*/
+/*  gap: 8px;*/
+/*  margin: 280px 20px 10px 20px;*/
+/*}*/
 .info_image{
   text-align:  start;
   margin: 60% 185px 0px 20px;
-}
-.homeindicator{
-  width: 375px;
-  height: 34px;
 }
 .body{
   place-items: center;
@@ -69,6 +67,5 @@ button {
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }

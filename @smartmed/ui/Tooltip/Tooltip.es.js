@@ -1,13 +1,14 @@
 import "./Tooltip.css";
-import { defineComponent as Z, mergeDefaults as q, toRefs as Y, inject as j, ref as h, computed as K, onBeforeUnmount as U, watch as G, withDirectives as B, openBlock as C, createBlock as J, unref as k, normalizeClass as x, withCtx as A, createElementVNode as Q, renderSlot as O, createVNode as P, Transition as X, createElementBlock as R, normalizeStyle as tt, createCommentVNode as et } from "vue";
-import ot from "@smartmed/ui/ActiveZone";
-import it from "@smartmed/ui/Portal";
-import { HINT_HOST_TOKEN as nt } from "@smartmed/ui/tokens";
-import { HoveredDirective as I } from "@smartmed/utility/directives";
-import { _ as lt } from "../_plugin-vue_export-helper-dad06003.mjs";
-const st = {
+import { defineComponent as U, mergeDefaults as G, toRefs as J, useSlots as Q, inject as X, ref as u, computed as O, onBeforeUnmount as x, watch as R, withDirectives as P, openBlock as S, createBlock as $, unref as k, normalizeClass as A, withCtx as B, createElementVNode as tt, renderSlot as I, createVNode as et, Transition as ot, createElementBlock as it, normalizeStyle as nt, createCommentVNode as F } from "vue";
+import lt from "@smartmed/ui/ActiveZone";
+import st from "@smartmed/ui/Portal";
+import { HINT_HOST_TOKEN as rt } from "@smartmed/ui/tokens";
+import { HoveredDirective as z } from "@smartmed/utility/directives";
+import { hasSlotContent as at } from "@smartmed/utility/vue";
+import { _ as ct } from "../_plugin-vue_export-helper-dad06003.mjs";
+const dt = {
   direction: "bottom-right"
-}, e = 4, rt = 7, $ = rt * 5, ct = {
+}, i = 4, ht = 7, N = ht * 5, ut = {
   "top-left": "bottom-left",
   "top-right": "bottom-right",
   "bottom-left": "top-left",
@@ -16,7 +17,7 @@ const st = {
   right: "left",
   "top-middle": "bottom-middle",
   "bottom-middle": "top-middle"
-}, at = {
+}, ft = {
   "top-left": "top-right",
   "top-right": "top-left",
   "bottom-left": "bottom-right",
@@ -26,9 +27,9 @@ const st = {
   "top-middle": "top-middle",
   "bottom-middle": "bottom-middle"
 };
-function dt(o, a, i, g) {
-  let s = g;
-  const _ = o.top + o.height / 2 - a.height / 2 - i.top, d = o.left - a.width - e - i.left, m = o.left + o.width + e - i.left, r = o.bottom + e - i.top, f = o.top - a.height - e - i.top, u = o.left + o.width / 2 - $ - i.left, p = o.left + o.width / 2 - a.width + $ - i.left, v = o.left - a.width / 2 + o.width / 2 - i.left, c = [
+function mt(n, a, l, b) {
+  let s = b;
+  const w = n.top + n.height / 2 - a.height / 2 - l.top, T = n.left - a.width - i - l.left, h = n.left + n.width + i - l.left, c = n.bottom + i - l.top, r = n.top - a.height - i - l.top, f = n.left + n.width / 2 - N - l.left, m = n.left + n.width / 2 - a.width + N - l.left, p = n.left - a.width / 2 + n.width / 2 - l.left, d = [
     "left",
     "right",
     "bottom-left",
@@ -38,164 +39,173 @@ function dt(o, a, i, g) {
     "top-right",
     "top-middle"
   ];
-  c.splice(c.indexOf(s), 1);
-  let n = 0, l = 0;
-  for (; c.length; ) {
+  d.splice(d.indexOf(s), 1);
+  let o = 0, e = 0;
+  for (; d.length; ) {
     switch (s) {
       case "left":
-        n = _, l = d - e * 2;
+        o = w, e = T - i * 2;
         break;
       case "right":
-        n = _, l = m + e * 2;
+        o = w, e = h + i * 2;
         break;
       case "top-right":
-        n = f - e * 2, l = u;
+        o = r - i * 2, e = f;
         break;
       case "top-left":
-        n = f - e * 2, l = p;
+        o = r - i * 2, e = m;
         break;
       case "bottom-right":
-        n = r + e * 2, l = u;
+        o = c + i * 2, e = f;
         break;
       case "bottom-left":
-        n = r + e * 2, l = p;
+        o = c + i * 2, e = m;
         break;
       case "bottom-middle":
-        n = r + e * 2, l = v;
+        o = c + i * 2, e = p;
         break;
       case "top-middle":
-        n = f - e * 2, l = v;
+        o = r - i * 2, e = p;
         break;
     }
-    const b = n + i.top > e && n + a.height + e + i.top < window.innerHeight, H = l > e && l + a.width + e + i.left < i.width;
-    if (c.length === 0 || b && H)
+    const y = o + l.top > i && o + a.height + i + l.top < window.innerHeight, H = e > i && e + a.width + i + l.left < l.width;
+    if (d.length === 0 || y && H)
       break;
-    s = b ? at[s] : ct[s], s = c.splice(c.indexOf(s), 1)[0] || g;
+    s = y ? ft[s] : ut[s], s = d.splice(d.indexOf(s), 1)[0] || b;
   }
   return {
-    left: l,
-    top: n,
+    left: e,
+    top: o,
     direction: s
   };
 }
-const mt = ["aria-describedby"], ft = {
+const _t = ["aria-describedby"], pt = {
   name: "Tooltip"
-}, ht = /* @__PURE__ */ Z({
-  ...ft,
-  props: q({
+}, vt = /* @__PURE__ */ U({
+  ...pt,
+  props: G({
     direction: {},
-    describedBy: {}
-  }, st),
-  setup(o) {
-    const a = o, i = 500, g = 200, { direction: s } = Y(a), _ = j(nt), d = h(null), m = h(null), r = h(!1), f = h(null), u = h(null), p = h(s.value), v = h({ left: 0, top: 0 }), c = { id: null }, n = () => _ ? _.value.getBoundingClientRect() : {
+    describedBy: {},
+    wide: { type: Boolean }
+  }, dt),
+  setup(n) {
+    const a = n, l = 500, b = 200, { direction: s } = J(a), w = Q(), T = X(rt), h = u(null), c = u(null), r = u(!1), f = u(null), m = u(null), p = u(s.value), d = u({ left: 0, top: 0 }), o = { id: null }, e = O(() => at(w.hint)), y = () => T ? T.value.getBoundingClientRect() : {
       left: 0,
       top: document.body.clientHeight,
       width: document.body.clientWidth
-    }, l = (t) => {
-      t ? (D(), w()) : (T(), E());
-    }, b = (t) => {
-      t ? (D(), w()) : (T(), E());
     }, H = (t) => {
-      r.value && (t ? w() : (T(), E()));
-    }, D = () => {
-      r.value || (d.value = setTimeout(() => {
-        r.value = !0, d.value = null;
-      }, i));
-    }, T = () => {
-      d.value && (clearTimeout(d.value), d.value = null);
+      if (!e.value) {
+        g(), v();
+        return;
+      }
+      t ? (C(), g()) : (v(), E());
+    }, L = (t) => {
+      e.value && (t ? (C(), g()) : (v(), E()));
+    }, M = (t) => {
+      !r.value || !e.value || (t ? g() : (v(), E()));
+    }, C = () => {
+      r.value || !e.value || (h.value = setTimeout(() => {
+        r.value = !0, h.value = null;
+      }, l));
+    }, v = () => {
+      h.value && (clearTimeout(h.value), h.value = null);
     }, E = () => {
-      r.value && (m.value = setTimeout(() => {
-        r.value = !1, m.value = null;
-      }, g));
-    }, w = () => {
-      m.value && (clearTimeout(m.value), m.value = null);
-    }, F = K(() => {
-      const { left: t, top: y } = v.value;
+      !r.value || !e.value || (c.value = setTimeout(() => {
+        r.value = !1, c.value = null;
+      }, b));
+    }, g = () => {
+      c.value && (clearTimeout(c.value), c.value = null);
+    }, V = O(() => {
+      const { left: t, top: _ } = d.value;
       return {
         left: `${t}px`,
-        top: `${y}px`
+        top: `${_}px`
       };
     });
-    U(() => {
-      T(), w(), S();
+    x(() => {
+      v(), g(), D();
     });
-    const z = () => {
-      if (!f.value || !u.value)
+    const W = () => {
+      if (!f.value || !m.value)
         return;
-      const t = f.value.getBoundingClientRect(), y = u.value.getBoundingClientRect(), L = n(), {
-        direction: M,
-        left: V,
-        top: W
-      } = dt(t, y, L, s.value);
-      v.value = {
-        left: V,
-        top: W
-      }, p.value = M;
-    }, N = () => {
+      const t = f.value.getBoundingClientRect(), _ = m.value.getBoundingClientRect(), q = y(), {
+        direction: Y,
+        left: j,
+        top: K
+      } = mt(t, _, q, s.value);
+      d.value = {
+        left: j,
+        top: K
+      }, p.value = Y;
+    }, Z = () => {
       const t = () => {
-        z(), c.id = requestAnimationFrame(t);
+        W(), o.id = requestAnimationFrame(t);
       };
-      c.id = requestAnimationFrame(t);
-    }, S = () => {
-      c.id && cancelAnimationFrame(c.id);
+      o.id = requestAnimationFrame(t);
+    }, D = () => {
+      o.id && cancelAnimationFrame(o.id);
     };
-    return G(r, (t) => {
-      t ? N() : S();
-    }), (t, y) => B((C(), J(k(ot), {
-      class: x(t.$style.host),
-      onActiveZoneChanged: l
+    return R([r, e], ([t, _]) => {
+      t && _ ? Z() : D();
+    }), (t, _) => P((S(), $(k(lt), {
+      class: A([t.$style.host, t.wide && t.$style.host_wide]),
+      onActiveZoneChanged: H
     }, {
-      default: A(() => [
-        Q("div", {
+      default: B(() => [
+        tt("div", {
           ref_key: "host",
           ref: f,
-          class: x(t.$style.container)
+          class: A(t.$style.container)
         }, [
-          O(t.$slots, "default")
+          I(t.$slots, "default")
         ], 2),
-        P(k(it), { "append-to": "#smed_hints-host" }, {
-          default: A(() => [
-            P(X, { name: "fade" }, {
-              default: A(() => [
-                r.value ? B((C(), R("div", {
+        e.value ? (S(), $(k(st), {
+          key: 0,
+          "append-to": "#smed_hints-host"
+        }, {
+          default: B(() => [
+            et(ot, { name: "fade" }, {
+              default: B(() => [
+                r.value ? P((S(), it("div", {
                   key: 0,
                   ref_key: "hint",
-                  ref: u,
-                  class: x([t.$style.hint, t.$style["hint_" + p.value]]),
+                  ref: m,
+                  class: A([t.$style.hint, t.$style["hint_" + p.value]]),
                   "aria-describedby": t.describedBy,
-                  style: tt(F.value)
+                  style: nt(V.value)
                 }, [
-                  O(t.$slots, "hint")
-                ], 14, mt)), [
-                  [k(I), { onEvent: H }]
-                ]) : et("", !0)
+                  I(t.$slots, "hint")
+                ], 14, _t)), [
+                  [k(z), { onEvent: M }]
+                ]) : F("", !0)
               ]),
               _: 3
             })
           ]),
           _: 3
-        })
+        })) : F("", !0)
       ]),
       _: 3
     }, 8, ["class"])), [
-      [k(I), { onEvent: b }]
+      [k(z), { onEvent: L }]
     ]);
   }
-}), ut = "_host_1n1x8_1", _t = "_container_1n1x8_6", pt = "_hint_1n1x8_10", vt = "_hint_left_1n1x8_27", gt = "_hint_right_1n1x8_32", bt = {
-  host: ut,
-  container: _t,
-  hint: pt,
-  hint_left: vt,
-  hint_right: gt,
-  "hint_bottom-left": "_hint_bottom-left_1n1x8_37",
-  "hint_bottom-right": "_hint_bottom-right_1n1x8_41",
-  "hint_bottom-middle": "_hint_bottom-middle_1n1x8_45",
-  "hint_top-left": "_hint_top-left_1n1x8_50",
-  "hint_top-right": "_hint_top-right_1n1x8_55",
-  "hint_top-middle": "_hint_top-middle_1n1x8_60"
-}, Tt = {
-  $style: bt
-}, Dt = /* @__PURE__ */ lt(ht, [["__cssModules", Tt]]);
+}), gt = "_host_2h2o8_1", bt = "_host_wide_2h2o8_5", wt = "_container_2h2o8_8", Tt = "_hint_2h2o8_16", yt = "_hint_left_2h2o8_33", kt = "_hint_right_2h2o8_38", Ht = {
+  host: gt,
+  host_wide: bt,
+  container: wt,
+  hint: Tt,
+  hint_left: yt,
+  hint_right: kt,
+  "hint_bottom-left": "_hint_bottom-left_2h2o8_43",
+  "hint_bottom-right": "_hint_bottom-right_2h2o8_47",
+  "hint_bottom-middle": "_hint_bottom-middle_2h2o8_51",
+  "hint_top-left": "_hint_top-left_2h2o8_56",
+  "hint_top-right": "_hint_top-right_2h2o8_61",
+  "hint_top-middle": "_hint_top-middle_2h2o8_66"
+}, Et = {
+  $style: Ht
+}, It = /* @__PURE__ */ ct(vt, [["__cssModules", Et]]);
 export {
-  Dt as default
+  It as default
 };
