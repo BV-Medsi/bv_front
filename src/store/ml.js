@@ -16,7 +16,7 @@ export const useMlStore = defineStore({
             this.isLoading = true;
             try {
                 const result = await axiosApiInstance.post(BASE_URL, data)
-                stepsStore.setPrediction(result.data);
+                stepsStore.setPrediction(result.data.answer);
             } catch(e) {
             } finally {
                 this.isLoading = false;

@@ -1,6 +1,5 @@
 <script setup>
 
-import Layout from "../Layout.vue";
 import {onMounted, watch} from "vue";
 import {useStepsStore} from "../../store/steps.js";
 import {storeToRefs} from "pinia";
@@ -14,9 +13,10 @@ const mlStore = useMlStore();
 const {getCorrectSymptomsData, getIndicatorsData, steps, getInlinesHistory} = storeToRefs(store)
 const {selectClinic, selectDoctor} = store
 const {predictValues} = mlStore;
+const {isLoading} = storeToRefs(mlStore);
 
 import {useCardStore} from '../../store/card.js'
-import {ROUTES} from "../../router/index.js";
+import Spinner from "../../../@smartmed/ui/Spinner";
 
 const cardStore = useCardStore();
 const props = defineProps(['stepData', 'isValid']);
@@ -32,6 +32,7 @@ const payload = {
 onMounted(async () => {
   console.log(payload)
   await predictValues(payload);
+  console.log(props.stepData.doctors);
 });
 
 watch(() => props.stepData, (newValue, oldValue) => {
@@ -42,8 +43,9 @@ const emit = defineEmits(['update:response']);
 </script>
 
 <template>
-  <Layout>
-    <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Результаты</h2>
+    <Spinner v-if="isLoading" :class="$style.spinner"></Spinner>
+    <div v-else>
+     <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Результаты</h2>
     <p :class="$style.subtitle" class="smed-text_h3">Здесь представлен список врачей, которых вы можете посетить</p>
     <div>
       <div v-for="(doctor, doctorIndex) in stepData.doctors?.sort((a, b) => b.prediction - a.prediction)"
@@ -67,15 +69,23 @@ const emit = defineEmits(['update:response']);
       <BaseButton class="base_button_2">Записаться</BaseButton>
 
     </div>
-  </Layout>
+    </div>
 </template>
 
 <style module>
+.layout{
+
+}
 .title {
   text-align: left;
   margin-bottom: 40px;
 }
-
+.spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .subtitle {
   text-align: left;
   margin-bottom: 20px;
@@ -107,5 +117,6 @@ h3 {
 
 .title {
   margin-bottom: 20px;
+
 }
 </style>

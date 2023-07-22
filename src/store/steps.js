@@ -101,7 +101,7 @@ export const useStepsStore = defineStore({
                     doctors: [
                         {
                             isSelected: false,
-                            name: 'Терапевт',
+                            name: '',
                             prediction: 0.8,
                             clinics: [{
                                 name: 'Клиника на Благовещенском переулке',
@@ -272,7 +272,12 @@ export const useStepsStore = defineStore({
         },
         setPrediction(data) {
             const dataToUpdate = this.steps.find(s => s.id === ROUTES.RESULTS).data;
-            mapResponseToObject(data, dataToUpdate)
+            dataToUpdate.doctors[0].name = data.doctor1.doctor;
+            dataToUpdate.doctors[0].prediction = data.doctor1.prob;
+            dataToUpdate.doctors[1].name = data.doctor2.doctor;
+            dataToUpdate.doctors[1].prediction = data.doctor2.prob;
+            dataToUpdate.doctors[3].name = data.doctor3.doctor;
+            dataToUpdate.doctors[3].prediction = data.doctor3.prob;
         },
         validateAndUpdateStep(stepIndex, data) {
             this.steps[stepIndex].data = data;

@@ -49,16 +49,19 @@ router.beforeEach((to, from, next) => {
     const store = useStepsStore();
     const authStore = useAuthStore();
     const {isAuthenticated} = storeToRefs(authStore);
-    if (!isAuthenticated.value && to.path !== '/login') {
-        next('/login');
-    } else if (isAuthenticated.value && to.path === '/login') {
-        next('/')
-    } else {
-        if (to.path.startsWith('/chat')) {
-            const stepId = to.path.split('/')[2];
-            const stepIndex = store.steps.findIndex(step => step.id === stepId);
-            if (stepIndex > 0 && !store.steps[stepIndex - 1].isValid) next(`/chat/${ROUTES.DISCLAIMER}`)
-            else next();
-        } else next();
-    }
+    authStore.checkToken().then(result => {
+        authStore.setAuthenticated(result);
+        if (!isAuthenticated.value && to.path !== '/login') {
+            next('/login');
+        } else if (isAuthenticated.value && to.path === '/login') {
+            next('/')
+        } else {
+            if (to.path.startsWith('/chat')) {
+                const stepId = to.path.split('/')[2];
+                const stepIndex = store.steps.findIndex(step => step.id === stepId);
+                if (stepIndex > 0 && !store.steps[stepIndex - 1].isValid) next(`/chat/${ROUTES.DISCLAIMER}`)
+                else next();
+            } else next();
+        }
+    });
 })
