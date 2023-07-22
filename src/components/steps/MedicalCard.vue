@@ -8,13 +8,13 @@
       >
       </base-input>
       <div :class="$style.chooseGender">
-        <label>
-          <input :class="$style.radio_button" type="radio" :value="0"
+        <label :class="$style.radio_text">
+          <input :class="$style['styled-radio']" type="radio" :value="0"
                  :checked="stepData.gender === 0" v-model="stepData.gender">
           <span class="smed-text_body-md">Мужчина</span>
         </label>
-        <label>
-          <input :class="$style.radio_button" type="radio" :value="1"
+        <label :class="$style.radio_text">
+          <input :class="$style['styled-radio']" type="radio" :value="1"
                  :checked="stepData.gender === 1" v-model="stepData.gender">
           <span class="smed-text_body-md">Женщина</span>
         </label>
@@ -176,9 +176,6 @@ const isAgeValid = computed(() => {
 h2{
   text-align: left;
 }
-.radio_button{
-  accent-color: #00B2AC;
-}
 hr {
   width: 100%;
   height: 1px;
@@ -202,11 +199,45 @@ hr {
   justify-content: flex-start;
 }
 .chooseGender{
-  display: grid;
-  text-align: left;
+  display:grid;
+  justify-content: left;
+}
+.radio_text{
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
 }
 .base_button{
   width: 100%;
   margin: 30px 0px;
+}
+.styled-radio {
+ -webkit-appearance: none;
+ -moz-appearance: none;
+ appearance: none;
+ width: 20px;
+ height: 20px;
+ border: 2px solid #00B2AC;
+ border-radius: 50%;
+ outline: none;
+ cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ margin-right: 10px;
+  position: relative;
+}
+.styled-radio:checked::before {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #00B2AC;
+  margin: 4px;
+}
+.styled-radio-label {
+  font-size: 16px;
+  cursor: pointer;
 }
 </style>
