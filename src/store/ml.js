@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import {axiosApiInstance} from "../services/api.js";
 
-const BASE_URL = "http://5.63.159.74:5002/ml/";
+const BASE_URL = "https://app.mltherapist.ru/ml/";
 import {useStepsStore} from "./steps.js";
 
 export const useMlStore = defineStore({

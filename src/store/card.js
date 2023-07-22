@@ -2,7 +2,7 @@ import {defineStore} from "pinia";
 import {axiosApiInstance} from "../services/api.js";
 import {useStepsStore} from "./steps.js";
 
-const BASE_URL = "https://mltherapist.ru/api/v1/"
+const BASE_URL = "https://app.mltherapist.ru/api/v1/"
 const store = useStepsStore();
 const {updateCardData} = store;
 export const useCardStore = defineStore({

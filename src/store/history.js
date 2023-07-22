@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import {axiosApiInstance} from "../services/api.js";
 
-const BASE_URL = 'https://mltherapist.ru/api/v1/';
+const BASE_URL = 'https://app.mltherapist.ru/api/v1/';
 export const useHistoryStore = defineStore({
     id: 'history-store',
     state: () => ({
