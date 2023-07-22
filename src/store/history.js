@@ -10,14 +10,14 @@ export const useHistoryStore = defineStore({
     }),
     getters: {},
     actions: {
-        fetchHistory() {
+        async fetchHistory() {
             this.isLoading = true;
             try {
-                const response = axiosApiInstance.post(BASE_URL + 'history/get_answer', {});
+                const response = await axiosApiInstance.post(BASE_URL + 'history/get_answer', {});
                 this.history = response.data;
             } catch(e) {
                 console.error(e)
-            } finally {
+            } finally  {
                 this.isLoading = false;
             }
         },

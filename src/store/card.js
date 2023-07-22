@@ -1,5 +1,4 @@
 import {defineStore} from "pinia";
-import {tokenStorage} from "../services/TokenStorage.js";
 import {axiosApiInstance} from "../services/api.js";
 import {useStepsStore} from "./steps.js";
 
