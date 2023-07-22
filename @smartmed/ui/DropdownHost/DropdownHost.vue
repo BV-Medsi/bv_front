@@ -38,12 +38,6 @@
   </active-zone>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DropdownHost',
-};
-</script>
-
 <script setup lang="ts">
 import ActiveZone from '@smartmed/ui/ActiveZone';
 import Portal from '@smartmed/ui/Portal';
@@ -52,6 +46,7 @@ import {
   DROPDOWN_HOST_PIVOT_TOKEN,
   DROPDOWN_HOST_TOKEN,
 } from '@smartmed/ui/tokens';
+import { SCROLLBAR_REF_TOKEN } from '@smartmed/ui/tokens';
 import { useOverscroll } from '@smartmed/ui/use';
 import {
   getClosestKeyboardFocusable,
@@ -71,7 +66,6 @@ import {
   watch,
 } from 'vue';
 
-import { SCROLLBAR_REF_TOKEN } from '../ScrollbarControllers/scrollbarTokens';
 import {
   DEFAULT_MIN_HEIGHT,
   DropdownHostDefaultProps,
@@ -81,6 +75,10 @@ import {
 } from './DropdownHost.props';
 
 const DEFAULT_MARGIN = 8;
+
+defineOptions({
+  name: 'DropdownHost',
+});
 
 function inRange(value: number, min: number, max: number): boolean {
   return value >= min && value <= max;
@@ -371,27 +369,31 @@ onBeforeUnmount(() => {
 });
 
 const onKeydownArrowDown = () => {
-  if (!opened.value && canOpen.value) {
-    toggleOpen();
-
-    dropdownFocusTimeout = setTimeout(() => {
-      const closestFocusable = getClosestKeyboardFocusable(
-        topFocusableElement.value!,
-        false,
-        dropdown.value!
-      );
-
-      dropdownFocusTimeout = null;
-
-      if (
-        closestFocusable &&
-        closestFocusable.id !== 'smed_autoUnfocusableBottom' &&
-        closestFocusable.id !== 'smed_autoUnfocusableTop'
-      ) {
-        setNativeFocused(closestFocusable);
-      }
-    });
+  if (!canOpen.value) {
+    return;
   }
+
+  if (!opened.value) {
+    toggleOpen();
+  }
+
+  dropdownFocusTimeout = setTimeout(() => {
+    const closestFocusable = getClosestKeyboardFocusable(
+      topFocusableElement.value!,
+      false,
+      dropdown.value!
+    );
+
+    dropdownFocusTimeout = null;
+
+    if (
+      closestFocusable &&
+      closestFocusable.id !== 'smed_autoUnfocusableBottom' &&
+      closestFocusable.id !== 'smed_autoUnfocusableTop'
+    ) {
+      setNativeFocused(closestFocusable);
+    }
+  });
 };
 
 const onTopFocus = () => {

@@ -1,19 +1,18 @@
 import "./ScrollbarControllers.css";
-import { defineComponent as S, toRefs as re, ref as T, inject as _, computed as H, onBeforeUnmount as se, watch as M, openBlock as f, createElementBlock as W, provide as ae, renderSlot as ce, normalizeClass as h, createVNode as w, Transition as P, withCtx as E, createBlock as F, createCommentVNode as K } from "vue";
-import { ANIMATION_FRAME_EVENTS_TOKEN as Y } from "@smartmed/ui/tokens";
-import { useThrottleFn as j } from "@smartmed/utility/functions";
-import { a as G, S as q } from "../scrollbarTokens-5a5285c0.mjs";
+import { defineComponent as W, toRefs as re, ref as T, inject as _, computed as H, onBeforeUnmount as se, watch as M, openBlock as f, createElementBlock as k, provide as ae, renderSlot as ce, normalizeClass as h, createVNode as w, Transition as P, withCtx as E, createBlock as F, createCommentVNode as K } from "vue";
+import { SCROLLBAR_REF_TOKEN as Y, ANIMATION_FRAME_EVENTS_TOKEN as j } from "@smartmed/ui/tokens";
+import { useThrottleFn as G } from "@smartmed/utility/functions";
 import { _ as ie } from "../_plugin-vue_export-helper-dad06003.mjs";
-const L = 24, ue = 1e3 / 15, U = /* @__PURE__ */ S({
+const q = "__smed-scrollbar-wrapper", L = 24, ue = 1e3 / 15, U = /* @__PURE__ */ W({
   __name: "ScrollbarThumb",
   props: {
     direction: { default: "vertical" }
   },
   setup(g) {
-    const i = g, { direction: n } = re(i), r = T(null), u = _(G), c = _(
-      q,
+    const i = g, { direction: n } = re(i), r = T(null), u = _(q), c = _(
+      Y,
       null
-    ), k = _(Y), v = H(
+    ), C = _(j), v = H(
       () => c && c.value || document.documentElement
     ), s = H(
       () => c && c.value || window
@@ -33,12 +32,12 @@ const L = 24, ue = 1e3 / 15, U = /* @__PURE__ */ S({
         clientWidth: R
       } = e;
       return n.value === "vertical" ? t / (o - l) : a / (d - R);
-    }, C = () => {
+    }, S = () => {
       const e = p() || m();
       return y() * (1 - e);
     }, z = () => {
       const e = r.value;
-      e && (i.direction === "vertical" ? (e.style.top = `${C() * 100}%`, e.style.height = `${m() * 100}%`) : (e.style.left = `${C() * 100}%`, e.style.width = `${m() * 100}%`));
+      e && (i.direction === "vertical" ? (e.style.top = `${S() * 100}%`, e.style.height = `${m() * 100}%`) : (e.style.left = `${S() * 100}%`, e.style.width = `${m() * 100}%`));
     }, N = ({ clientY: e, clientX: t }, o, l) => {
       if (!r.value || !u.value)
         return [0, 0];
@@ -88,23 +87,23 @@ const L = 24, ue = 1e3 / 15, U = /* @__PURE__ */ S({
       var e, t;
       s.value.removeEventListener("scroll", z), (e = r.value) == null || e.removeEventListener("mousedown", B), (t = u.value) == null || t.removeEventListener("mousedown", A), document.removeEventListener("mousemove", b), document.removeEventListener("mouseup", $);
     });
-    const x = j(z, ue);
-    return M(k, x, { immediate: !0 }), M(
+    const x = G(z, ue);
+    return M(C, x, { immediate: !0 }), M(
       [u, r],
       (e, t) => {
         e && t && Z();
       },
       { immediate: !0 }
-    ), (e, t) => (f(), W("div", {
+    ), (e, t) => (f(), k("div", {
       ref_key: "thumbRef",
       ref: r
     }, null, 512));
   }
-}), X = /* @__PURE__ */ S({
+}), X = /* @__PURE__ */ W({
   __name: "ScrollbarWrapper",
   setup(g) {
     const i = T(null);
-    return ae(G, i), (n, r) => (f(), W("div", {
+    return ae(q, i), (n, r) => (f(), k("div", {
       ref_key: "wrapper",
       ref: i
     }, [
@@ -113,19 +112,19 @@ const L = 24, ue = 1e3 / 15, U = /* @__PURE__ */ S({
   }
 }), de = {
   name: "ScrollbarControllers"
-}, ve = /* @__PURE__ */ S({
+}, ve = /* @__PURE__ */ W({
   ...de,
   setup(g) {
-    const i = _(Y), n = _(
-      q,
+    const i = _(j), n = _(
+      Y,
       null
     ), r = T(!1), u = T(!1), c = H(
       () => n && n.value || document.documentElement
-    ), v = j(() => {
+    ), v = G(() => {
       const { clientHeight: s, scrollHeight: p, clientWidth: m, scrollWidth: y } = c.value;
       r.value = Math.ceil(s / p * 100) < 100, u.value = Math.ceil(m / y * 100) < 100;
     }, 300);
-    return M(i, v, { immediate: !0 }), (s, p) => (f(), W("div", {
+    return M(i, v, { immediate: !0 }), (s, p) => (f(), k("div", {
       class: h(s.$style.root)
     }, [
       w(P, { name: "fade" }, {
@@ -182,7 +181,7 @@ const L = 24, ue = 1e3 / 15, U = /* @__PURE__ */ S({
   thumb: we
 }, Le = {
   $style: Ee
-}, He = /* @__PURE__ */ ie(ve, [["__cssModules", Le]]);
+}, Re = /* @__PURE__ */ ie(ve, [["__cssModules", Le]]);
 export {
-  He as default
+  Re as default
 };

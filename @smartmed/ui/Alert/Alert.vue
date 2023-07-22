@@ -5,7 +5,11 @@
   >
     <svg-icon :class="['smed-space_right-2', $style.icon]" :name="iconName" />
 
-    <slot>{{ content }}</slot>
+    <template v-if="typeof content === 'string'">
+      {{ content }}
+    </template>
+
+    <component v-else :is="content" :context="context" />
 
     <button
       v-if="closable"
@@ -51,6 +55,11 @@ const iconName = computed(() => {
 
 const onClose = () => {
   emit('close');
+};
+
+const context = {
+  data: props.data,
+  close: onClose,
 };
 </script>
 

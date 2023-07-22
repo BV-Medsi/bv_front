@@ -1,12 +1,11 @@
 import "./DropdownHost.css";
-import { defineComponent as we, mergeDefaults as _e, ref as s, toRefs as ge, inject as M, nextTick as ye, computed as w, watch as k, onMounted as be, onUpdated as He, onBeforeUnmount as xe, openBlock as _, createBlock as g, unref as p, normalizeClass as W, withKeys as ee, withModifiers as L, withCtx as y, createElementVNode as A, renderSlot as te, Transition as Te, normalizeStyle as De, createCommentVNode as B } from "vue";
+import { defineComponent as we, mergeDefaults as ge, ref as s, toRefs as _e, inject as M, nextTick as ye, computed as w, watch as k, onMounted as be, onUpdated as He, onBeforeUnmount as xe, openBlock as g, createBlock as _, unref as p, normalizeClass as W, withKeys as ee, withModifiers as L, withCtx as y, createElementVNode as A, renderSlot as te, Transition as De, normalizeStyle as Te, createCommentVNode as B } from "vue";
 import Ee from "@smartmed/ui/ActiveZone";
 import Oe from "@smartmed/ui/Portal";
 import $e from "@smartmed/ui/Scrollbar";
-import { DROPDOWN_HOST_TOKEN as Fe, DROPDOWN_HOST_PIVOT_TOKEN as Me } from "@smartmed/ui/tokens";
-import { useOverscroll as ke } from "@smartmed/ui/use";
+import { DROPDOWN_HOST_TOKEN as Fe, SCROLLBAR_REF_TOKEN as Me, DROPDOWN_HOST_PIVOT_TOKEN as ke } from "@smartmed/ui/tokens";
+import { useOverscroll as We } from "@smartmed/ui/use";
 import { getClosestKeyboardFocusable as C, setNativeFocused as oe } from "@smartmed/utility/dom/focus";
-import { S as We } from "../scrollbarTokens-5a5285c0.mjs";
 import { _ as Le } from "../_plugin-vue_export-helper-dad06003.mjs";
 const Ae = 400, ne = 80, Be = {
   modelValue: !1,
@@ -16,11 +15,10 @@ const Ae = 400, ne = 80, Be = {
   direction: "bottom",
   customDropdownStyles: () => ({}),
   minHeight: ne
-}, Ce = ["onClick"], Ve = {
-  name: "DropdownHost"
-}, Ne = /* @__PURE__ */ we({
-  ...Ve,
-  props: _e({
+}, Ce = ["onClick"], i = 8, Ve = /* @__PURE__ */ we({
+  name: "DropdownHost",
+  __name: "DropdownHost",
+  props: ge({
     modelValue: { type: Boolean },
     canOpen: { type: Boolean },
     minHeight: {},
@@ -33,25 +31,25 @@ const Ae = 400, ne = 80, Be = {
   }, Be),
   emits: ["update:modelValue"],
   setup(le, { emit: b }) {
-    const V = le, i = 8;
+    const V = le;
     function N(e, t, n) {
       return e >= t && e <= n;
     }
     const a = s(!!V.modelValue), {
       modelValue: ae,
       canOpen: r,
-      maxHeight: S,
-      maxWidth: R,
+      maxHeight: R,
+      maxWidth: S,
       minHeight: H,
       direction: se,
       minWidth: z,
       align: P
-    } = ge(V), x = M(Fe), U = M(We, null), K = M(
-      Me,
+    } = _e(V), x = M(Fe), U = M(Me, null), K = M(
+      ke,
       s()
-    ), T = s(null), D = s(null), E = s(null), m = s(null), v = s(null), I = s(null), Z = s(null), G = s(null), j = s(!1);
+    ), D = s(null), T = s(null), E = s(null), m = s(null), v = s(null), I = s(null), Z = s(null), G = s(null), j = s(!1);
     ye(() => j.value = !0);
-    const O = ke(
+    const O = We(
       "all",
       (e) => e.native
     ), $ = w(
@@ -70,12 +68,12 @@ const Ae = 400, ne = 80, Be = {
       top: document.body.clientHeight,
       width: document.body.clientWidth
     } : x.value.element.getBoundingClientRect(), ue = w(() => {
-      const e = R && R.value, t = z && z.value, n = T.value;
+      const e = S && S.value, t = z && z.value, n = D.value;
       return {
         "max-width": e ? `${e}px` : null,
         "min-width": t ? `${t}px` : null,
         "max-height": n ? `${n}px` : null,
-        top: D.value,
+        top: T.value,
         bottom: E.value,
         left: m.value,
         right: v.value,
@@ -89,7 +87,7 @@ const Ae = 400, ne = 80, Be = {
       e || q();
     }, J = s(!1), re = (e) => {
       const t = window.innerHeight, n = e.top - i, l = t - e.bottom - i, o = Math.min(
-        S.value,
+        R.value,
         t - i
       ), d = Math.min(
         Math.max(
@@ -115,10 +113,10 @@ const Ae = 400, ne = 80, Be = {
       de(e, t), me(e, t), ve(e);
     }, de = (e, t) => {
       const n = window.innerHeight, l = Math.min(
-        S.value,
+        R.value,
         n - i * 2
       ), o = i, d = e.top - o, u = n - e.bottom - o, Y = re(e);
-      J.value = Y === "top", Y === "top" ? (T.value = Math.min(l, d), D.value = "auto", E.value = `${t.bottom - e.top + i}px`) : (T.value = Math.min(l, u), D.value = `${e.bottom - t.top + i}px`, E.value = "auto");
+      J.value = Y === "top", Y === "top" ? (D.value = Math.min(l, d), T.value = "auto", E.value = `${t.bottom - e.top + i}px`) : (D.value = Math.min(l, u), T.value = `${e.bottom - t.top + i}px`, E.value = "auto");
     }, me = (e, t) => {
       const l = Math.ceil(e.left - t.left - 0), o = Math.floor(t.right - e.right - 0);
       switch (P.value) {
@@ -143,7 +141,7 @@ const Ae = 400, ne = 80, Be = {
       F.value.removeEventListener("scroll", c), window.removeEventListener("resize", c), h && clearTimeout(h);
     });
     const pe = () => {
-      !a.value && r.value && (X(), h = setTimeout(() => {
+      r.value && (a.value || X(), h = setTimeout(() => {
         const e = C(
           Z.value,
           !1,
@@ -168,7 +166,7 @@ const Ae = 400, ne = 80, Be = {
         a.value = e;
       },
       { immediate: !0 }
-    ), (e, t) => (_(), g(p(Ee), {
+    ), (e, t) => (g(), _(p(Ee), {
       ref_key: "host",
       ref: G,
       class: W(e.$style.container),
@@ -186,23 +184,23 @@ const Ae = 400, ne = 80, Be = {
         }, [
           te(e.$slots, "default")
         ], 10, Ce),
-        j.value ? (_(), g(p(Oe), {
+        j.value ? (g(), _(p(Oe), {
           key: 0,
           "append-to": "#smed_dropdown-host"
         }, {
           default: y(() => [
-            p(r) ? (_(), g(Te, {
+            p(r) ? (g(), _(De, {
               key: 0,
               name: "fade"
             }, {
               default: y(() => [
-                a.value ? (_(), g(p($e), {
+                a.value ? (g(), _(p($e), {
                   key: 0,
                   ref_key: "dropdownRef",
                   ref: O,
                   "data-automation-id": "smed-dropdown__scrollbar",
                   class: W([e.$style.dropdown, e.$style["dropdown_" + p(P)]]),
-                  style: De({ ...e.customDropdownStyles, ...ue.value })
+                  style: Te({ ...e.customDropdownStyles, ...ue.value })
                 }, {
                   default: y(() => [
                     A("div", {
@@ -231,13 +229,13 @@ const Ae = 400, ne = 80, Be = {
       _: 3
     }, 8, ["class", "child", "onKeydown"]));
   }
-}), Se = "_container_zhy4y_1", Re = "_content_zhy4y_6", ze = "_dropdown_zhy4y_13", Pe = {
-  container: Se,
+}), Ne = "_container_zhy4y_1", Re = "_content_zhy4y_6", Se = "_dropdown_zhy4y_13", ze = {
+  container: Ne,
   content: Re,
-  dropdown: ze
-}, Ue = {
-  $style: Pe
-}, et = /* @__PURE__ */ Le(Ne, [["__cssModules", Ue]]);
+  dropdown: Se
+}, Pe = {
+  $style: ze
+}, Qe = /* @__PURE__ */ Le(Ve, [["__cssModules", Pe]]);
 export {
-  et as default
+  Qe as default
 };

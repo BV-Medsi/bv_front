@@ -1,17 +1,19 @@
 <template>
   <div id="smed-alerts-host" ref="elementRef">
-    <div :class="$style.root">
+    <div :class="[$style.root, $style['root_' + position]]">
       <transition-group
         tag="ui"
-        name="smed-list-transition"
+        :name="alertTransitionName"
         :class="$style.container"
       >
-        <alert
+        <component
           v-for="item in alerts"
           :key="item.id"
+          :is="alertComponent"
           class="smed-space_bottom-4"
           :type="item.type"
           :content="item.content"
+          :data="item.data"
           :closable="item.closable"
           @close="close(item.id)"
         />
@@ -21,9 +23,9 @@
 </template>
 
 <script setup lang="ts">
-import Alert from '@smartmed/ui/Alert';
+import { ALERTS_OPTIONS_TOKEN } from '@smartmed/ui/tokens';
 import { AlertHostDefaultParams, AlertHostInstance } from '@smartmed/ui/types';
-import { onBeforeUnmount, ref } from 'vue';
+import { Component as ComponentType, inject, onBeforeUnmount, ref } from 'vue';
 
 defineOptions({
   name: 'AlertsHost',
@@ -32,15 +34,28 @@ defineOptions({
 const alerts = ref<
   {
     id: string;
-    content: string;
+    content: string | ComponentType;
     type?: 'success' | 'error';
     closable: boolean;
+    data: any;
   }[]
 >([]);
 
 const timeoutDict = new Map<string, number>();
 
+type Position = 'top' | 'top-right' | 'bottom' | 'bottom-right';
+
 const elementRef = ref<HTMLElement | null>(null);
+const options = inject<{
+  component: any;
+  transitionName: string;
+  position: Position;
+} | null>(ALERTS_OPTIONS_TOKEN, null);
+const alertComponent = options?.component ? options.component : 'div';
+const alertTransitionName = options?.transitionName
+  ? options.transitionName
+  : 'none';
+const position = options?.position || 'bottom';
 
 const show: AlertHostInstance['show'] = (
   id,
@@ -58,6 +73,7 @@ const show: AlertHostInstance['show'] = (
     content,
     type: type,
     closable: autoClose,
+    data: params.data,
   });
 
   if (autoClose) {
@@ -105,14 +121,49 @@ defineExpose<AlertHostInstance>({
 .root {
   @include transition(transform);
 
-  margin: 0 auto;
-  max-width: min(680px, calc(100vw - 24px));
-  transform: translateY(-100%) translateY(-12px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+
+  &_bottom {
+    justify-content: flex-end;
+  }
+
+  &_bottom-right {
+    justify-content: flex-end;
+
+    & > .container {
+      margin: 0 12px 0 auto;
+    }
+  }
+
+  &_top {
+    & > .container {
+      margin-top: 12px;
+    }
+  }
+
+  &_top-right {
+    & > .container {
+      margin: 12px 12px 0 auto;
+    }
+  }
 }
 
 .container {
   position: relative;
   display: block;
   width: 100%;
+  max-width: min(680px, calc(100vw - 24px));
+  margin: 0 auto;
+
+  & > * {
+    pointer-events: auto;
+  }
 }
 </style>

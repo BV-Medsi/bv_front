@@ -1,10 +1,12 @@
 import { VNode } from 'vue';
 
+import { PrimitiveCheckboxProps } from '../PrimitiveCheckbox/PrimitiveCheckbox.props';
+
 export type BaseCheckboxProps = {
-  modelValue: boolean | null;
+  modelValue: PrimitiveCheckboxProps['value'];
   disabled?: boolean;
   label?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: PrimitiveCheckboxProps['size'];
   isError?: boolean;
   pseudoHovered?: boolean;
 };
@@ -23,4 +25,5 @@ export const BaseCheckboxDefaultProps = {
   label: '',
   size: 'md',
   isError: false,
+  pseudoHovered: false,
 } as const;

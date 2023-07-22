@@ -1,20 +1,23 @@
-import { A as d } from "../ActiveElement.token-15bf5689.mjs";
-const E = "__smed_ALERTS_HOST_TOKEN", T = "__smed_AnimationFrameEvents", O = "__smed_DropdownHostToken", N = "__smed_DropdownHostPivotToken", o = "__SmartMed_EVENT_TUNNEL_TOKEN", s = "__SmartMed_EVENT_TUNNEL_CONTROLLER_TOKEN", t = "__SmartMed_EVENT_TUNNEL_PROGRESS_TOKEN", S = "__smed_HintHostToken", e = "__smed-IS_POPUP_MOBILE_TOKEN", n = "__SmartMed_MODEL_MODIFIERS_TOKEN", R = "__smed_PopupsHostToken", K = (_) => `https://static.medsi.pro/icons/${_}.svg`, c = Symbol(), I = "__smed_TableBarHostToken", L = "__SmartMed_VALIDATION_ERRORS_TOKEN";
+const E = "__SmartMed_ACTIVE_ELEMENT_TOKEN", T = "__smed_ALERTS_HOST_TOKEN", O = "__smedAlertsOptions", N = "__smed_AnimationFrameEvents", t = "__smed_DropdownHostToken", s = "__smed_DropdownHostPivotToken", o = "__SmartMed_EVENT_TUNNEL_TOKEN", e = "__SmartMed_EVENT_TUNNEL_CONTROLLER_TOKEN", n = "__SmartMed_EVENT_TUNNEL_PROGRESS_TOKEN", S = "__smed_HintHostToken", R = "__smed-IS_POPUP_MOBILE_TOKEN", c = "__internalSmedMediaScreenWidth", I = "__internalSmedMediaBreakpoints", K = "__SmartMed_MODEL_MODIFIERS_TOKEN", d = "__smed_PopupsHostToken", L = "__smed-scrollbar-ref", m = (_) => `https://static.medsi.pro/icons/${_}.svg`, r = Symbol(), A = "__smed_TableBarHostToken", M = "__SmartMed_VALIDATION_ERRORS_TOKEN";
 export {
-  d as ACTIVE_ELEMENT_TOKEN,
-  E as ALERTS_HOST_TOKEN,
-  T as ANIMATION_FRAME_EVENTS_TOKEN,
-  N as DROPDOWN_HOST_PIVOT_TOKEN,
-  O as DROPDOWN_HOST_TOKEN,
-  s as EVENT_TUNNEL_CONTROLLER_TOKEN,
-  t as EVENT_TUNNEL_PROGRESS_TOKEN,
+  E as ACTIVE_ELEMENT_TOKEN,
+  T as ALERTS_HOST_TOKEN,
+  O as ALERTS_OPTIONS_TOKEN,
+  N as ANIMATION_FRAME_EVENTS_TOKEN,
+  s as DROPDOWN_HOST_PIVOT_TOKEN,
+  t as DROPDOWN_HOST_TOKEN,
+  e as EVENT_TUNNEL_CONTROLLER_TOKEN,
+  n as EVENT_TUNNEL_PROGRESS_TOKEN,
   o as EVENT_TUNNEL_TOKEN,
   S as HINT_HOST_TOKEN,
-  e as IS_POPUP_MOBILE_TOKEN,
-  n as MODEL_MODIFIERS_TOKEN,
-  R as POPUPS_HOST_TOKEN,
-  c as SVG_ICON_SOURCE_PREDICATE,
-  I as TABLE_BAR_HOST_TOKEN,
-  L as VALIDATION_ERRORS_TOKEN,
-  K as svgIconSourceDefaultPredicate
+  R as IS_POPUP_MOBILE_TOKEN,
+  I as MEDIA_BREAKPOINTS,
+  c as MEDIA_WINDOW_WIDTH_TOKEN,
+  K as MODEL_MODIFIERS_TOKEN,
+  d as POPUPS_HOST_TOKEN,
+  L as SCROLLBAR_REF_TOKEN,
+  r as SVG_ICON_SOURCE_PREDICATE,
+  A as TABLE_BAR_HOST_TOKEN,
+  M as VALIDATION_ERRORS_TOKEN,
+  m as svgIconSourceDefaultPredicate
 };

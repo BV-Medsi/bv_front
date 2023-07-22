@@ -1,32 +1,26 @@
 <template>
-  <div :class="[$style.list, overflowy && $style.list_overflowy]">
-    <template v-if="isLoading">
-      <div :class="[$style.spinner, $style['item_' + size]]">
-        <spinner theme="primary" size="md" />
-      </div>
-    </template>
+  <div
+    ref="root"
+    :class="[$style.list, overflowy && $style.list_overflowy]"
+    @keydown.up.prevent="onMoveFocus($event, -1)"
+    @keydown.down.prevent="onMoveFocus($event, 1)"
+  >
+    <div v-if="isLoading" :class="[$style.spinner, $style['item_' + size]]">
+      <spinner theme="primary" size="md" />
+    </div>
 
     <template v-else>
-      <template v-if="items && items.length > 0">
-        <ul v-if="!virtualListProps">
-          <li
+      <div v-if="items && items.length > 0" :class="$style.buttons">
+        <slot
+          name="list"
+          :on-update="onUpdate"
+          :get-is-active="isActive.bind(null, modelValue)"
+        >
+          <data-list-item
             v-for="(item, index) in items"
-            v-keyboard-focused
-            ref="element"
             :key="index"
-            tabindex="0"
-            :class="[
-              'smed-text_body-xl',
-              $style.item,
-              $style.item_hoverable,
-              $style['item_' + size],
-            ]"
-            @keydown.up.prevent.stop="onKeydownArrowUp($refs.element, index)"
-            @keydown.down.prevent.stop="
-              onKeydownArrowDown($refs.element, index)
-            "
-            @keydown.enter.stop.prevent="onUpdate(item)"
-            @click="onUpdate(item)"
+            :size="size"
+            @onClick="onUpdate(item)"
           >
             <slot
               name="itemContent"
@@ -42,87 +36,30 @@
                 :size="iconSize"
               />
             </slot>
-          </li>
+          </data-list-item>
+        </slot>
 
-          <li
-            v-if="hasAction"
-            :class="[
-              'smed-text_body-xl',
-              $style.item,
-              $style.item_hoverable,
-              $style['item_' + size],
-            ]"
-          >
-            <slot name="action" />
-          </li>
-        </ul>
-
-        <virtual-list v-else v-bind="virtualListProps" :items="items">
-          <template v-slot:default="{ item }">
-            <li
-              v-keyboard-focused
-              tabindex="0"
-              :class="[
-                'smed-text_body-xl',
-                $style.item,
-                $style.item_hoverable,
-                $style['item_' + size],
-              ]"
-              @keydown.enter.stop.prevent="onUpdate(item)"
-              @click="onUpdate(item)"
-            >
-              <slot
-                name="itemContent"
-                :item="item"
-                :active="isActive(modelValue, item)"
-              >
-                <span>{{ item }}</span>
-
-                <svg-icon
-                  v-if="isActive(modelValue, item)"
-                  name="check"
-                  :class="$style.icon"
-                  :size="iconSize"
-                />
-              </slot>
-            </li>
-          </template>
-
-          <template #after>
-            <slot name="action" />
-          </template>
-        </virtual-list>
-      </template>
-
-      <div
-        v-else
-        :class="[
-          'smed-text_body-xl',
-          $style.item,
-          $style.item_notFound,
-          $style['item_' + size],
-        ]"
-      >
-        <slot name="emptyContent"> Ничего не найдено </slot>
+        <data-list-item v-if="hasAction" :size="size">
+          <slot name="action" />
+        </data-list-item>
       </div>
+
+      <data-list-item v-else :hoverable="false" :size="size">
+        <span style="color: var(--smed-base-03)">
+          <slot name="emptyContent"> Ничего не найдено </slot>
+        </span>
+      </data-list-item>
     </template>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DataList',
-};
-</script>
-
 <script setup lang="ts" generic="T, U = T">
+import DataListItem from '@smartmed/ui/DataListItem';
 import Spinner from '@smartmed/ui/Spinner';
 import SvgIcon from '@smartmed/ui/SvgIcon';
-import VirtualList from '@smartmed/ui/VirtualList';
-import { KeyboardFocusedDirective as vKeyboardFocused } from '@smartmed/utility/directives';
-import { moveFocus } from '@smartmed/utility/dom/focus';
+import { moveFocus } from '@smartmed/utility/dom';
 import { hasSlotContent } from '@smartmed/utility/vue';
-import { computed, toRefs, useSlots } from 'vue';
+import { computed, ref, toRefs, useSlots } from 'vue';
 
 import {
   DataListDefaultProps,
@@ -130,6 +67,10 @@ import {
   DataListProps,
   DataListSlots,
 } from './DataList.props';
+
+defineOptions({
+  name: 'DataList',
+});
 
 const props = withDefaults(
   defineProps<DataListProps<T, U>>(),
@@ -144,6 +85,8 @@ defineSlots<DataListSlots<U>>();
 const { items, size } = toRefs(props);
 const slots = useSlots();
 
+const root = ref<HTMLElement | null>(null);
+
 const isLoading = computed(() => items.value === null);
 
 const iconSize = computed(() => {
@@ -152,16 +95,20 @@ const iconSize = computed(() => {
 
 const hasAction = computed(() => hasSlotContent(slots.action));
 
-const onKeydownArrowUp = (elements: unknown, index: number) => {
-  const _elements = elements as HTMLElement[];
+const getChildDataListElements = () => {
+  const rootElement = root.value;
 
-  moveFocus(index, _elements, -1);
+  const result =
+    rootElement?.querySelectorAll('[data-smed-data-list-item=""]') || [];
+
+  return Array.from(result) as HTMLElement[];
 };
 
-const onKeydownArrowDown = (elements: unknown, index: number) => {
-  const _elements = elements as HTMLElement[];
+const onMoveFocus = (event: KeyboardEvent, step: 1 | -1) => {
+  const target = event.target as HTMLElement;
+  const elements = getChildDataListElements();
 
-  moveFocus(index, _elements, 1);
+  moveFocus(elements.indexOf(target), elements, step);
 };
 
 const onUpdate = (item: U) => {
@@ -192,6 +139,11 @@ const isActive = (value: any, item: any) => {
 
 .spinner {
   text-align: center;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
 }
 
 .item {

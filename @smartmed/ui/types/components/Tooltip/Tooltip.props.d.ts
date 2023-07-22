@@ -3,6 +3,7 @@ export declare type TooltipDirection = 'left' | 'right' | 'bottom-left' | 'botto
 export declare type TooltipProps = {
     direction?: TooltipDirection;
     describedBy?: string;
+    wide?: boolean;
 };
 export declare type TooltipSlots = {
     default: (props: {}) => ReadonlyArray<VNode>;

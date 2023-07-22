@@ -1,0 +1,8 @@
+{
+  "main": "./NavigationBar.cjs.js",
+  "module": "./NavigationBar.es.js",
+  "types": "./../types/components/NavigationBar/NavigationBar.vue.d.ts",
+  "browser": {
+    "./sfc": "./NavigationBar.vue"
+  }
+}

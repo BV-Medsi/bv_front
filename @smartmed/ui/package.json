@@ -1,6 +1,6 @@
 {
     "name": "@smartmed/ui",
-    "version": "1.0.3",
+    "version": "1.0.11",
     "repository": {
         "type": "git",
         "url": "git@gitlab.medsi.pro:smartmed/front/web/kernel.git"
@@ -11,10 +11,9 @@
     "peerDependencies": {
         "@maskito/core": "^0.15.0",
         "@maskito/kit": "^0.15.0",
-        "@smartmed/utility": "1.0.3",
+        "@smartmed/utility": "1.0.11",
         "@vuelidate/core": "^2.0.2",
         "@vuelidate/validators": "^2.0.2",
-        "css-reset-and-normalize": "2.3.6",
         "vue": "^3.2.31",
         "vue-router": "^4.0.12"
     }

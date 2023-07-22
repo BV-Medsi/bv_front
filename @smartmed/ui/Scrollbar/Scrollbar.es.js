@@ -1,8 +1,8 @@
 import "./Scrollbar.css";
 import { defineComponent as _, mergeDefaults as d, ref as m, provide as p, openBlock as a, createElementBlock as f, normalizeClass as l, unref as e, createBlock as u, createCommentVNode as y, createElementVNode as S, renderSlot as b } from "vue";
 import C from "@smartmed/ui/ScrollbarControllers";
-import { a as g, b as k } from "../isMobile-2b62b6a9.mjs";
-import { S as w } from "../scrollbarTokens-5a5285c0.mjs";
+import { SCROLLBAR_REF_TOKEN as g } from "@smartmed/ui/tokens";
+import { a as k, b as w } from "../isMobile-2b62b6a9.mjs";
 import { _ as R } from "../_plugin-vue_export-helper-dad06003.mjs";
 const n = window.CSS || {
   escape: (s) => s,
@@ -17,8 +17,8 @@ const n = window.CSS || {
     dataAutomationId: {}
   }, $),
   setup(s, { expose: c }) {
-    const t = m(null), r = !n.supports("position", "sticky") || g() && !n.supports("scrollbar-width", "none"), i = !k() && !r;
-    return p(w, t), c({ native: t }), (o, N) => (a(), f("div", {
+    const t = m(null), r = !n.supports("position", "sticky") || k() && !n.supports("scrollbar-width", "none"), i = !w() && !r;
+    return p(g, t), c({ native: t }), (o, N) => (a(), f("div", {
       ref_key: "scrollbarRef",
       ref: t,
       "data-automation-id": o.dataAutomationId,

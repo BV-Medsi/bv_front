@@ -1,0 +1,8 @@
+{
+  "main": "./ThemeToggle.cjs.js",
+  "module": "./ThemeToggle.es.js",
+  "types": "./../types/components/ThemeToggle/ThemeToggle.vue.d.ts",
+  "browser": {
+    "./sfc": "./ThemeToggle.vue"
+  }
+}

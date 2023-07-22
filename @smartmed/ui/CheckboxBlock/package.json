@@ -1,0 +1,8 @@
+{
+  "main": "./CheckboxBlock.cjs.js",
+  "module": "./CheckboxBlock.es.js",
+  "types": "./../types/components/CheckboxBlock/CheckboxBlock.vue.d.ts",
+  "browser": {
+    "./sfc": "./CheckboxBlock.vue"
+  }
+}

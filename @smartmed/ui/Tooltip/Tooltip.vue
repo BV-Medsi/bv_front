@@ -1,14 +1,14 @@
 <template>
   <active-zone
     v-hovered="{ onEvent: onHover }"
-    :class="$style.host"
+    :class="[$style.host, wide && $style.host_wide]"
     @active-zone-changed="onChangeActiveZone"
   >
     <div ref="host" :class="$style.container">
       <slot />
     </div>
 
-    <portal append-to="#smed_hints-host">
+    <portal v-if="hasHint" append-to="#smed_hints-host">
       <transition name="fade">
         <div
           v-if="isShownHint"
@@ -36,6 +36,7 @@ import ActiveZone from '@smartmed/ui/ActiveZone';
 import Portal from '@smartmed/ui/Portal';
 import { HINT_HOST_TOKEN } from '@smartmed/ui/tokens';
 import { HoveredDirective as vHovered } from '@smartmed/utility/directives';
+import { hasSlotContent } from '@smartmed/utility/vue';
 import {
   computed,
   inject,
@@ -43,6 +44,7 @@ import {
   Ref,
   ref,
   toRefs,
+  useSlots,
   watch,
 } from 'vue';
 
@@ -62,6 +64,9 @@ const props = withDefaults(defineProps<TooltipProps>(), TooltipDefaultProps);
 defineSlots<TooltipSlots>();
 
 const { direction } = toRefs(props);
+
+const slots = useSlots();
+
 const hintsPortal = inject<Ref<HTMLElement>>(HINT_HOST_TOKEN);
 const timeout = ref<ReturnType<typeof setTimeout> | null>(null);
 const hideTimeout = ref<ReturnType<typeof setTimeout> | null>(null);
@@ -72,6 +77,10 @@ const computedDirection = ref<TooltipDirection>(direction.value);
 
 const position = ref({ left: 0, top: 0 });
 const resolvePositionHandler: { id: number | null } = { id: null };
+
+const hasHint = computed(() => {
+  return hasSlotContent(slots.hint);
+});
 
 const getPortalRect = () => {
   if (!hintsPortal) {
@@ -86,6 +95,13 @@ const getPortalRect = () => {
 };
 
 const onChangeActiveZone = (isActive: boolean) => {
+  if (!hasHint.value) {
+    clearIsHideTimer();
+    clearIsShownTimer();
+
+    return;
+  }
+
   if (isActive) {
     setupIsShownTimer();
     clearIsHideTimer();
@@ -96,6 +112,10 @@ const onChangeActiveZone = (isActive: boolean) => {
 };
 
 const onHover = (hovered: boolean) => {
+  if (!hasHint.value) {
+    return;
+  }
+
   if (hovered) {
     setupIsShownTimer();
     clearIsHideTimer();
@@ -106,7 +126,7 @@ const onHover = (hovered: boolean) => {
 };
 
 const onHintMouseEnter = (hovered: boolean) => {
-  if (!isShownHint.value) {
+  if (!isShownHint.value || !hasHint.value) {
     return;
   }
 
@@ -119,7 +139,7 @@ const onHintMouseEnter = (hovered: boolean) => {
 };
 
 const setupIsShownTimer = () => {
-  if (isShownHint.value) {
+  if (isShownHint.value || !hasHint.value) {
     return;
   }
 
@@ -138,7 +158,7 @@ const clearIsShownTimer = () => {
 };
 
 const setupIsHideTimer = () => {
-  if (!isShownHint.value) {
+  if (!isShownHint.value || !hasHint.value) {
     return;
   }
 
@@ -210,8 +230,8 @@ const stopResolvePosition = () => {
   }
 };
 
-watch(isShownHint, (value) => {
-  if (value) {
+watch([isShownHint, hasHint], ([value, _hint]) => {
+  if (value && _hint) {
     tickForResolvePosition();
   } else {
     stopResolvePosition();
@@ -226,6 +246,14 @@ $margin: 8px;
 .host {
   position: relative;
   display: inline-flex;
+
+  &_wide {
+    width: 100%;
+
+    & > .container {
+      width: 100%;
+    }
+  }
 }
 
 .container {

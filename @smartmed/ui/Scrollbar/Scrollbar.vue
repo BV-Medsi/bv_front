@@ -20,11 +20,11 @@ export default {
 
 <script setup lang="ts">
 import ScrollbarControllers from '@smartmed/ui/ScrollbarControllers';
+import { SCROLLBAR_REF_TOKEN } from '@smartmed/ui/tokens';
 import { isFirefox, isIOS } from '@smartmed/utility/dom/api/isMobile';
 import { windowCSS } from '@smartmed/utility/dom/api/windowCss';
 import { provide, ref } from 'vue';
 
-import { SCROLLBAR_REF_TOKEN } from '../ScrollbarControllers/scrollbarTokens';
 import {
   ScrollbarDefaultProps,
   ScrollbarExposed,

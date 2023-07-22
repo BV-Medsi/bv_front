@@ -12,7 +12,7 @@
 
   <popups-host ref="popupsHostRef" :class="$style.host" />
 
-  <alerts-host ref="alertsHostRef" :class="$style.host" />
+  <alerts-host ref="alertsHostRef" />
 
   <dropdown-host ref="dropdownHostRef" :class="$style.host" />
 

@@ -1,0 +1,8 @@
+{
+  "main": "./BaseRadio.cjs.js",
+  "module": "./BaseRadio.es.js",
+  "types": "./../types/components/BaseRadio/BaseRadio.vue.d.ts",
+  "browser": {
+    "./sfc": "./BaseRadio.vue"
+  }
+}

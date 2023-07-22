@@ -14,6 +14,8 @@ export type TooltipProps = {
   direction?: TooltipDirection;
 
   describedBy?: string;
+
+  wide?: boolean;
 };
 
 export type TooltipSlots = {

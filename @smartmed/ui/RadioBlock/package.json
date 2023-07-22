@@ -1,0 +1,8 @@
+{
+  "main": "./RadioBlock.cjs.js",
+  "module": "./RadioBlock.es.js",
+  "types": "./../types/components/RadioBlock/RadioBlock.vue.d.ts",
+  "browser": {
+    "./sfc": "./RadioBlock.vue"
+  }
+}

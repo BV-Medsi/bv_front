@@ -1,15 +1,13 @@
 import { VNode } from 'vue';
 
-import { VirtualListProps } from '../VirtualList/VirtualList.props';
+import { DataListItemProps } from '../DataListItem/DataListItem.props';
 
 export type DataListProps<T, U> = {
   modelValue: T;
 
   items: ReadonlyArray<U> | null;
 
-  size?: 'none' | 'sm' | 'md' | 'lg';
-
-  virtualListProps?: Omit<VirtualListProps<U>, 'modelValue' | 'items'> | null;
+  size?: DataListItemProps['size'];
 
   matcher?: (value: T, item: U) => boolean;
 
@@ -21,6 +19,11 @@ export type DataListEmits<T> = {
 };
 
 export type DataListSlots<T> = {
+  list?: (props: {
+    getIsActive: (item: T) => boolean;
+    onUpdate: (item: T) => void;
+  }) => ReadonlyArray<VNode>;
+
   itemContent?: (props: { item: T; active: boolean }) => ReadonlyArray<VNode>;
 
   action?: (props: {}) => ReadonlyArray<VNode>;
@@ -30,7 +33,6 @@ export type DataListSlots<T> = {
 
 export const DataListDefaultProps = {
   size: 'md',
-  virtualProps: null,
   items: () => [],
   matcher: (value: any, item: any) => value === item,
   overflowy: true,

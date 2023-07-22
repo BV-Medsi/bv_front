@@ -1,0 +1,1 @@
+{"version":3,"file":"media.plugin.d.ts","sourceRoot":"","sources":["../../../../plugins/media/media.plugin.ts"],"names":[],"mappings":"AAKA,OAAO,EAAO,MAAM,EAAO,MAAM,KAAK,CAAC;AAEvC,oBAAY,YAAY,CAAC,CAAC,SAAS,MAAM,GAAG,MAAM,IAAI,MAAM,CAAC,CAAC,EAAE,MAAM,CAAC,CAAC;AACxE,oBAAY,eAAe,CAAC,CAAC,SAAS,MAAM,GAAG,MAAM,IAAI,YAAY,CAAC,CAAC,CAAC,CAAC;AAyBzE,eAAO,MAAM,WAAW,EAAE,MAEzB,CAAC"}

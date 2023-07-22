@@ -73,7 +73,14 @@ const onUpdate = (value: string) => {
   emit('update:modelValue', value);
 };
 
+const focus = () => {
+  const value = baseInputExposed.value;
+
+  value?.focus();
+};
+
 defineExpose<SearchInputExpose>({
   baseInputWrapper,
+  focus,
 });
 </script>

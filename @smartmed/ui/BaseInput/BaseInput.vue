@@ -92,7 +92,7 @@
         <svg-icon
           v-if="computedHasCleaner"
           data-automation-id="smed-base-input-cleaner-icon"
-          name="close"
+          name="close-filled"
           :class="[$style.closeIcon, $style.icon, $style.icon_right]"
           :size="iconSize"
           @click.stop.prevent="clearSearch"
@@ -284,6 +284,9 @@ defineExpose<BaseInputExpose>({
   }
 }
 
+$smRadius: 6px;
+$otherRadius: 8px;
+
 .wrapper {
   @include transition(border-color);
 
@@ -292,7 +295,9 @@ defineExpose<BaseInputExpose>({
   justify-content: center;
 
   background: var(--smed-base-07);
-  border-radius: 6px;
+  border-radius: var(--smed-group-tlr, $smRadius)
+    var(--smed-group-trr, $smRadius) var(--smed-group-brr, $smRadius)
+    var(--smed-group-blr, $smRadius);
 
   color: var(--smed-base-01);
 
@@ -313,7 +318,9 @@ defineExpose<BaseInputExpose>({
     @include smed-text_body-xl;
 
     min-height: 44px;
-    border-radius: 8px;
+    border-radius: var(--smed-group-tlr, $otherRadius)
+      var(--smed-group-trr, $otherRadius) var(--smed-group-brr, $otherRadius)
+      var(--smed-group-blr, $otherRadius);
 
     .native,
     .decorator {
@@ -325,7 +332,9 @@ defineExpose<BaseInputExpose>({
     @include smed-text_body-xl;
 
     min-height: 56px;
-    border-radius: 8px;
+    border-radius: var(--smed-group-tlr, $otherRadius)
+      var(--smed-group-trr, $otherRadius) var(--smed-group-brr, $otherRadius)
+      var(--smed-group-blr, $otherRadius);
 
     .native,
     .decorator {
