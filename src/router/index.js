@@ -41,7 +41,7 @@ const routes = [
 ];
 
 export const router = createRouter({
-    history: createWebHistory("/bv_front/"),
+    history: createWebHistory('/'),
     routes
 });
 
