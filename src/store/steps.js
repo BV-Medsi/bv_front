@@ -104,11 +104,19 @@ export const useStepsStore = defineStore({
                             name: 'Терапевт',
                             prediction: 0.8,
                             clinics: [{
-                                name: 'Clinic One',
+                                name: 'Клиника на Благовещенском переулке',
                                 isChecked: false
                             },
                                 {
-                                    name: 'Clinic Two',
+                                    name: 'Клиника на Пречистенке',
+                                    isChecked: false
+                                },
+                                {
+                                    name: 'Клиника на Покрышкина',
+                                    isChecked: false
+                                },
+                                {
+                                    name: 'Клиника на Мичуринском проспекте',
                                     isChecked: false
                                 }]
                         },
@@ -117,11 +125,19 @@ export const useStepsStore = defineStore({
                             name: 'Хирург',
                             prediction: 0.9,
                             clinics: [{
-                                name: 'Clinic One',
+                                name: 'Клиника на Красной Пресне',
                                 isChecked: false
                             },
                                 {
-                                    name: 'Clinic Two',
+                                    name: 'Клиника на Хорошевском проезде',
+                                    isChecked: false
+                                },
+                                {
+                                    name: 'Клиника на Белорусской',
+                                    isChecked: false
+                                },
+                                {
+                                    name: 'Клиника на Ленинградском проспекте',
                                     isChecked: false
                                 }],
                         },
@@ -130,11 +146,19 @@ export const useStepsStore = defineStore({
                             name: 'Кардиолог',
                             prediction: 1,
                             clinics: [{
-                                name: 'Clinic One',
+                                name: 'Клиника на Дубининской',
                                 isChecked: false
                             },
                                 {
-                                    name: 'Clinic Two',
+                                    name: 'Клиника на Авиационной',
+                                    isChecked: false
+                                },
+                                {
+                                    name: 'Клиника на Пречистенке',
+                                    isChecked: false
+                                },
+                                {
+                                    name: 'Клиника на Астрадамском проезде',
                                     isChecked: false
                                 }],
                         }
