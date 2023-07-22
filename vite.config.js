@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   plugins: [vue()],
-  base: '/',
+  base: '/bv_front/',
   build: {
     rollupOptions: {
       external: "https://rollupjs.org/configuration-options/#external"
