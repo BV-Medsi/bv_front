@@ -100,9 +100,10 @@ const {validateAndUpdateStep} = store;
 
 const diseasesItems = [
   'ОРВИ',
-    "Гайморит",
-    "Корь",
-    "Гастродуоденит",
+  "Гайморит",
+  "Корь",
+  "Гастродуоденит",
+
 ];
 
 const chronicDiseasesItems = [
@@ -116,7 +117,7 @@ const operationsItems = [
   'Кесарево сечение',
   'Замена коленного сустава',
   'Холецистэктомия',
-  'Катарактальная операция'
+  'Катарактальная операция',
 ];
 
 const addEntry = category => {
