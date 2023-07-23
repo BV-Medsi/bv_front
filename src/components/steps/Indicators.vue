@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class="$style.container">
       <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Дополнительная информация</h2>
       <base-input v-model="stepData.weight" size="md" description="Указать в килограммах" label="Вес"
                   :class="$style.inputField"
@@ -19,7 +19,7 @@
 <!--      <base-input v-model="stepData.sugar" size="md" label="Сахар в крови"-->
 <!--                  :class="$style.inputField"-->
 <!--                  :is-error="!isValueValid(stepData.sugar) && stepData.sugar != null"/>-->
-      <base-textarea v-model="stepData.inlines_history" label="Опишите свои жалобы подробнее" :class="$style.describe" description="Введите минимум 50 символов" />
+      <base-textarea v-model="stepData.inlines_history" label="Опишите свои жалобы подробнее" :class="$style.describe"/>
     </div>
     <BaseButton @click="nextStep" :disabled="!isValid" :class="$style.base_button">Получить результат</BaseButton>
 </template>
@@ -63,7 +63,7 @@ const props = defineProps(['stepData', 'isValid']);
 <style module>
 .title {
   margin-bottom: 12px;
-  text-align: left;
+
 }
 
 .inputField {
@@ -75,6 +75,9 @@ const props = defineProps(['stepData', 'isValid']);
   margin: 20px 0;
 }
 .describe{
+  text-align: left;
+}
+.container{
   text-align: left;
 }
 </style>
