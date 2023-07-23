@@ -48,7 +48,7 @@ const emit = defineEmits(['update:response']);
      <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Результаты</h2>
     <p :class="$style.subtitle" class="smed-text_h3">Здесь представлен список врачей, которых вы можете посетить</p>
     <div>
-      <div v-for="(doctor, doctorIndex) in stepData.doctors?.sort((a, b) => b.prediction - a.prediction)"
+      <div v-for="(doctor, doctorIndex) in stepData.doctors?.sort((a, b) => b.prob - a.prob)"
            :key="`doctor-${doctorIndex}`" align="left">
         <div :class="$style.doctor_header">
           <BaseCheckbox v-model="doctor.isSelected" @change="selectDoctor(doctor.name)"

@@ -7,7 +7,7 @@
       <base-input v-model="stepData.growth" size="md" description="Указать в сантиметрах" label="Рост"
                   :class="$style.inputField"
                   :is-error="!isValueValid(stepData.growth) && stepData.growth != null"/>
-      <base-input v-model="stepData.temperature" size="md" label="Температура "
+      <base-input v-model="stepData.temperature" size="md" label="Температура"
                   :class="$style.inputField"
                   :is-error="!isValueValid(stepData.temperature) && stepData.temperature != null"/>
 <!--      <base-input v-model="stepData.oxygen" size="md" label="Кислород в крови"-->
@@ -53,7 +53,7 @@ const isValueValid = computed(() => (inputValue) => {
 });
 
 function processData(value){
-  return value > 0
+  return value > 0;
 }
 const nextStep = () =>{
   router.push("/chat/results")

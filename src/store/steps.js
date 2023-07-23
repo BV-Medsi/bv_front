@@ -3,23 +3,33 @@ import {ROUTES} from "../router/index.js";
 import {symptomsData} from "./data/symptomsData.js";
 import {PARTS} from "../components/steps/SelectImageSymptomsComponent/constants/parts.js";
 
-function mapResponseToObject(response, doctors) {
-    for (let i = 0; i < doctors.length; i++) {
-        const doctorName = doctors[i].name;
-        if (response.answer.hasOwnProperty(doctorName)) {
-            doctors[i].prediction = response.answer[doctorName];
-        }
-    }
+const doctorBlueprint = {
+    isSelected: false, name: '', prob: 0,
+}
+
+function mapResponseToObject(answer) {
+    const result = [];
+    Object.values(answer).forEach((value) => {
+        result.push({
+            ...doctorBlueprint, name: value.doctor, prob: value.prob, clinics: [{
+                name: 'Клиника на Благовещенском переулке', isChecked: false
+            }, {
+                name: 'Клиника на Пречистенке', isChecked: false
+            }, {
+                name: 'Клиника на Покрышкина', isChecked: false
+            }, {
+                name: 'Клиника на Мичуринском проспекте', isChecked: false
+            }]
+        })
+    })
+    return result;
 }
 
 export const useStepsStore = defineStore({
-    id: "steps-store",
-    state: () => ({
+    id: "steps-store", state: () => ({
         steps: [
             {
-                id: ROUTES.DISCLAIMER,
-                isValid: false,
-                data: {
+                id: ROUTES.DISCLAIMER, isValid: false, data: {
                     hasAcceptedTerms: false,
                 }
             },
@@ -28,8 +38,6 @@ export const useStepsStore = defineStore({
                 question: "Выберите ваш пол",
                 status_code: 404,
                 data: {
-                    //id: null,
-                    //user_id: null,
                     gender: null,
                     age: null,
                     chronic_diseases: [],
@@ -91,78 +99,13 @@ export const useStepsStore = defineStore({
                     weight: null,
                     sugar: 0,
                     oxygen: 0,
-                    inlines_history: '',
                 },
-
+                    inlines_history: '',
             },
             {
                 id: ROUTES.RESULTS,
                 data: {
-                    doctors: [
-                        {
-                            isSelected: false,
-                            name: '',
-                            prediction: 0.8,
-                            clinics: [{
-                                name: 'Клиника на Благовещенском переулке',
-                                isChecked: false
-                            },
-                                {
-                                    name: 'Клиника на Пречистенке',
-                                    isChecked: false
-                                },
-                                {
-                                    name: 'Клиника на Покрышкина',
-                                    isChecked: false
-                                },
-                                {
-                                    name: 'Клиника на Мичуринском проспекте',
-                                    isChecked: false
-                                }]
-                        },
-                        {
-                            isSelected: false,
-                            name: 'Хирург',
-                            prediction: 0.9,
-                            clinics: [{
-                                name: 'Клиника на Красной Пресне',
-                                isChecked: false
-                            },
-                                {
-                                    name: 'Клиника на Хорошевском проезде',
-                                    isChecked: false
-                                },
-                                {
-                                    name: 'Клиника на Белорусской',
-                                    isChecked: false
-                                },
-                                {
-                                    name: 'Клиника на Ленинградском проспекте',
-                                    isChecked: false
-                                }],
-                        },
-                        {
-                            isSelected: false,
-                            name: 'Кардиолог',
-                            prediction: 1,
-                            clinics: [{
-                                name: 'Клиника на Дубининской',
-                                isChecked: false
-                            },
-                                {
-                                    name: 'Клиника на Авиационной',
-                                    isChecked: false
-                                },
-                                {
-                                    name: 'Клиника на Пречистенке',
-                                    isChecked: false
-                                },
-                                {
-                                    name: 'Клиника на Астрадамском проезде',
-                                    isChecked: false
-                                }],
-                        }
-                    ],
+                    doctors: [],
                     isValid: false
                 }
             }
@@ -185,13 +128,13 @@ export const useStepsStore = defineStore({
             const indicatorsStep = state.steps.find(step => step.id === ROUTES.INDICATORS);
             const dict = {};
             for (const field in indicatorsStep.data) {
-                if (indicatorsStep.data[field]!== null && field !== 'inlines_history') {
+                if (indicatorsStep.data[field] !== null && field !== 'inlines_history') {
                     dict[field] = Number(indicatorsStep.data[field]);
                 }
             }
             return dict;
         },
-        getInlinesHistory(state){
+        getInlinesHistory(state) {
             const indicatorsStep = state.steps.find(step => step.id === ROUTES.INDICATORS);
             return indicatorsStep.data['inlines_history'];
         },
@@ -222,8 +165,7 @@ export const useStepsStore = defineStore({
         getGeneralCardStep: (state) => {
             return state.steps.find(s => s.id === ROUTES.GENERAL_CARD);
         },
-    },
-    actions: {
+    }, actions: {
         updateCardData(data) {
             const cardData = this.steps[1].data;
             //cardData.id = data.id;
@@ -233,8 +175,7 @@ export const useStepsStore = defineStore({
             cardData.operations = data.operations;
             cardData.diseases = data.diseases;
             cardData.chronic_diseases = data.chronic_diseases;
-        },
-        selectDoctor(doctorName) {
+        }, selectDoctor(doctorName) {
             const resultsStep = this.steps.find(step => step.id === ROUTES.RESULTS);
             if (resultsStep) {
                 resultsStep.data.doctors.forEach(doctor => {
@@ -271,35 +212,27 @@ export const useStepsStore = defineStore({
             }
         },
         setPrediction(data) {
-            console.log(data)
-            this.steps[4].doctors[0].name = data.doctor1.doctor;
-            this.steps[4].doctors[0].prediction = data.doctor1.prob;
-            this.steps[4].doctors[1].name = data.doctor2.doctor;
-            this.steps[4].doctors[1].prediction = data.doctor2.prob;
-            this.steps[4].doctors[3].name = data.doctor3.doctor;
-            this.steps[4].doctors[3].prediction = data.doctor3.prob;
+            const dataToUpdate = this.steps.find(s => s.id === ROUTES.RESULTS).data;
+            dataToUpdate.doctors = mapResponseToObject(data);
         },
         validateAndUpdateStep(stepIndex, data) {
             this.steps[stepIndex].data = data;
 
             switch (this.steps[stepIndex].id) {
                 case ROUTES.GENERAL_CARD:
-                    const {gender, age} = this.steps[stepIndex].data;
-                    this.steps[stepIndex].isValid = [0, 1].includes(gender) && !!age && age > 0 && age <= 122;
+                    const {gender, age, chronic_diseases, diseases} = this.steps[stepIndex].data;
+                    this.steps[stepIndex].isValid = [0, 1].includes(gender) && !!age && age > 0 && age <= 122 &&
+                    chronic_diseases.length > 0 || diseases.length > 0;
                     break;
                 case ROUTES.IMAGE_SYMPTOMS:
-                    this.steps[stepIndex].isValid = Object.values(data).some(
-                        el => el.symptoms.some(symptom => symptom.isChecked)
-                    );
+                    this.steps[stepIndex].isValid = Object.values(data).some(el => el.symptoms.some(symptom => symptom.isChecked));
                     break;
                 case ROUTES.INDICATORS:
-                    const {temperature, growth, weight, inlines_history} = this.steps[stepIndex].data;
-                    this.steps[stepIndex].isValid = temperature > 0 && growth > 0 && weight > 0 && inlines_history.length > 50;
+                    const {temperature, growth, weight} = this.steps[stepIndex].data;
+                    this.steps[stepIndex].isValid = temperature > 0 && growth > 0 && weight > 0;
                     break;
                 case ROUTES.RESULTS:
-                    this.steps[stepIndex].isValid = this.steps[stepIndex].data.doctors.some(
-                        doctor => doctor.isSelected && doctor.clinics.some(clinic => clinic.isChecked)
-                    );
+                    this.steps[stepIndex].isValid = this.steps[stepIndex].data.doctors.some(doctor => doctor.isSelected && doctor.clinics.some(clinic => clinic.isChecked));
                     break;
                 default:
                     this.steps[stepIndex].isValid = !!data;
