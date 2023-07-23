@@ -13,6 +13,4 @@ app.use(pinia)
 app.use(router)
 app.use(ActiveElementPlugin)
 
-const authStore = useAuthStore();
-
 app.mount('#app');
