@@ -27,15 +27,25 @@ function mapResponseToObject(answer) {
 
 export const useStepsStore = defineStore({
     id: "steps-store", state: () => ({
-        steps: [{
-            id: ROUTES.DISCLAIMER, isValid: false, data: {
-                hasAcceptedTerms: false,
-            }
-        }, {
-            id: ROUTES.GENERAL_CARD, question: "Выберите ваш пол", status_code: 404, data: {
-                gender: null, age: null, chronic_diseases: [], diseases: [], operations: [],
-            }, isValid: false
-        },
+        steps: [
+            {
+                id: ROUTES.DISCLAIMER, isValid: false, data: {
+                    hasAcceptedTerms: false,
+                }
+            },
+            {
+                id: ROUTES.GENERAL_CARD,
+                question: "Выберите ваш пол",
+                status_code: 404,
+                data: {
+                    gender: null,
+                    age: null,
+                    chronic_diseases: [],
+                    diseases: [],
+                    operations: [],
+                },
+                isValid: false
+            },
             {
                 id: ROUTES.IMAGE_SYMPTOMS,
                 question: "Выберите область тела, где вы ощущаете симптомы",
@@ -210,8 +220,9 @@ export const useStepsStore = defineStore({
 
             switch (this.steps[stepIndex].id) {
                 case ROUTES.GENERAL_CARD:
-                    const {gender, age} = this.steps[stepIndex].data;
-                    this.steps[stepIndex].isValid = [0, 1].includes(gender) && !!age && age > 0 && age <= 122;
+                    const {gender, age, chronic_diseases, diseases} = this.steps[stepIndex].data;
+                    this.steps[stepIndex].isValid = [0, 1].includes(gender) && !!age && age > 0 && age <= 122 &&
+                    chronic_diseases.length > 0 || diseases.length > 0;
                     break;
                 case ROUTES.IMAGE_SYMPTOMS:
                     this.steps[stepIndex].isValid = Object.values(data).some(el => el.symptoms.some(symptom => symptom.isChecked));
