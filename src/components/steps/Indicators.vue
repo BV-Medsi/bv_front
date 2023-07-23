@@ -19,7 +19,7 @@
 <!--      <base-input v-model="stepData.sugar" size="md" label="Сахар в крови"-->
 <!--                  :class="$style.inputField"-->
 <!--                  :is-error="!isValueValid(stepData.sugar) && stepData.sugar != null"/>-->
-      <base-textarea v-model="stepData.inlines_history" label="Опишите свои жалобы подробнее" :class="$style.describe" />
+      <base-textarea v-model="stepData.inlines_history" label="Опишите свои жалобы подробнее" :class="$style.describe" description="Введите минимум 50 символов" />
     </div>
     <BaseButton @click="nextStep" :disabled="!isValid" :class="$style.base_button">Получить результат</BaseButton>
 </template>

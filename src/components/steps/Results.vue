@@ -32,7 +32,7 @@ const payload = {
 onMounted(async () => {
   console.log(payload)
   await predictValues(payload);
-  console.log(props.stepData.doctors);
+  console.log(props.stepData.doctors?.sort((a, b) => b.prediction - a.prediction));
 });
 
 watch(() => props.stepData, (newValue, oldValue) => {
