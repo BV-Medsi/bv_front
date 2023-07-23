@@ -99,8 +99,8 @@ export const useStepsStore = defineStore({
                     weight: null,
                     sugar: 0,
                     oxygen: 0,
-                },
                     inlines_history: '',
+                },
             },
             {
                 id: ROUTES.RESULTS,
