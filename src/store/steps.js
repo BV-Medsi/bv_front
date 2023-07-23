@@ -2,6 +2,7 @@ import {defineStore} from 'pinia'
 import {ROUTES} from "../router/index.js";
 import {symptomsData} from "./data/symptomsData.js";
 import {PARTS} from "../components/steps/SelectImageSymptomsComponent/constants/parts.js";
+import {ref} from "vue";
 
 const doctorBlueprint = {
     isSelected: false, name: '', prob: 0,
@@ -99,8 +100,8 @@ export const useStepsStore = defineStore({
                     weight: null,
                     sugar: 0,
                     oxygen: 0,
-                },
                     inlines_history: '',
+                },
             },
             {
                 id: ROUTES.RESULTS,
@@ -228,8 +229,8 @@ export const useStepsStore = defineStore({
                     this.steps[stepIndex].isValid = Object.values(data).some(el => el.symptoms.some(symptom => symptom.isChecked));
                     break;
                 case ROUTES.INDICATORS:
-                    const {temperature, growth, weight} = this.steps[stepIndex].data;
-                    this.steps[stepIndex].isValid = temperature > 0 && growth > 0 && weight > 0;
+                    const {temperature, growth, weight, inlines_history} = this.steps[stepIndex].data;
+                    this.steps[stepIndex].isValid = temperature > 33 && temperature < 42 && growth > 120 && growth < 220 && weight > 35 && weight < 180 && inlines_history.length >= 30;
                     break;
                 case ROUTES.RESULTS:
                     this.steps[stepIndex].isValid = this.steps[stepIndex].data.doctors.some(doctor => doctor.isSelected && doctor.clinics.some(clinic => clinic.isChecked));

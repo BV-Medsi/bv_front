@@ -3,13 +3,13 @@
       <h2 class="smed-text_h2 smed-text_medium" :class="$style.title">Дополнительная информация</h2>
       <base-input v-model="stepData.weight" size="md" description="Указать в килограммах" label="Вес"
                   :class="$style.inputField"
-                  :is-error="!isValueValid(stepData.weight) && stepData.weight != null"/>
+                  :is-error="!isValueValid(stepData.weight, 'weight') && stepData.weight != null"/>
       <base-input v-model="stepData.growth" size="md" description="Указать в сантиметрах" label="Рост"
                   :class="$style.inputField"
-                  :is-error="!isValueValid(stepData.growth) && stepData.growth != null"/>
+                  :is-error="!isValueValid(stepData.growth, 'growth') && stepData.growth != null"/>
       <base-input v-model="stepData.temperature" size="md" label="Температура"
                   :class="$style.inputField"
-                  :is-error="!isValueValid(stepData.temperature) && stepData.temperature != null"/>
+                  :is-error="!isValueValid(stepData.temperature, 'temperature') && stepData.temperature != null"/>
 <!--      <base-input v-model="stepData.oxygen" size="md" label="Кислород в крови"-->
 <!--                  :class="$style.inputField"-->
 <!--                  :is-error="!isValueValid(stepData.oxygen) && stepData.oxygen != null"/>-->
@@ -19,7 +19,8 @@
 <!--      <base-input v-model="stepData.sugar" size="md" label="Сахар в крови"-->
 <!--                  :class="$style.inputField"-->
 <!--                  :is-error="!isValueValid(stepData.sugar) && stepData.sugar != null"/>-->
-      <base-textarea v-model="stepData.inlines_history" label="Опишите свои жалобы подробнее" :class="$style.describe"/>
+      <base-textarea v-model="stepData.inlines_history" label="Опишите свои жалобы подробнее" :class="$style.describe" description="Не менее 30 символов"
+      :is-error="!isValueValid(stepData.inlines_history, 'inlines') && stepData.inlines_history !== ''"/>
     </div>
     <BaseButton @click="nextStep" :disabled="!isValid" :class="$style.base_button">Получить результат</BaseButton>
 </template>
@@ -48,12 +49,24 @@ watch(additionalData, () => {
 onMounted(() => {
   setCurrentStepIndex(3);
 })
-const isValueValid = computed(() => (inputValue) => {
-  return processData(inputValue)
+const isValueValid = computed(() => (inputValue, field) => {
+  return processData(inputValue, field)
 });
 
-function processData(value){
-  return value > 0;
+function processData(value, currentField){
+  switch (currentField){
+    case "temperature":
+      return value > 33 && value < 42;
+    case "growth":
+      return value > 120 && value < 220;
+    case "weight":
+      return value > 35 && value < 180;
+    case "inlines":
+      if(typeof value === 'string'){
+        return value.length > 30;
+      }
+
+  }
 }
 const nextStep = () =>{
   router.push("/chat/results")
@@ -75,7 +88,6 @@ const props = defineProps(['stepData', 'isValid']);
   margin: 20px 0;
 }
 .describe{
-  text-align: left;
 }
 .container{
   text-align: left;
