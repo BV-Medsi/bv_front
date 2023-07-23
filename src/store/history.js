@@ -6,7 +6,13 @@ export const useHistoryStore = defineStore({
     id: 'history-store',
     state: () => ({
         isLoading: false,
-        history: [],
+        history: {},
+        answer_id: null,
+        indicators: {
+            temperature: 0,
+            weight: 0,
+            growth: 0,
+        }
     }),
     getters: {},
     actions: {
@@ -14,7 +20,14 @@ export const useHistoryStore = defineStore({
             this.isLoading = true;
             try {
                 const response = await axiosApiInstance.post(BASE_URL + 'history/get_answer', {});
+
                 this.history = response.data;
+                console.log(this.history)
+                this.answer_id = response.data.answer_id;
+
+                this.indicators.temperature = response.data.indicators.temperature;
+                this.indicators.weight = response.data.indicators.weight;
+                this.indicators.growth = response.data.indicators.growth;
             } catch(e) {
                 console.error(e)
             } finally  {
@@ -24,10 +37,18 @@ export const useHistoryStore = defineStore({
         loadPreviousHistoryItem() {
             this.isLoading = true;
             try {
+
                 const lastItemId = this.history?.at(-1)?.id;
                 if (!lastItemId) return;
-                const response = axiosApiInstance.post(BASE_URL + 'history/get_previous_history_item/' + id);
+                const response = axiosApiInstance.post(BASE_URL + 'history/get_answer', {
+                    answer_id: this.answer_id,
+                });
+                this.answer_id = response.data.id;
                 this.history.push(response.data);
+
+                this.indicators.temperature = response.data.indicators.temperature;
+                this.indicators.weight = response.data.indicators.weight;
+                this.indicators.growth = response.data.indicators.growth;
             } catch (e) {
                 console.error(e);
             } finally {
