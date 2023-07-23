@@ -271,13 +271,13 @@ export const useStepsStore = defineStore({
             }
         },
         setPrediction(data) {
-            const dataToUpdate = this.steps.find(s => s.id === ROUTES.RESULTS).data;
-            dataToUpdate.doctors[0].name = data.doctor1.doctor;
-            dataToUpdate.doctors[0].prediction = data.doctor1.prob;
-            dataToUpdate.doctors[1].name = data.doctor2.doctor;
-            dataToUpdate.doctors[1].prediction = data.doctor2.prob;
-            dataToUpdate.doctors[3].name = data.doctor3.doctor;
-            dataToUpdate.doctors[3].prediction = data.doctor3.prob;
+            console.log(data)
+            this.steps[4].doctors[0].name = data.doctor1.doctor;
+            this.steps[4].doctors[0].prediction = data.doctor1.prob;
+            this.steps[4].doctors[1].name = data.doctor2.doctor;
+            this.steps[4].doctors[1].prediction = data.doctor2.prob;
+            this.steps[4].doctors[3].name = data.doctor3.doctor;
+            this.steps[4].doctors[3].prediction = data.doctor3.prob;
         },
         validateAndUpdateStep(stepIndex, data) {
             this.steps[stepIndex].data = data;
