@@ -43,7 +43,6 @@ export const useStepsStore = defineStore({
                     age: null,
                     chronic_diseases: [],
                     diseases: [],
-                    operations: [],
                 },
                 isValid: false
             },
@@ -173,7 +172,6 @@ export const useStepsStore = defineStore({
             //cardData.user_id = data.user_id;
             cardData.age = data.age;
             cardData.gender = data.gender;
-            cardData.operations = data.operations;
             cardData.diseases = data.diseases;
             cardData.chronic_diseases = data.chronic_diseases;
         }, selectDoctor(doctorName) {

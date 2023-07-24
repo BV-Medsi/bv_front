@@ -8,15 +8,16 @@
       >
       </base-input>
       <div :class="$style.chooseGender">
+        <p class="_inline_1yye7_126 smed-text_body-sm smed-space_bottom-1" :class="$style.title_gender">Укажите ваш пол</p>
         <label :class="$style.radio_text">
           <input :class="$style['styled-radio']" type="radio" :value="0"
                  :checked="stepData.gender === 0" v-model="stepData.gender">
-          <span class="smed-text_body-md">Мужчина</span>
+          <span class="smed-text_body-md">Мужской</span>
         </label>
         <label :class="$style.radio_text">
           <input :class="$style['styled-radio']" type="radio" :value="1"
                  :checked="stepData.gender === 1" v-model="stepData.gender">
-          <span class="smed-text_body-md">Женщина</span>
+          <span class="smed-text_body-md">Женский</span>
         </label>
       </div>
       <hr/>
@@ -34,6 +35,7 @@
                 size="md"
                 :items="availableDiseasesItems"
                 placeholder="Выберите болезнь:"
+                :class="$style.combobox"
       />
       <hr/>
       <h2 class="smed-text_h3 smed-text_medium" :class="$style.header">Хронические заболевания</h2>
@@ -49,23 +51,9 @@
                 size="md"
                 :items="availableChronicDiseasesItems"
                 placeholder="Выберите болезнь:"
+                :class="$style.combobox"
       />
       <hr/>
-      <div>
-        <h2 class="smed-text_h3 smed-text_medium" :class="$style.header">Перенесенные операции</h2>
-        <BaseButton icon="plus" @click="addEntry('operations')" :disabled="isOperationsButton"
-                    :class="$style.addButton">Добавить
-          перенесенные операции
-        </BaseButton>
-        <combobox v-for="(operation, index) in stepData.operations?.filter(customFilter)"
-                  :key="`operations-${index}`"
-                  @update:modelValue="value => handleUpdate('operations', index, value)"
-                  :modelValue="stepData.operations[index]"
-                  size="md"
-                  :items="availableOperationsItems"
-                  placeholder="Выберите операцию:"
-        />
-      </div>
       <BaseButton :disabled="!isValid" @click="nextStep" :class="$style.base_button">Далее</BaseButton>
     </div>
   </div>
@@ -112,14 +100,6 @@ const chronicDiseasesItems = [
   'Аутизм',
 ];
 
-const operationsItems = [
-  'Аппендэктомия',
-  'Кесарево сечение',
-  'Замена коленного сустава',
-  'Холецистэктомия',
-  'Катарактальная операция',
-];
-
 const addEntry = category => {
   if (!props.stepData[category].includes(null)) {
     props.stepData[category].push(null);
@@ -146,13 +126,9 @@ const availableChronicDiseasesItems = computed(() => {
   return chronicDiseasesItems.filter(disease => !props.stepData.chronic_diseases.includes(disease));
 });
 
-const availableOperationsItems = computed(() => {
-  return operationsItems.filter(operation => !props.stepData.operations.includes(operation));
-});
-
 const isChronicDiseasesButton = computed(() => props.stepData.chronic_diseases?.length >= chronicDiseasesItems.length);
 const isDiseasesButton = computed(() => props.stepData.diseases?.length >= diseasesItems.length);
-const isOperationsButton = computed(() => props.stepData.operations?.length >= operationsItems.length);
+
 onMounted(async () => {
   hasCard.value = await getCard();
 })
@@ -173,8 +149,15 @@ const isAgeValid = computed(() => {
 
 </script>
 <style module>
+.combobox{
+  margin-top: 5px;
+  margin-bottom: 7px;
+}
 h2{
   text-align: left;
+}
+.title_gender{
+  margin-bottom: 10px;
 }
 hr {
   width: 100%;
@@ -201,6 +184,7 @@ hr {
 .chooseGender{
   display:grid;
   justify-content: left;
+  margin-top: 17px;
 }
 .radio_text{
   display: flex;

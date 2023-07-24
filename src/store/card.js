@@ -18,9 +18,6 @@ export const useCardStore = defineStore({
                 await axiosApiInstance.post(BASE_URL+"card/create_card", {
                     age: cardData.age,
                     gender: cardData.gender,
-                    operations: cardData.operations.filter(element => {
-                        return element !== null;
-                    }),
                     diseases: cardData.diseases.filter(element => {
                         return element !== null;
                     }),
@@ -40,7 +37,7 @@ export const useCardStore = defineStore({
                 if([500, 404, 401, 403].includes(response.status)){
                     return false;
                 }else{
-                    await updateCardData(response.data);
+                    await   updateCardData(response.data);
                     return true;
                 }
             }catch (e){
@@ -55,9 +52,6 @@ export const useCardStore = defineStore({
                 await axiosApiInstance.patch(BASE_URL + "card/update_card", {
                     age: cardData.age,
                     gender: cardData.gender,
-                    operations: cardData.operations.filter(element => {
-                        return element !== null;
-                    }),
                     diseases: cardData.diseases.filter(element => {
                         return element !== null;
                     }),
