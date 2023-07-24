@@ -10,15 +10,6 @@
       <base-input v-model="stepData.temperature" size="md" label="Температура"
                   :class="$style.inputField"
                   :is-error="!isValueValid(stepData.temperature, 'temperature') && stepData.temperature != null"/>
-<!--      <base-input v-model="stepData.oxygen" size="md" label="Кислород в крови"-->
-<!--                  :class="$style.inputField"-->
-<!--                  :is-error="!isValueValid(stepData.oxygen) && stepData.oxygen != null"/>-->
-<!--      <base-input v-model="stepData.pressure" size="md" label="Давление"-->
-<!--                  :class="$style.inputField"-->
-<!--                  :is-error="!isValueValid(stepData.pressure) && stepData.pressure != null"/>-->
-<!--      <base-input v-model="stepData.sugar" size="md" label="Сахар в крови"-->
-<!--                  :class="$style.inputField"-->
-<!--                  :is-error="!isValueValid(stepData.sugar) && stepData.sugar != null"/>-->
       <base-textarea v-model="stepData.inlines_history" label="Опишите свои жалобы подробнее" :class="$style.describe" description="Не менее 30 символов"
       :is-error="!isValueValid(stepData.inlines_history, 'inlines') && stepData.inlines_history !== ''"/>
     </div>
@@ -76,9 +67,7 @@ const props = defineProps(['stepData', 'isValid']);
 <style module>
 .title {
   margin-bottom: 12px;
-
 }
-
 .inputField {
   margin-bottom: 12px;
   text-align: left;

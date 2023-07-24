@@ -53,7 +53,6 @@
                 placeholder="Выберите болезнь:"
                 :class="$style.combobox"
       />
-      <hr/>
       <BaseButton :disabled="!isValid" @click="nextStep" :class="$style.base_button">Далее</BaseButton>
     </div>
   </div>

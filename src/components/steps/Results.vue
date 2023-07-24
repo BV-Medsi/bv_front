@@ -73,9 +73,6 @@ const emit = defineEmits(['update:response']);
 </template>
 
 <style module>
-.layout{
-
-}
 .title {
   text-align: left;
   margin-bottom: 40px;
