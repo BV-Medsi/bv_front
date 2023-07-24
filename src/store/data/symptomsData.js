@@ -3,112 +3,302 @@ import {PARTS} from "../../components/steps/SelectImageSymptomsComponent/constan
 export const symptomsData = {
     [PARTS.head]: [
         {
-            name: 'Головная боль',
+            name: 'головная боль',
             isChecked: false
         },
         {
-            name: 'Мигрень',
+            name: 'головокружение',
             isChecked: false
         },
         {
-            name: 'Выпадение волос',
+            name: 'шум в ушах',
             isChecked: false
         },
         {
-            name: 'Першение в горле',
+            name: 'обмороки',
             isChecked: false
         },
         {
-            name: 'Шум в ушах',
+            name: 'синие губы',
             isChecked: false
         },
         {
-            name: 'Снижение зрения',
+            name: 'выпадение волос',
+            isChecked: false
+        },
+        {
+            name: 'выпадение волос',
+            isChecked: false
+        },
+        {
+            name: 'затруднение дыхания носом',
+            isChecked: false
+        },
+        {
+            name: 'боли в ушах',
+            isChecked: false
+        },
+        {
+            name: 'боли в области носа',
+            isChecked: false
+        },
+        {
+            name: 'снижение слуха',
+            isChecked: false
+        },
+        {
+            name: 'заложенность в ухе',
+            isChecked: false
+        },
+        {
+            name: 'заложенность носа',
+            isChecked: false
+        },
+        {
+            name: 'боль в голове',
+            isChecked: false
+        },
+        {
+            name: 'кровотечения из носа',
+            isChecked: false
+        },
+        {
+            name: 'кровотечения из ушей',
+            isChecked: false
+        },
+        {
+            name: 'насморк',
+            isChecked: false
+        },
+        {
+            name: 'частое чихание',
+            isChecked: false
+        },
+        {
+            name: 'сухость в носу',
+            isChecked: false
+        },
+        {
+            name: 'заложенность в ушах',
+            isChecked: false
+        },
+        {
+            name: 'искривление носовой перегородки',
+            isChecked: false
+        },
+        {
+            name: 'снижение остроты зрения',
+            isChecked: false
+        },
+        {
+            name: 'расплывчатое восприятие',
+            isChecked: false
+        },
+        {
+            name: 'ощущение рези в глазах',
+            isChecked: false
+        },
+        {
+            name: 'попадание инородных предметов в глаза',
+            isChecked: false
+        },
+        {
+            name: 'боль в глазах',
+            isChecked: false
+        },
+        {
+            name: 'дискомфорт в области глаз',
+            isChecked: false
+        },
+        {
+            name: 'покраснение глаз',
+            isChecked: false
+        },
+        {
+            name: 'слезотечение',
+            isChecked: false
+        },
+        {
+            name: 'cложности в распознавании цветов',
+            isChecked: false
+        },
+        {
+            name: 'трудно подвижные глаза',
             isChecked: false
         }
     ],
-    [PARTS.neck]: [],
+    [PARTS.neck]: [
+        {
+            name: 'боли в области горла',
+            isChecked: false
+        },
+        {
+            name: 'чувство инородного тела в горле',
+            isChecked: false
+        },
+        {
+            name: 'сухость во рту',
+            isChecked: false
+        },
+        {
+            name: 'нарушение речи',
+            isChecked: false
+        },
+        {
+            name: 'осиплость голоса',
+            isChecked: false
+        },
+        {
+            name: 'храп',
+            isChecked: false
+        },
+        {
+            name: 'покраснение в горле',
+            isChecked: false
+        },
+        {
+            name: 'боли в горле',
+            isChecked: false
+        },
+        {
+            name: 'гнусавость голоса',
+            isChecked: false
+        },
+        {
+            name: 'горечь во рту',
+            isChecked: false
+        }
+    ],
     [PARTS.chest]: [
         {
-            name: 'Кашель',
+            name: 'астеническое состояние',
             isChecked: false
         },
         {
-            name: 'Перебой в работе сердца',
+            name: 'боль в груди',
             isChecked: false
         },
         {
-            name: 'Нехватка воздуха',
+            name: 'боль в области сердца',
+            isChecked: false
+        },
+        {
+            name: 'отдышка',
+            isChecked: false
+        },
+        {
+            name: 'удушье',
+            isChecked: false
+        },
+        {
+            name: 'нехватка воздуха',
+            isChecked: false
+        },
+        {
+            name: 'болит сердце',
             isChecked: false
         }
     ],
     [PARTS.arms]: [
         {
-            name: 'Подергивание руки',
+            name: 'боль в руках',
             isChecked: false
         },
         {
-            name: 'Отек руки',
+            name: 'судороги',
             isChecked: false
         },
         {
-            name: 'Рука онемела',
+            name: 'покалывание в конечностях',
             isChecked: false
         },
         {
-            name: 'Боль в руках при движении',
-            isChecked: false
-        },
-        {
-            name: 'Дрожь руки',
-            isChecked: false
-        },
-        {
-            name: 'Рука посинела',
-            isChecked: false
-        },
-        {
-            name: 'Холодная рука',
-            isChecked: false
-        },
-        {
-            name: 'Слабость в руке',
-            isChecked: false
-        },
-        {
-            name: 'Не могу двигать рукой',
+            name: 'онемение конечностей',
             isChecked: false
         }
     ],
     [PARTS.abdomen]: [
         {
-            name: 'Боль в животе',
+            name: 'боли половых органов',
             isChecked: false
         },
         {
-            name: 'Вздутие живота',
+            name: 'выделения из половых органов',
             isChecked: false
         },
         {
-            name: 'Урчание',
+            name: 'перебои в менструальном цикле',
             isChecked: false
         },
         {
-            name: 'Диарея',
+            name: 'изжога',
             isChecked: false
         },
         {
-            name: 'Изжога',
+            name: 'боль внизу живота',
+            isChecked: false
+        },
+        {
+            name: 'изжога',
+            isChecked: false
+        },
+        {
+            name: 'вздутие живота',
+            isChecked: false
+        },
+        {
+            name: 'спазм',
+            isChecked: false
+        },
+        {
+            name: 'постоянные менструации',
+            isChecked: false
+        },
+        {
+            name: 'боли в нижней части живота',
             isChecked: false
         }
     ],
     [PARTS.back]: [
         {
-            name: 'Боль в пояснице',
+            name: 'боли в позвоночнике',
+            isChecked: false
+        },
+        {
+            name: 'искривление позвоночника',
+            isChecked: false
+        },
+        {
+            name: 'нарушение осанки',
+            isChecked: false
+        },
+        {
+            name: 'боли в спине',
+            isChecked: false
+        },
+        {
+            name: 'сколиоз',
+            isChecked: false
+        },
+        {
+            name: 'лордоз',
+            isChecked: false
+        },
+        {
+            name: 'кифоз',
             isChecked: false
         }
     ],
-    [PARTS.pelvis]: [],
+    [PARTS.pelvis]: [
+        {
+            name: 'боли в области таза',
+            isChecked: false
+        },
+        {
+            name: 'боль в правом подреберье',
+            isChecked: false
+        }
+    ],
     [PARTS.buttock]: [
         {
             name: 'кровь в кале',
@@ -117,51 +307,59 @@ export const symptomsData = {
     ],
     [PARTS.legs]: [
         {
-            name: 'Боль в ноге',
+            name: 'нарушения ходьбы',
             isChecked: false
         },
         {
-            name: 'Нога онемела',
+            name: 'боли в ногах',
             isChecked: false
         },
         {
-            name: 'Синяк на ноге',
+            name: 'хруст в суставах при движении',
             isChecked: false
         },
         {
-            name: 'Боль в колене',
+            name: 'ограничение объема движений',
             isChecked: false
         },
         {
-            name: 'Боль в пятке',
+            name: 'боли в стопах при ходьбе',
             isChecked: false
         },
         {
-            name: 'Боль в пальцах ноги',
+            name: 'косолапость',
             isChecked: false
         },
         {
-            name: 'Боль в икрах ног',
+            name: 'судороги',
             isChecked: false
         },
         {
-            name: 'Не могу двигать ногой',
+            name: 'покалывание в конечностях',
             isChecked: false
         },
         {
-            name: 'Нога посинела',
+            name: 'онемение конечностей',
             isChecked: false
         },
         {
-            name: 'Слабость в мышцах',
+            name: 'наличие хромоты',
             isChecked: false
         },
         {
-            name: 'Больно двигать ногой',
+            name: 'ушибы в связках ног',
             isChecked: false
         },
         {
-            name: 'Нога покраснела',
+            name: 'отек нижних конечностей',
+            isChecked: false
+        },
+        {
+            name: 'отек ног',
+            isChecked: false
+        },
+        {
+            name: 'онемение ног',
             isChecked: false
         }
     ],
