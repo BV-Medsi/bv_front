@@ -175,7 +175,7 @@ hr {
   text-align: left;
 }
 .addButton{
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -192,7 +192,7 @@ hr {
 }
 .base_button{
   width: 100%;
-  margin: 30px 0px;
+  margin: 20px 0px;
 }
 .styled-radio {
  -webkit-appearance: none;

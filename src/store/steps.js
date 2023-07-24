@@ -220,8 +220,7 @@ export const useStepsStore = defineStore({
             switch (this.steps[stepIndex].id) {
                 case ROUTES.GENERAL_CARD:
                     const {gender, age, chronic_diseases, diseases} = this.steps[stepIndex].data;
-                    this.steps[stepIndex].isValid = [0, 1].includes(gender) && !!age && age > 0 && age <= 122 &&
-                    chronic_diseases.length > 0 || diseases.length > 0;
+                    this.steps[stepIndex].isValid = [0, 1].includes(gender) && !!age && age > 0 && age <= 122;
                     break;
                 case ROUTES.IMAGE_SYMPTOMS:
                     this.steps[stepIndex].isValid = Object.values(data).some(el => el.symptoms.some(symptom => symptom.isChecked));

@@ -14,6 +14,12 @@ export const useCardStore = defineStore({
     actions: {
         async createCard(cardData){
             this.isLoading = true;
+            if(cardData.diseases.length === 0){
+                cardData.diseases = [''];
+            }
+            if(cardData.chronic_diseases.length === 0){
+                cardData.chronic_diseases = [''];
+            }
             try{
                 await axiosApiInstance.post(BASE_URL+"card/create_card", {
                     age: cardData.age,

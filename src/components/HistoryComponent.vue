@@ -22,12 +22,20 @@ const translate = {
   growth: 'Рост',
   age: 'Возраст',
   gender: 'Пол',
-  diseases: 'Заболевания',
-  chronic_diseases: 'Хронические заболевания'
+}
+
+function convert(val){
+  if(val === 0){
+    return "Мужской";
+  }else if(val === 1){
+    return "Женский";
+  }else{
+    return val;
+  }
 }
 function func(name, value){
   if(translate[name] !== undefined){
-    return translate[name] + ' ' + value;
+    return translate[name] + ': ' + convert(value);
   }
 }
 
@@ -38,67 +46,31 @@ function sortDoctors(data){
   }
   console.log(doctors_list);
 }
-
-//const s = useCssModule();
-// const generateHTML = (obj) => {
-//   let html = `<ul class="${s.list}">`;
-//   for (let key in obj) {
-//     if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
-//       html += `<li><span>${key}:</span> ${generateHTML(obj[key])}</li>`;
-//     } else if (Array.isArray(obj[key])) {
-//       html += `<li><span>${key}:</span> <ul>${obj[key].map(item => typeof item === 'object' ? generateHTML(item) : `<li>${item}</li>`).join('')}</ul></li>`;
-//     } else {
-//       html += `<li>${key}: ${obj[key]}</li>`;
-//     }
-//   }
-//   html += '</ul><hr />';
-//   return html;
-// }
-//
-// const objectData = {
-//   card: {
-//     id: "UUID",
-//     age: 30,
-//     gender: 1,
-//     operations: ["value1", "value2"],
-//     diseases: ["value1", "value2"],
-//     chronic_diseases: ["value1", "value2"]
-//   },
-//   complains: {
-//     head: ["value1", "value2"],
-//     leg: "value"
-//   },
-//   indicators: {
-//     temperature: 36.6,
-//     pressure: 1.56,
-//     growth: 178,
-//     weight: 80.78,
-//     sugar: 0.8,
-//     oxygen: 100.1
-//   },
-//   answer: [
-//     {doctor: 0.1},
-//     {doctor: 0.09},
-//     {doctor: 0.08}
-//   ]
-// }
 </script>
 
 <template>
   <Layout :class="$style.container">
     <Spinner v-if="isLoading" :class="$style.spinner"></Spinner>
     <div v-else>
-      <h2 class="smed-text_h2 smed-text_medium">История</h2>
-      <h3 class="smed-text_h3 smed-text_medium">Основная информация</h3>
-      <p v-for="(value, name) in history.card">{{ func(name, value) }}</p>
-      <h3 class="smed-text_h3 smed-text_medium">Описание жалобы</h3>
-      <p>{{history.inlines_history}}</p>
-      <h3 class="smed-text_h3 smed-text_medium">Дополнительная информация</h3>
-      <p v-for="(value, name) in indicators">{{ translate[name] + " " + value}}</p>
-      <hr/>
+      <div>
+        <h2 class="smed-text_h2 smed-text_medium">История</h2>
+        <hr/>
+      </div>
+      <div>
+        <h3 class="smed-text_h3 smed-text_medium">Основная информация</h3>
+        <p v-for="(value, name) in history.card" class="smed-text_body-md">{{ func(name, value) }}</p>
+        <p v-for="(value, name) in indicators" class="smed-text_body-md">{{ translate[name] + ": " + value}}</p>
+        <hr/>
+      </div>
+      <div>
+        <h3 class="smed-text_h3 smed-text_medium">Описание жалобы</h3>
+        <p class="smed-text_body-md">{{history.inlines_history}}</p>
+        <hr/>
+      </div>
+
       <div>
         <h3 class="smed-text_h3 smed-text_medium">Рекомендуемые врачи</h3>
-        <p v-for="doctor in history.answer">{{ doctor.doctor }}</p>
+        <p v-for="doctor in history.answer" class="smed-text_body-md">{{ doctor.doctor }}</p>
       </div>
     </div>
 
@@ -106,22 +78,29 @@ function sortDoctors(data){
 
 
   </Layout>
-<!--  <layout>-->
-<!--    <spinner v-if="isLoading" :class="$style.spinner"></spinner>-->
-<!--    <div v-else>-->
-<!--      <p class="smed-text_h2 smed-text_medium" :class="$style.title">История обращений</p>-->
-<!--      <div :class="$style.historyWrapper">-->
-<!--        <template v-if="history?.length">Не было обращений</template>-->
-<!--        <template v-else>-->
-<!--          <div v-html="generateHTML(objectData)"></div>-->
-<!--        </template>-->
-<!--      </div>-->
-<!--      <base-button :class="$style.button" @click="loadPreviousHistoryItem">Загрузить предыдущее</base-button>-->
-<!--    </div>-->
-<!--  </layout>-->
 </template>
 
 <style module lang="scss">
+h3{
+  margin-bottom: 12px;
+}
+hr {
+  width: 100%;
+  height: 1px;
+  border: none;
+  background-color: rgb(206, 206, 206);
+}
+p{
+  margin-top: 7px;
+  margin-bottom: 7px;
+  margin-left: 10px;
+  color: var(--colors-black, #141414);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}
 .container{
   text-align: left;
 }
