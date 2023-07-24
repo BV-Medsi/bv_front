@@ -58,74 +58,74 @@ export const symptomsData = {
             name: 'боль в голове',
             isChecked: false
         },
-        {
-            name: 'кровотечения из носа',
-            isChecked: false
-        },
-        {
-            name: 'кровотечения из ушей',
-            isChecked: false
-        },
-        {
-            name: 'насморк',
-            isChecked: false
-        },
-        {
-            name: 'частое чихание',
-            isChecked: false
-        },
-        {
-            name: 'сухость в носу',
-            isChecked: false
-        },
-        {
-            name: 'заложенность в ушах',
-            isChecked: false
-        },
-        {
-            name: 'искривление носовой перегородки',
-            isChecked: false
-        },
+        // {
+        //     name: 'кровотечения из носа',
+        //     isChecked: false
+        // },
+        // {
+        //     name: 'кровотечения из ушей',
+        //     isChecked: false
+        // },
+        // {
+        //     name: 'насморк',
+        //     isChecked: false
+        // },
+        // {
+        //     name: 'частое чихание',
+        //     isChecked: false
+        // },
+        // {
+        //     name: 'сухость в носу',
+        //     isChecked: false
+        // },
+        // {
+        //     name: 'заложенность в ушах',
+        //     isChecked: false
+        // },
+        // {
+        //     name: 'искривление носовой перегородки',
+        //     isChecked: false
+        // },
         {
             name: 'снижение остроты зрения',
             isChecked: false
         },
-        {
-            name: 'расплывчатое восприятие',
-            isChecked: false
-        },
-        {
-            name: 'ощущение рези в глазах',
-            isChecked: false
-        },
-        {
-            name: 'попадание инородных предметов в глаза',
-            isChecked: false
-        },
-        {
-            name: 'боль в глазах',
-            isChecked: false
-        },
-        {
-            name: 'дискомфорт в области глаз',
-            isChecked: false
-        },
-        {
-            name: 'покраснение глаз',
-            isChecked: false
-        },
-        {
-            name: 'слезотечение',
-            isChecked: false
-        },
-        {
-            name: 'cложности в распознавании цветов',
-            isChecked: false
-        },
-        {
-            name: 'трудно подвижные глаза',
-            isChecked: false
-        }
+        // {
+        //     name: 'расплывчатое восприятие',
+        //     isChecked: false
+        // },
+        // {
+        //     name: 'ощущение рези в глазах',
+        //     isChecked: false
+        // },
+        // {
+        //     name: 'попадание инородных предметов в глаза',
+        //     isChecked: false
+        // },
+        // {
+        //     name: 'боль в глазах',
+        //     isChecked: false
+        // },
+        // {
+        //     name: 'дискомфорт в области глаз',
+        //     isChecked: false
+        // },
+        // {
+        //     name: 'покраснение глаз',
+        //     isChecked: false
+        // },
+        // {
+        //     name: 'слезотечение',
+        //     isChecked: false
+        // },
+        // {
+        //     name: 'cложности в распознавании цветов',
+        //     isChecked: false
+        // },
+        // {
+        //     name: 'трудно подвижные глаза',
+        //     isChecked: false
+        // }
     ],
     [PARTS.neck]: [
         {
@@ -299,12 +299,7 @@ export const symptomsData = {
             isChecked: false
         }
     ],
-    [PARTS.buttock]: [
-        {
-            name: 'кровь в кале',
-            isChecked: false
-        }
-    ],
+    [PARTS.buttock]: [],
     [PARTS.legs]: [
         {
             name: 'нарушения ходьбы',
@@ -384,5 +379,102 @@ export const symptomsData = {
             isChecked: false,
             name: 'Рефлекторная боль'
         }
+    ],
+    [PARTS.state]: [
+        {
+            isChecked: false,
+            name: 'астенические состояния'
+        },{
+            isChecked: false,
+            name: 'потери сознания'
+        },{
+            isChecked: false,
+            name: 'депрессия'
+        },{
+            isChecked: false,
+            name: 'нарушения сна'
+        },{
+            isChecked: false,
+            name: 'неврастения'
+        },
+        {
+            isChecked: false,
+            name: 'cнижение настроения',
+        },{
+            isChecked: false,
+            name: 'бессонница'
+        },
+        {
+            isChecked: false,
+            name:  'расстройство памяти'
+        },{
+            isChecked: false,
+            name: 'повышенная утомляемость'
+        },{
+            isChecked: false,
+            name: 'нарушение равновесия'
+        },{
+            isChecked: false,
+            name:  'слабость'
+        },{
+            isChecked: false,
+            name: 'длительный стресс'
+        },{
+            isChecked: false,
+            name: 'панические атаки'
+        },{
+            isChecked: false,
+            name:  'постоянном наклоне головы к одному из плеч'
+        },{
+            isChecked: false,
+            name:  'быстрая утомляемость'
+        },{
+            isChecked: false,
+            name: 'повышенное потоотделение'
+        },{
+            isChecked: false,
+            name: 'тошнота'
+        },
+        {
+            isChecked: false,
+            name:  'рвота'
+        },{
+            isChecked: false,
+            name:  'мутит'
+        },{
+            isChecked: false,
+            name: 'частые проявления агрессивности'
+        },{
+            isChecked: false,
+            name:  'отсутствие интереса к жизни'
+        },{
+            isChecked: false,
+            name:  'постоянная жажда'
+        },
+    ],
+    [PARTS.factors]: [
+        {
+            isChecked: false,
+            name:  'повышение артериального давления',
+        },{
+            isChecked: false,
+            name: 'учащенный пульс'
+        },{
+            isChecked: false,
+            name: 'замедленный пульс'
+        },{
+            isChecked: false,
+            name: 'повышенный пульс'
+        },{
+            isChecked: false,
+            name: 'проблемы с массой тела'
+        },
+        {
+            isChecked: false,
+            name: 'быстроe насыщение'
+        },{
+            isChecked: false,
+            name: 'немотивированное похудение'
+        },
     ]
 }

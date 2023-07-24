@@ -85,6 +85,14 @@ export const useStepsStore = defineStore({
                     [PARTS.legs]: {
                         isSelected: false,
                         symptoms: [...symptomsData[PARTS.legs]]
+                    },
+                    [PARTS.state]: {
+                        isSelected: false,
+                        symptoms: [...symptomsData[PARTS.state]]
+                    },
+                    [PARTS.factors]: {
+                        isSelected: false,
+                        symptoms: [...symptomsData[PARTS.factors]]
                     }
                 },
                 isValid: false
